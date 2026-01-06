@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:id="@+id/linearRectangle"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/workout_layout_rectangle"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="Upper Body"
+            android:background="@drawable/booking_choicelayout"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv"
+            android:fontFamily="@font/manrope_semi_bold"
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
+
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/white"
+            style="@style/CustomCheckboxBrand"
+            android:textColor="@color/white"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>

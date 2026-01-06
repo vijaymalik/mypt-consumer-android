@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/relative"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:paddingVertical="15dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/cal_recycler_bg">
+        <androidx.cardview.widget.CardView
+            android:layout_width="72dp"
+            android:layout_marginHorizontal="10dp"
+            app:cardBackgroundColor="#31343A"
+            app:cardCornerRadius="18dp"
+            android:layout_height="72dp">
+            <ImageView
+                android:layout_width="24dp"
+                android:id="@+id/im"
+                android:src="@drawable/dumbbell"
+                android:layout_gravity="center"
+                android:layout_height="24dp"/>
+
+        </androidx.cardview.widget.CardView>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <androidx.cardview.widget.CardView
+                android:layout_width="95dp"
+                app:cardBackgroundColor="#1C1F21"
+                app:cardCornerRadius="8dp"
+                android:layout_marginLeft="5dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/headingcolor"
+                    android:textSize="12sp"
+                    android:id="@+id/tvduration"
+                    android:gravity="center"
+                    android:paddingVertical="5dp"
+                    android:fontFamily="@font/manrope_semi_bold"
+                    android:text="10:00 - 11:00"
+                    />
+
+            </androidx.cardview.widget.CardView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:layout_marginTop="5dp"
+                android:id="@+id/tvname"
+                android:layout_marginLeft="7dp"
+                android:fontFamily="@font/manrope_bold"
+                android:text="Shoulder Workout"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="7dp"
+
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/smallTextcolor"
+                    android:textSize="14sp"
+                    android:id="@+id/tvExercises"
+                    android:fontFamily="@font/manrope_medium"
+                    android:text="3 Exercise"
+                    />
+                <View
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_width="5dp"
+
+                    android:layout_gravity="center"
+                    android:layout_height="5dp"
+                    android:background="@drawable/dot"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/smallTextcolor"
+                    android:textSize="14sp"
+                    android:id="@+id/tvhours"
+                    android:fontFamily="@font/manrope_medium"
+                    android:text="2 hours"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="20dp"
+                android:src="@drawable/imedit"
+                android:id="@+id/im_edit"
+                android:layout_height="20dp"/>
+            <ImageView
+                android:layout_width="20dp"
+                android:id="@+id/im_delete"
+
+                android:src="@drawable/trash"
+                android:layout_marginLeft="10dp"
+                android:layout_height="20dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

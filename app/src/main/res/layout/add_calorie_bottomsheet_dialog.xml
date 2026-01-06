@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/top_rounded_corners"
+
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="70dp"
+            app:cardCornerRadius="3dp"
+            android:layout_height="5dp"
+            app:cardBackgroundColor="@color/rulersmallline"/>
+        <TextView
+            android:layout_width="match_parent"
+
+            android:layout_marginTop="40dp"
+            android:layout_marginHorizontal="15dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/headingcolor"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/manrope_medium"
+            android:text="@string/add_calories" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginHorizontal="15dp"
+            android:layout_gravity="center"
+            android:background="@drawable/edittext_background">
+            <com.google.android.material.textfield.TextInputLayout
+
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                app:hintTextColor="@color/booked"
+                app:boxStrokeColor="@android:color/transparent"
+                android:paddingVertical="5dp"
+                app:boxStrokeWidth="1dp"
+                app:boxStrokeWidthFocused="1dp"
+                android:textColorHint="@color/booked"
+                android:background="@android:color/transparent"
+                app:hintTextAppearance="@style/MyFloatingLabelStyle"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textCursorDrawable="@null"
+                    android:id="@+id/textMeal"
+                    android:fontFamily="@font/manrope_medium"
+                    android:textColorHint="@color/smallTextcolor"
+                    android:hint="@string/meal_name"
+                    android:textStyle="bold"
+                    android:imeOptions="actionDone"
+                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrst uvwxyz1234567890"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/booked"
+                    android:background="@android:color/transparent"
+
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginHorizontal="15dp"
+            android:layout_gravity="center"
+            android:background="@drawable/edittext_background">
+            <com.google.android.material.textfield.TextInputLayout
+
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                app:hintTextColor="@color/booked"
+                app:boxStrokeColor="@android:color/transparent"
+                android:paddingVertical="5dp"
+                app:boxStrokeWidth="1dp"
+                app:boxStrokeWidthFocused="1dp"
+                android:textColorHint="@color/booked"
+                android:background="@android:color/transparent"
+                app:hintTextAppearance="@style/MyFloatingLabelStyle"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textCursorDrawable="@null"
+                    android:id="@+id/textCalories"
+                    android:digits="1234567890"
+                    android:inputType="phone"
+                    android:fontFamily="@font/manrope_medium"
+                    android:textColorHint="@color/smallTextcolor"
+                    android:hint="@string/calories"
+                    android:textStyle="bold"
+                    android:textColor="@color/booked"
+                    android:background="@android:color/transparent"
+
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp">
+            <ImageView
+                android:layout_width="20dp"
+
+                android:layout_marginRight="5dp"
+                android:src="@drawable/baseline_info_outline_24"
+                android:layout_height="20dp"
+                app:tint="#6D6D6D" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/smallTextcolor"
+                android:id="@+id/tvcalorietakemsg"
+                android:textSize="14sp"
+                android:fontFamily="@font/manrope_medium"
+
+                android:text="@string/_2200_calories_intake_is_recommended_as_per_your_body_profile"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvSave"
+            android:text="@string/save"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="@drawable/white_stroke_rectangle"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textAllCaps="true"
+            android:paddingVertical="18dp"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/manrope_medium"
+            android:textFontWeight="700"/>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Outer gradient border -->
+    <item>
+        <shape>
+            <gradient
+                android:angle="360"
+                android:startColor="#31343A"
+                android:endColor="#878FA0"
+                android:type="linear" />
+            <corners android:radius="20dp" />
+        </shape>
+    </item>
+
+    <!-- Inner transparent background -->
+    <item
+        android:bottom="1dp"
+        android:top="1dp"
+        android:left="1dp" android:right="1dp">
+        <shape>
+            <corners android:radius="18dp" />
+           <!-- <solid android:color="#101113"/>-->
+            <solid android:color="@android:color/transparent"/>
+        </shape>
+    </item>
+
+</layer-list>

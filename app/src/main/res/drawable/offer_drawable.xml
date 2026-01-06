@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Outer gradient border -->
+    <item>
+        <shape>
+            <gradient
+                android:angle="360"
+                android:startColor="#1D50A9"
+                android:centerColor="#7DB0F8"
+                android:endColor="#001A4DA6"
+                android:type="linear" />
+        </shape>
+    </item>
+
+
+
+</layer-list>

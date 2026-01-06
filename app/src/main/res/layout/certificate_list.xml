@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="133dp"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:gravity="center"
+            android:background="@drawable/product_gradient_rounded_corner"
+            android:orientation="vertical"
+            android:layout_width="123dp"
+            android:layout_height="100dp"
+           >
+            <TextView
+                android:layout_marginHorizontal="10dp"
+                android:text="Lvl. 2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/certificationTv1"
+                android:fontFamily="@font/clashdisplay_medium"
+                android:textColor="@color/subheadingcolor"
+                android:textSize="30sp"/>
+            <TextView
+                android:layout_marginHorizontal="10dp"
+                android:text="@string/personal_training"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvname"
+                android:fontFamily="@font/manrope_semi_bold"
+                android:textColor="@color/white"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_marginRight="10dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_weight="1"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/sand_clock"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>

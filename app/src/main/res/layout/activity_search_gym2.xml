@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:background="@color/buttontextcolor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".activities.SearchGymActivity2">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="10dp"
+                android:id="@+id/imBack"
+                android:layout_marginVertical="20dp"
+                android:src="@drawable/backarrow"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="@drawable/edittext_background"
+                android:layout_marginEnd="15dp"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:id="@+id/im_search"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/search"
+                    />
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
+                    app:hintEnabled="false"
+                    app:hintTextColor="@color/smallTextcolor"
+                    android:textColorHint="@color/smallTextcolor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14dp"
+                        android:id="@+id/searchName"
+                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrst uvwxyz1234567890"
+                        android:inputType="textPersonName"
+                        android:paddingVertical="12dp"
+                        android:paddingRight="12dp"
+                        android:fontFamily="@font/manrope_medium"
+                        android:textColorHint="@color/smallTextcolor"
+                        android:hint="@string/search_gym"
+                        android:textStyle="bold"
+                        android:textColor="@color/headingcolor"
+                        android:background="@android:color/transparent"
+                        android:theme="@style/Theme.MyPT"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/im_close"
+                    android:layout_marginEnd="5dp"
+                    android:adjustViewBounds="true"
+                    android:layout_gravity="center"
+                    android:src="@drawable/close"
+                    />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearGymNearme"
+            android:layout_marginHorizontal="15dp"
+            android:background="@drawable/booking_choicelayout"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_marginStart="10dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginVertical="20dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/headingcolor"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/manrope_medium"
+                android:text="Gyms near me"
+                />
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_gravity="center"
+                android:src="@drawable/arrow_right"
+                />
+        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:id="@+id/recycleSearch"
+            />
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="@color/white"
+        android:id="@+id/tv"
+        android:fontFamily="@font/manrope_medium"
+        android:visibility="gone"
+        android:text="No data found"
+        android:gravity="center"
+        android:textSize="14sp"
+        />
+</RelativeLayout>

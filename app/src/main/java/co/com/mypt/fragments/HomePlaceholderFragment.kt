@@ -1,0 +1,47 @@
+package co.com.mypt.fragments
+
+import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.view.View
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import co.com.mypt.R
+
+class HomePlaceholderFragment : Fragment(R.layout.fragment_placeholder) {
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Example: API call or SharedPref logic
+        val navController = findNavController()
+
+
+        val isActiveUser = arguments?.getBoolean("isActiveUser") ?: false
+        val name = arguments?.getString("name") ?: ""
+        val lat = arguments?.getString("lat") ?: ""
+        val long = arguments?.getString("long") ?: ""
+        val chooseAddress = arguments?.getString("chooseAddress") ?: ""
+
+        if(chooseAddress != ""){
+            Handler(Looper.getMainLooper()).postDelayed({
+                val frag = if (isActiveUser) {
+                    InactivePlanHomeFragment.newInstance(name, lat, long, chooseAddress)
+                } else {
+                    GuestUserHomeFragment.newInstance(lat, long, chooseAddress)
+                }
+
+                childFragmentManager.beginTransaction()
+                    .replace(R.id.home_container, frag)
+                    .commitNowAllowingStateLoss()
+
+            }, 200)
+        }
+
+    }
+
+    private fun isUserLoggedIn(): Boolean {
+        // Replace with real check (SharedPref / ViewModel / API)
+        return false
+    }
+}

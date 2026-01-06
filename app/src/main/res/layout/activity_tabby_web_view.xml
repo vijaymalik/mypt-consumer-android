@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
+    android:layout_height="match_parent"
+    tools:context=".activities.TabbyWebViewActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_height="wrap_content"
+        android:id="@+id/headerLayout"
+        android:orientation="vertical">
+        <LinearLayout
+            android:background="@color/buttontextcolor"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/back_1"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginVertical="20dp"
+                android:src="@drawable/backarrow"
+                />
+
+
+
+        </LinearLayout>
+        <View
+            android:background="@color/tabbackground"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"/>
+
+    </LinearLayout>
+
+    <WebView
+        android:layout_width="match_parent"
+        android:id="@+id/web"
+        android:layout_below="@id/headerLayout"
+        android:layout_height="match_parent"/>
+</RelativeLayout>

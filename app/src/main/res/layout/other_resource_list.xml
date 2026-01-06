@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/other_resource"
+    android:layout_marginHorizontal="15dp"
+    android:id="@+id/relative"
+    android:layout_marginBottom="15dp"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <androidx.cardview.widget.CardView
+            android:layout_width="80dp"
+            app:cardCornerRadius="18dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+
+            android:layout_height="80dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:id="@+id/imResource"
+                android:scaleType="fitXY"
+                android:layout_height="match_parent"/>
+        </androidx.cardview.widget.CardView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:id="@+id/tvResourcesName"
+                android:fontFamily="@font/manrope_bold"
+                android:text="Stretching and Recovery Sessions"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textColor="#D7D8D9"
+                android:ellipsize="end"
+                android:textSize="14sp"
+                android:maxLines="1"
+                android:id="@+id/tvDescription"
+                android:fontFamily="@font/manrope_medium"
+                android:text="Mai Sakurajima Sensei"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="12dp"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_gravity="center"
+                    android:layout_height="16dp"
+                    android:src="@drawable/imclock"
+                    />
+                <TextView
+                    android:text="5 mins read"
+                    android:layout_width="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:id="@+id/tvreadTime"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/manrope_medium"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

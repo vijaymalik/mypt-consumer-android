@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/top_rounded_corners"
+    app:cardCornerRadius="15dp"
+    android:id="@+id/standard_bottom_sheet"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="70dp"
+        app:cardCornerRadius="3dp"
+        android:layout_height="5dp"
+        app:cardBackgroundColor="@color/rulersmallline"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_marginEnd="10dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="@color/headingcolor"
+            android:textSize="18sp"
+            android:padding="15dp"
+            android:textStyle="bold"
+            android:fontFamily="@font/manrope_medium"
+            android:text="Sure you want to decline the session request?"
+            />
+        <ImageView
+            android:id="@+id/close"
+            android:layout_width="30dp"
+            android:layout_gravity="center"
+            android:layout_height="30dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/close"/>
+
+    </LinearLayout>
+    <TextView
+        android:layout_marginHorizontal="15sp"
+        android:layout_marginTop="5dp"
+        android:textSize="14sp"
+        android:textColor="@color/booked"
+        android:textStyle="bold"
+        android:id="@+id/dateTime"
+        android:fontFamily="@font/manrope_medium"
+        android:text="Your trainer wants to scheduled a home session for 3rd Jan,2024 | 10:30PM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <LinearLayout
+        android:id="@+id/trainerDetailLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="15sp"
+        android:layout_marginBottom="15dp">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/imTrainer"
+            android:scaleType="centerCrop"
+            android:src="@drawable/dummy_trainer" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/manrope_medium"
+                android:text="Christene De Koning"
+                android:textColor="@color/white"
+                android:textFontWeight="700"
+                android:textSize="14sp"
+                android:id="@+id/tvTrainer_name"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="2dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/gymlocation"
+                    app:tint="@color/subheadingcolor" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:fontFamily="@font/manrope_medium"
+                    android:text="6567.18km"
+                    android:id="@+id/tvdistance"
+                    android:textColor="@color/subheadingcolor"
+                    android:textSize="12sp"
+                    android:maxLength="10"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="3dp"
+                    android:layout_height="3dp"
+                    android:backgroundTint="@color/subheadingcolor"
+                    android:layout_marginHorizontal="5dp"
+                    android:background="@drawable/dot" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvLocation"
+                    android:fontFamily="@font/manrope_medium"
+                    android:text="Near Dubai Mall"
+                    android:textColor="@color/subheadingcolor"
+                    android:textSize="12sp"
+                    android:maxLength="80"
+                    android:maxLines="1"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/tvCancel"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="20dp"
+        android:background="@drawable/rounded_corner_red"
+        android:gravity="center"
+        android:fontFamily="@font/manrope_semi_bold"
+        android:paddingVertical="15dp"
+        android:textFontWeight="700"
+        android:textAllCaps="true"
+        android:text="Yes, Decline Request"
+        android:textStyle="bold"
+        android:textColor="@color/red"
+        android:textSize="16sp" />
+</LinearLayout>

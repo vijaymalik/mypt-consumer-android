@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/top_rounded_corners">
+    <androidx.cardview.widget.CardView
+        android:layout_centerHorizontal="true"
+        android:layout_width="70dp"
+        android:layout_height="5dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:id="@+id/bar"
+        app:cardBackgroundColor="@color/rulersmallline"
+        app:cardCornerRadius="3dp" />
+    <androidx.core.widget.NestedScrollView
+        android:layout_below="@id/bar"
+        android:layout_above="@id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/standard_bottom_sheet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:orientation="vertical">
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/manrope_semi_bold"
+                android:paddingVertical="15dp"
+                android:text="@string/repeat_frequency"
+                android:textColor="@color/headingcolor"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/manrope_semi_bold"
+                android:text="@string/repeat_every"
+                android:textColor="@color/smallTextcolor"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/ed1"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/edittext_background"
+                    android:cursorVisible="false"
+                    android:gravity="center"
+                    android:maxLength="1"
+                    android:text="1"
+                    android:fontFamily="@font/manrope_semi_bold"
+                    android:textColor="@color/white" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="15dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imUp"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/polygon" />
+
+                    <ImageView
+                        android:id="@+id/imDown"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginTop="15dp"
+                        android:rotation="180"
+                        android:src="@drawable/polygon" />
+                </LinearLayout>
+
+                <AutoCompleteTextView
+                    android:id="@+id/atweek"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:background="@drawable/edittext_background"
+                    android:cursorVisible="false"
+                    android:drawableRight="@drawable/baseline_keyboard_arrow_down_24"
+                    android:drawableTint="@color/headingcolor"
+                    android:inputType="text"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="15dp"
+                    android:popupBackground="@color/buttontextcolor"
+                    android:text="@string/weeks"
+                    android:fontFamily="@font/manrope_semi_bold"
+                    android:textColor="@color/headingcolor"
+                    android:textColorHint="@color/headingcolor"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/manrope_semi_bold"
+                android:text="@string/day"
+                android:textColor="@color/smallTextcolor"
+                android:textSize="14sp"/>
+
+            <HorizontalScrollView
+                android:scrollbars="none"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tvSu"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/booking_choicelayout"
+                        android:fontFamily="@font/manrope_semi_bold"
+                        android:gravity="center"
+                        android:text="S"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        />
+                    <TextView
+                        android:id="@+id/tvm"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/booking_choicelayout"
+                        android:fontFamily="@font/manrope_semi_bold"
+                        android:gravity="center"
+                        android:text="M"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvT"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/booking_choicelayout"
+                        android:fontFamily="@font/manrope_semi_bold"
+                        android:gravity="center"
+                        android:text="T"
+
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvw"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/booking_choicelayout"
+                        android:fontFamily="@font/manrope_semi_bold"
+                        android:gravity="center"
+                        android:text="W"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvTh"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/booking_choicelayout"
+                        android:fontFamily="@font/manrope_semi_bold"
+                        android:gravity="center"
+                        android:text="T"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/tvf"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/booking_choicelayout"
+                        android:fontFamily="@font/manrope_semi_bold"
+                        android:gravity="center"
+                        android:text="F"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvS"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/booking_choicelayout"
+                        android:fontFamily="@font/manrope_semi_bold"
+                        android:gravity="center"
+                        android:text="S"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+
+                        />
+
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/manrope_semi_bold"
+                android:text="@string/ends"
+                android:textColor="@color/smallTextcolor"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:id="@+id/check5"
+                style="@style/CustomCheckboxBrand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:buttonTint="@color/white"
+                android:fontFamily="@font/manrope_semi_bold"
+                android:paddingHorizontal="5dp"
+                android:text="@string/no_end_date"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/checkEndON"
+                    style="@style/CustomCheckboxBrand"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/white"
+                    android:fontFamily="@font/manrope_semi_bold"
+                    android:paddingHorizontal="5dp"
+                    android:text="@string/end_on"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvEndDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/booking_choicelayout"
+                    android:fontFamily="@font/manrope_semi_bold"
+                    android:paddingHorizontal="20dp"
+                    android:gravity="center_vertical"
+                    android:hint="Select Date"
+                    android:textColorHint="@color/smallTextcolor"
+                    android:textColor="@color/headingcolor"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:id="@+id/tvDone"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:background="@drawable/apply_rectangle"
+            android:gravity="center"
+            android:fontFamily="@font/manrope_bold"
+            android:paddingVertical="15dp"
+            android:textFontWeight="700"
+            android:textAllCaps="true"
+            android:text="@string/done"
+            android:textStyle="bold"
+            android:textColor="@color/buttontextcolor"
+            android:textSize="16dp" />
+    </LinearLayout>
+
+
+</RelativeLayout>

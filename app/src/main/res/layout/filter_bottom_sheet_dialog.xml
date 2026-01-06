@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:orientation="vertical"
+android:background="@drawable/top_rounded_corners">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+
+    android:id="@+id/standard_bottom_sheet"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="70dp"
+            app:cardCornerRadius="3dp"
+            android:layout_height="5dp"
+            app:cardBackgroundColor="@color/rulersmallline"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="15dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textColor="@color/headingcolor"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/manrope_medium"
+                android:text="@string/filter_s" />
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_gravity="center"
+                android:src="@drawable/question_mark"
+                android:layout_height="18dp"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:background="#2F2F2F"
+            android:layout_marginTop="20dp"
+            android:layout_height="1dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.8"
+                android:background="#181818"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/linearGender"
+                    android:orientation="horizontal"
+                    android:layout_height="match_parent">
+                    <View
+                        android:layout_width="5dp"
+                        android:id="@+id/orangeViewGender"
+                        android:visibility="gone"
+                        android:background="@drawable/top_rounded_stroke"
+                        android:layout_height="match_parent"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/manrope_semi_bold"
+                        android:text="@string/gender"
+                        android:paddingHorizontal="20dp"
+                        android:id="@+id/tvgender"
+                        android:paddingVertical="15dp"
+                        android:textColor="@color/headingcolor"
+                        android:textSize="16sp" />
+                    <View
+                        android:layout_width="1dp"
+                        android:id="@+id/viewGender"
+                        android:background="#2F2F2F"
+
+                        android:layout_height="match_parent"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:id="@+id/linearTime"
+                    android:layout_height="match_parent">
+                    <View
+                        android:layout_width="5dp"
+                        android:id="@+id/orangeViewTime"
+                        android:visibility="gone"
+                        android:background="@drawable/top_rounded_stroke"
+                        android:layout_height="match_parent"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/manrope_semi_bold"
+                        android:text="@string/timeslot"
+                        android:paddingVertical="15dp"
+                        android:id="@+id/tvTimeslot"
+
+                        android:paddingHorizontal="20dp"
+                        android:textColor="@color/headingcolor"
+                        android:textSize="16sp" />
+                    <View
+                        android:layout_width="1dp"
+                        android:background="#2F2F2F"
+                        android:id="@+id/viewTime"
+                        android:layout_height="match_parent"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:id="@+id/linearLanguage"
+                    android:layout_height="match_parent">
+                    <View
+                        android:layout_width="5dp"
+                        android:visibility="gone"
+                        android:id="@+id/orangeViewLanguage"
+                        android:background="@drawable/top_rounded_stroke"
+                        android:layout_height="match_parent"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/manrope_semi_bold"
+                        android:text="@string/Language"
+                        android:paddingVertical="15dp"
+                        android:id="@+id/tvLanguage"
+
+                        android:paddingHorizontal="20dp"
+                        android:textColor="@color/headingcolor"
+                        android:textSize="16sp" />
+                    <View
+                        android:layout_width="1dp"
+                        android:background="#2F2F2F"
+                        android:id="@+id/viewLanguage"
+                        android:layout_height="match_parent"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:id="@+id/linearNationality"
+                    android:layout_height="match_parent">
+                    <View
+                        android:layout_width="5dp"
+                        android:visibility="gone"
+                        android:id="@+id/orangeViewNation"
+                        android:background="@drawable/top_rounded_stroke"
+                        android:layout_height="match_parent"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/manrope_semi_bold"
+                        android:text="@string/Nationality"
+                        android:paddingVertical="15dp"
+                        android:id="@+id/tvNationality"
+                        android:paddingHorizontal="20dp"
+                        android:textColor="@color/headingcolor"
+                        android:textSize="16sp" />
+                    <View
+                        android:layout_width="1dp"
+                        android:background="#2F2F2F"
+                        android:id="@+id/viewNationality"
+                        android:layout_height="match_parent"/>
+                </LinearLayout>
+                <View
+                    android:layout_width="1dp"
+                    android:background="#2F2F2F"
+                    android:layout_gravity="end"
+                    android:layout_height="100dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_height="match_parent">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:id="@+id/genderRecycler"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_height="wrap_content"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:id="@+id/timeSlotRecycler"
+                    android:visibility="gone"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_height="wrap_content"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:id="@+id/LanguageRecycler"
+                    android:visibility="gone"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_height="wrap_content"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:id="@+id/nationRecycler"
+                    android:visibility="gone"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:paddingVertical="10dp"
+        android:background="@color/black"
+        android:paddingHorizontal="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:id="@+id/tvReset"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+
+            android:background="@drawable/view_detail_rectangle"
+            android:gravity="center"
+            android:fontFamily="@font/manrope_medium"
+            android:paddingVertical="15dp"
+            android:textFontWeight="700"
+            android:textAllCaps="true"
+            android:text="@string/reset"
+            android:textStyle="bold"
+            android:textColor="@color/headingcolor"
+            android:textSize="16dp" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:id="@+id/tvApplyFilter"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/apply_rectangle"
+            android:gravity="center"
+            android:fontFamily="@font/manrope_medium"
+            android:paddingVertical="15dp"
+            android:textFontWeight="700"
+            android:textAllCaps="true"
+            android:text="@string/apply_filter"
+            android:textStyle="bold"
+            android:textColor="@color/buttontextcolor"
+            android:textSize="16dp" />
+    </LinearLayout>
+
+</LinearLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

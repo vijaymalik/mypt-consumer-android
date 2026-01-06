@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="15dp"
+        android:background="@drawable/booking_choicelayout"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_marginEnd="10dp"
+                android:layout_width="0dp"
+                android:id="@+id/tvname"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textColor="@color/headingcolor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/manrope_medium"
+                android:text="MyPTStudio" />
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:src="@drawable/baseline_arrow_forward_24"
+                app:tint="@color/white" />
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp">
+
+            <!-- 1. Location pin -->
+            <ImageView
+                android:id="@+id/locationIcon"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/gymlocation"
+                app:tint="@color/orangecolor"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <!-- 2. Location text (takes the remaining width) -->
+            <TextView
+                android:id="@+id/tvLocation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textStyle="bold"
+                android:fontFamily="@font/manrope_medium"
+                android:textColor="@color/smallTextcolor"
+                android:textSize="12sp"
+                android:text=""
+                app:layout_constraintStart_toEndOf="@id/locationIcon"
+                app:layout_constraintEnd_toStartOf="@id/dotView"
+                app:layout_constraintTop_toTopOf="@id/locationIcon"
+                app:layout_constraintBottom_toBottomOf="@id/locationIcon" />
+
+            <!-- 3. Tiny dot -->
+            <View
+                android:id="@+id/dotView"
+                android:layout_width="3dp"
+                android:layout_height="3dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/dot"
+                app:layout_constraintStart_toEndOf="@id/tvLocation"
+                app:layout_constraintEnd_toStartOf="@id/tvKm"
+                app:layout_constraintTop_toTopOf="@id/tvLocation"
+                app:layout_constraintBottom_toBottomOf="@id/tvLocation" />
+
+            <!-- 4. Distance text -->
+            <TextView
+                android:id="@+id/tvKm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textStyle="bold"
+                android:fontFamily="@font/manrope_medium"
+                android:textColor="@color/smallTextcolor"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@id/dotView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvLocation"
+                app:layout_constraintBottom_toBottomOf="@id/tvLocation" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

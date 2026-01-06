@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:background="@color/buttontextcolor"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".More.MyMealsActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_height="wrap_content"
+        android:id="@+id/linear"
+        android:orientation="vertical">
+        <LinearLayout
+            android:background="@color/buttontextcolor"
+            android:id="@+id/headerLayout"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/back_1"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="20dp"
+                android:src="@drawable/backarrow"
+                />
+            <TextView
+                android:layout_marginEnd="10dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textColor="@color/headingcolor"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/manrope_medium"
+                android:text="@string/my_meals"
+                />
+
+
+        </LinearLayout>
+        <View
+            android:background="@color/tabbackground"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"/>
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@id/linear"
+
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:id="@+id/dateRecyclerView"
+                />
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:layout_below="@id/dateRecyclerView"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:id="@+id/mealecyclerView"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:id="@+id/imCreateMeal"
+                android:visibility="gone"
+                android:src="@drawable/create_meal"/>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/relative"
+            android:visibility="gone"
+            android:layout_height="wrap_content">
+            <View
+                android:layout_width="match_parent"
+                android:alpha="0.9"
+                android:background="@color/black"
+                android:layout_height="match_parent"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:src="@drawable/transparent_background"
+                android:id="@+id/im"
+                android:scaleType="centerCrop"
+                android:layout_height="match_parent"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_centerInParent="true"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginTop="200dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    android:gravity="center"
+                    android:id="@+id/tv"
+                    android:layout_below="@id/im"
+                    android:fontFamily="@font/clashdisplay_medium"
+                    android:text="@string/locked_for_now"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/smallTextcolor"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:layout_below="@id/tv"
+                    android:fontFamily="@font/manrope_semi_bold"
+                    android:text="@string/extra_features_are_on_the_way_n_we_re_adding_more_tools_to_power_n_your_fitness_goals"
+                    />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

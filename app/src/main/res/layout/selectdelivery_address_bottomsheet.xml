@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/top_rounded_corners"
+    android:paddingBottom="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginBottom="65dp"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card"
+            android:layout_width="70dp"
+            android:layout_height="5dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            app:cardCornerRadius="3dp"
+            app:cardBackgroundColor="@color/rulersmallline" />
+
+        <TextView
+            android:id="@+id/heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/select_delivery_address"
+            android:textColor="@color/headingcolor"
+            android:textSize="18sp"
+            android:fontFamily="@font/manrope_bold" />
+
+        <!-- Add New Address -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardAddnewAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="15dp"
+            app:cardCornerRadius="12dp"
+            app:cardBackgroundColor="#242529">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="15dp"
+                android:paddingHorizontal="15dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/add" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:text="@string/add_new_address__"
+                    android:textColor="@color/headingcolor"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/manrope_semi_bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Saved Address -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Saved Address"
+            android:textColor="@color/headingcolor"
+            android:textSize="18sp"
+            android:id="@+id/tvSaveAddress"
+            android:fontFamily="@font/manrope_bold" />
+
+        <!-- Address List (wrap_content + nested) -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycleraddresslist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    </LinearLayout>
+
+    <!-- Fixed Bottom Button -->
+    <androidx.cardview.widget.CardView
+        android:layout_gravity="bottom"
+        android:id="@+id/cardChangeAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="12dp"
+        app:cardBackgroundColor="@color/white">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingVertical="15dp"
+            android:text="Change address"
+            android:textAllCaps="true"
+            android:id="@+id/textAddress"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:fontFamily="@font/manrope_bold" />
+    </androidx.cardview.widget.CardView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

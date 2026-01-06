@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@drawable/onboarding_backgrd_2"
+    tools:context=".onBoarding.OtpActivity">
+
+    <!--<VideoView
+        android:id="@+id/idVideoView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true" />-->
+
+    <!--<View
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/open_number_screen_gradient" />
+-->
+    <RelativeLayout
+        android:id="@+id/relative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imarrow"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/ic_back_arrow_new" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:drawableLeft="@drawable/ic_exclamation_circle"
+            android:drawablePadding="8dp"
+            android:drawableTint="@color/white"
+            android:fontFamily="@font/manrope_bold"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="@string/help"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/relative"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="30dp"
+
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/manrope_bold"
+            android:text="@string/verify_your_Email_id"
+            android:textColor="@color/headingcolor"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/clash_display_semibold"
+            android:lineHeight="30sp"
+            android:text="@string/verify_your_mobile_number"
+            android:textColor="@color/text_color_primary_white"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/manrope_regular_400"
+            android:lineHeight="18sp"
+            android:text="Please enter the verification code sent on"
+            android:textColor="@color/text_color_neutral_alpha"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/phoneNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/manrope_bold"
+                android:lineHeight="18sp"
+                android:textColor="@color/text_color_white"
+                android:textSize="14sp"
+                tools:text="+91-999-999-9999" />
+
+            <TextView
+                android:id="@+id/email_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/manrope_bold"
+                android:lineHeight="18sp"
+                android:textColor="@color/headingcolor"
+                android:textSize="14sp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/imEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/edit" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="64dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/ed1"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_marginVertical="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:autofillHints="smsOTPCode"
+                android:background="@drawable/otp_edittext_background"
+                android:ems="2"
+                android:fontFamily="@font/manrope_bold"
+                android:gravity="center"
+                android:importantForAutofill="yes"
+                android:inputType="number"
+                android:maxLength="1"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                android:textSize="36sp" />
+
+            <EditText
+                android:id="@+id/ed2"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_marginVertical="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:autofillHints="smsOTPCode"
+                android:background="@drawable/otp_edittext_background"
+                android:ems="2"
+                android:fontFamily="@font/manrope_bold"
+                android:gravity="center"
+                android:importantForAutofill="yes"
+                android:inputType="number"
+                android:maxLength="1"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                android:textSize="36sp" />
+
+            <EditText
+                android:id="@+id/ed3"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_marginVertical="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:autofillHints="smsOTPCode"
+                android:background="@drawable/otp_edittext_background"
+                android:ems="2"
+                android:fontFamily="@font/manrope_bold"
+                android:gravity="center"
+                android:importantForAutofill="yes"
+                android:inputType="number"
+                android:maxLength="1"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                android:textSize="36sp" />
+
+            <EditText
+                android:id="@+id/ed4"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_marginVertical="10dp"
+                android:layout_weight="1"
+                android:autofillHints="smsOTPCode"
+                android:background="@drawable/otp_edittext_background"
+                android:ems="2"
+                android:fontFamily="@font/manrope_bold"
+                android:gravity="center"
+                android:importantForAutofill="yes"
+                android:inputType="number"
+                android:maxLength="1"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                android:textSize="36sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/manrope_regular_400"
+                android:lineHeight="16sp"
+                android:text="@string/didn_t_receive_otp"
+                android:textColor="@color/text_color_neutral_alpha"
+                android:textSize="12sp" />
+
+            <LinearLayout
+                android:id="@+id/linearresend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="3dp"
+                    android:fontFamily="@font/manrope_regular_400"
+                    android:text="@string/resend_otp_in"
+                    android:textColor="@color/text_color_neutral_alpha"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvseconds"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/manrope_regular_400"
+                    android:text="30 seconds"
+                    android:textColor="@color/text_color_white"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvResendOtp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/manrope_regular_400"
+                android:text="@string/resend_otp"
+                android:textColor="@color/smallTextcolor"
+                android:textSize="12sp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_otp_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/manrope_regular_400"
+            android:lineHeight="18sp"
+            android:text="@string/error_text_invalid_otp"
+            android:textColor="@color/text_color_primary_error"
+            android:textSize="14sp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</RelativeLayout>

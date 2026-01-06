@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_marginVertical="10dp"
+    android:layout_marginHorizontal="15dp"
+    android:layout_height="80dp">
+   <ImageView
+       android:layout_width="match_parent"
+       android:adjustViewBounds="true"
+       android:background="@drawable/with_fruit"
+
+       android:layout_height="match_parent"/>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_centerInParent="true"
+       android:layout_marginHorizontal="15dp"
+       android:orientation="horizontal">
+      <ImageView
+          android:layout_width="20dp"
+          android:src="@drawable/knife"
+          android:layout_height="20dp"/>
+      <TextView
+          android:layout_width="0dp"
+          android:layout_weight="1"
+          android:layout_height="wrap_content"
+          android:textColor="@color/headingcolor"
+          android:textSize="16sp"
+          android:id="@+id/tvname"
+          android:textStyle="bold"
+          android:fontFamily="@font/manrope_medium"
+          android:layout_marginLeft="5dp"
+          android:text="Meal"
+          />
+      <TextView
+          android:layout_width="wrap_content"
+
+          android:layout_height="wrap_content"
+          android:textColor="@color/headingcolor"
+          android:textSize="16sp"
+          android:textStyle="bold"
+          android:id="@+id/tvcal"
+          android:fontFamily="@font/manrope_medium"
+          android:layout_marginRight="5dp"
+          android:text="150cal"
+          />
+      <ImageView
+          android:layout_width="20dp"
+          android:layout_gravity="center"
+          android:id="@+id/imEdit"
+          android:src="@drawable/three_dots"
+          android:layout_height="20dp"/>
+   </LinearLayout>
+
+
+
+</RelativeLayout>

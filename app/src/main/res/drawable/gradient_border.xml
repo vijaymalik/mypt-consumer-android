@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Outer Border with Gradient -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="20dp" />
+            <gradient
+                android:angle="360"
+                android:startColor="#31343A"
+                android:endColor="#878FA0"
+                android:type="linear"/>
+        </shape>
+    </item>
+
+    <!-- Inner Transparent Background to Create a Border Effect -->
+    <item android:top="1.5dp" android:bottom="1.5dp" android:left="1.5dp" android:right="1.5dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="18dp" />
+            <solid android:color="@android:color/transparent"/>
+        </shape>
+    </item>
+
+</layer-list>

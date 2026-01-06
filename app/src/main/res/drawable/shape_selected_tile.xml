@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="390dp"
+    android:height="135dp"
+    android:viewportWidth="390"
+    android:viewportHeight="135">
+    <group>
+        <clip-path android:pathData="M16,0 L374,0 A16,16 0 0 1 390,16 L390,119 A16,16 0 0 1 374,135 L16,135 A16,16 0 0 1 0,119 L0,16 A16,16 0 0 1 16,0 Z" />
+        <!-- The fill color is now transparent to allow the image to show through -->
+        <path
+            android:fillColor="@android:color/transparent"
+            android:pathData="M0 0V135H390V0" />
+        <group
+            android:pivotX="195"
+            android:pivotY="67.5"
+            android:scaleX="2"
+            android:scaleY="1.653"
+            android:translateX="0"
+            android:translateY="-0.515">
+            <path android:pathData="M0 0V135H390V0">
+                <aapt:attr name="android:fillColor">
+                    <gradient
+                        android:centerX="195"
+                        android:centerY="67.5"
+                        android:fillAlpha="0.08"
+                        android:gradientRadius="97.5"
+                        android:type="radial">
+                        <item
+                            android:color="#FFFFFF"
+                            android:offset="0" />
+                        <item
+                            android:color="#00FFFFFF"
+                            android:offset="1" />
+                    </gradient>
+                </aapt:attr>
+            </path>
+        </group>
+        <path
+            android:pathData="M16,0 L374,0 A16,16 0 0 1 390,16 L390,119 A16,16 0 0 1 374,135 L16,135 A16,16 0 0 1 0,119 L0,16 A16,16 0 0 1 16,0 Z"
+            android:strokeWidth="2"
+            android:strokeColor="#66E0FE08" />
+    </group>
+</vector>

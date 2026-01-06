@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/standard_bottom_sheet"
+        android:background="@drawable/top_rounded_corners"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+
+        android:orientation="vertical">
+        <androidx.cardview.widget.CardView
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="70dp"
+            app:cardCornerRadius="3dp"
+            android:layout_height="5dp"
+            app:cardBackgroundColor="@color/rulersmallline"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/headingcolor"
+            android:textSize="18sp"
+            android:visibility="gone"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="15dp"
+            android:fontFamily="@font/manrope_medium"
+            android:text="@string/plan_your_fitness_journey" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/headingcolor"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="15dp"
+            android:fontFamily="@font/manrope_medium"
+            android:text="@string/select_workout_type" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/linearRegular"
+            android:layout_marginHorizontal="15dp"
+            android:background="@drawable/fitness_rounded"
+            android:layout_marginTop="20dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="20dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/headingcolor"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:paddingBottom="3dp"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/manrope_bold"
+                    android:text="@string/regular" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/smallTextcolor"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="3dp"
+                    android:visibility="gone"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/manrope_medium"
+                    android:text="Lorem ipusm dolrem" />
+
+            </LinearLayout>
+
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="15dp"
+                android:src="@drawable/baseline_arrow_forward_24"
+                app:tint="@color/white" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/linearcircuit"
+            android:layout_marginHorizontal="15dp"
+            android:background="@drawable/fitness_rounded"
+            android:layout_marginTop="20dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="20dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/headingcolor"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:paddingBottom="3dp"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/manrope_bold"
+                    android:text="@string/circuit" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/smallTextcolor"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    android:layout_marginTop="3dp"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/manrope_medium"
+                    android:text="Lorem ipusm dolrem" />
+
+            </LinearLayout>
+
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="15dp"
+                android:src="@drawable/baseline_arrow_forward_24"
+                app:tint="@color/white" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/linearSuperSet"
+            android:layout_marginHorizontal="15dp"
+            android:background="@drawable/fitness_rounded"
+            android:layout_marginVertical="20dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="20dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:paddingBottom="3dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/headingcolor"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/manrope_bold"
+                    android:text="@string/superset_trisets" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/smallTextcolor"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    android:layout_marginTop="3dp"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/manrope_medium"
+                    android:text="Lorem ipusm dolrem" />
+
+            </LinearLayout>
+
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="15dp"
+                android:src="@drawable/baseline_arrow_forward_24"
+                app:tint="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/linearPlan"
+            android:visibility="gone"
+            android:layout_marginHorizontal="15dp"
+            android:background="@drawable/fitness_rounded"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginVertical="20dp"
+                android:layout_marginHorizontal="15dp"
+                android:src="@drawable/im_personal" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textColor="@color/headingcolor"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:fontFamily="@font/manrope_medium"
+                android:text="@string/schedule_personal_workout" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="15dp"
+                android:src="@drawable/baseline_arrow_forward_24"
+                app:tint="@color/white" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/linearHome"
+            android:visibility="gone"
+            android:layout_marginHorizontal="15dp"
+            android:background="@drawable/fitness_rounded"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginVertical="20dp"
+                android:layout_marginHorizontal="15dp"
+                android:src="@drawable/im_book" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textColor="@color/headingcolor"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:fontFamily="@font/manrope_medium"
+                android:text="@string/book_a_trainer_at_home" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="15dp"
+                android:src="@drawable/baseline_arrow_forward_24"
+                app:tint="@color/white" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="40dp"
+            android:layout_marginHorizontal="15dp"
+            android:id="@+id/linearGym"
+            android:visibility="gone"
+            android:background="@drawable/fitness_rounded"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginVertical="20dp"
+                android:layout_marginHorizontal="15dp"
+                android:src="@drawable/im_trainer" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textColor="@color/headingcolor"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:fontFamily="@font/manrope_medium"
+                android:text="Book Trainer at Gym" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="15dp"
+                android:src="@drawable/baseline_arrow_forward_24"
+                app:tint="@color/white" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

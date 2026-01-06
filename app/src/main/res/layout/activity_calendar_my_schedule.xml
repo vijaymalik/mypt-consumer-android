@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+
+    android:background="@color/buttontextcolor"
+    tools:context=".activities.CalendarMyScheduleActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_height="wrap_content"
+        android:id="@+id/linear"
+        android:orientation="vertical">
+        <LinearLayout
+            android:background="@color/buttontextcolor"
+            android:id="@+id/headerLayout"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/back_1"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="20dp"
+                android:src="@drawable/backarrow"
+                />
+            <TextView
+                android:layout_marginEnd="10dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textColor="@color/headingcolor"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/manrope_medium"
+                android:text="@string/calendar"
+                />
+
+
+        </LinearLayout>
+        <View
+            android:background="@color/tabbackground"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@id/linear"
+        android:layout_marginBottom="5dp"
+        android:layout_above="@id/tvAddNewEvent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.michalsvec.singlerowcalendar.calendar.SingleRowCalendar
+            android:id="@+id/main_single_row_calendar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            app:deselection="false"
+            app:longPress="false"
+            app:multiSelection="false" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentBottom="true"
+            android:fontFamily="@font/manrope_medium"
+            android:textFontWeight="700"
+            android:text="@string/my_schedule"
+            android:textStyle="bold"
+            android:textColor="@color/smallTextcolor"
+            android:textSize="16sp" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="vertical"
+            android:id="@+id/linearRecycler"
+            android:layout_marginVertical="20dp"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/tvAddNewEvent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/view_detail_rectangle"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:fontFamily="@font/manrope_medium"
+        android:paddingVertical="15dp"
+        android:textFontWeight="700"
+        android:textAllCaps="true"
+        android:text="@string/add_new_event"
+        android:textStyle="bold"
+        android:textColor="@color/headingcolor"
+        android:textSize="16sp" />
+
+
+</RelativeLayout>

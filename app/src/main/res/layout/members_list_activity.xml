@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black"
+    android:fitsSystemWindows="true"
+
+    tools:context=".GymWorkout.withoutTrainer.JoiningFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearadd"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/headingcolor"
+            android:textSize="32dp"
+            android:layout_marginVertical="20dp"
+            android:layout_marginHorizontal="10dp"
+            android:gravity="center"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/clashdisplay_medium"
+            android:text="@string/who_s_joining"/>
+
+
+
+
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/linearmax"
+        android:layout_below="@+id/linearadd"
+        android:id="@+id/nested">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:layout_marginHorizontal="15dp"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="vertical"
+                android:layout_marginBottom="15dp"
+                android:nestedScrollingEnabled="false"
+                android:id="@+id/Recycler"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:paddingVertical="15dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:id="@+id/linearAddMember"
+                android:background="@drawable/view_detail_rectangle"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/baseline_add_24"
+                    app:tint="@color/headingcolor" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/headingcolor"
+                    android:textSize="14sp"
+                    android:layout_marginStart="10dp"
+                    android:textStyle="bold"
+                    android:textAllCaps="true"
+                    android:fontFamily="@font/manrope_medium"
+                    android:text="@string/add_members"
+                    />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:paddingVertical="15dp"
+        android:gravity="center"
+        android:id="@+id/linearmax"
+        android:layout_above="@id/tvcontinue"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="15dp"
+        android:background="@drawable/grey_rounded_corner_rectangle"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/progress_track_color"
+            android:textSize="14sp"
+            android:layout_marginStart="10dp"
+            android:textStyle="bold"
+            android:id="@+id/tvPerson"
+            android:textAllCaps="true"
+            android:fontFamily="@font/manrope_medium"
+            android:text="Min 3 Person, Max 10 Person"
+            />
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/tvcontinue"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="20dp"
+        android:background="@drawable/rectangle_btn"
+        android:gravity="center"
+        android:fontFamily="@font/manrope_variablefont_wght"
+        android:paddingVertical="15dp"
+        android:textFontWeight="700"
+        android:textAllCaps="true"
+        android:text="@string/cont_inue"
+        android:textColor="@color/white"
+        android:textSize="16dp" />
+</RelativeLayout>

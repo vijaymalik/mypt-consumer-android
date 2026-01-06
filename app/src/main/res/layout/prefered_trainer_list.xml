@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="15dp"
+        app:cardCornerRadius="12dp"
+        app:cardBackgroundColor="#101113"
+        android:layout_marginBottom="10dp"
+
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:paddingVertical="5dp"
+
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="55dp"
+                android:id="@+id/im"
+                android:src="@drawable/dummy_trainer"
+                android:layout_height="55dp"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/headingcolor"
+                    android:textSize="16sp"
+                    android:id="@+id/tvTrainerName"
+                    android:layout_marginHorizontal="15dp"
+                    android:fontFamily="@font/manrope_semi_bold"
+                    android:text="Christene De Koning"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/headingcolor"
+                    android:textSize="10sp"
+                    android:id="@+id/tvtime"
+                    android:layout_marginHorizontal="15dp"
+                    android:fontFamily="@font/manrope_semi_bold"
+                    android:text="You trained 20 times with this coach"
+                    />
+            </LinearLayout>
+            <CheckBox
+                android:paddingHorizontal="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:id="@+id/check"
+                android:buttonTint="@color/headingcolor"
+                style="@style/CustomCheckboxBrand"
+                android:fontFamily="@font/manrope_medium"
+                />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

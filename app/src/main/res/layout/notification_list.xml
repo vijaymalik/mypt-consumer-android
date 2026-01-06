@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        app:cardCornerRadius="12dp"
+        android:layout_marginVertical="15dp"
+        android:layout_marginHorizontal="15dp"
+        app:cardBackgroundColor="#101113"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="15dp"
+            android:orientation="vertical"
+            android:paddingVertical="15dp"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="24dp"
+                    android:src="@drawable/calendartick"
+                    android:layout_height="24dp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:layout_marginHorizontal="15dp"
+                    android:fontFamily="@font/manrope_semi_bold"
+                    android:text="@string/session_request"
+                    />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:gravity="center"
+                    android:id="@+id/linearDeny"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:src="@drawable/close"
+                        android:layout_height="24dp"
+                        app:tint="#F43E33" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#F43E33"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/manrope_semi_bold"
+                        android:text="@string/deny_request"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/trainerDetailLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="15dp">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/imTrainer"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/dummy_trainer" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/manrope_medium"
+                        android:text="Christene De Koning"
+                        android:textColor="@color/white"
+                        android:textFontWeight="700"
+                        android:textSize="14sp"
+                        android:id="@+id/tvTrainer_name"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="2dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/gymlocation"
+                            app:tint="@color/subheadingcolor" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:fontFamily="@font/manrope_medium"
+                            android:text="6567.18km"
+                            android:id="@+id/tvdistance"
+                            android:textColor="@color/subheadingcolor"
+                            android:textSize="12sp"
+                            android:maxLength="10"
+                            android:textStyle="bold" />
+
+                        <View
+                            android:layout_width="3dp"
+                            android:layout_height="3dp"
+                            android:backgroundTint="@color/subheadingcolor"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@drawable/dot" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tvLocation"
+                            android:fontFamily="@font/manrope_medium"
+                            android:text="Near Dubai Mall"
+                            android:textColor="@color/subheadingcolor"
+                            android:textSize="12sp"
+                            android:maxLength="80"
+                            android:maxLines="1"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="5dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/star" />
+
+                    <TextView
+                        android:id="@+id/avgRating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:fontFamily="@font/manrope_medium"
+                        android:text="4"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/linearAddress"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/headingcolor"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="15dp"
+                    android:fontFamily="@font/manrope_semi_bold"
+                    android:text="@string/please_add_a_home_address_to_confirm_your_session"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="+ Add Address"
+                    android:textAllCaps="true"
+                    android:id="@+id/tvAddress"
+                    android:background="@drawable/accept_white_rectangle"
+                    android:textColor="@color/buttontextcolor"
+                    android:textSize="14sp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:paddingVertical="12dp"
+                    android:fontFamily="@font/manrope_bold"
+                    />
+
+            </LinearLayout>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                app:cardCornerRadius="7dp"
+                app:cardBackgroundColor="#005538"
+                android:layout_marginTop="15dp"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginVertical="15dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/manrope_semi_bold"
+                        android:text="Your trainer wants to scheduled a home session for  3rd Jan,2024 | 10:30PM"
+                        android:textColor="@color/subheadingcolor"
+                        android:id="@+id/tvsessionDetail"
+                        android:textSize="12sp"
+                         />
+                    <LinearLayout
+                        android:id="@+id/rescheduleCancelLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:id="@+id/rescheduleBooking"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="5dp"
+                            android:background="@drawable/reshedule_button_rectangle"
+                            android:gravity="center"
+                            android:fontFamily="@font/manrope_bold"
+                            android:paddingVertical="12dp"
+                            android:text="@string/reschedule"
+                            android:textAllCaps="true"
+                            android:textColor="@color/headingcolor"
+                            android:textSize="14sp" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:text="@string/accept"
+                            android:textAllCaps="true"
+                            android:id="@+id/tvAccept"
+                            android:background="@drawable/accept_white_rectangle"
+                            android:textColor="@color/buttontextcolor"
+                            android:textSize="14sp"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center"
+                            android:paddingVertical="12dp"
+                            android:fontFamily="@font/manrope_bold"
+                            />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

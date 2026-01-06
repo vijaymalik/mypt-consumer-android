@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout 
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@drawable/top_rounded_corners"
+        app:cardCornerRadius="15dp"
+        android:id="@+id/standard_bottom_sheet"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <androidx.cardview.widget.CardView
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="70dp"
+            app:cardCornerRadius="3dp"
+            android:layout_height="5dp"
+            app:cardBackgroundColor="@color/rulersmallline"/>
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/headingcolor"
+            android:textSize="18sp"
+            android:padding="15dp"
+            android:textStyle="bold"
+            android:fontFamily="@font/manrope_medium"
+            android:text="@string/select_month"
+            />
+        <LinearLayout
+            android:layout_marginVertical="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/progress_track_color"
+            android:orientation="vertical">
+            <DatePicker
+                android:visibility="gone"
+                android:id="@+id/datePicker1"
+                android:layout_width="match_parent"
+                android:layout_height = "210dp"
+                android:datePickerMode="spinner"
+                android:spinnersShown = "true"
+                android:descendantFocusability = "blocksDescendants"
+                android:background="@drawable/cal_multiple_gradient"
+                android:theme="@style/NumberPickerStyle"
+                android:calendarViewShown="false"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="210dp"
+                android:background="@drawable/cal_multiple_gradient"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:padding="16dp">
+
+                <!-- NumberPicker for Month -->
+                <NumberPicker
+                    android:layout_marginEnd="10dp"
+                    android:id="@+id/monthPicker"
+                    android:descendantFocusability = "blocksDescendants"
+                    android:layout_width="wrap_content"
+                    android:theme="@style/NumberPickerStyle_1"
+                    android:layout_height = "210dp"
+                    />
+
+                <!-- NumberPicker for Year -->
+                <NumberPicker
+                    android:id="@+id/yearPicker"
+                    android:descendantFocusability = "blocksDescendants"
+                    android:theme="@style/NumberPickerStyle_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height = "210dp"
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:id="@+id/tvclear"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginVertical="20dp"
+                android:background="@drawable/view_detail_rectangle"
+                android:gravity="center"
+                android:fontFamily="@font/manrope_medium"
+                android:paddingVertical="15dp"
+                android:textFontWeight="700"
+                android:textAllCaps="true"
+                android:text="@string/clear"
+                android:textStyle="bold"
+                android:textColor="@color/headingcolor"
+                android:textSize="16dp" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:id="@+id/tvOk"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginVertical="20dp"
+                android:background="@drawable/apply_rectangle"
+                android:gravity="center"
+                android:fontFamily="@font/manrope_medium"
+                android:paddingVertical="15dp"
+                android:textFontWeight="700"
+                android:textAllCaps="true"
+                android:text="@string/ok"
+                android:textStyle="bold"
+                android:textColor="@color/buttontextcolor"
+                android:textSize="16dp" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

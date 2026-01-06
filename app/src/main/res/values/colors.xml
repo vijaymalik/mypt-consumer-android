@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="light_white">#ADFFFFFF</color>
+    <color name="headingcolor">#FAFAFA</color>
+    <color name="sea_color">#00C1AA</color>
+    <color name="filter_unselected">#181818</color>
+    <color name="subheadingcolor">#D4D4D4</color>
+    <color name="location_color">#B7B7B7</color>
+    <color name="dot_color">#BABBBE</color>
+    <color name="progress_track_color">#31343A</color>
+    <color name="progress_track_color_1">#606060</color>
+    <color name="edittextbordercolor">#606060</color>
+    <color name="smallTextcolor">#959595</color>
+    <color name="rulerlargeline">#50535B</color>
+    <color name="rulersmallline">#393C43</color>
+    <color name="lightgreycolor">#F0F0F0</color>
+    <color name="rulartextcolor">#9EA0A5</color>
+    <color name="buttongreycolor">#606060</color>
+    <color name="buttontextcolor">#000502</color>
+    <color name="orangecolor">#F38D1B</color>
+    <color name="tabbackground">#101113</color>
+    <color name="home_frag_blk">#1C1F21</color>
+    <color name="yellow">#F0CF43</color>
+    <color name="gold">#D8B94B</color>
+    <color name="progress_clr">#FFC606</color>
+    <color name="progress_clr_1">#F9C78D</color>
+    <color name="txt_clr_1">#EEEEEE</color>
+    <color name="txt_clr_2">#676C75</color>
+    <color name="transparent_white">#26FFFFFF</color>
+    <color name="transparent_white_1">#B0FFFFFF</color>
+    <color name="txt_color_db">#DBDBDB</color>
+    <color name="circuit_color">#EFB36D</color>
+    <color name="regular_color">#4981F2</color>
+
+    <color name="available">#70C978</color>
+    <color name="green1">#0FA958</color>
+    <color name="fast_filling">#F1E151</color>
+    <color name="fully_booked">#F46D33</color>
+    <color name="booked">#959595</color>
+    <color name="darkblue">#4981F2</color>
+    <color name="progressBlue">#3E84FF</color>
+    <color name="ltblue">#9EBCFF</color>
+    <color name="red">#F43E33</color>
+    <color name="swipe_textcolor">#636566</color>
+    <color name="progress_default">#1FA95E09</color>
+    <color name="progress_default_1">#2A170B</color>
+    <color name="stroke_color">#1FA95E09</color>
+    <color name="sea_green">#00C1AA</color>
+    <color name="light_gray_filter">#CECECE</color>
+    <color name="AlmostfullColor">#960000</color>
+
+    <color name="deepSleep">#5320BD</color>
+    <color name="lightSleep">#7FC9CC</color>
+    <color name="remSleep">#C4D180</color>
+    <color name="awake">#D1A381</color>
+    <color name="F6F3F0">#F6F3F0</color>
+    <color name="white_60">#99FFFFFF</color>
+
+
+    <!-- dots inactive colors -->
+
+    <!-- dots active colors -->
+
+    <color name="text_color_white">@color/white</color>
+    <color name="text_color_neutral_200">#F0F0F0</color>
+    <color name="text_color_primary_white">#FAFAFA</color>
+    <color name="text_color_primary_black">#000000</color>// #FFFFFF
+    <color name="text_color_primary_error">#EE4D37</color>
+    <color name="text_color_neutral_alpha">#8CFAFAFA</color>
+    <color name="text_color_white_alpha80">#CCFFFFFF</color>
+
+    <color name="bg_color_btn_primary">#FFFFFF</color>
+    <color name="bg_color_btn_secondary_grey">#F0F0F0</color>
+    <color name="bg_color_primary_white_55">#8CFAFAFA</color>
+    <color name="progress_color">#B2CA01</color>
+    <color name="progress_color_bg">#32FFFFFF</color>
+    <color name="bg_color_btn_disabled">#4DFAFAFA</color>
+    <color name="center_text_weight">#D6F407</color>
+    <color name="tab_back_gd">#181D20</color>
+    <color name="login_btn">#4B4F4C</color>
+    <color name="name_text_field">#141514</color>
+    <color name="gender_button">#4B554F</color>
+
+</resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:background="@drawable/marker_bg"
+    android:padding="6dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:src="@drawable/red_heart"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        app:tint="@android:color/holo_orange_light" />
+
+    <TextView
+        android:id="@+id/tvBpm"
+        android:text="89 bpm"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        android:layout_marginStart="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

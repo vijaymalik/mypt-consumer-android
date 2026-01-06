@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background: Non-progress part -->
+    <item android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <solid android:color="#FFFFFF" /> <!-- White for the background -->
+            <corners android:radius="5dp" />
+
+        </shape>
+    </item>
+
+    <!-- Progress: Filled part -->
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape android:shape="rectangle">
+                <solid android:color="#FFC606" /> <!-- Yellow for the progress -->
+                <corners android:radius="5dp" />
+            </shape>
+        </clip>
+    </item>
+
+
+
+
+</layer-list>

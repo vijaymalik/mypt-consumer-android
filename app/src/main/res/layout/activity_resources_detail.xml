@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:fillViewport="true"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/buttontextcolor"
+    tools:context=".UpComingClasses.ResourcesDetailActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="322dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:scaleType="centerCrop"
+                android:id="@+id/im"
+                android:src="@drawable/resource_girl"
+                android:layout_height="322dp"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="36dp"
+                    android:scaleType="centerCrop"
+                    android:id="@+id/imback"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/backarrow"
+                    android:layout_height="36dp"/>
+                <ImageView
+                    android:layout_width="44dp"
+                    android:scaleType="centerCrop"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="15dp"
+                    android:src="@drawable/imshare"
+                    android:layout_height="44dp"/>
+
+            </RelativeLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:background="@drawable/resource_detail"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:text="Stretching and  Recovery Sessions"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="30dp"
+                android:layout_width="wrap_content"
+                android:textStyle="bold"
+                android:id="@+id/tvTitlle"
+                android:layout_alignParentBottom="true"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/clashdisplay_medium"
+                android:textColor="@color/headingcolor"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="15dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_gravity="center"
+                android:layout_height="18dp"
+                android:src="@drawable/im_watch"
+                />
+            <TextView
+                android:text="19 Dec, 2024"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:id="@+id/tvDate"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/manrope_medium"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_gravity="center"
+                android:layout_height="18dp"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/im_watch"
+                />
+            <TextView
+                android:text="10 mins"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:id="@+id/tvRating"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/manrope_medium"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+          android:background="@drawable/resourcedetail_rectangle"
+            android:layout_height="match_parent">
+            <TextView
+                android:text="@string/introduction"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/manrope_semi_bold"
+                android:textColor="@color/buttontextcolor"
+                android:textSize="18sp" />
+            <TextView
+                android:text="Introduction"
+                android:layout_marginHorizontal="20dp"
+
+                android:id="@+id/tvIntro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/manrope_medium"
+                android:textColor="@color/buttontextcolor"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

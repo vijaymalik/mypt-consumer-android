@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/buttontextcolor"
+    android:fitsSystemWindows="true"
+
+    tools:context=".BookingScreen.CancelBookingDetailActivity">
+    <LinearLayout
+        android:background="@color/buttontextcolor"
+        android:id="@+id/headerLayout"
+        android:gravity="center_vertical"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/back_1"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="20dp"
+            android:src="@drawable/backarrow"
+            />
+        <TextView
+            android:layout_marginEnd="10dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="@color/headingcolor"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/manrope_medium"
+            android:text="@string/session_details"
+            />
+
+    </LinearLayout>
+    <View
+        android:background="@color/tabbackground"
+        android:layout_width="match_parent"
+        android:id="@+id/view"
+        android:layout_below="@id/headerLayout"
+
+        android:layout_height="2dp"/>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_below="@+id/view"
+        android:id="@+id/nested"
+        android:visibility="gone"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/session_rectangle"
+                android:layout_marginHorizontal="15dp"
+
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="25dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/headingcolor"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:id="@+id/home_workout"
+                        android:fontFamily="@font/manrope_medium"
+                        android:text="@string/home_workout"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/smallTextcolor"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:id="@+id/tvBookingDate"
+                        android:fontFamily="@font/manrope_medium"
+                        android:text="Wed, Sep 18th at 8:30 AM"
+                        />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="20dp"
+                    android:background="@drawable/white_rectangle_package"
+                    android:fontFamily="@font/manrope_medium"
+                    android:paddingVertical="10dp"
+                    android:paddingHorizontal="25dp"
+                    android:textFontWeight="700"
+                    android:textAllCaps="true"
+                    android:text="@string/help"
+                    android:textStyle="bold"
+                    android:textColor="@color/headingcolor"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/session_rectangle"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/calendar_remove"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:layout_marginLeft="10dp"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/manrope_medium"
+                            android:text="@string/session_cancelled"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingVertical="20dp">
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:id="@+id/imTrainer"
+                            android:src="@drawable/dummy_trainer" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/manrope_medium"
+                                android:text="Christene De Koning"
+                                android:textColor="@color/headingcolor"
+                                android:textFontWeight="700"
+                                android:textSize="14dp"
+                                android:id="@+id/tvTrainer_name"
+
+                                android:textStyle="bold" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="16dp"
+                                    android:layout_height="16dp"
+                                    android:src="@drawable/gymlocation" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="3dp"
+                                    android:fontFamily="@font/manrope_medium"
+                                    android:text="1.2km"
+                                    android:id="@+id/tvdistance"
+
+                                    android:textColor="@color/smallTextcolor"
+                                    android:textSize="12dp"
+                                    android:textStyle="bold" />
+
+                                <View
+                                    android:layout_width="3dp"
+                                    android:layout_height="3dp"
+                                    android:layout_marginHorizontal="5dp"
+                                    android:background="@drawable/dot" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/tvLocation"
+                                    android:maxLines="2"
+                                    android:ellipsize="end"
+                                    android:fontFamily="@font/manrope_medium"
+                                    android:text="Near Dubai Mall"
+                                    android:textColor="@color/smallTextcolor"
+                                    android:textSize="12dp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginEnd="5dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:src="@drawable/star" />
+
+                            <TextView
+                                android:id="@+id/avgRating"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="3dp"
+                                android:fontFamily="@font/manrope_medium"
+                                android:text="4"
+                                android:textColor="@color/white"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:id="@+id/tvBookAgain"
+                        android:layout_height="wrap_content"
+
+                        android:paddingHorizontal="50dp"
+                        android:background="@drawable/apply_rectangle"
+                        android:gravity="center"
+                        android:fontFamily="@font/manrope_medium"
+                        android:paddingVertical="15dp"
+                        android:textFontWeight="700"
+                        android:textAllCaps="true"
+                        android:text="@string/book_again"
+                        android:textStyle="bold"
+                        android:textColor="@color/buttontextcolor"
+                        android:textSize="16dp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/booking_amount_rectangle"
+                        android:fontFamily="@font/manrope_medium"
+                        android:paddingVertical="15dp"
+                        android:paddingHorizontal="10dp"
+                        android:id="@+id/cancellationMsg"
+                        android:textFontWeight="700"
+                        android:text="@string/booking_amount_will_be_refunded_within_24_hours_of_cancellation"
+                        android:textStyle="bold"
+                        android:textColor="@color/subheadingcolor"
+                        android:textSize="12dp" />
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/smallTextcolor"
+                android:textSize="16sp"
+                android:textStyle="bold"
+
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/manrope_medium"
+                android:text="@string/booking_details"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:background="@drawable/session_rectangle"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/smallTextcolor"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/manrope_medium"
+                        android:text="@string/contact_no"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/headingcolor"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:id="@+id/tvContact"
+
+                        android:fontFamily="@font/manrope_medium"
+                        android:text="Aug 15, 2024, 8:00 AM"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/smallTextcolor"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/manrope_medium"
+                        android:text="@string/amount_paid"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/headingcolor"
+                        android:textSize="14sp"
+                        android:id="@+id/tvamountPaid"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/manrope_medium"
+                        android:text="Aug 15, 2024, 8:00 AM"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/smallTextcolor"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/manrope_medium"
+                        android:text="@string/training_location"
+                        />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:id="@+id/tvTrainingLocation"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/headingcolor"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/manrope_medium"
+                        android:text="Aug 15, 2024, 8:00 AM"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/smallTextcolor"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/manrope_medium"
+                        android:text="@string/training_date"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:id="@+id/tvTrainingDate"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/headingcolor"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/manrope_medium"
+                        android:text="Aug 15, 2024, 8:00 AM"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/smallTextcolor"
+                android:textSize="16sp"
+                android:textStyle="bold"
+
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginVertical="20dp"
+                android:fontFamily="@font/manrope_medium"
+                android:text="@string/cancellation_details"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/session_rectangle"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/smallTextcolor"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/manrope_medium"
+                        android:text="@string/cancelled_on"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:id="@+id/tvCancelledOn"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/headingcolor"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/manrope_medium"
+                        android:text="Aug 15, 2024, 8:00 AM"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/smallTextcolor"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/manrope_medium"
+                        android:text="@string/reason"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:id="@+id/tvReason"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/headingcolor"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/manrope_medium"
+                        android:text="Aug 15, 2024, 8:00 AM"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/smallTextcolor"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/manrope_medium"
+                        android:text="@string/refund_amount"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:id="@+id/tvRefundAmount"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/headingcolor"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/manrope_medium"
+                        android:text="Aug 15, 2024, 8:00 AM"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</RelativeLayout>

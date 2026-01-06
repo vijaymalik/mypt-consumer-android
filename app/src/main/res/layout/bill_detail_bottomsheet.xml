@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/top_rounded_corners"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="70dp"
+            app:cardCornerRadius="3dp"
+            android:layout_height="5dp"
+            app:cardBackgroundColor="@color/rulersmallline"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="40dp"
+
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="15dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/headingcolor"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/manrope_bold"
+                android:text="@string/bill_details" />
+            <ImageView
+                android:layout_width="24dp"
+                android:id="@+id/imclose"
+                android:src="@drawable/close"
+                android:layout_marginRight="15dp"
+                android:layout_height="24dp"/>
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            app:cardBackgroundColor="#171717"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="20dp"
+            app:cardCornerRadius="10dp"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_marginVertical="30dp"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="15dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="#BCBCBC"
+                        android:textSize="14dp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/manrope_medium"
+                        android:text="@string/session_cost" />
+                    <TextView
+                        android:layout_width="wrap_content"
+
+                        android:layout_marginHorizontal="15dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="#EEEEEE"
+                        android:id="@+id/tvSessionCost"
+                        android:textSize="14dp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/manrope_medium"
+                        android:text="AED 2,280" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="12dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:textColor="#BCBCBC"
+                        android:textSize="14dp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/manrope_medium"
+                        android:text="@string/taxes" />
+                    <TextView
+                        android:layout_width="wrap_content"
+
+                        android:layout_height="wrap_content"
+                        android:textColor="#EEEEEE"
+                        android:textSize="14dp"
+                        android:id="@+id/tvTax"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/manrope_medium"
+                        android:text="AED 20" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:layerType="software"
+                    android:background="@drawable/light_dotted_line"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginHorizontal="15dp"
+
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:textColor="#BCBCBC"
+                        android:textSize="14dp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/manrope_semi_bold"
+                        android:text="@string/total_payable" />
+                    <TextView
+                        android:layout_width="wrap_content"
+
+                        android:layout_marginLeft="15dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="#EEEEEE"
+                        android:textSize="18dp"
+                        android:id="@+id/tvPayable"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/manrope_bold"
+                        android:text="AED 20" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:id="@+id/linearPayButton"
+            android:visibility="gone"
+            android:background="@drawable/payment_screen_drawable"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="@drawable/update_plan_drawable"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginHorizontal="20dp"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pay AED 2,300"
+                    android:textColor="@color/buttontextcolor"
+                    android:textSize="16sp"
+                    android:paddingVertical="16dp"
+                    android:id="@+id/tvPayment"
+                    android:textAllCaps="true"
+                    android:fontFamily="@font/manrope_bold"
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/arrow_right_blue"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    app:tint="@color/buttontextcolor" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".onBoarding.personalize.PersonalizeScreenFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linear"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/tv"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/headingcolor"
+            android:textSize="30sp"
+            android:id="@+id/userName"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="20dp"
+            android:gravity="center"
+            android:fontFamily="@font/clashdisplay_medium"
+            android:text="Hello Ashwin"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/headingcolor"
+            android:textSize="30sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="20dp"
+            android:gravity="center"
+            android:fontFamily="@font/clashdisplay_medium"
+            android:text="@string/what_brings_you_here"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_marginTop="40dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="15dp"
+            android:id="@+id/recycler"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/headingcolor"
+        android:textSize="12sp"
+        android:id="@+id/tv"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/grey_rounded_corner_rectangle"
+        android:gravity="center"
+        android:fontFamily="@font/manrope_medium"
+        android:paddingVertical="8dp"
+        android:text="@string/feel_free_to_load_up_on_as_many_options_as_apply"/>
+
+</RelativeLayout>

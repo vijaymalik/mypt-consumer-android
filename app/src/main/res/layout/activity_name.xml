@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".onBoarding.NameActivity">
+
+    <ImageView
+        android:id="@+id/im"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/man" />
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progress_bar"
+        android:layout_width="160dp"
+        android:layout_height="3dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:progress="10"
+        android:progressBackgroundTint="@color/progress_color_bg"
+        app:indicatorColor="@color/progress_color"
+        app:trackColor="@color/progress_color_bg"
+        app:trackCornerRadius="10dp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:paddingBottom="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/manrope_regular_400"
+            android:lineHeight="16sp"
+            android:text="@string/welcome_to_mypt"
+            android:textColor="@color/text_color_white_alpha80"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/clashdisplay_medium"
+            android:gravity="center"
+            android:lineHeight="39sp"
+            android:text="@string/what_should_we_call_you"
+            android:textColor="@color/headingcolor"
+            android:textSize="32sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/EditTextThemeOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:textColorHint="@color/smallTextcolor"
+            app:boxBackgroundColor="@color/name_text_field"
+            app:boxCornerRadiusBottomEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxCornerRadiusTopStart="8dp"
+            app:boxStrokeWidth="0.5dp"
+            app:hintTextAppearance="@style/HintTextAppearance"
+            app:hintTextColor="@color/smallTextcolor">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/userFirstName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrst uvwxyz1234567890"
+                android:focusable="true"
+                android:fontFamily="@font/manrope_semi_bold"
+                android:hint="@string/full_name"
+                android:inputType="textPersonName"
+                android:lineHeight="21sp"
+                android:padding="15dp"
+                android:paddingVertical="12sp"
+                android:textColor="@color/headingcolor"
+                android:textColorHint="@color/smallTextcolor"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <FrameLayout
+            android:id="@+id/flBtn"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/bg_shape_btn_disabled">
+
+            <TextView
+                android:id="@+id/tvcontinue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawableEnd="@drawable/ic_arrow_right"
+                android:drawablePadding="8dp"
+                android:drawableTint="@color/text_color_neutral_200"
+                android:fontFamily="@font/clashdisplay_medium"
+                android:gravity="center"
+                android:lineSpacingExtra="2sp"
+                android:paddingHorizontal="12dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="8dp"
+                android:text="@string/label_lets_get_started"
+                android:textAllCaps="true"
+                android:textColor="@color/text_color_neutral_200"
+                android:textSize="14sp" />
+        </FrameLayout>
+    </LinearLayout>
+</RelativeLayout>

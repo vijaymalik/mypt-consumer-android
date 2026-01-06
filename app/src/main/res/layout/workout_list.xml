@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/relative"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="10dp"
+        android:layout_marginVertical="10dp"
+        android:id="@+id/linear"
+        android:background="@drawable/workout_gradient_rectangle">
+        <RelativeLayout
+            android:layout_width="90dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_height="90dp">
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                app:cardBackgroundColor="#31343A"
+                app:cardCornerRadius="14dp"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:src="@drawable/dumbbell"
+                    android:layout_gravity="center"
+                    android:id="@+id/im"
+                    android:layout_height="match_parent"/>
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="50dp"
+                android:layout_marginBottom="20dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
+                app:cardBackgroundColor="#3E84FF"
+                app:cardCornerRadius="8dp"
+                android:visibility="gone"
+                android:layout_height="24dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:fontFamily="@font/clashdisplay_medium"
+                    android:text="@string/New"
+                    />
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:id="@+id/tvName"
+                android:maxLines="1"
+                android:ellipsize="end"
+
+                android:layout_marginLeft="7dp"
+                android:fontFamily="@font/clashdisplay_medium"
+                android:text="Shoulder Workout"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:layout_marginLeft="7dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/dumbell_fill"
+                    app:tint="@color/smallTextcolor" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/headingcolor"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="5dp"
+                    android:textStyle="bold"
+                    android:id="@+id/tvReps"
+                    android:fontFamily="@font/manrope_medium"
+                    android:text="12"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/headingcolor"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="@font/manrope_medium"
+                    android:text="Reps x"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/headingcolor"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="5dp"
+                    android:textStyle="bold"
+                    android:id="@+id/tvSets"
+                    android:fontFamily="@font/manrope_medium"
+                    android:text="3"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/headingcolor"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="@font/manrope_medium"
+                    android:text="Sets"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="7dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/solid_fire"
+                    app:tint="@color/smallTextcolor" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/headingcolor"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="5dp"
+                    android:textStyle="bold"
+                    android:id="@+id/calorie"
+                    android:fontFamily="@font/manrope_medium"
+                    android:text="251"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/headingcolor"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="@font/manrope_medium"
+                    android:text="Kcal"
+                    />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_gravity="center"
+            android:id="@+id/linearEdit"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="24dp"
+                android:src="@drawable/baseline_arrow_forward_24"
+                android:id="@+id/im_edit"
+                android:layout_height="24dp"
+                app:tint="@color/headingcolor" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

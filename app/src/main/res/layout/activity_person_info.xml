@@ -1,0 +1,762 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/buttontextcolor"
+    tools:context=".Profile.PersonInfoActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/nested"
+        android:layout_above="@id/cardSaveCHanges"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Header Section -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:layout_marginTop="-30dp"
+                        android:scaleType="centerCrop"
+                        android:id="@+id/coverImage"
+                        android:src="@drawable/profile_background" />
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentBottom="true"
+                        android:background="@drawable/top_background" />
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="125dp"
+                        android:background="@drawable/bottom_background" />
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:id="@+id/im_cover_edit"
+                        android:src="@drawable/im_edit"
+                        android:layout_marginRight="30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="160dp"
+
+                        android:layout_height="24dp"/>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/headerLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:id="@+id/back_1"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/backarrow" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/personal_information"
+                        android:textColor="@color/headingcolor"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/manrope_medium" />
+
+                </LinearLayout>
+
+                <!-- Profile Image -->
+                <RelativeLayout
+                    android:layout_width="99dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="110dp"
+                    android:layout_height="96dp">
+                    <LinearLayout
+                        android:id="@+id/linear"
+                        android:layout_width="91dp"
+                        android:layout_height="92dp"
+                        android:background="@drawable/profile_image_border"
+                        android:gravity="center">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="2dp"
+                            app:cardCornerRadius="16dp">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                android:id="@+id/CUserImage"
+                                android:src="@drawable/_no_image" />
+
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:id="@+id/im_profile_edit"
+                        android:src="@drawable/im_edit"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_height="24dp"/>
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="-10dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/personal_information"
+                    android:textColor="@color/smallTextcolor"
+                    android:textSize="16sp"
+                    android:layout_marginHorizontal="20dp"
+                    android:fontFamily="@font/manrope_medium" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/profile_edittext">
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:src="@drawable/info_name"
+                        android:layout_marginLeft="12dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_height="24dp"/>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        app:hintTextColor="@color/smallTextcolor"
+                        app:boxStrokeColor="@android:color/transparent"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp"
+
+                        android:textColorHint="@color/smallTextcolor"
+                        android:background="@android:color/transparent"
+                        app:hintTextAppearance="@style/MyFloatingLabelStyleProfileScreen"
+                        >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textCursorDrawable="@null"
+                            android:id="@+id/textName"
+                            android:inputType="textPersonName"
+                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrst uvwxyz1234567890"
+                            android:fontFamily="@font/manrope_medium"
+                            android:hint="@string/full_name"
+                            android:textColor="@color/headingcolor"
+                            android:background="@android:color/transparent"
+                            android:enabled="false"
+
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:src="@drawable/im_edit"
+                        android:id="@+id/im_editname"
+                        android:layout_marginRight="12dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_height="match_parent"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/profile_edittext">
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:src="@drawable/sms"
+                        android:layout_marginLeft="12dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_height="24dp"/>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        app:hintTextColor="@color/smallTextcolor"
+                        app:boxStrokeColor="@android:color/transparent"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp"
+
+                        android:textColorHint="@color/smallTextcolor"
+                        android:background="@android:color/transparent"
+                        app:hintTextAppearance="@style/MyFloatingLabelStyleProfileScreen"
+                        >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textCursorDrawable="@null"
+                            android:id="@+id/textEmail"
+                            android:inputType="textEmailAddress"
+                            android:fontFamily="@font/manrope_medium"
+                            android:hint="@string/email_address"
+                            android:textColor="@color/headingcolor"
+                            android:background="@android:color/transparent"
+                            android:enabled="false"
+
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:src="@drawable/im_edit"
+                        android:id="@+id/imedit_email"
+                        android:layout_marginRight="12dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_height="match_parent"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/profile_edittext">
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:src="@drawable/call"
+                        android:layout_marginLeft="12dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_height="24dp"/>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        app:hintTextColor="@color/smallTextcolor"
+                        app:boxStrokeColor="@android:color/transparent"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp"
+
+                        android:textColorHint="@color/smallTextcolor"
+                        android:background="@android:color/transparent"
+                        app:hintTextAppearance="@style/MyFloatingLabelStyleProfileScreen"
+                        >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textCursorDrawable="@null"
+                            android:id="@+id/textphone"
+                            android:enabled="false"
+                            android:inputType="textEmailAddress"
+                            android:fontFamily="@font/manrope_medium"
+                            android:hint="@string/contact_number"
+                            android:textColor="@color/headingcolor"
+                            android:background="@android:color/transparent"
+
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/profile_edittext">
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:src="@drawable/calendar"
+                        android:layout_marginLeft="12dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_height="24dp"/>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        app:hintTextColor="@color/smallTextcolor"
+                        app:boxStrokeColor="@android:color/transparent"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp"
+
+                        android:textColorHint="@color/smallTextcolor"
+                        android:background="@android:color/transparent"
+                        app:hintTextAppearance="@style/MyFloatingLabelStyleProfileScreen"
+                        >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textCursorDrawable="@null"
+                            android:id="@+id/textdate"
+                            android:inputType="textEmailAddress"
+                            android:fontFamily="@font/manrope_medium"
+                            android:hint="@string/date_of_birth"
+                            android:textColor="@color/headingcolor"
+                            android:background="@android:color/transparent"
+                            android:enabled="false"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/profile_edittext">
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:src="@drawable/im_gender"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="14dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_height="24dp"/>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        app:hintTextColor="@color/smallTextcolor"
+                        app:boxStrokeColor="@android:color/transparent"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp"
+                        android:id="@+id/genderInputLayout"
+                        android:textColorHint="@color/smallTextcolor"
+                        android:background="@android:color/transparent"
+                        app:hintTextAppearance="@style/MyFloatingLabelStyleProfileScreen"
+                        >
+
+                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textCursorDrawable="@null"
+                            android:id="@+id/textGender"
+                            android:inputType="textEmailAddress"
+                            android:fontFamily="@font/manrope_medium"
+                            android:hint="Gender"
+                            android:paddingTop="24dp"
+                            android:paddingBottom="12dp"
+                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrst uvwxyz1234567890"
+                            android:textColor="@color/headingcolor"
+                            android:background="@android:color/transparent"
+                            android:enabled="false"
+                            android:dropDownWidth="match_parent"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:src="@drawable/im_edit"
+                        android:id="@+id/imedit_gender"
+                        android:layout_marginRight="12dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_height="match_parent"/>
+                </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/address_information"
+                    android:textColor="@color/smallTextcolor"
+                    android:textSize="16sp"
+                    android:id="@+id/tvAddressINfo"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:fontFamily="@font/manrope_medium" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_gravity="center"
+                    android:id="@+id/locationLayout"
+                    android:background="@drawable/profile_edittext">
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:src="@drawable/location"
+                        android:layout_marginLeft="12dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_height="24dp"/>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        app:hintTextColor="@color/smallTextcolor"
+                        app:boxStrokeColor="@android:color/transparent"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp"
+                        android:id="@+id/locationInputLayout"
+                        android:textColorHint="@color/smallTextcolor"
+                        android:background="@android:color/transparent"
+                        app:hintTextAppearance="@style/MyFloatingLabelStyleProfileScreen"
+                        >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textCursorDrawable="@null"
+                            android:focusable="false"
+                            android:inputType="textPersonName"
+                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrst uvwxyz1234567890"
+                            android:fontFamily="@font/manrope_medium"
+                            android:hint="@string/location"
+                            android:textColor="@color/headingcolor"
+                            android:background="@android:color/transparent"
+
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:src="@drawable/im_edit"
+                        android:layout_marginRight="12dp"
+                        android:id="@+id/imeditLocation"
+                        android:layout_gravity="center_vertical"
+                        android:layout_height="match_parent"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/profile_edittext">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        app:hintTextColor="@color/smallTextcolor"
+                        app:boxStrokeColor="@android:color/transparent"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp"
+
+                        android:textColorHint="@color/smallTextcolor"
+                        android:background="@android:color/transparent"
+                        app:hintTextAppearance="@style/MyFloatingLabelStyleProfileScreen"
+                        >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textCursorDrawable="@null"
+                            android:id="@+id/textAddress"
+                            android:inputType="textPersonName"
+                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrst uvwxyz1234567890"
+                            android:enabled="false"
+                            android:fontFamily="@font/manrope_medium"
+                            android:hint="@string/address"
+                            android:textColor="@color/headingcolor"
+                            android:background="@android:color/transparent"
+
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:src="@drawable/im_edit"
+                        android:id="@+id/imeditAddress"
+                        android:layout_marginRight="12dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_height="match_parent"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:visibility="gone"
+                    android:orientation="horizontal"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/profile_edittext">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        app:hintTextColor="@color/smallTextcolor"
+                        app:boxStrokeColor="@android:color/transparent"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp"
+
+                        android:textColorHint="@color/smallTextcolor"
+                        android:background="@android:color/transparent"
+                        app:hintTextAppearance="@style/MyFloatingLabelStyleProfileScreen"
+                        >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textCursorDrawable="@null"
+                            android:id="@+id/textPostal"
+                            android:inputType="textPersonName"
+                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrst uvwxyz1234567890"
+                            android:enabled="false"
+                            android:fontFamily="@font/manrope_medium"
+                            android:hint="@string/postal_code_zip"
+                            android:textColor="@color/headingcolor"
+                            android:background="@android:color/transparent"
+
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:src="@drawable/im_edit"
+                        android:id="@+id/imeditPostal"
+                        android:layout_marginRight="12dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_height="20dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/profile_edittext">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        app:hintTextColor="@color/smallTextcolor"
+                        app:boxStrokeColor="@android:color/transparent"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp"
+                        android:textColorHint="@color/smallTextcolor"
+                        android:background="@android:color/transparent"
+                        app:hintTextAppearance="@style/MyFloatingLabelStyleProfileScreen"
+                        >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textCursorDrawable="@null"
+                            android:id="@+id/textCountry"
+                            android:inputType="textPersonName"
+                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrst uvwxyz1234567890"
+                            android:enabled="false"
+                            android:fontFamily="@font/manrope_medium"
+                            android:hint="@string/country"
+                            android:textColor="@color/headingcolor"
+                            android:background="@android:color/transparent"
+
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:src="@drawable/arrow_right"
+                        android:rotation="90"
+                        android:layout_marginRight="12dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_height="20dp"
+                        app:tint="@color/headingcolor" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:visibility="gone"
+                    android:orientation="horizontal"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/profile_edittext">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        app:hintTextColor="@color/smallTextcolor"
+                        app:boxStrokeColor="@android:color/transparent"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp"
+
+                        android:textColorHint="@color/smallTextcolor"
+                        android:background="@android:color/transparent"
+                        app:hintTextAppearance="@style/MyFloatingLabelStyleProfileScreen"
+                        >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textCursorDrawable="@null"
+                            android:inputType="textPersonName"
+                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrst uvwxyz1234567890"
+                            android:enabled="false"
+                            android:fontFamily="@font/manrope_medium"
+                            android:hint="@string/state"
+                            android:textColor="@color/headingcolor"
+                            android:background="@android:color/transparent"
+
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:src="@drawable/arrow_right"
+                        android:rotation="90"
+                        android:layout_marginRight="12dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_height="20dp"
+                        app:tint="@color/headingcolor" />
+                </LinearLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_height="wrap_content">
+                    <AutoCompleteTextView
+                        android:id="@+id/autoCompleteCity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:padding="16dp"
+                        android:layout_alignBottom="@id/stateLinearLayout"
+                        android:cursorVisible="false"
+                        android:background="@android:color/transparent"
+                        android:textColor="@color/tabbackground"
+                        android:textColorHint="@color/smallTextcolor"
+                        android:fontFamily="@font/manrope_medium" />
+                    <LinearLayout
+                        android:id="@+id/stateLinearLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal"
+                        android:background="@drawable/profile_edittext">
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/stateTextInputLayout"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_gravity="center"
+                            android:layout_height="wrap_content"
+                            app:hintTextColor="@color/booked"
+                            app:boxStrokeColor="@android:color/transparent"
+                            android:paddingVertical="1dp"
+                            app:boxStrokeWidth="1dp"
+                            android:importantForAutofill="no"
+                            app:boxStrokeWidthFocused="1dp"
+                            android:textColorHint="@color/booked"
+                            android:background="@android:color/transparent"
+                            android:hint="@string/city"
+                            app:hintTextAppearance="@style/MyFloatingLabelStyleProfileScreen"
+                            >
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:cursorVisible="false"
+                                android:textSize="14sp"
+                                android:textCursorDrawable="@null"
+                                android:id="@+id/tvCity"
+                                android:fontFamily="@font/manrope_medium"
+                                android:textColorHint="@color/smallTextcolor"
+                                android:textStyle="bold"
+                                android:textColor="@color/headingcolor"
+                                android:background="@android:color/transparent"
+                                android:inputType="textNoSuggestions|textVisiblePassword"
+                                android:importantForAutofill="noExcludeDescendants"
+                                android:autofillHints=""
+                                />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:src="@drawable/arrow_right"
+                            android:rotation="90"
+                            android:layout_marginRight="12dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_height="20dp"
+                            app:tint="@color/headingcolor" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:id="@+id/cardSaveCHanges"
+        app:cardCornerRadius="12dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="20dp"
+        app:cardBackgroundColor="#606060"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SAVE Changes"
+            android:gravity="center"
+            android:paddingVertical="12dp"
+            android:textColor="@color/subheadingcolor"
+            android:textSize="16sp"
+            android:id="@+id/tvCard"
+            android:textAllCaps="true"
+            android:layout_marginHorizontal="20dp"
+            android:fontFamily="@font/manrope_medium" />
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

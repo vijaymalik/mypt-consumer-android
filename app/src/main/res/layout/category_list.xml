@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/buttontextcolor"
+    android:layout_height="wrap_content">
+    <CheckBox
+        android:paddingHorizontal="10dp"
+        android:id="@+id/checkname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:buttonTint="@color/white"
+        style="@style/CustomCheckboxBrand"
+        android:fontFamily="@font/manrope_medium"
+        android:textColor="@color/white"
+        android:checked="true"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="10dp"
+        android:text="Fitness Equipment"/>
+
+</RelativeLayout>

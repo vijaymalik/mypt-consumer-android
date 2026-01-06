@@ -1,0 +1,1837 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/buttontextcolor"
+    tools:context=".WorkoutLibrary.WorkoutLibraryBodyPartsActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearHeader"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/headerLayout"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/back_1"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="20dp"
+                android:src="@drawable/backarrow"
+                />
+            <TextView
+                android:layout_marginEnd="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/headingcolor"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/manrope_medium"
+                android:text="@string/workout_library"
+                />
+
+
+        </LinearLayout>
+        <View
+            android:background="@color/tabbackground"
+            android:layout_width="match_parent"
+
+            android:layout_height="2dp"/>
+
+
+    </LinearLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/frontbody_container"
+        android:layout_width="match_parent"
+        android:visibility="visible"
+        android:layout_below="@id/linearHeader"
+        android:layout_height="match_parent">
+
+        <!-- Body Image -->
+        <ImageView
+            android:id="@+id/frontbody_img"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/frontbody"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/sholder_img"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
+            android:src="@drawable/sholder_img"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/neck_img"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
+            android:src="@drawable/neck"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/obliques_img"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
+            android:src="@drawable/obliques"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/hip_flexor_img"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
+            android:src="@drawable/hip_flexor"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/chest_img"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
+            android:src="@drawable/chest_img"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/abs_img"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
+            android:src="@drawable/abs_img"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/thighs_img"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
+            android:src="@drawable/thighs_img"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+        <ImageView
+            android:id="@+id/calves_img"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
+            android:src="@drawable/calves_img"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
+            android:id="@+id/forearm_img"
+            android:src="@drawable/forearm"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
+            android:id="@+id/biceps_img"
+            android:src="@drawable/biceps"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <!-- Guidelines for chest -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_chest_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.42" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_chest_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.18" />
+
+        <!-- Guidelines for hipFlexor -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_hip_flexor_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.58" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_hip_flexor_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.475" />
+
+        <!-- Guideline for obliques -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_obliques_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.36" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_obliques_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.3" />
+
+        <!-- Guidelines for Abs -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_abs_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.55" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_abs_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.36" />
+
+        <!-- Guidelines for left shoulder -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_shoulder_left_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.25" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_shoulder_left_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.12" />
+
+        <!-- Guidelines for neck -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_neck_left_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.55" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_neck_left_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.079" />
+
+        <!-- Guidelines for forearm -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_forearm_left_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.159" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_forearm_left_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.39" />
+
+        <!-- Guidelines for biceps -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_biceps_left_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.2" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_biceps_left_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.25" />
+
+        <!-- Guidelines for right thigh -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_thigh_right_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.70" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_thigh_right_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.84" />
+
+        <!-- Guidelines for left thigh -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_thigh_left_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.35" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_thigh_left_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.64" />
+
+        <!-- chest Button -->
+        <RelativeLayout
+            android:id="@+id/btn_chest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/guideline_chest_horizontal"
+            app:layout_constraintStart_toStartOf="@id/guideline_chest_vertical"
+            android:translationX="-15dp"
+            android:translationY="-15dp">
+
+
+            <RelativeLayout
+                android:id="@+id/btn_chest_withouttext"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:visibility="visible"
+                android:background="@drawable/transparant_background_layer">
+                <RelativeLayout
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/rounded_button_bg">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="+"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:id="@+id/btn_chest_withtext"
+                android:layout_height="wrap_content"
+                android:paddingRight="6dp"
+                android:visibility="gone"
+                android:orientation="horizontal"
+                android:background="@drawable/buttonshape">
+
+                <RelativeLayout
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:visibility="visible"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/transparant_background_layer"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/rounded_button_bg">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="+"
+                            android:textColor="@android:color/white"
+                            android:textSize="16sp" />
+                    </RelativeLayout>
+                </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/white"
+                    android:text="Chest"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <!-- obliques Button -->
+        <RelativeLayout
+            android:id="@+id/btn_obliques"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/guideline_obliques_horizontal"
+            app:layout_constraintStart_toStartOf="@id/guideline_obliques_vertical"
+            android:translationX="-15dp"
+            android:translationY="-15dp">
+
+
+            <RelativeLayout
+                android:id="@+id/btn_obliques_withouttext"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:visibility="visible"
+                android:background="@drawable/transparant_background_layer">
+                <RelativeLayout
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/rounded_button_bg">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="+"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:id="@+id/btn_obliques_withtext"
+                android:layout_height="wrap_content"
+                android:paddingRight="6dp"
+                android:visibility="gone"
+                android:orientation="horizontal"
+                android:background="@drawable/buttonshape">
+
+                <RelativeLayout
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:visibility="visible"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/transparant_background_layer"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/rounded_button_bg">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="+"
+                            android:textColor="@android:color/white"
+                            android:textSize="16sp" />
+                    </RelativeLayout>
+                </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/white"
+                    android:text="Obliques"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <!-- Abs Button -->
+        <RelativeLayout
+            android:id="@+id/btn_abs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/guideline_abs_horizontal"
+            app:layout_constraintStart_toStartOf="@id/guideline_abs_vertical"
+            android:translationX="-15dp"
+            android:translationY="-15dp">
+
+            <RelativeLayout
+                android:id="@+id/btn_abs_withouttext"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@drawable/transparant_background_layer"
+                android:visibility="visible">
+                <RelativeLayout
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/rounded_button_bg">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="+"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:id="@+id/btn_abs_withtext"
+                android:layout_height="wrap_content"
+                android:paddingRight="6dp"
+                android:visibility="gone"
+                android:orientation="horizontal"
+                android:background="@drawable/buttonshape">
+
+                <RelativeLayout
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:visibility="visible"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/transparant_background_layer"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/rounded_button_bg">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="+"
+                            android:textColor="@android:color/white"
+                            android:textSize="16sp" />
+                    </RelativeLayout>
+                </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/white"
+                    android:text="Abs"/>
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <!-- Left Shoulder Button -->
+        <RelativeLayout
+            android:id="@+id/btn_shoulder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/guideline_shoulder_left_horizontal"
+            app:layout_constraintStart_toStartOf="@id/guideline_shoulder_left_vertical"
+            android:translationX="-15dp"
+            android:translationY="-15dp">
+
+            <RelativeLayout
+                android:id="@+id/btn_shoulder_withouttext"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:visibility="visible"
+                android:background="@drawable/transparant_background_layer">
+                <RelativeLayout
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/rounded_button_bg">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="+"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:id="@+id/btn_shoulder_withtext"
+                android:layout_height="wrap_content"
+                android:paddingRight="6dp"
+                android:visibility="gone"
+                android:orientation="horizontal"
+                android:background="@drawable/buttonshape">
+
+                <RelativeLayout
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:visibility="visible"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/transparant_background_layer"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/rounded_button_bg">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="+"
+                            android:textColor="@android:color/white"
+                            android:textSize="16sp" />
+                    </RelativeLayout>
+                </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/white"
+                    android:text="Shoulder"/>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <!-- Neck Button -->
+        <RelativeLayout
+            android:id="@+id/btn_neck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/guideline_neck_left_horizontal"
+            app:layout_constraintStart_toStartOf="@id/guideline_neck_left_vertical"
+            android:translationX="-15dp"
+            android:translationY="-15dp">
+
+            <RelativeLayout
+                android:id="@+id/btn_neck_withouttext"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:visibility="visible"
+                android:background="@drawable/transparant_background_layer">
+                <RelativeLayout
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/rounded_button_bg">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="+"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:id="@+id/btn_neck_withtext"
+                android:layout_height="wrap_content"
+                android:paddingRight="6dp"
+                android:visibility="gone"
+                android:orientation="horizontal"
+                android:background="@drawable/buttonshape">
+
+                <RelativeLayout
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:visibility="visible"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/transparant_background_layer"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/rounded_button_bg">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="+"
+                            android:textColor="@android:color/white"
+                            android:textSize="16sp" />
+                    </RelativeLayout>
+                </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/white"
+                    android:text="Neck"/>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <!-- Forearm Button -->
+        <RelativeLayout
+            android:id="@+id/btn_forearm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/guideline_forearm_left_horizontal"
+            app:layout_constraintStart_toStartOf="@id/guideline_forearm_left_vertical"
+            android:translationX="-15dp"
+            android:translationY="-15dp">
+
+            <RelativeLayout
+                android:id="@+id/btn_forearm_withouttext"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:visibility="visible"
+                android:background="@drawable/transparant_background_layer">
+                <RelativeLayout
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/rounded_button_bg">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="+"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:id="@+id/btn_forearm_withtext"
+                android:layout_height="wrap_content"
+                android:paddingRight="6dp"
+                android:visibility="gone"
+                android:orientation="horizontal"
+                android:background="@drawable/buttonshape">
+
+                <RelativeLayout
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:visibility="visible"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/transparant_background_layer"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/rounded_button_bg">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="+"
+                            android:textColor="@android:color/white"
+                            android:textSize="16sp" />
+                    </RelativeLayout>
+                </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/white"
+                    android:text="Forearms"/>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <!-- Biceps Button -->
+        <RelativeLayout
+            android:id="@+id/btn_biceps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/guideline_biceps_left_horizontal"
+            app:layout_constraintStart_toStartOf="@id/guideline_biceps_left_vertical"
+            android:translationX="-15dp"
+            android:translationY="-15dp">
+
+            <RelativeLayout
+                android:id="@+id/btn_biceps_withouttext"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:visibility="visible"
+                android:background="@drawable/transparant_background_layer">
+                <RelativeLayout
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/rounded_button_bg">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="+"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:id="@+id/btn_biceps_withtext"
+                android:layout_height="wrap_content"
+                android:paddingRight="6dp"
+                android:visibility="gone"
+                android:orientation="horizontal"
+                android:background="@drawable/buttonshape">
+
+                <RelativeLayout
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:visibility="visible"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/transparant_background_layer"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/rounded_button_bg">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="+"
+                            android:textColor="@android:color/white"
+                            android:textSize="16sp" />
+                    </RelativeLayout>
+                </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/white"
+                    android:text="Biceps"/>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <!-- hip_flexor Button -->
+        <RelativeLayout
+            android:id="@+id/btn_hip_flexor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/guideline_hip_flexor_horizontal"
+            app:layout_constraintStart_toStartOf="@id/guideline_hip_flexor_vertical"
+            >
+
+            <RelativeLayout
+                android:id="@+id/btn_hip_flexor_withouttext"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:visibility="visible"
+                android:background="@drawable/transparant_background_layer">
+                <RelativeLayout
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/rounded_button_bg">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="+"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:id="@+id/btn_hip_flexor_withtext"
+                android:layout_height="wrap_content"
+                android:paddingRight="6dp"
+                android:visibility="gone"
+                android:orientation="horizontal"
+                android:background="@drawable/buttonshape">
+
+                <RelativeLayout
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:visibility="visible"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/transparant_background_layer"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/rounded_button_bg">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="+"
+                            android:textColor="@android:color/white"
+                            android:textSize="16sp" />
+                    </RelativeLayout>
+                </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/white"
+                    android:text="Hip Flexor"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <!-- Calves Button -->
+        <RelativeLayout
+            android:id="@+id/btn_calves"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/guideline_thigh_right_horizontal"
+            app:layout_constraintStart_toStartOf="@id/guideline_thigh_right_vertical"
+            android:translationX="-15dp"
+            android:translationY="-15dp">
+
+            <RelativeLayout
+                android:id="@+id/btn_calves_withouttext"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:visibility="visible"
+                android:background="@drawable/transparant_background_layer">
+                <RelativeLayout
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/rounded_button_bg">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="+"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:id="@+id/btn_calves_withtext"
+                android:layout_height="wrap_content"
+                android:paddingRight="6dp"
+                android:visibility="gone"
+                android:orientation="horizontal"
+                android:background="@drawable/buttonshape">
+
+                <RelativeLayout
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:visibility="visible"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/transparant_background_layer"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/rounded_button_bg">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="+"
+                            android:textColor="@android:color/white"
+                            android:textSize="16sp" />
+                    </RelativeLayout>
+                </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/white"
+                    android:text="Calves"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <!-- Left Thigh Button -->
+        <RelativeLayout
+            android:id="@+id/btn_thigh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/guideline_thigh_left_horizontal"
+            app:layout_constraintStart_toStartOf="@id/guideline_thigh_left_vertical"
+            android:translationX="-15dp"
+            android:translationY="-15dp">
+
+            <RelativeLayout
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:visibility="visible"
+                android:id="@+id/btn_thigh_withouttext"
+                android:background="@drawable/transparant_background_layer">
+                <RelativeLayout
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/rounded_button_bg">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="+"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:id="@+id/btn_thigh_withtext"
+                android:layout_height="wrap_content"
+                android:paddingRight="6dp"
+                android:visibility="gone"
+                android:orientation="horizontal"
+                android:background="@drawable/buttonshape">
+
+                <RelativeLayout
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:visibility="visible"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/transparant_background_layer"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/rounded_button_bg">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="+"
+                            android:textColor="@android:color/white"
+                            android:textSize="16sp" />
+                    </RelativeLayout>
+                </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/white"
+                    android:text="Quadriceps"/>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/backbody_container"
+        android:layout_width="match_parent"
+        android:layout_below="@id/linearHeader"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <!-- Body Image -->
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitCenter"
+            android:id="@+id/backbody_img"
+            android:src="@drawable/backbody"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
+            android:id="@+id/back_img"
+            android:src="@drawable/back_img"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
+            android:id="@+id/triceps_img"
+            android:src="@drawable/triceps"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
+            android:id="@+id/rear_delts_img"
+            android:src="@drawable/rear_delts"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
+            android:id="@+id/spine_img"
+            android:src="@drawable/spine"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
+            android:id="@+id/glutes_img"
+            android:src="@drawable/glutes"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
+            android:id="@+id/hamstring_img"
+            android:src="@drawable/hamstring"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+
+        <!-- Guidelines for Triceps -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_triceps_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.18" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_triceps_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.24" />
+
+        <!-- Guidelines for back -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_back_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_back_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.20" />
+
+        <!-- Guidelines for Rear Delts -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_rear_delts_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.22" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_rear_delts_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.15" />
+
+        <!-- Guidelines for hamstring -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_hamstring_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.35" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_hamstring_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.70" />
+
+        <!-- Guidelines for glutes -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_glutes_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.6" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_glutes_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.50" />
+
+        <!-- Guidelines for spine -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_spine_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_spine_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.40" />
+
+        <!-- Triceps Button -->
+        <RelativeLayout
+            android:id="@+id/btn_triceps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/guideline_triceps_horizontal"
+            app:layout_constraintStart_toStartOf="@id/guideline_triceps_vertical"
+            android:translationX="-15dp"
+            android:translationY="-15dp">
+
+            <RelativeLayout
+                android:id="@+id/btn_triceps_withouttext"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:visibility="visible"
+                android:background="@drawable/transparant_background_layer">
+                <RelativeLayout
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/rounded_button_bg">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="+"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:id="@+id/btn_triceps_withtext"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:paddingRight="6dp"
+                android:orientation="horizontal"
+                android:background="@drawable/buttonshape">
+
+                <RelativeLayout
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:visibility="visible"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/transparant_background_layer"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/rounded_button_bg">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="+"
+                            android:textColor="@android:color/white"
+                            android:textSize="16sp" />
+                    </RelativeLayout>
+                </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/white"
+                    android:text="Triceps"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <!-- Rear Delts Button -->
+        <RelativeLayout
+            android:id="@+id/btn_rear_delts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/guideline_rear_delts_horizontal"
+            app:layout_constraintStart_toStartOf="@id/guideline_rear_delts_vertical"
+            android:translationX="-15dp"
+            android:translationY="-15dp">
+
+            <RelativeLayout
+                android:id="@+id/btn_rear_delts_withouttext"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:visibility="visible"
+                android:background="@drawable/transparant_background_layer">
+                <RelativeLayout
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/rounded_button_bg">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="+"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:id="@+id/btn_rear_delts_withtext"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:paddingRight="6dp"
+                android:orientation="horizontal"
+                android:background="@drawable/buttonshape">
+
+                <RelativeLayout
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:visibility="visible"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/transparant_background_layer"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/rounded_button_bg">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="+"
+                            android:textColor="@android:color/white"
+                            android:textSize="16sp" />
+                    </RelativeLayout>
+                </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/white"
+                    android:text="Rear Delts"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <!-- back Button -->
+        <RelativeLayout
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/guideline_back_horizontal"
+            app:layout_constraintStart_toStartOf="@id/guideline_back_vertical"
+            android:translationX="-15dp"
+            android:translationY="-15dp">
+            <RelativeLayout
+                android:id="@+id/btn_back_withouttext"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:visibility="visible"
+                android:background="@drawable/transparant_background_layer"
+                >
+
+                <RelativeLayout
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/rounded_button_bg">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="+"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:id="@+id/btn_back_withtext"
+                android:layout_height="wrap_content"
+                android:paddingRight="6dp"
+                android:visibility="gone"
+                android:orientation="horizontal"
+                android:background="@drawable/buttonshape">
+
+                <RelativeLayout
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:visibility="visible"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/transparant_background_layer"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/rounded_button_bg">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="+"
+                            android:textColor="@android:color/white"
+                            android:textSize="16sp" />
+                    </RelativeLayout>
+                </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/white"
+                    android:text="Back"/>
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <!-- Spine Button -->
+        <RelativeLayout
+            android:id="@+id/btn_spine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/guideline_spine_horizontal"
+            app:layout_constraintStart_toStartOf="@id/guideline_spine_vertical"
+            android:translationX="-15dp"
+            android:translationY="-15dp">
+            <RelativeLayout
+                android:id="@+id/btn_spine_withouttext"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:visibility="visible"
+                android:background="@drawable/transparant_background_layer"
+                >
+
+                <RelativeLayout
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/rounded_button_bg">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="+"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:id="@+id/btn_spine_withtext"
+                android:layout_height="wrap_content"
+                android:paddingRight="6dp"
+                android:visibility="gone"
+                android:orientation="horizontal"
+                android:background="@drawable/buttonshape">
+
+                <RelativeLayout
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:visibility="visible"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/transparant_background_layer"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/rounded_button_bg">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="+"
+                            android:textColor="@android:color/white"
+                            android:textSize="16sp" />
+                    </RelativeLayout>
+                </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/white"
+                    android:text="Spine"/>
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <!-- hamstring Button -->
+        <RelativeLayout
+            android:id="@+id/btn_hamstring"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/guideline_hamstring_horizontal"
+            app:layout_constraintStart_toStartOf="@id/guideline_hamstring_vertical"
+            android:translationX="-15dp"
+            android:translationY="-15dp">
+            <RelativeLayout
+                android:id="@+id/btn_hamstring_withouttext"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:visibility="visible"
+                android:background="@drawable/transparant_background_layer"
+                >
+
+                <RelativeLayout
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/rounded_button_bg">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="+"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:id="@+id/btn_hamstring_withtext"
+                android:layout_height="wrap_content"
+                android:paddingRight="6dp"
+                android:visibility="gone"
+                android:orientation="horizontal"
+                android:background="@drawable/buttonshape">
+
+                <RelativeLayout
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:visibility="visible"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/transparant_background_layer"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/rounded_button_bg">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="+"
+                            android:textColor="@android:color/white"
+                            android:textSize="16sp" />
+                    </RelativeLayout>
+                </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/white"
+                    android:text="Hamstring"/>
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <!-- glutes Button -->
+        <RelativeLayout
+            android:id="@+id/btn_glutes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/guideline_glutes_horizontal"
+            app:layout_constraintStart_toStartOf="@id/guideline_glutes_vertical"
+            android:translationX="-15dp"
+            android:translationY="-15dp">
+            <RelativeLayout
+                android:id="@+id/btn_glutes_withouttext"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:visibility="visible"
+                android:background="@drawable/transparant_background_layer"
+                >
+
+                <RelativeLayout
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/rounded_button_bg">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="+"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:id="@+id/btn_glutes_withtext"
+                android:layout_height="wrap_content"
+                android:paddingRight="6dp"
+                android:visibility="gone"
+                android:orientation="horizontal"
+                android:background="@drawable/buttonshape">
+
+                <RelativeLayout
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:visibility="visible"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/transparant_background_layer"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/rounded_button_bg">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="+"
+                            android:textColor="@android:color/white"
+                            android:textSize="16sp" />
+                    </RelativeLayout>
+                </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/white"
+                    android:text="Glutes"/>
+
+            </LinearLayout>
+        </RelativeLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/turnaround_btn"
+            android:layout_height="match_parent"
+            android:layout_margin="4dp"
+            android:background="@drawable/buttonshape">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_centerInParent="true"
+                android:layout_toLeftOf="@id/textaround_text"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/turnovericon"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textaround_text"
+                android:layout_centerInParent="true"
+                android:textColor="@color/white"
+                android:text="Turn Around"/>
+
+        </RelativeLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:layout_weight="1"
+            app:cornerRadius="10dp"
+            android:layout_margin="4dp"
+            android:text="View Workout"
+            android:textColor="@color/black"
+            android:id="@+id/viewworkout"
+            android:insetTop="0dp"
+            android:textSize="16sp"
+            android:insetBottom="0dp"
+            android:textAllCaps="false"
+            />
+    </LinearLayout>
+
+
+</RelativeLayout>

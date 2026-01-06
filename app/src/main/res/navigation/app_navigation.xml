@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="co.com.mypt.fragments.HomePlaceholderFragment"
+        tools:layout="@layout/fragment_placeholder" />
+
+    <fragment
+        android:id="@+id/guestUserHomeFragment"
+        android:name="co.com.mypt.fragments.GuestUserHomeFragment"
+        android:label="Guest Home"
+        tools:layout="@layout/fragment_guest_user_home" />
+
+    <fragment
+        android:id="@+id/inActivePanUserHomeFragment"
+        android:name="co.com.mypt.fragments.InactivePlanHomeFragment"
+        android:label="User Home"
+        tools:layout="@layout/fragment_inactive_plan_home" />
+
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="co.com.mypt.fragments.CalendarFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_calendar" />
+    <fragment
+        android:id="@+id/bookingFragment"
+        android:name="co.com.mypt.fragments.BookingFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_booking" />
+    <fragment
+        android:id="@+id/libraryFragment"
+        android:name="co.com.mypt.fragments.LibraryFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_library" />
+    <fragment
+        android:id="@+id/moreFragment"
+        android:name="co.com.mypt.fragments.MoreFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_goals" />
+
+</navigation>

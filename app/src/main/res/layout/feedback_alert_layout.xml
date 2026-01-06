@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/left_right_corner"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <androidx.cardview.widget.CardView
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="70dp"
+            app:cardCornerRadius="3dp"
+            android:layout_height="5dp"
+            app:cardBackgroundColor="@color/rulersmallline"/>
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            android:id="@+id/im"
+            android:src="@drawable/successicon"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/headingcolor"
+            android:textSize="24sp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:fontFamily="@font/manrope_medium"
+            android:text="@string/thank_you_for_your_feedback"
+            />
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/smallTextcolor"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginHorizontal="15dp"
+            android:gravity="center"
+            android:fontFamily="@font/manrope_medium"
+            android:text="@string/your_rating_has_been_submitted_successfully_your_input_helps_us_maintain_and_improve_the_quality_of_our_trainers"
+            />
+
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/done"
+            android:layout_marginBottom="25dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginHorizontal="15dp"
+            android:textStyle="bold"
+            android:id="@+id/tvdone"
+            android:textAllCaps="true"
+            android:background="@drawable/white_rectangle"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:paddingVertical="15dp"
+            android:textFontWeight="700"
+            android:fontFamily="@font/manrope_medium"
+            />
+    </LinearLayout>
+</RelativeLayout>

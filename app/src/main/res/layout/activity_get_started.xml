@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:fitsSystemWindows="true"
+    tools:context=".onBoarding.personalize.GetStartedActivity">
+    <ImageView
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tvall"
+        android:scaleType="centerCrop"
+        android:src="@drawable/all_set_background"/>
+    <ImageView
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tvall"
+        android:src="@drawable/endim"/>
+    <VideoView
+        android:id="@+id/idVideoView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/tvall"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/headingcolor"
+        android:textSize="32sp"
+        android:layout_above="@+id/tv"
+        android:id="@+id/tvall"
+        android:gravity="center"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/clashdisplay_medium"
+        android:text="@string/you_are_all_set" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/subheadingcolor"
+        android:textSize="14dp"
+        android:layout_above="@+id/tvcontinue"
+        android:gravity="center"
+        android:id="@+id/tv"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="30dp"
+        android:fontFamily="@font/manrope_semi_bold"
+        android:text="@string/gear_up_for_a_whole_new_fitness_journey" />
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/tvcontinue"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/white_rectangle"
+        android:gravity="center"
+        android:fontFamily="@font/manrope_bold"
+        android:paddingVertical="15dp"
+        android:textFontWeight="700"
+        android:textAllCaps="true"
+        android:layout_alignParentBottom="true"
+        android:text="@string/cont_inue"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="16dp" />
+
+</RelativeLayout>

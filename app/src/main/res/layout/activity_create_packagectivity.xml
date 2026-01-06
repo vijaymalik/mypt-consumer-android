@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+
+    android:background="@color/buttontextcolor"
+    tools:context=".activities.CreatePackagectivity">
+    <ImageView
+        android:id="@+id/im"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/chest_press_dark_blur"
+        />
+
+    <RelativeLayout
+        android:id="@+id/personaliseLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="10dp"
+            android:id="@+id/relative"
+
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/back"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/backarrow"
+                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dots_height"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="@dimen/dots_margin_bottom"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/p_Bar"
+                android:layout_centerInParent="true"
+                android:layout_width="160dp"
+                android:progressTint="@color/progress_clr_1"
+                android:layout_height="wrap_content"
+                android:indeterminate="false"
+                android:max="100"
+                app:trackCornerRadius="15dp"
+                app:indicatorColor="@color/progress_clr_1"
+                app:trackColor="@color/progress_track_color"
+                android:progress="25" />
+
+            <TextView
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:padding="10dp"
+                android:textSize="14dp"
+                android:textFontWeight="700"
+                android:id="@+id/skip"
+                android:fontFamily="@font/manrope_variablefont_wght"
+                android:layout_alignParentEnd="true"
+                android:text="@string/skip"/>
+        </RelativeLayout>
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/relative"
+            android:layout_above="@id/tvcontinue"
+            android:layout_height="match_parent" />
+        <TextView
+            android:layout_width="match_parent"
+            android:id="@+id/tvcontinue"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="20dp"
+            android:background="@drawable/rectangle_btn"
+            android:gravity="center"
+            android:fontFamily="@font/manrope_bold"
+            android:paddingVertical="15dp"
+            android:textAllCaps="true"
+            android:text="@string/cont_inue"
+            android:letterSpacing="0.05"
+            android:textColor="@color/subheadingcolor"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

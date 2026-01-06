@@ -1,0 +1,184 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.MyPT" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+        <!--dark theme-->
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/black</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/black</item>
+        <item name="colorControlHighlight">@color/white</item>
+        <item name="android:windowBackground">@android:color/black</item>
+    </style>
+    <style name="Base.Theme.MyPTNumber" parent="Theme.MaterialComponents.Light.NoActionBar">
+
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+
+        <!-- Prevent overlap -->
+        <item name="android:fitsSystemWindows">true</item>
+
+        <item name="android:statusBarColor">@color/black</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/black</item>
+        <item name="colorControlHighlight">@color/white</item>
+        <item name="android:windowBackground">@android:color/black</item>
+
+    </style>
+
+    <style name="HintTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textColorHint">@color/white</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/white</item>
+        <item name="colorControlHighlight">@color/white</item>
+        <item name="android:textSize">10sp</item>
+        <item name="fontFamily">@font/manrope_medium</item>
+    </style>
+
+    <style name="CustomDateTextAppearance" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textColor">@color/headingcolor</item>
+        <item name="android:fontFamily">@font/manrope_medium</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="CustomWeekDayTextAppearance" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textColor">#959595</item>
+        <item name="android:fontFamily">@font/manrope_medium</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Theme.MyPT" parent="Base.Theme.MyPT" />
+
+    <style name="CustomCheckboxBrand" parent="@style/Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/checkbox_selector</item>
+        <item name="android:background">@android:color/transparent</item>
+
+    </style>
+
+    <style name="CustomBottomSheetDialogTheme" parent="android:Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="bottomSheetStyle">@style/CustomBottomSheetStyle</item>
+    </style>
+
+    <style name="CustomBottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="MyAlertDialogTheme" parent="Base.Theme.AppCompat.Light.Dialog.Alert">
+        <item name="windowFixedWidthMajor">90%</item>
+        <item name="windowFixedWidthMinor">90%</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+
+        <item name="android:backgroundDimAmount">0.5</item>
+    </style>
+
+    <style name="NumberPickerStyle">
+        <item name="android:textColorPrimary">@color/headingcolor</item>
+        <item name="colorControlNormal">#00FFFFFF</item>
+        <item name="android:textSize">28sp</item>
+    </style>
+
+    <style name="NumberPickerStyle_1">
+        <item name="android:textColorPrimary">@color/headingcolor</item>
+        <item name="colorControlNormal">#00FFFFFF</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="ratingStyle" parent="@android:style/Widget.RatingBar">
+
+        <item name="android:progressDrawable">@drawable/rating_bar_bg</item>
+    </style>
+
+    <style name="BottomSheetDialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/bottom_sheet_slide_up</item>
+        <item name="android:windowExitAnimation">@anim/bottom_sheet_slide_down</item>
+    </style>
+
+    <style name="timePickerOrange">
+        <item name="android:textColorPrimary">@color/headingcolor</item> <!-- color for digits -->
+        <item name="android:textSize">32sp</item>
+        <item name="colorControlNormal">#00ffffff</item>
+        <!-- color for (horizontal) delimeters -->
+    </style>
+
+    <style name="MyFloatingLabelStyle" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="MyFloatingLabelStyleProfileScreen" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">@font/manrope_medium</item>
+    </style>
+    <!-- <style name="FullScreenBottomSheet" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="behavior_peekHeight">0dp</item>
+        <item name="behavior_hideable">true</item>
+    </style>-->
+    <style name="FullScreenBottomSheet" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="behavior_peekHeight">0dp</item>
+        <item name="behavior_hideable">true</item>
+    </style>
+
+
+    <style name="NoCornersShape">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">0dp</item>
+    </style>
+
+    <style name="EditTextThemeOverlay" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">@color/text_input_box_stroke</item>
+        <item name="boxStrokeWidth">0.5dp</item>
+    </style>
+
+    <style name="NoUnderlineTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxBackgroundMode">none</item> <!-- No underline -->
+        <item name="hintEnabled">false</item>      <!-- No floating label -->
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+        <item name="hintTextColor">@color/white</item>
+    </style>
+    <style name="NoSpaceErrorStyle" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:paddingTop">-10dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+    </style>
+
+    <style name="TextAppearance.ManropeMedium" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/manrope_medium</item>
+        <item name="android:textColor">#FFFFFF</item> <!-- or use @color/white -->
+        <item name="android:textSize">16sp</item><!-- optional -->
+    </style>
+
+    <style name="MyTimePickerStyle" parent="android:Widget.Material.Light.TimePicker">
+        <item name="android:textColor">@color/headingcolor</item>
+        <item name="android:textColorPrimary">@color/headingcolor</item>
+        <item name="android:textColorSecondary">@color/headingcolor</item>
+        <item name="android:textSize">30sp</item>
+        <item name="colorAccent">@color/headingcolor</item>
+        <item name="colorControlNormal">#00ffffff</item>
+        <item name="android:timePickerStyle">@style/MyTimePickerWidgetStyle</item>
+        <item name="fontFamily">@font/clashdisplay_medium</item>
+    </style>
+
+    <style name="MyTimePickerWidgetStyle" parent="android:Widget.Material.Light.TimePicker">
+        <item name="android:headerTimeTextAppearance">@style/MyTimePickerHeaderTimeText</item>
+        <item name="android:numbersTextColor">#555658</item>
+        <item name="android:numbersSelectorColor">@color/headingcolor</item>
+    </style>
+
+    <style name="MyTimePickerHeaderTimeText">
+        <item name="android:textSize">32sp
+        </item>
+    </style>
+
+</resources>

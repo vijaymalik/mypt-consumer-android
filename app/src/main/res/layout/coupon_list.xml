@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="15dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearShowCoupon"
+            android:paddingRight="10dp"
+            android:gravity="center"
+            android:paddingLeft="-20dp"
+            android:paddingVertical="5dp"
+            android:orientation="horizontal">
+            <CheckBox
+                android:id="@+id/checkBox2"
+                android:buttonTint="#E8E8E8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="10dp"
+                android:textStyle="bold"
+                android:id="@+id/tvcouponName"
+                android:textSize="16dp"
+                android:fontFamily="@font/manrope_medium"
+                android:background="@drawable/white_dotted_rectangle"
+                android:textColor="@color/booked"
+                android:text="FIRST200"/>
+            <TextView
+                android:text="Save AED 100"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/manrope_semi_bold"
+                android:textColor="@color/white"
+                android:textSize="14sp"/>
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:textSize="12sp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/linearShowCoupon"
+            android:fontFamily="@font/manrope_light_300"
+            android:textColor="@color/white"
+            android:text="Expires on: 8th Oct, 2024 | 11:59 AM"/>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
+    android:layout_height="match_parent"
+    android:background="@color/buttontextcolor"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomNavigation"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/app_navigation" />
+    <FrameLayout
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fragment_container"
+        android:layout_alignParentTop="true"
+        android:layout_above="@id/bottomNavigation"
+        />
+    <co.com.mypt.curvedBottomNavigation.CurvedBottomNavigation
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        app:cbn_titleColor="@color/white"
+        android:layout_alignParentBottom="true"
+        app:cbn_fabColor="@color/orangecolor"
+        android:background="@drawable/bottom_nav_gradient"
+        app:cbn_iconColor="@color/white"
+        app:cbn_selected_icon_size="48dp"
+        app:cbn_selectedIconColor="@null"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>

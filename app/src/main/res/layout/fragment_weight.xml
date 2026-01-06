@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".onBoarding.personalize.WeightFragment">
+
+    <!-- Main content container for the question and unit selection -->
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+
+        <!-- Question Text -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="30dp"
+            android:fontFamily="@font/clashdisplay_medium"
+            android:gravity="center"
+            android:text="@string/what_is_your_weight"
+            android:textColor="@color/headingcolor"
+            android:textSize="32sp" />
+
+        <!-- Unit Selection (kg / lbs) -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/tab_linear_background"
+            android:orientation="horizontal"
+            android:paddingHorizontal="4dp"
+            android:paddingVertical="4dp">
+
+            <!-- Kilogram Option -->
+            <TextView
+                android:id="@+id/tvkg"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:background="@drawable/feet_button"
+                android:fontFamily="@font/manrope_semi_bold"
+                android:gravity="center"
+                android:paddingHorizontal="40dp"
+                android:text="@string/kg"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textFontWeight="700"
+                android:textSize="14sp" />
+
+            <!-- Pound Option -->
+            <TextView
+                android:id="@+id/tvlbs"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/manrope_semi_bold"
+                android:gravity="center"
+                android:paddingHorizontal="40dp"
+                android:text="@string/lbs"
+                android:textAllCaps="true"
+                android:textColor="@color/lightgreycolor"
+                android:textFontWeight="600"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/manrope_bold"
+            android:gravity="center"
+            android:text="10"
+            android:textSize="60dp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal">
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:gravity="center_vertical"
+    android:layout_height="wrap_content">
+    <EditText
+        android:id="@+id/weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/clash_display_semibold"
+        android:text="90"
+        android:textColor="@color/white"
+        android:focusable="false"
+        android:inputType="numberDecimal"
+        android:digits="0123456789."
+        android:focusableInTouchMode="false"
+        android:cursorVisible="false"
+        android:textSize="40sp" />
+    <TextView
+        android:id="@+id/unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/clash_display_semibold"
+        android:text="kg"
+        android:paddingStart="4dp"
+        android:textColor="@color/white"
+        android:textSize="36sp"
+        android:visibility="visible" />
+    <FrameLayout
+        android:id="@+id/imEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/edit" />
+
+    </FrameLayout>
+</LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/weight_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:background="@android:color/transparent"
+                android:clipToPadding="false"
+                android:padding="0dp"
+                android:scrollbars="none"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/arrowView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/weight_recycler_view"
+                android:layout_marginHorizontal="20dp"
+                android:background="@drawable/weight_line"
+                android:gravity="center_horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/weight_recycler_view">
+
+                <ImageView
+                    android:layout_width="68dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/weightarrow" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/arrowView"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="-40dp"
+                android:src="@drawable/glow_view" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginBottom="15dp"
+        android:layout_height="120dp"
+
+        android:background="@drawable/workout_gradient_rectangle">
+        <androidx.cardview.widget.CardView
+            android:layout_margin="1dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="12dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/relative"
+                android:paddingHorizontal="15dp"
+                android:background="@drawable/product_gradient">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="96dp"
+                    android:id="@+id/card"
+                    app:cardCornerRadius="20dp"
+                    android:layout_gravity="center"
+                    android:layout_height="96dp">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:id="@+id/im"
+                        android:src="@drawable/things_im"/>
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:id="@+id/linearLayout"
+                    >
+                    <LinearLayout
+                        android:paddingVertical="15dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:id="@+id/tvName"
+
+                            android:fontFamily="@font/clashdisplay_medium"
+                            android:text="Upper Strength 2"
+                            />
+
+                        <TextView
+                            android:id="@+id/tvdetail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:maxLines="2"
+                            android:fontFamily="@font/manrope_medium"
+                            android:text="Ensure you have a clear, spacious area to exercise and any obstacles to avoid injuries. "
+                            android:textColor="@color/smallTextcolor"
+                            android:textSize="12sp"
+                             />
+
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</RelativeLayout>

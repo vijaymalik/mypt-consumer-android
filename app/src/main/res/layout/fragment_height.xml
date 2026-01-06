@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linear"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="20dp"
+        android:layout_marginRight="10dp"
+        android:fontFamily="@font/clashdisplay_medium"
+        android:gravity="center"
+        android:text="@string/what_is_your_height"
+        android:textColor="@color/headingcolor"
+        android:textSize="32sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/tab_linear_background"
+        android:orientation="horizontal"
+        android:paddingHorizontal="4dp"
+        android:paddingVertical="4dp">
+
+        <TextView
+            android:id="@+id/tvfeet"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="@drawable/feet_button"
+            android:fontFamily="@font/funnel_sans_semibold"
+            android:gravity="center"
+            android:paddingHorizontal="40dp"
+            android:text="@string/feet"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvcms"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/funnel_sans_semibold"
+            android:gravity="center"
+            android:paddingHorizontal="40dp"
+            android:text="@string/cms"
+            android:textAllCaps="true"
+            android:textColor="@color/smallTextcolor"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <LinearLayout
+            android:id="@+id/scalerView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="-25dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="@+id/arrowCenterAnchor"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <co.com.calculateheight.MyScaleView
+                android:id="@+id/myScaleViewcms"
+                android:layout_width="145dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:visibility="gone" />
+
+            <co.com.mypt.rulerHeight.CenterWaveScaleViewFeet
+                android:id="@+id/myScaleViewfeet"
+                android:layout_width="145dp"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/verticalGlow"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="-30dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/vertical_glow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/arrowCenterAnchor"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/verticalGlow"
+            app:layout_constraintEnd_toEndOf="@id/verticalGlow"
+            app:layout_constraintStart_toStartOf="@+id/verticalGlow"
+            app:layout_constraintTop_toTopOf="@id/verticalGlow" />
+
+        <!-- <View
+             android:id="@+id/arrowCenterAnchor"
+             android:layout_width="1dp"
+             android:layout_height="0dp"
+             app:layout_constraintBottom_toBottomOf="@id/centerArrow"
+             app:layout_constraintEnd_toEndOf="@id/centerArrow"
+             app:layout_constraintStart_toStartOf="@+id/centerArrow"
+             app:layout_constraintTop_toTopOf="@id/centerArrow" />
+
+         <ImageView
+             android:id="@+id/verticalGlow"
+             android:layout_width="170dp"
+             android:layout_height="210dp"
+             android:adjustViewBounds="true"
+             android:src="@drawable/glow_view"
+             app:layout_constraintBottom_toBottomOf="@+id/centerArrow"
+             app:layout_constraintEnd_toStartOf="@+id/arrowCenterAnchor"
+             app:layout_constraintTop_toTopOf="@+id/centerArrow" />
+
+         <ImageView
+             android:id="@+id/centerArrow"
+             android:layout_width="80dp"
+             android:layout_height="wrap_content"
+             android:adjustViewBounds="true"
+             android:src="@drawable/vertical_slider"
+             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintTop_toTopOf="parent" />
+ -->
+
+
+
+    <LinearLayout
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/scalerView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/txt_height"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/clash_display_semibold"
+            android:text="90"
+            android:textColor="@color/white"
+            android:focusable="false"
+            android:inputType="numberDecimal"
+            android:digits="0123456789."
+            android:focusableInTouchMode="false"
+            android:cursorVisible="false"
+            android:textSize="35sp" />
+        <!--  <TextView
+              android:id="@+id/unit"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:fontFamily="@font/clash_display_semibold"
+              android:text=""
+              android:paddingStart="4dp"
+              android:textColor="@color/white"
+              android:textSize="30sp"
+              android:visibility="visible" />-->
+        <FrameLayout
+            android:id="@+id/imEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/edit" />
+
+        </FrameLayout>
+    </LinearLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
+

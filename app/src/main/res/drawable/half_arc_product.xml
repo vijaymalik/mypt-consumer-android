@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Gradient Border -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="#FFFFFF"
+                android:endColor="#00000000"
+                android:angle="270"/> <!-- Change angle as needed -->
+            <corners android:topLeftRadius="24dp" android:topRightRadius="24dp"/> <!-- Adjust for rounded corners -->
+        </shape>
+    </item>
+
+    <!-- Inner Solid Background -->
+    <item android:top="0.4dp" >
+        <shape android:shape="rectangle">
+            <solid android:color="#101113"/>
+            <corners android:topLeftRadius="24dp" android:topRightRadius="24dp"/> <!-- Inner radius should be less than outer -->
+        </shape>
+    </item>
+
+</layer-list>
+

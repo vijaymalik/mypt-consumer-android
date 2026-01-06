@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:background="@color/buttontextcolor"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".PlanRenewal.SelectedUpgragationActivity">
+    <ImageView
+        android:id="@+id/im"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:src="@drawable/chest_press_dark_blur"
+        />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/tvcontinue"
+        android:id="@+id/nested"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/back"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="20dp"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/backarrow"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="50dp"
+                android:fontFamily="@font/clashdisplay_medium"
+                android:gravity="center"
+                android:text="@string/do_you_want_to_top_up_nor_upgrade"
+                android:textColor="@color/headingcolor"
+                android:textSize="32sp"
+                />
+
+            <ImageView
+                android:id="@+id/imTopUp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:cropToPadding="true"
+                android:adjustViewBounds="true"
+                android:src="@drawable/grey_topup"
+                />
+            <ImageView
+                android:layout_marginTop="20dp"
+                android:id="@+id/im_Upgrade"
+                android:layout_marginHorizontal="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/grey_upgrade"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_above="@+id/tvcontinue"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/grey_rectangle_background"
+                android:gravity="center"
+                android:fontFamily="@font/manrope_medium"
+                android:paddingVertical="15dp"
+                android:paddingHorizontal="10dp"
+                android:text="@string/only_packages_with_a_greater_number_of_sessions_longer_validity_or_higher_cost_will_be_displayed"
+                android:textColor="@color/subheadingcolor"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/tvcontinue"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="20dp"
+        android:background="@drawable/rectangle_btn"
+        android:gravity="center"
+        android:fontFamily="@font/manrope_bold"
+        android:paddingVertical="15dp"
+        android:textAllCaps="true"
+        android:letterSpacing="0.05"
+        android:text="@string/cont_inue"
+        android:textColor="@color/subheadingcolor"
+        android:textSize="16sp" />
+
+</RelativeLayout>

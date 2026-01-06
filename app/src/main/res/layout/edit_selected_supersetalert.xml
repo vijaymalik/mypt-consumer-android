@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="66dp"
+    android:orientation="vertical"
+    app:cardCornerRadius="8dp"
+    app:cardBackgroundColor="#CCEFEFEF">
+    <androidx.cardview.widget.CardView
+        android:layout_width="130dp"
+        android:layout_marginEnd="40dp"
+        android:layout_height="66dp"
+        android:orientation="vertical"
+        app:cardCornerRadius="8dp"
+        app:cardBackgroundColor="#CCEFEFEF">
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_marginHorizontal="10dp"
+                android:id="@+id/linear_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:src="@drawable/edit_2" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/edit"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/manrope_semi_bold"
+                    android:textColor="#1C1F21"
+                    android:layout_marginStart="10dp"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="10dp"
+                android:layout_height="1dp"
+                android:background="#BDBDBD"
+                android:layout_marginVertical="5dp"/>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_marginHorizontal="10dp"
+                android:id="@+id/linear_delete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:src="@drawable/delete_01"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/delete"
+                    android:textSize="12sp"
+                    android:textColor="#F43E33"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/manrope_semi_bold"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

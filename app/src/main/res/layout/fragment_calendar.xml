@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/buttontextcolor"
+    android:fitsSystemWindows="true"
+
+    tools:context=".fragments.CalendarFragment">
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:background="@color/buttontextcolor"
+        android:id="@+id/headerLayout"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:visibility="invisible"
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:id="@+id/back_1"
+            android:layout_marginHorizontal="8dp"
+            android:src="@drawable/backarrow"
+            />
+        <TextView
+            android:layout_marginEnd="10dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="@color/headingcolor"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/manrope_medium"
+            android:text="@string/calendar"
+            />
+
+    </LinearLayout>
+    <View
+        android:background="@color/tabbackground"
+        android:layout_width="match_parent"
+        android:id="@+id/view"
+        android:layout_below="@+id/headerLayout"
+        android:layout_height="2dp"/>
+    <com.michalsvec.singlerowcalendar.calendar.SingleRowCalendar
+        android:id="@+id/main_single_row_calendar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        app:deselection="false"
+        android:layout_below="@id/view"
+        app:longPress="false"
+        app:multiSelection="false" />
+    <androidx.core.widget.NestedScrollView
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        android:layout_above="@+id/linearPlanCard"
+        android:layout_below="@+id/main_single_row_calendar">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:visibility="gone"
+                android:id="@+id/scheduleTv"
+                android:layout_marginHorizontal="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/smallTextcolor"
+                android:textSize="16sp"
+                android:fontFamily="@font/manrope_semi_bold"
+                android:text="@string/my_schedule"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:nestedScrollingEnabled="false"
+                android:id="@+id/recyclePlan"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_height="0dp"/>
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:id="@+id/linearNoSession"
+                android:orientation="vertical">
+                <pl.droidsonroids.gif.GifImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="390dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/calendar_gif"
+                    android:layout_centerInParent="true"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    android:gravity="center"
+                    android:fontFamily="@font/clashdisplay_medium"
+                    android:text="@string/create_your_first_plan"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/smallTextcolor"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:layout_marginHorizontal="65dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/manrope_semi_bold"
+                    android:text="@string/you_re_one_step_closer_to_establishing_your_daily_routine"
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_alignParentBottom="true"
+        android:layout_width="260dp"
+        app:cardCornerRadius="12dp"
+        android:layout_height="48dp"
+        app:cardBackgroundColor="#F6F3F0"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/linearPlanCard"
+        android:layout_marginVertical="15dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingHorizontal="16dp"
+            android:id="@+id/linearPlan"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/tvBookSession"
+                android:gravity="center_vertical"
+                android:text="@string/create_plan"
+                android:textColor="@color/buttontextcolor"
+                android:textSize="16sp"
+                android:textAllCaps="true"
+                android:fontFamily="@font/manrope_bold"/>
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="5dp"
+                android:src="@drawable/baseline_add_24"/>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:src="@drawable/im_calendar"
+        android:layout_below="@id/headerLayout"
+        android:scaleType="centerCrop"
+        android:visibility="gone"
+        android:layout_height="match_parent"/>
+
+
+</RelativeLayout>

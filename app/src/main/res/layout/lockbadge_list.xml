@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/workout_layout_rectangle"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="54dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginVertical="12dp"
+            android:layout_height="54dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:src="@drawable/blur_badge"
+                android:layout_height="match_parent"/>
+            <ImageView
+                android:visibility="gone"
+                android:layout_width="16dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/lock"
+                android:layout_height="20dp"/>
+
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="15dp"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_marginEnd="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:fontFamily="@font/manrope_bold"
+                android:text="10 Day Streak"
+                />
+            <TextView
+                android:layout_marginEnd="10dp"
+                android:layout_width="match_parent"
+                android:layout_marginTop="2dp"
+                android:layout_height="wrap_content"
+                android:textColor="#D7D8D9"
+                android:textSize="14sp"
+                android:maxLines="1"
+                android:fontFamily="@font/manrope_medium"
+                android:text="Open app for 10 days"
+                />
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="60dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+
+            android:layout_height="60dp">
+          <!--  <co.com.mypt.model.CustomSplitCircularProgressBar
+                android:id="@+id/splitProgressBar"
+                android:layout_width="54dp"
+                android:layout_height="54dp" />-->
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/progressIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:progress="0"
+
+                app:indicatorSize="54dp"
+                app:trackThickness="2dp"
+                app:indicatorDirectionCircular="clockwise"
+                app:trackColor="#31343A"
+                android:max="100"
+                app:indicatorColor="#F38D1B" />
+            <TextView
+                android:layout_marginEnd="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_centerInParent="true"
+                android:textSize="22sp"
+                android:id="@+id/tvProgress"
+                android:gravity="center"
+                android:fontFamily="@font/manrope_bold"
+                android:text="40"
+                />
+        </RelativeLayout>
+
+
+
+
+    </LinearLayout>
+</RelativeLayout>

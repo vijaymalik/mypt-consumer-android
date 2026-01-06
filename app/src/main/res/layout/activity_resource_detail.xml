@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/buttontextcolor"
+    android:fitsSystemWindows="true"
+    tools:context=".UpComingClasses.ResourceDetailActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="322dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/resource_girl"
+                android:layout_height="322dp"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="36dp"
+                    android:scaleType="centerCrop"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/backarrow"
+                    android:layout_height="36dp"/>
+                <ImageView
+                    android:layout_width="44dp"
+                    android:scaleType="centerCrop"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="15dp"
+                    android:src="@drawable/imshare"
+                    android:layout_height="44dp"/>
+
+            </RelativeLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:background="@drawable/resource_detail"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:text="Stretching and  Recovery Sessions"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="30dp"
+                android:layout_width="wrap_content"
+                android:textStyle="bold"
+                android:id="@+id/tvname"
+                android:layout_alignParentBottom="true"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/clashdisplay_medium"
+                android:textColor="@color/headingcolor"
+                android:textSize="32sp" />
+
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="15dp"
+            android:layout_marginHorizontal="15dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_gravity="center"
+                android:layout_height="16dp"
+                android:src="@drawable/imclock"
+                />
+            <TextView
+                android:text="5 mins read"
+                android:layout_width="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:id="@+id/tvRating"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/manrope_medium"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+
+        </LinearLayout>
+        <TextView
+            android:text="Borem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus."
+            android:layout_width="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="30dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/manrope_semi_bold"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+        <androidx.cardview.widget.CardView
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="30dp"
+            android:descendantFocusability="blocksDescendants"
+            app:cardCornerRadius="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="235dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <VideoView
+                    android:focusable="false"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:id="@+id/videoView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
+                <ImageView
+                    android:id="@+id/play"
+                    android:src="@drawable/play"
+                    android:layout_centerInParent="true"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"/>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+        <TextView
+            android:text="Borem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus."
+            android:layout_width="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="30dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/manrope_semi_bold"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="horizontal"
+            android:layout_marginLeft="15dp"
+            android:id="@+id/recycler"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

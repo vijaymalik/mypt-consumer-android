@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="80dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_marginRight="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:layout_width="48dp"
+        app:cardCornerRadius="12dp"
+        android:layout_height="48dp">
+        <ImageView
+            android:layout_width="match_parent"
+            android:background="@color/available"
+            android:id="@+id/im"
+            android:src="@drawable/health_heart"
+            android:layout_height="match_parent"/>
+    </androidx.cardview.widget.CardView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/headingcolor"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:id="@+id/tvname"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/manrope_semi_bold"
+        android:text="Eggplanty kslsjl "
+        />
+
+</LinearLayout>

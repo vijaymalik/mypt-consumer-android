@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/session_rectangle"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="15dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/manrope_medium"
+                android:paddingVertical="5dp"
+                android:paddingHorizontal="20dp"
+                android:text="Home"
+                android:id="@+id/tvHome"
+                android:layout_centerVertical="true"
+                android:background="@drawable/type_drawable"
+                android:layout_marginHorizontal="15dp"
+                android:textColor="#DBDBDB"
+                android:textSize="14sp" />
+            <CheckBox
+                android:paddingLeft="10dp"
+                android:paddingRight="15dp"
+                android:id="@+id/checkname"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/white"
+                style="@style/CustomCheckboxBrand"
+                android:checked="true"
+
+                android:layout_marginHorizontal="15dp"
+             />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/manrope_medium"
+            android:layout_marginLeft="15dp"
+
+            android:layout_marginRight="80dp"
+            android:id="@+id/tvlocation"
+            android:text="Villa 12, Street 5, Al Barsha 3, Dubai, UAE 157698"
+            android:textColor="@color/headingcolor"
+            android:textSize="14sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/manrope_medium"
+                android:layout_marginTop="10dp"
+                android:text="@string/mobile"
+
+                android:layout_marginLeft="15dp"
+                android:textColor="@color/smallTextcolor"
+                android:textSize="14sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/manrope_medium"
+                android:layout_marginTop="10dp"
+                android:text="7992344645"
+                android:id="@+id/tvmobile"
+                android:layout_marginHorizontal="15dp"
+                android:textColor="@color/headingcolor"
+                android:textSize="14sp" />
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="@string/edit"
+            android:textColor="@color/headingcolor"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
+            android:paddingHorizontal="40dp"
+            android:layout_marginHorizontal="15dp"
+            android:paddingVertical="10dp"
+            android:textStyle="bold"
+            android:id="@+id/tvEdit"
+            android:textAllCaps="true"
+            android:fontFamily="@font/manrope_medium"
+            android:layout_height="wrap_content"
+            android:background="@drawable/view_detail_rectangle"/>
+    </LinearLayout>
+
+</RelativeLayout>

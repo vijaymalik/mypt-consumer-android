@@ -1,0 +1,661 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/buttontextcolor"
+    tools:context=".CreateWorkoutFlow.SuperSet.EditExerciseActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearHeader"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/headerLayout"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/back_1"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="20dp"
+                android:src="@drawable/backarrow"
+                />
+            <TextView
+                android:layout_marginEnd="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/headingcolor"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/manrope_medium"
+                android:text="@string/edit_exercise"
+                />
+
+
+        </LinearLayout>
+        <View
+            android:background="@color/tabbackground"
+            android:layout_width="match_parent"
+
+            android:layout_height="2dp"/>
+
+
+    </LinearLayout>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/CardSave"
+        android:layout_below="@id/linearHeader"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="15dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txt_exercise_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/manrope_bold"
+                    android:text="facepull"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="10dp"
+                    app:cardCornerRadius="24dp">
+
+                    <ImageView
+                        android:id="@+id/img"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/dummy_ex_1" />
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+
+                    android:orientation="vertical"
+                    >
+
+                    <LinearLayout
+                        android:visibility="gone"
+                        android:id="@+id/duration_circuit_ll"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:clipToOutline="true"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="60dp"
+                            android:background="@drawable/health_overview_drawable">
+
+                            <ImageView
+                                android:layout_width="56dp"
+                                android:layout_height="56dp"
+                                android:scaleType="centerCrop"
+                                android:layout_gravity="bottom"
+                                android:src="@drawable/starttimer"
+                                />
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:layout_width="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:orientation="vertical"
+                                >
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/clashdisplay_medium"
+                                    android:text="60s"
+                                    android:id="@+id/tvDuration"
+                                    android:textColor="@color/white"
+                                    android:textSize="20sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/manrope_semi_bold"
+                                    android:text="@string/duration"
+                                    android:textColor="#D0D1D2"
+                                    android:textSize="10sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:clipToOutline="true"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="10dp"
+                            android:layout_height="60dp"
+                            android:background="@drawable/health_overview_drawable">
+
+                            <ImageView
+                                android:layout_width="56dp"
+                                android:layout_height="56dp"
+                                android:scaleType="centerCrop"
+                                android:layout_gravity="bottom"
+                                android:src="@drawable/edit_ex_flame"
+                                />
+
+                            <LinearLayout
+                                android:layout_marginStart="20dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                >
+
+                                <TextView
+                                    android:id="@+id/txt_calorie"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/clashdisplay_medium"
+                                    android:text="60s"
+                                    android:textColor="@color/white"
+                                    android:textSize="20sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/manrope_semi_bold"
+                                    android:text="@string/calories"
+                                    android:layout_gravity="center"
+                                    android:textColor="#D0D1D2"
+                                    android:textSize="10sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:visibility="gone"
+                        android:id="@+id/duration_circuit_ll_circuit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:id="@+id/linearActivity"
+                            android:orientation="vertical"
+                            android:clipToOutline="true"
+                            android:background="@drawable/health_overview_drawable"
+                            android:layout_height="160dp">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white"
+                                android:textSize="30sp"
+                                android:id="@+id/tvDurationCircuit"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginHorizontal="15dp"
+                                android:fontFamily="@font/clashdisplay_medium"
+                                />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:layout_marginHorizontal="15dp"
+                                android:fontFamily="@font/manrope_semi_bold"
+                                android:text="@string/duration"
+                                />
+                            <FrameLayout
+                                android:clipToOutline="true"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <co.com.mypt.utils.QuarterCircleProgressBar
+                                    android:id="@+id/quarterDurationProgressBar"
+                                    android:layout_width="140dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginBottom="-70dp"
+                                    android:layout_marginEnd="-65dp"
+                                    android:layout_gravity="bottom|end"/>
+                                <ImageView
+                                    android:layout_width="160dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginEnd="-45dp"
+                                    android:layout_marginBottom="-10dp"
+                                    android:layout_marginTop="25dp"
+                                    android:layout_gravity="bottom|end"
+                                    android:rotation="-45"
+                                    android:src="@drawable/half_ring"
+                                    app:tint="@color/white" />
+                                <ImageView
+                                    android:layout_gravity="bottom|end"
+                                    android:layout_width="40dp"
+                                    android:layout_marginEnd="2dp"
+                                    android:layout_height="wrap_content"
+                                    android:adjustViewBounds="true"
+                                    android:src="@drawable/tilt_hour_glass"
+                                    />
+                            </FrameLayout>
+                            <ImageView
+                                android:visibility="gone"
+                                android:layout_width="wrap_content"
+                                android:layout_gravity="end"
+                                android:adjustViewBounds="true"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/im_time"
+                                />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:clipToOutline="true"
+                            android:id="@+id/linearCalorie"
+                            android:layout_marginLeft="10dp"
+
+                            android:orientation="vertical"
+                            android:background="@drawable/health_overview_drawable"
+                            android:layout_height="160dp">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white"
+                                android:textSize="30sp"
+                                android:id="@+id/tvCaloriesCircuit"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginHorizontal="15dp"
+                                android:fontFamily="@font/clashdisplay_medium"
+                                />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:layout_marginHorizontal="15dp"
+                                android:fontFamily="@font/manrope_semi_bold"
+                                android:text="@string/calories"
+                                />
+                            <FrameLayout
+                                android:clipToOutline="true"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <co.com.mypt.utils.QuarterCircleProgressBar
+                                    android:id="@+id/quarterCaloriesProgressBar"
+                                    android:layout_width="140dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginBottom="-70dp"
+                                    android:layout_marginEnd="-65dp"
+                                    android:layout_gravity="bottom|end"/>
+                                <ImageView
+                                    android:layout_width="160dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginEnd="-45dp"
+                                    android:layout_marginBottom="-10dp"
+                                    android:layout_marginTop="25dp"
+                                    android:layout_gravity="bottom|end"
+                                    android:rotation="-45"
+                                    android:src="@drawable/half_ring"
+                                    app:tint="@color/white" />
+                                <ImageView
+                                    android:layout_gravity="bottom|end"
+                                    android:layout_width="40dp"
+                                    android:layout_marginEnd="2dp"
+                                    android:layout_height="wrap_content"
+                                    android:adjustViewBounds="true"
+                                    android:src="@drawable/tilt_fire"
+                                    />
+                            </FrameLayout>
+
+                            <ImageView
+                                android:visibility="gone"
+                                android:layout_width="wrap_content"
+                                android:layout_gravity="end"
+                                android:adjustViewBounds="true"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/imfire"
+                                />
+                            <RelativeLayout
+                                android:visibility="gone"
+                                android:layout_marginHorizontal="2dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <co.com.mypt.utils.GradientHalfCircleProgressBar
+                                    android:id="@+id/caloriesProgress"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginTop="-20dp"
+                                    android:rotation="-45"
+                                    android:layout_alignParentEnd="true"
+                                    />
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginEnd="-20dp"
+                                    android:layout_marginTop="10dp"
+                                    android:rotation="-45"
+                                    android:src="@drawable/half_ring"
+                                    app:tint="@color/white" />
+                                <ImageView
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_width="30dp"
+                                    android:layout_height="wrap_content"
+                                    android:adjustViewBounds="true"
+                                    android:src="@drawable/tilt_fire"
+                                    />
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginEnd="-20dp"
+                                    android:rotation="-45"
+                                    android:src="@drawable/half_ring"
+                                    app:tint="@color/white" />
+                            </RelativeLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linear_sets"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
+                        <LinearLayout
+                            android:id="@+id/linear_no_of_sets"
+                            android:layout_width="match_parent"
+                            android:layout_height="139dp"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/achievments_drawable"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="20dp">
+
+                            <TextView
+                                android:layout_marginTop="12dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/manrope_medium"
+                                android:text="@string/choose_no_of_sets"
+                                android:textColor="#ADFFFFFF"
+                                android:textSize="14sp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical">
+
+                                <ImageView
+                                    android:id="@+id/img_minus_sets"
+                                    android:layout_width="39dp"
+                                    android:layout_height="39dp"
+                                    android:layout_marginStart="10dp"
+                                    android:src="@drawable/rounded_circle_minus" />
+
+                                <TextView
+                                    android:id="@+id/txt_no_of_sets"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/manrope_bold"
+                                    android:gravity="center_horizontal"
+                                    android:text="3"
+                                    android:textColor="@color/white"
+                                    android:textSize="60sp" />
+
+                                <ImageView
+                                    android:id="@+id/img_add_sets"
+                                    android:layout_width="39dp"
+                                    android:layout_height="39dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:background="@drawable/rounded_circle_add"
+
+                                    android:src="@drawable/add" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="131dp"
+                            android:layout_marginTop="20dp"
+                            android:id="@+id/linearRest"
+                            android:background="@drawable/achievments_drawable"
+                            android:orientation="vertical">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginHorizontal="20dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/manrope_medium"
+                                    android:text="@string/add_rest_time_sec"
+                                    android:textColor="#ADFFFFFF"
+                                    android:textSize="14sp" />
+
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_centerInParent="true"
+                                    android:src="@drawable/fillarrow"
+                                    android:layout_height="24dp"
+                                    app:tint="#3d3d3d" />
+                            </RelativeLayout>
+
+
+                            <co.com.mypt.utils.RulerView
+                                android:layout_alignParentBottom="true"
+                                android:layout_gravity="bottom"
+                                android:layout_width="match_parent"
+                                android:id="@+id/rulerviewbottom"
+                                android:layout_marginTop="20dp"
+                                android:layout_height="wrap_content"/>
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="40dp"
+                            android:id="@+id/linearReps"
+                            android:background="@drawable/achievments_drawable"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="20dp"
+                            android:paddingVertical="15dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/manrope_medium"
+                                android:text="@string/choose_no_of_reps"
+                                android:textColor="#ADFFFFFF"
+                                android:textSize="14sp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="20dp"
+                                android:gravity="center_vertical">
+
+                                <ImageView
+                                    android:id="@+id/img_minus_reps"
+                                    android:layout_width="39dp"
+                                    android:layout_height="39dp"
+                                    android:layout_marginStart="20dp"
+                                    android:src="@drawable/rounded_circle_minus" />
+
+                                <TextView
+                                    android:id="@+id/txt_no_of_reps"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="12"
+                                    android:fontFamily="@font/manrope_bold"
+                                    android:gravity="center"
+                                    android:text="12"
+                                    android:textColor="@color/white"
+                                    android:textSize="60sp" />
+
+                                <ImageView
+                                    android:id="@+id/img_add_reps"
+                                    android:layout_width="39dp"
+                                    android:layout_height="39dp"
+                                    android:layout_marginEnd="20dp"
+                                    android:src="@drawable/rounded_circle_add" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linear_circuit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+
+                        android:layout_marginTop="20dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                app:cardCornerRadius="12dp"
+                                app:cardBackgroundColor="#31343A">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:text="1"
+                                    android:textSize="20sp"
+                                    android:fontFamily="@font/manrope_bold"
+                                    android:textColor="@color/white"/>
+                            </androidx.cardview.widget.CardView>
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="Set 1"
+                                android:layout_marginHorizontal="20dp"
+                                android:gravity="center_vertical"
+                                android:textSize="20sp"
+                                android:fontFamily="@font/manrope_bold"
+                                android:textColor="@color/white"/>
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:rotation="270"
+                                android:src="@drawable/arrow_right"
+                                app:tint="#666967" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:background="@drawable/achievments_drawable"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="40dp"
+                            android:padding="15dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/tvRepsExerciseCircuit"
+                                android:text="Number of reps for FacePull"
+                                android:textColor="#ADFFFFFF"
+                                android:textSize="14sp"
+                                android:fontFamily="@font/manrope_medium"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="20dp"
+                                android:gravity="center_vertical">
+
+                                <ImageView
+                                    android:id="@+id/img_minus_reps_circuit"
+                                    android:layout_width="39dp"
+                                    android:layout_height="39dp"
+                                    android:layout_marginStart="20dp"
+                                    android:src="@drawable/rounded_circle_minus" />
+
+                                <TextView
+                                    android:id="@+id/txt_no_of_reps_circuit"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="12"
+                                    android:fontFamily="@font/manrope_bold"
+                                    android:gravity="center"
+                                    android:text="3"
+                                    android:textColor="@color/white"
+                                    android:textSize="60sp" />
+
+                                <ImageView
+                                    android:id="@+id/img_add_reps_circuit"
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                    android:layout_marginEnd="20dp"
+                                    android:src="@drawable/rounded_circle_add" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        app:cardCornerRadius="12dp"
+        android:id="@+id/CardSave"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="15dp"
+        app:cardBackgroundColor="@color/headingcolor"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:fontFamily="@font/manrope_bold"
+            android:paddingVertical="15dp"
+            android:textAllCaps="true"
+            android:text="@string/save"
+            android:textColor="@color/buttontextcolor"
+            android:textSize="16sp" />
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

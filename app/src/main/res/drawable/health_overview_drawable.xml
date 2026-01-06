@@ -1,0 +1,20 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Border Layer -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#101113" /> <!-- Border color -->
+            <corners android:radius="12dp" />
+        </shape>
+    </item>
+
+    <!-- Gradient Background Layer -->
+    <item android:left="2dp" android:right="2dp" android:top="2dp" android:bottom="2dp">
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="#101113"
+                android:endColor="#474D60"
+                android:angle="90" />
+            <corners android:radius="10dp" />
+        </shape>
+    </item>
+</layer-list>

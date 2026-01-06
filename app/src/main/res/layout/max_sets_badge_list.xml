@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="170dp"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:id="@+id/badgeImage"
+            android:src="@drawable/gold_shield"
+            android:scaleType="centerCrop"/>
+        <ImageView
+            android:id="@+id/lock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/outline_lock_24"
+            />
+    </RelativeLayout>
+    <ImageView
+        android:adjustViewBounds="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/podium_1"
+        />
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/subheadingcolor"
+        android:textSize="10sp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:fontFamily="@font/manrope_medium"
+        android:text="Feb 23, 2025"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/headingcolor"
+        android:textSize="20sp"
+        android:layout_marginTop="3dp"
+        android:gravity="center"
+        android:fontFamily="@font/clash_display_semibold"
+        android:text="Max Sets"
+        />
+</LinearLayout>

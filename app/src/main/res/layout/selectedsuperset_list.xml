@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="15dp"
+    android:background="@drawable/gradient_import_workout"
+    android:layout_marginVertical="5dp"
+    android:layout_marginLeft="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            app:cardBackgroundColor="#1C1F21"
+            app:cardCornerRadius="6dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/txt_exercise_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rope"
+                android:textSize="10sp"
+                android:fontFamily="@font/manrope_semi_bold"
+                android:textColor="@color/headingcolor"
+                android:paddingVertical="5dp"
+                android:paddingHorizontal="10dp" />
+
+        </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:id="@+id/img_menu"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/white_menu"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/txt_exercise_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="rope_aerobics"
+        android:textSize="16sp"
+        android:maxLines="1"
+        android:textColor="@color/headingcolor"
+        android:fontFamily="@font/clash_display_semibold"
+        android:layout_marginTop="10dp"/>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_gravity="center"
+            android:src="@drawable/dumbell_fill"
+            app:tint="@color/smallTextcolor" />
+
+        <TextView
+            android:id="@+id/txt_reps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12"
+            android:textColor="@color/headingcolor"
+            android:textSize="14sp"
+            android:layout_marginStart="5dp"
+            android:fontFamily="@font/manrope_extra_bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reps"
+            android:textColor="@color/headingcolor"
+            android:textSize="14sp"
+            android:layout_marginStart="2dp"
+            android:fontFamily="@font/manrope_regular_400"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.appcompat.widget.LinearLayoutCompat>
