@@ -40,7 +40,7 @@ class WeightFragment : Fragment(), ScaleSliderLayoutManager.MovementListener {
     lateinit var weight1: EditText
     lateinit var unitTextView: TextView
     lateinit var repo: WeightRepo
-    lateinit var weightRecyclerView: RecyclerView
+//    lateinit var weightRecyclerView: RecyclerView
     var isEditable = false
     lateinit var imEdit: FrameLayout
     override fun onCreateView(
@@ -52,7 +52,7 @@ class WeightFragment : Fragment(), ScaleSliderLayoutManager.MovementListener {
         tvlbs = view.findViewById(R.id.tvlbs)
         tvkg = view.findViewById(R.id.tvkg)
         imEdit = view.findViewById(R.id.imEdit)
-        weightRecyclerView = view.findViewById(R.id.weight_recycler_view)
+//        weightRecyclerView = view.findViewById(R.id.weight_recycler_view)
         weight1 = view.findViewById(R.id.weight)
         unitTextView = view.findViewById(R.id.unit)
 
@@ -78,7 +78,7 @@ class WeightFragment : Fragment(), ScaleSliderLayoutManager.MovementListener {
             repo.setUnitToLbs()  // Set unit to lbs
             updateWeightLabels()  // Update the labels to lbs
         }
-        weightRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        /*weightRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(@NonNull rv: RecyclerView, dx: Int, dy: Int) {
                // val lm = rv.getLayoutManager() as LinearLayoutManager?
 
@@ -101,7 +101,7 @@ class WeightFragment : Fragment(), ScaleSliderLayoutManager.MovementListener {
                     updateCenterPosition(rv, closestPos)
                 }
             }
-        })
+        })*/
 
 
         imEdit.setOnClickListener {
@@ -160,8 +160,8 @@ class WeightFragment : Fragment(), ScaleSliderLayoutManager.MovementListener {
         val adapter = WeightScaleAdapter(activity)
         adapter.setData(repo.getWeightLabels())  // Update the adapter with the new weight labels
 
-        weightRecyclerView.adapter = adapter
-        weightRecyclerView.scrollToPosition(repo.startWeight)  // Scroll to the start weight
+       /* weightRecyclerView.adapter = adapter
+        weightRecyclerView.scrollToPosition(repo.startWeight)*/  // Scroll to the start weight
 
         // Update the weight label text with the selected unit
         val weightLabel = repo.getWeightLabels()[repo.startWeight]
@@ -236,7 +236,7 @@ class WeightFragment : Fragment(), ScaleSliderLayoutManager.MovementListener {
     override fun onStart() {
         super.onStart()
 
-        val padding = Screen.getScreenWidth(activity) / 2
+        /*val padding = Screen.getScreenWidth(activity) / 2
         weightRecyclerView.setPadding(padding, 0, padding, 0)
 
         val adapter = WeightScaleAdapter(activity)
@@ -246,7 +246,7 @@ class WeightFragment : Fragment(), ScaleSliderLayoutManager.MovementListener {
         weightRecyclerView.itemAnimator = DefaultItemAnimator()
         weightRecyclerView.adapter = adapter
 
-        weightRecyclerView.scrollToPosition(repo.startWeight)
+        weightRecyclerView.scrollToPosition(repo.startWeight)*/
 //        weightRecyclerView.addItemDecoration(FadeEdgeDecoration(requireContext()))
 
         val weightLabel = repo.getWeightLabels()[repo.startWeight]
