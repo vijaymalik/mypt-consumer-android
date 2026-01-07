@@ -36,6 +36,7 @@ class CommonFunctionMethods {
             editText.isFocusableInTouchMode = true
             editText.isFocusable = true
             editText.isCursorVisible = true
+            editText.setSelection(editText.text.length)
             editText.requestFocus()
 
             editText.post {

@@ -1,14 +1,21 @@
 package co.com.mypt.onBoarding.personalize
 
+import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import co.com.calculateheight.MyScaleView
@@ -32,7 +39,7 @@ class HeightFragment : Fragment() {
     lateinit var tvfeet: TextView
     lateinit var txtValue: EditText
     lateinit var imEdit: FrameLayout
-    lateinit var rootLayout: LinearLayout
+//    lateinit var rootLayout: LinearLayout
 
     //    lateinit var  unitTextView: TextView
     var isEditable = false
@@ -46,7 +53,7 @@ class HeightFragment : Fragment() {
         tvcms = view.findViewById(R.id.tvcms)
         tvfeet = view.findViewById(R.id.tvfeet)
         imEdit = view.findViewById(R.id.imEdit)
-        rootLayout = view.findViewById(R.id.linear)
+//        rootLayout = view.findViewById(R.id.linear)
         val myScaleView = view.findViewById<MyScaleView>(R.id.myScaleViewcms)
         val myScaleViewfeet = view.findViewById<CenterWaveScaleViewFeet>(R.id.myScaleViewfeet)
         txtValue = view.findViewById(R.id.txt_height)
@@ -59,6 +66,7 @@ class HeightFragment : Fragment() {
                 disableEditText(txtValue, requireContext())
             }
         }
+
         myScaleView.initializeStartingPoint(70F)
         myScaleView.setUpdateListener(object : onViewUpdateListener {
             override fun onViewUpdate(value: Float) {
@@ -132,39 +140,89 @@ class HeightFragment : Fragment() {
 
         return view
     }
+    fun setLinearLayoutEnd(linearLayout: LinearLayout, targetViewId: Int?) {
+        val parent = linearLayout.parent as ConstraintLayout
+        val constraintSet = ConstraintSet()
+        constraintSet.clone(parent)
+
+        if (targetViewId != null) {
+            // Constrain end to another view
+            constraintSet.connect(
+                linearLayout.id,
+                ConstraintSet.END,
+                targetViewId,
+                ConstraintSet.START,
+                0 // optional margin
+            )
+        } else {
+            // Constrain end to parent
+            constraintSet.connect(
+                linearLayout.id,
+                ConstraintSet.END,
+                parent.id,
+                ConstraintSet.END,
+                0 // optional margin
+            )
+        }
+
+        constraintSet.applyTo(parent)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+       val  heightTextView = view.findViewById<LinearLayout>(R.id.heightTextView)
+       val  scalerView = view.findViewById<LinearLayout>(R.id.scalerView)
+       val  verticalGlow = view.findViewById<ImageView>(R.id.verticalGlow)
 
-        // Required for IME insets
-        WindowCompat.setDecorFitsSystemWindows(requireActivity().window, false)
-
-        // Listen to keyboard height on root layout
-        rootLayout.listenKeyboardHeight { keyboardHeight ->
-            println("Keyboard height: $keyboardHeight")
-            if (isEditable) {
-                // Get parent view of EditText (the LinearLayout containing txtValue + imEdit)
-                val parentLayout = txtValue.parent as? View
-                parentLayout?.let { parent ->
-                    val params = parent.layoutParams as? ViewGroup.MarginLayoutParams
-                    params?.let {
-                        it.bottomMargin = 250
-                        parent.layoutParams = it
+            ViewCompat.setOnApplyWindowInsetsListener(requireView()) { _, insets ->
+                if (insets.isVisible(WindowInsetsCompat.Type.ime())) {
+                    //setLinearLayoutEnd(heightTextView, R.id.scalerView)
+                    setHeightTextEndTo(heightTextView, false)
+                    scalerView.visibility= View.GONE
+                    verticalGlow.visibility= View.GONE
+                    val parentLayout = txtValue.parent as? View
+                    /*parentLayout?.let { parent ->
+                        val params = parent.layoutParams as? ViewGroup.MarginLayoutParams
+                        params?.let {
+                            it.bottomMargin = 100
+                            parent.layoutParams = it
+                        }
+                    }*/
+                } else {
+                    setHeightTextEndTo(heightTextView, true)
+                    scalerView.visibility= View.VISIBLE
+                    verticalGlow.visibility= View.VISIBLE
+//                    setLinearLayoutEnd(heightTextView, null)
+                    val parentLayout = txtValue.parent as? View
+                    parentLayout?.let { parent ->
+                        val params = parent.layoutParams as? ViewGroup.MarginLayoutParams
+                        params?.let {
+                            it.bottomMargin = 0
+                            parent.layoutParams = it
+                        }
                     }
                 }
-            } else {
-                val parentLayout = txtValue.parent as? View
-                parentLayout?.let { parent ->
-                    val params = parent.layoutParams as? ViewGroup.MarginLayoutParams
-                    params?.let {
-                        it.bottomMargin = 0
-                        parent.layoutParams = it
-                    }
-                }
+                insets
             }
-        }
 
     }
+    fun setHeightTextEndTo(
+        heightTextView: LinearLayout,
+        endToScaler: Boolean
+    ) {
+        val params = heightTextView.layoutParams as ConstraintLayout.LayoutParams
 
+        if (endToScaler) {
+            // END → START of scalerView
+            params.endToStart = R.id.scalerView
+            params.endToEnd = ConstraintLayout.LayoutParams.UNSET
+        } else {
+            // END → END of parent
+            params.endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
+            params.endToStart = ConstraintLayout.LayoutParams.UNSET
+        }
+
+        heightTextView.layoutParams = params
+    }
 
 }

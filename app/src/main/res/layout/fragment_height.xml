@@ -105,39 +105,8 @@
             app:layout_constraintStart_toStartOf="@+id/verticalGlow"
             app:layout_constraintTop_toTopOf="@id/verticalGlow" />
 
-        <!-- <View
-             android:id="@+id/arrowCenterAnchor"
-             android:layout_width="1dp"
-             android:layout_height="0dp"
-             app:layout_constraintBottom_toBottomOf="@id/centerArrow"
-             app:layout_constraintEnd_toEndOf="@id/centerArrow"
-             app:layout_constraintStart_toStartOf="@+id/centerArrow"
-             app:layout_constraintTop_toTopOf="@id/centerArrow" />
-
-         <ImageView
-             android:id="@+id/verticalGlow"
-             android:layout_width="170dp"
-             android:layout_height="210dp"
-             android:adjustViewBounds="true"
-             android:src="@drawable/glow_view"
-             app:layout_constraintBottom_toBottomOf="@+id/centerArrow"
-             app:layout_constraintEnd_toStartOf="@+id/arrowCenterAnchor"
-             app:layout_constraintTop_toTopOf="@+id/centerArrow" />
-
-         <ImageView
-             android:id="@+id/centerArrow"
-             android:layout_width="80dp"
-             android:layout_height="wrap_content"
-             android:adjustViewBounds="true"
-             android:src="@drawable/vertical_slider"
-             app:layout_constraintBottom_toBottomOf="parent"
-             app:layout_constraintEnd_toEndOf="parent"
-             app:layout_constraintTop_toTopOf="parent" />
- -->
-
-
-
     <LinearLayout
+        android:id="@+id/heightTextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/scalerView"
         app:layout_constraintStart_toStartOf="parent"
@@ -154,8 +123,7 @@
             android:text="90"
             android:textColor="@color/white"
             android:focusable="false"
-            android:inputType="numberDecimal"
-            android:digits="0123456789."
+            android:textCursorDrawable="@drawable/cursor_white"
             android:focusableInTouchMode="false"
             android:cursorVisible="false"
             android:textSize="35sp" />
@@ -185,9 +153,6 @@
 
         </FrameLayout>
     </LinearLayout>
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
