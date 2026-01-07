@@ -92,7 +92,7 @@ class CenterWaveScaleViewWeightHorizontal(
         viewHeight = h
 
         screenSize = width
-        pxmm = screenSize / 67f
+        pxmm = screenSize / 50f
 
         rulerSize = pxmm * 12
         midScreenPoint = width / 2
@@ -241,6 +241,6 @@ class CenterWaveScaleViewWeightHorizontal(
 
     companion object {
         var screenSize = 480
-        var pxmm = screenSize / 67f
+        var pxmm = screenSize / 50f
     }
 }
