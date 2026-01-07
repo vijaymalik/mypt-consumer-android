@@ -182,10 +182,11 @@ class CenterWaveScaleViewWeightHorizontal(
                 } else {
                     resources.getDimension(R.dimen.txt_size)
                 }
-
+                val label = "${i / 12}"
+                val textWidth = textPaint.measureText(label)
                 canvas.drawText(
-                    "${i / 12}",
-                    startingPoint - 10,
+                    label,
+                    startingPoint - textWidth / 2f,
                     (endPoint - textStartPoint+ reduceTextGapPx).toFloat(),
                     textPaint
                 )
