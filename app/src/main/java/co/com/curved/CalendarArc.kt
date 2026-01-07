@@ -67,9 +67,12 @@ class CalendarArc :  Fragment()  {
         recyclerYear.layoutManager = CurvedLayoutManager(context_)
         val arcAdapter = ArcCalendarAdapter(years,recyclerYear)
         recyclerYear.adapter = arcAdapter
-        recyclerYear.scrollToPosition(years.size-2)
 
-        months = getMonthsForYear(currentYear)
+        val defaultYear = currentYear - 18
+        val defaultIndex = years.indexOf(defaultYear.toString())-2
+        recyclerYear.scrollToPosition(defaultIndex)
+
+        months = getMonthsForYear(defaultYear)
         recyclerMonth.layoutManager = CurvedLayoutManager(context_)
         val monthAdapter = MonthCalAdapter(months,recyclerMonth)
         recyclerMonth.adapter = monthAdapter
