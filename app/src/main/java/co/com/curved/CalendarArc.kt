@@ -273,7 +273,30 @@ class CalendarArc :  Fragment()  {
         /*setupRecyclerView(recyclerDay, days,today.get(Calendar.DAY_OF_MONTH),3) { selectedDay ->
             println("Selected Day: $selectedDay")
         }*/
+        getUserAge(defaultYear)
         return view
+    }
+
+    fun getUserAge(defaultYear:Int){
+        val currentMonth = when (currentMonth+1) {
+            in 1..9 -> {
+                ("0${currentMonth+1}")
+            }
+            0 -> {
+                "01"
+            }
+            else -> {
+                currentMonth+1
+            }
+        }
+        var tempDay = ""
+        tempDay = if(currentDay < 10){
+            "0$currentDay"
+        } else
+            "$currentDay"
+
+        val yourAge = calculateAge("$tempDay/$currentMonth/$defaultYear")
+        age.text = yourAge
     }
 
     fun calculateAge(selectedDate: String): String {
