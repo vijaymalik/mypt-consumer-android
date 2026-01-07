@@ -1,23 +1,15 @@
 package co.com.mypt.onBoarding.personalize
 
-import android.content.Context
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.FrameLayout
-import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.NonNull
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import co.com.mypt.CommonFunctionMethods.Companion.disableEditText
@@ -28,9 +20,9 @@ import co.com.mypt.onBoarding.weightClass.ScaleSliderLayoutManager
 import co.com.mypt.onBoarding.weightClass.Screen
 import co.com.mypt.onBoarding.weightClass.Screen.dpToPx
 import co.com.mypt.onBoarding.weightClass.WeightRepo
-import co.com.mypt.rulerHeight.onViewUpdateListenerFeet
+import co.com.mypt.rulerHeight.CenterWaveScaleViewWeightHorizontal
+import co.com.mypt.rulerHeight.onViewUpdateListenerWeight
 import co.com.mypt.utils.SharedWeightViewModel
-import kotlin.math.abs
 
 
 class WeightFragment : Fragment(), ScaleSliderLayoutManager.MovementListener {
@@ -56,6 +48,8 @@ class WeightFragment : Fragment(), ScaleSliderLayoutManager.MovementListener {
 //        weightRecyclerView = view.findViewById(R.id.weight_recycler_view)
         weight1 = view.findViewById(R.id.weight)
         unitTextView = view.findViewById(R.id.unit)
+        val rulerWeight = view.findViewById<CenterWaveScaleViewWeightHorizontal>(R.id.ruler_weight)
+
 
         // Handling kg and lbs button clicks
         tvkg.setOnClickListener {
@@ -113,18 +107,17 @@ class WeightFragment : Fragment(), ScaleSliderLayoutManager.MovementListener {
                disableEditText(weight1, requireContext())
             }
         }
-        /*myScaleViewfeet.setUpdateListenerfeet(object : onViewUpdateListenerFeet {
+        rulerWeight.initializeStartingPoint(70F)
+        rulerWeight.setUpdateListenerWeight(object : onViewUpdateListenerWeight {
             override fun onViewUpdate(value: Float) {
-                val feet = value.toInt() // Extract integer part as feet
-                val inches = ((value - feet) * 12).toInt() // Convert decimal part to inches
-                ft = if (inches == 0) "$feet" + "ft"
-                else "$feet" + "ft" + "$inches" + "in"
-                txtValue.setText(ft)
-                viewModel.data.value = txtValue.text.toString()
+                updateWeight(roundTo1Decimal(value).toString())
             }
-        })*/
+        })
 
         return view
+    }
+    fun roundTo1Decimal(value: Float): Float {
+        return kotlin.math.round(value * 10) / 10
     }
     private  val centerHeight = 33
     private  val level1Height = 30

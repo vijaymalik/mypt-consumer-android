@@ -29,7 +29,7 @@ class CenterWaveScaleViewWeightHorizontal(
 
     private var isMove = false
 
-    private var mListener: onViewUpdateListenerFeet? = null
+    private var mListener: onViewUpdateListenerWeight? = null
 
     lateinit var rulerPaint: Paint
     lateinit var textPaint: Paint
@@ -51,6 +51,9 @@ class CenterWaveScaleViewWeightHorizontal(
     private val WAVE_HALF = WAVE_ITEM_COUNT / 2   // 3
 
     var isFirstTime = true
+    private val reduceTextGapPx by lazy {
+        (20 * resources.displayMetrics.density).toInt() // try 4–8 dp
+    }
 
     init {
         if (!isInEditMode) initPaints()
@@ -80,7 +83,7 @@ class CenterWaveScaleViewWeightHorizontal(
         textStartPoint = resources.getDimension(R.dimen.text_start_point).toInt()
     }
 
-    fun setUpdateListenerFeet(listener: onViewUpdateListenerFeet?) {
+    fun setUpdateListenerWeight(listener: onViewUpdateListenerWeight?) {
         mListener = listener
     }
 
@@ -181,9 +184,9 @@ class CenterWaveScaleViewWeightHorizontal(
                 }
 
                 canvas.drawText(
-                    "${i / 12} ft",
+                    "${i / 12}",
                     startingPoint - 10,
-                    (endPoint - textStartPoint).toFloat(),
+                    (endPoint - textStartPoint+ reduceTextGapPx).toFloat(),
                     textPaint
                 )
             }
