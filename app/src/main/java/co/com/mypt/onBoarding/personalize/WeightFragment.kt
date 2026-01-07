@@ -28,6 +28,7 @@ import co.com.mypt.onBoarding.weightClass.ScaleSliderLayoutManager
 import co.com.mypt.onBoarding.weightClass.Screen
 import co.com.mypt.onBoarding.weightClass.Screen.dpToPx
 import co.com.mypt.onBoarding.weightClass.WeightRepo
+import co.com.mypt.rulerHeight.onViewUpdateListenerFeet
 import co.com.mypt.utils.SharedWeightViewModel
 import kotlin.math.abs
 
@@ -112,7 +113,16 @@ class WeightFragment : Fragment(), ScaleSliderLayoutManager.MovementListener {
                disableEditText(weight1, requireContext())
             }
         }
-
+        /*myScaleViewfeet.setUpdateListenerfeet(object : onViewUpdateListenerFeet {
+            override fun onViewUpdate(value: Float) {
+                val feet = value.toInt() // Extract integer part as feet
+                val inches = ((value - feet) * 12).toInt() // Convert decimal part to inches
+                ft = if (inches == 0) "$feet" + "ft"
+                else "$feet" + "ft" + "$inches" + "in"
+                txtValue.setText(ft)
+                viewModel.data.value = txtValue.text.toString()
+            }
+        })*/
 
         return view
     }
