@@ -111,7 +111,7 @@
                     android:textSize="30sp"
                     android:id="@+id/tvprice"
                     android:textStyle="bold"
-                    android:fontFamily="@font/clashdisplay_medium"
+                    android:fontFamily="@font/clash_display_medium"
                     android:text="299"
                     />
                 <TextView
@@ -121,7 +121,7 @@
                     android:textSize="16sp"
                     android:id="@+id/tvcurrency"
                     android:layout_marginLeft="2dp"
-                    android:fontFamily="@font/clashdisplay_medium"
+                    android:fontFamily="@font/clash_display_medium"
                     android:text="AED"
                     />
                 <TextView
@@ -131,7 +131,7 @@
                     android:textSize="16sp"
                     android:layout_marginLeft="10dp"
                     android:id="@+id/tvRealPrice"
-                    android:fontFamily="@font/clashdisplay_medium"
+                    android:fontFamily="@font/clash_display_medium"
                     android:text="329 AED"
                     />
                 <TextView
@@ -144,7 +144,7 @@
                     android:paddingVertical="6dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/product_offer_drawable"
-                    android:fontFamily="@font/clashdisplay_medium"
+                    android:fontFamily="@font/clash_display_medium"
                     android:text="20% off"
                     />
 

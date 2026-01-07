@@ -21,7 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/certificationTv1"
-                android:fontFamily="@font/clashdisplay_medium"
+                android:fontFamily="@font/clash_display_medium"
                 android:textColor="@color/subheadingcolor"
                 android:textSize="30sp"/>
             <TextView

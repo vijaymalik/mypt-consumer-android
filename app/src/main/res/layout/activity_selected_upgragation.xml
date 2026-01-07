@@ -44,7 +44,7 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="50dp"
-                android:fontFamily="@font/clashdisplay_medium"
+                android:fontFamily="@font/clash_display_medium"
                 android:gravity="center"
                 android:text="@string/do_you_want_to_top_up_nor_upgrade"
                 android:textColor="@color/headingcolor"

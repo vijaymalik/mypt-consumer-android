@@ -130,7 +130,7 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/smallTextcolor"
                             android:textSize="16sp"
-                            android:fontFamily="@font/clashdisplay_medium"
+                            android:fontFamily="@font/clash_display_medium"
                             android:text="49 min"
                             />
                         <com.github.mikephil.charting.charts.BarChart
@@ -388,7 +388,7 @@
                             android:textColor="@color/smallTextcolor"
                             android:layout_marginHorizontal="15dp"
                             android:textSize="16sp"
-                            android:fontFamily="@font/clashdisplay_medium"
+                            android:fontFamily="@font/clash_display_medium"
                             android:text="49 min"
                             />
                         <LinearLayout
@@ -502,7 +502,7 @@
                             android:textColor="@color/smallTextcolor"
                             android:layout_marginHorizontal="15dp"
                             android:textSize="16sp"
-                            android:fontFamily="@font/clashdisplay_medium"
+                            android:fontFamily="@font/clash_display_medium"
                             android:text="5 h  11 min"
                             />
                         <LinearLayout
@@ -584,7 +584,7 @@
                         android:textColor="@color/smallTextcolor"
                         android:layout_marginHorizontal="15dp"
                         android:textSize="16sp"
-                        android:fontFamily="@font/clashdisplay_medium"
+                        android:fontFamily="@font/clash_display_medium"
                         android:text="49 min"
                         />
                     <LinearLayout
@@ -664,7 +664,7 @@
                             android:textColor="@color/smallTextcolor"
                             android:layout_marginHorizontal="15dp"
                             android:textSize="16sp"
-                            android:fontFamily="@font/clashdisplay_medium"
+                            android:fontFamily="@font/clash_display_medium"
                             android:text="5 h  11 min"
                             />
                         <LinearLayout

@@ -67,7 +67,7 @@
                 android:textStyle="bold"
 
                 android:layout_marginHorizontal="20dp"
-                android:fontFamily="@font/clashdisplay_medium"
+                android:fontFamily="@font/clash_display_medium"
                 android:textColor="@color/white"
                 android:textSize="20sp"/>
             <TextView
@@ -78,7 +78,7 @@
                 android:visibility="gone"
                 android:layout_marginTop="15dp"
                 android:layout_marginHorizontal="20dp"
-                android:fontFamily="@font/clashdisplay_medium"
+                android:fontFamily="@font/clash_display_medium"
                 android:textColor="@color/smallTextcolor"
                 android:textSize="14sp"/>
             <LinearLayout
@@ -99,7 +99,7 @@
                     android:textStyle="bold"
                     android:id="@+id/tvreps"
                     android:layout_marginLeft="5dp"
-                    android:fontFamily="@font/clashdisplay_medium"
+                    android:fontFamily="@font/clash_display_medium"
                     android:textColor="@color/headingcolor"
                     android:textSize="14sp"/>
                 <TextView
@@ -131,7 +131,7 @@
                     android:textStyle="bold"
                     android:id="@+id/tvcalorie"
                     android:layout_marginLeft="5dp"
-                    android:fontFamily="@font/clashdisplay_medium"
+                    android:fontFamily="@font/clash_display_medium"
                     android:textColor="@color/headingcolor"
                     android:textSize="14sp"/>
                 <TextView

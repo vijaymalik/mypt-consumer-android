@@ -23,18 +23,11 @@ import android.widget.RelativeLayout
 import android.widget.SeekBar
 import android.widget.TextSwitcher
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
-import androidx.cardview.widget.CardView
 import androidx.core.content.res.ResourcesCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.RecyclerView
-import co.com.mypt.PlanRenewal.UpgradeTopUpReviewPackageActivity
 import co.com.mypt.R
-import co.com.mypt.activities.TrainersListActivity
 import co.com.mypt.model.ActivityModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -87,7 +80,7 @@ class HomeValidityActivity : AppCompatActivity() {
             val textView = TextView(this)
             textView.textSize = 40f
             textView.setTextColor(resources.getColor(R.color.headingcolor))
-            textView.setTypeface(ResourcesCompat.getFont(this, R.font.clashdisplay_medium))
+            textView.setTypeface(ResourcesCompat.getFont(this, R.font.clash_display_medium))
             textView.gravity = Gravity.CENTER
             textView
         }

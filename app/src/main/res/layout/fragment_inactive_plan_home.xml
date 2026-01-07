@@ -291,7 +291,7 @@
                                     android:textSize="16sp"
                                     android:textStyle="bold"
                                     android:textAllCaps="true"
-                                    android:fontFamily="@font/clashdisplay_medium"
+                                    android:fontFamily="@font/clash_display_medium"
                                     android:text="1500"
                                     android:id="@+id/waterIntake"
                                     />
@@ -303,7 +303,7 @@
                                     android:textSize="12sp"
                                     android:textStyle="bold"
                                     android:id="@+id/totalWaterIntake"
-                                    android:fontFamily="@font/clashdisplay_medium"
+                                    android:fontFamily="@font/clash_display_medium"
                                     android:text=" /2200 ml"
                                     />
                             </LinearLayout>
@@ -373,7 +373,7 @@
                                     android:textSize="16sp"
                                     android:textStyle="bold"
                                     android:textAllCaps="true"
-                                    android:fontFamily="@font/clashdisplay_medium"
+                                    android:fontFamily="@font/clash_display_medium"
                                     android:text="1500"
                                     android:id="@+id/intakeCalories"
                                     />
@@ -385,7 +385,7 @@
                                     android:textSize="12sp"
                                     android:textStyle="bold"
                                     android:id="@+id/intakeTotalCalories"
-                                    android:fontFamily="@font/clashdisplay_medium"
+                                    android:fontFamily="@font/clash_display_medium"
                                     android:text=" /2200 kcal"
                                     />
                             </LinearLayout>
@@ -433,7 +433,7 @@
                                     android:textSize="16sp"
                                     android:textStyle="bold"
                                     android:textAllCaps="true"
-                                    android:fontFamily="@font/clashdisplay_medium"
+                                    android:fontFamily="@font/clash_display_medium"
                                     android:text="1500"
                                     android:id="@+id/caloriesBurn"
                                     />
@@ -445,7 +445,7 @@
                                     android:textSize="12sp"
                                     android:textStyle="bold"
                                     android:id="@+id/intakeBurnCalories"
-                                    android:fontFamily="@font/clashdisplay_medium"
+                                    android:fontFamily="@font/clash_display_medium"
                                     android:text=" /2200 kcal"
                                     />
 
@@ -523,7 +523,7 @@
                                 android:textSize="16sp"
                                 android:textStyle="bold"
                                 android:textAllCaps="true"
-                                android:fontFamily="@font/clashdisplay_medium"
+                                android:fontFamily="@font/clash_display_medium"
                                 android:text="1500"
                                 android:id="@+id/steps"
                                 />
@@ -535,7 +535,7 @@
                                 android:textSize="12sp"
                                 android:textStyle="bold"
                                 android:id="@+id/totalSteps"
-                                android:fontFamily="@font/clashdisplay_medium"
+                                android:fontFamily="@font/clash_display_medium"
                                 android:text=" /2200 steps"
                                 />
 
@@ -558,7 +558,7 @@
                                 android:textSize="16sp"
                                 android:textStyle="bold"
                                 android:textAllCaps="true"
-                                android:fontFamily="@font/clashdisplay_medium"
+                                android:fontFamily="@font/clash_display_medium"
                                 android:text="3.1"
                                 android:id="@+id/distance"
                                 />
@@ -569,7 +569,7 @@
                                 android:textColor="@color/white"
                                 android:textSize="12sp"
                                 android:textStyle="bold"
-                                android:fontFamily="@font/clashdisplay_medium"
+                                android:fontFamily="@font/clash_display_medium"
                                 android:text=" kms"
                                 />
 
@@ -849,7 +849,7 @@
                                 android:textColor="@color/white"
                                 android:textSize="16sp"
                                 android:textStyle="bold"
-                                android:fontFamily="@font/clashdisplay_medium"
+                                android:fontFamily="@font/clash_display_medium"
                                 android:text="1,000 kcal"
                                 />
                             <LinearLayout
@@ -870,7 +870,7 @@
                                     android:textColor="@color/smallTextcolor"
                                     android:textSize="16sp"
                                     android:textStyle="bold"
-                                    android:fontFamily="@font/clashdisplay_medium"
+                                    android:fontFamily="@font/clash_display_medium"
                                     android:text="+600"
                                     />
                             </LinearLayout>
@@ -963,7 +963,7 @@
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:textColor="@color/white"
-                        android:fontFamily="@font/clashdisplay_medium"
+                        android:fontFamily="@font/clash_display_medium"
                         android:text="Strength Challenge"
                         />
                     <LinearLayout
@@ -1074,7 +1074,7 @@
                                     android:textStyle="bold"
                                     android:textColor="@color/white"
                                     android:id="@+id/completedPercentage"
-                                    android:fontFamily="@font/clashdisplay_medium"
+                                    android:fontFamily="@font/clash_display_medium"
                                     android:text="75 %"
                                     />
                                 <TextView
@@ -1164,7 +1164,7 @@
                    android:layout_centerHorizontal="true"
                    android:paddingVertical="5dp"
                    android:paddingHorizontal="15dp"
-                   android:fontFamily="@font/clashdisplay_medium"
+                   android:fontFamily="@font/clash_display_medium"
                    android:textSize="16sp"
                    android:textColor="@color/white"
                    android:layout_width="wrap_content"
@@ -1186,7 +1186,7 @@
                 android:layout_gravity="center_horizontal"
                 android:textSize="25sp"
                 android:gravity="center_vertical"
-                android:fontFamily="@font/clashdisplay_medium"
+                android:fontFamily="@font/clash_display_medium"
                 android:text="“ Believe you can and\nyou're halfway there ”"
                 />
             <TextView

@@ -12,7 +12,7 @@
         android:layout_marginHorizontal="15dp"
         android:layout_marginVertical="20dp"
         android:layout_marginRight="10dp"
-        android:fontFamily="@font/clashdisplay_medium"
+        android:fontFamily="@font/clash_display_medium"
         android:gravity="center"
         android:text="@string/what_is_your_height"
         android:textColor="@color/headingcolor"

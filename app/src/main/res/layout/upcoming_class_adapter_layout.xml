@@ -98,7 +98,7 @@
                             android:text="200 AED\nOnwards"
                             android:id="@+id/price"
                             android:gravity="end"
-                            android:fontFamily="@font/clashdisplay_medium"
+                            android:fontFamily="@font/clash_display_medium"
                             android:textColor="@color/txt_clr_1"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>

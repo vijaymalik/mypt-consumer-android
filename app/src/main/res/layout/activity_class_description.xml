@@ -104,7 +104,7 @@
                         android:textSize="22sp"
                         android:textStyle="bold"
                         android:id="@+id/userName"
-                        android:fontFamily="@font/clashdisplay_medium"
+                        android:fontFamily="@font/clash_display_medium"
                         android:text="Zumba Classes"
                         />
 
@@ -250,7 +250,7 @@
                     android:textSize="16sp"
                     android:id="@+id/trainer_name"
                     android:layout_marginLeft="10dp"
-                    android:fontFamily="@font/clashdisplay_medium"
+                    android:fontFamily="@font/clash_display_medium"
                     android:text="Chrstene De Koning"
                     />
                 <ImageView
@@ -319,7 +319,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/tvSession"
-                        android:fontFamily="@font/clashdisplay_medium"
+                        android:fontFamily="@font/clash_display_medium"
                         android:textColor="@color/subheadingcolor"
                         android:textSize="30sp"/>
                     <TextView
@@ -349,7 +349,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/avgRating"
-                        android:fontFamily="@font/clashdisplay_medium"
+                        android:fontFamily="@font/clash_display_medium"
                         android:textColor="@color/subheadingcolor"
                         android:textSize="30sp"/>
                     <TextView
@@ -379,7 +379,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/clientsCoached"
-                        android:fontFamily="@font/clashdisplay_medium"
+                        android:fontFamily="@font/clash_display_medium"
                         android:textColor="@color/subheadingcolor"
                         android:textSize="30sp"/>
                     <TextView
@@ -448,7 +448,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/certificationTv1"
-                            android:fontFamily="@font/clashdisplay_medium"
+                            android:fontFamily="@font/clash_display_medium"
                             android:textColor="@color/subheadingcolor"
                             android:textSize="30sp"/>
 
@@ -476,7 +476,7 @@
                             android:text="2&amp;3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/clashdisplay_medium"
+                            android:fontFamily="@font/clash_display_medium"
                             android:textColor="@color/subheadingcolor"
                             android:textSize="30sp"/>
                         <TextView
@@ -502,7 +502,7 @@
                             android:text="3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/clashdisplay_medium"
+                            android:fontFamily="@font/clash_display_medium"
                             android:textColor="@color/subheadingcolor"
                             android:textSize="30sp"/>
                         <TextView
@@ -610,7 +610,7 @@
                     android:layout_width="match_parent"
                     android:id="@+id/tvQuote"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/clashdisplay_medium"
+                    android:fontFamily="@font/clash_display_medium"
                     android:textColor="@color/subheadingcolor"
                     android:textSize="24sp"/>
 
@@ -619,7 +619,7 @@
                     android:layout_marginHorizontal="10dp"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:fontFamily="@font/clashdisplay_medium"
+                    android:fontFamily="@font/clash_display_medium"
                     android:textColor="@color/subheadingcolor"
                     android:text="-Theodore Roosevelt"
                     android:visibility="gone"
@@ -672,7 +672,7 @@
             android:textSize="14sp"
             android:textStyle="bold"
             android:id="@+id/trainerName_1"
-            android:fontFamily="@font/clashdisplay_medium"
+            android:fontFamily="@font/clash_display_medium"
             android:text="Zumba Classes"
             />
 

@@ -173,14 +173,14 @@
                 android:textSize="25sp"
                 android:textStyle="bold"
                 android:gravity="center_vertical"
-                android:fontFamily="@font/clashdisplay_medium"
+                android:fontFamily="@font/clash_display_medium"
                 android:text="“ Believe you can and\nyou're halfway there ”"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
-                android:fontFamily="@font/clashdisplay_medium"
+                android:fontFamily="@font/clash_display_medium"
                 android:textColor="@color/edittextbordercolor"
                 android:text="-Theodore Roosevelt"
                 android:layout_gravity="center_horizontal"

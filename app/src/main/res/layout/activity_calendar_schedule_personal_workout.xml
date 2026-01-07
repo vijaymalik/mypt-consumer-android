@@ -237,7 +237,7 @@
                             android:maxLines="1"
                             android:ellipsize="end"
                             android:id="@+id/tvTime"
-                            android:fontFamily="@font/clashdisplay_medium"
+                            android:fontFamily="@font/clash_display_medium"
                             android:text="0s"
                             />
                         <TextView
@@ -280,7 +280,7 @@
                             android:maxLines="1"
                             android:ellipsize="end"
                             android:id="@+id/tvCalories"
-                            android:fontFamily="@font/clashdisplay_medium"
+                            android:fontFamily="@font/clash_display_medium"
                             android:text="0"
                             />
                         <TextView
@@ -323,7 +323,7 @@
                             android:maxLines="1"
                             android:ellipsize="end"
                             android:id="@+id/tvExercises"
-                            android:fontFamily="@font/clashdisplay_medium"
+                            android:fontFamily="@font/clash_display_medium"
                             android:text="0"
                             />
                         <TextView

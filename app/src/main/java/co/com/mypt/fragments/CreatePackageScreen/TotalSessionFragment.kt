@@ -136,7 +136,7 @@ class TotalSessionFragment(
             val textView = TextView(context)
             textView.textSize = 40f
             textView.setTextColor(resources.getColor(R.color.headingcolor))
-            textView.setTypeface(ResourcesCompat.getFont(requireActivity(), R.font.clashdisplay_medium))
+            textView.setTypeface(ResourcesCompat.getFont(requireActivity(), R.font.clash_display_medium))
             textView.gravity = Gravity.CENTER
             textView
         }

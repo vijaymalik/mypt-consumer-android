@@ -81,7 +81,7 @@
                         android:textSize="25sp"
                         android:textStyle="bold"
                         android:textColor="@color/white"
-                        android:fontFamily="@font/clashdisplay_medium"
+                        android:fontFamily="@font/clash_display_medium"
                         android:text="Strength Challenge"
                         />
                 </LinearLayout>
@@ -151,7 +151,7 @@
                                     android:textStyle="bold"
                                     android:textColor="@color/white"
                                     android:id="@+id/completedPercentage"
-                                    android:fontFamily="@font/clashdisplay_medium"
+                                    android:fontFamily="@font/clash_display_medium"
                                     android:text="75 %"
                                     />
                                 <TextView

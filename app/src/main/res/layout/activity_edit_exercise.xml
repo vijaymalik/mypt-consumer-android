@@ -128,7 +128,7 @@
                                     android:textColor="@color/white"
                                     android:textSize="20sp"
                                     android:id="@+id/tvTime"
-                                    android:fontFamily="@font/clashdisplay_medium"
+                                    android:fontFamily="@font/clash_display_medium"
                                     android:text="60s"
                                     />
                                 <TextView
@@ -218,7 +218,7 @@
                                     android:textColor="@color/white"
                                     android:textSize="20sp"
                                     android:id="@+id/tvCalories"
-                                    android:fontFamily="@font/clashdisplay_medium"
+                                    android:fontFamily="@font/clash_display_medium"
                                     android:text="326"
                                     />
                                 <TextView

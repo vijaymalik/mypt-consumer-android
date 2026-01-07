@@ -44,7 +44,7 @@
                 android:textColor="@color/headingcolor"
                 android:textSize="32sp"
                 android:gravity="center"
-                android:fontFamily="@font/clashdisplay_medium"
+                android:fontFamily="@font/clash_display_medium"
                 android:text="@string/choose_your_preferred_trainer"
                 />
             <TextView

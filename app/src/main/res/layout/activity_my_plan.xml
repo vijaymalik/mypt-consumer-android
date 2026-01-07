@@ -258,7 +258,7 @@
                         android:textStyle="bold"
                         android:layout_marginTop="15dp"
                         android:layout_marginHorizontal="15dp"
-                        android:fontFamily="@font/clashdisplay_medium"
+                        android:fontFamily="@font/clash_display_medium"
                         android:text="32/50 sessions"
                         />
                     <ProgressBar
@@ -299,7 +299,7 @@
                         android:id="@+id/tvDays"
                         android:layout_marginTop="15dp"
                         android:layout_marginRight="15dp"
-                        android:fontFamily="@font/clashdisplay_medium"
+                        android:fontFamily="@font/clash_display_medium"
                         android:text="32/50 Days"
                         />
                     <ProgressBar

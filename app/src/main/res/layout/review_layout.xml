@@ -59,7 +59,7 @@
             android:id="@+id/tvDetail"
             android:minLines="4"
             android:ellipsize="end"
-            android:fontFamily="@font/clashdisplay_medium"
+            android:fontFamily="@font/clash_display_medium"
             android:textColor="@color/subheadingcolor"
             android:textSize="20sp"/>
         <LinearLayout

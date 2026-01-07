@@ -76,7 +76,7 @@
         android:id="@+id/tvMyPTScore"
         android:gravity="center"
         android:layout_above="@+id/tvScore"
-        android:fontFamily="@font/clashdisplay_medium"
+        android:fontFamily="@font/clash_display_medium"
         android:text="@string/mypt_score"/>
     <TextView
         android:layout_width="match_parent"
@@ -90,7 +90,7 @@
         android:gravity="center"
         android:id="@+id/tvScore"
         android:layout_above="@+id/tvgymtext"
-        android:fontFamily="@font/clashdisplay_medium"
+        android:fontFamily="@font/clash_display_medium"
         android:text="89"/>
     <TextView
         android:layout_width="match_parent"

@@ -103,7 +103,7 @@ class RenewHomeGymValidityActivity : AppCompatActivity() {
             val textView = TextView(this)
             textView.textSize = 40f
             textView.setTextColor(resources.getColor(R.color.headingcolor))
-            textView.setTypeface(ResourcesCompat.getFont(this, R.font.clashdisplay_medium))
+            textView.setTypeface(ResourcesCompat.getFont(this, R.font.clash_display_medium))
             textView.gravity = Gravity.CENTER
             textView
         }

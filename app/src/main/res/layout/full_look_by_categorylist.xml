@@ -50,7 +50,7 @@
                     android:text="Zumba"
                     android:textSize="20sp"
                     android:id="@+id/tvname"
-                    android:fontFamily="@font/clashdisplay_medium"
+                    android:fontFamily="@font/clash_display_medium"
                     android:textColor="@android:color/white"
                     android:textStyle="bold"/>
 

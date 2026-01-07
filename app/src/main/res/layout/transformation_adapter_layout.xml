@@ -167,7 +167,7 @@
                         android:textColor="@color/headingcolor"
                         android:textSize="12sp"
                         android:textStyle="bold"
-                        android:fontFamily="@font/clashdisplay_medium"
+                        android:fontFamily="@font/clash_display_medium"
                         android:text="@string/before"
                         />
                     <View
@@ -183,7 +183,7 @@
                         android:textColor="@color/headingcolor"
                         android:textSize="12sp"
                         android:textStyle="bold"
-                        android:fontFamily="@font/clashdisplay_medium"
+                        android:fontFamily="@font/clash_display_medium"
                         android:text="@string/after"
                         />
                 </LinearLayout>
@@ -226,7 +226,7 @@
                         android:layout_marginTop="10dp"
                         android:textColor="@color/white"
                         android:text="— Aisha Khan, 32"
-                        android:fontFamily="@font/clashdisplay_medium"
+                        android:fontFamily="@font/clash_display_medium"
                         android:textSize="14sp"
                         android:id="@+id/userName"
                         android:layout_width="wrap_content"

@@ -293,7 +293,7 @@
                             android:id="@+id/tvDuration"
                             android:layout_marginTop="15dp"
                             android:layout_marginHorizontal="15dp"
-                            android:fontFamily="@font/clashdisplay_medium"
+                            android:fontFamily="@font/clash_display_medium"
                             android:text="22"
                             />
                         <TextView
@@ -353,7 +353,7 @@
                             android:id="@+id/tvCalories"
                             android:layout_marginTop="15dp"
                             android:layout_marginHorizontal="15dp"
-                            android:fontFamily="@font/clashdisplay_medium"
+                            android:fontFamily="@font/clash_display_medium"
                             android:text="225"
                             />
                         <TextView
@@ -421,7 +421,7 @@
                             android:id="@+id/tvExercise"
                             android:layout_marginTop="15dp"
                             android:layout_marginHorizontal="15dp"
-                            android:fontFamily="@font/clashdisplay_medium"
+                            android:fontFamily="@font/clash_display_medium"
                             android:text="225"
                             />
                         <TextView
@@ -522,7 +522,7 @@
                 android:layout_gravity="center_horizontal"
                 android:textSize="25sp"
                 android:gravity="center_vertical"
-                android:fontFamily="@font/clashdisplay_medium"
+                android:fontFamily="@font/clash_display_medium"
                 android:text="“ Believe you can and\nyou're halfway there ”"
                 />
             <TextView

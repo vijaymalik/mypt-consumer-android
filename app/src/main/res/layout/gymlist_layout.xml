@@ -55,7 +55,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:id="@+id/userName"
-                android:fontFamily="@font/clashdisplay_medium"
+                android:fontFamily="@font/clash_display_medium"
                 android:text="MyPT Studio Dubai"
                 />
             <LinearLayout

@@ -130,7 +130,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="@font/clashdisplay_medium"
+                                    android:fontFamily="@font/clash_display_medium"
                                     android:text="60s"
                                     android:id="@+id/tvDuration"
                                     android:textColor="@color/white"
@@ -174,7 +174,7 @@
                                     android:id="@+id/txt_calorie"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="@font/clashdisplay_medium"
+                                    android:fontFamily="@font/clash_display_medium"
                                     android:text="60s"
                                     android:textColor="@color/white"
                                     android:textSize="20sp" />
@@ -211,7 +211,7 @@
                                 android:id="@+id/tvDurationCircuit"
                                 android:layout_marginTop="15dp"
                                 android:layout_marginHorizontal="15dp"
-                                android:fontFamily="@font/clashdisplay_medium"
+                                android:fontFamily="@font/clash_display_medium"
                                 />
                             <TextView
                                 android:layout_width="match_parent"
@@ -280,7 +280,7 @@
                                 android:id="@+id/tvCaloriesCircuit"
                                 android:layout_marginTop="15dp"
                                 android:layout_marginHorizontal="15dp"
-                                android:fontFamily="@font/clashdisplay_medium"
+                                android:fontFamily="@font/clash_display_medium"
                                 />
                             <TextView
                                 android:layout_width="match_parent"

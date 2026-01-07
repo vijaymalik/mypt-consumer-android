@@ -49,7 +49,7 @@
                     android:textColor="@color/home_frag_blk"
                     android:textSize="18sp"
                     android:id="@+id/tvPackage"
-                    android:fontFamily="@font/clashdisplay_medium"
+                    android:fontFamily="@font/clash_display_medium"
                     android:text="12 months, Elite Gym Membership"
                     />
                 <LinearLayout
@@ -79,7 +79,7 @@
                             android:textColor="@color/buttontextcolor"
                             android:textSize="32dp"
                             android:id="@+id/tvStartDate"
-                            android:fontFamily="@font/clashdisplay_medium"
+                            android:fontFamily="@font/clash_display_medium"
                             android:text="06/24"
                             />
                     </LinearLayout>
@@ -106,7 +106,7 @@
                             android:textColor="@color/buttontextcolor"
                             android:textSize="32dp"
                             android:id="@+id/tvValid"
-                            android:fontFamily="@font/clashdisplay_medium"
+                            android:fontFamily="@font/clash_display_medium"
                             android:text="06/24"
                             />
                     </LinearLayout>
@@ -156,7 +156,7 @@
                                 android:textColor="@color/home_frag_blk"
                                 android:textSize="18dp"
                                 android:id="@+id/tvTrainerDetail"
-                                android:fontFamily="@font/clashdisplay_medium"
+                                android:fontFamily="@font/clash_display_medium"
                                 android:text="@string/trainer_details" />
                             <ImageView
                                 android:layout_width="16dp"

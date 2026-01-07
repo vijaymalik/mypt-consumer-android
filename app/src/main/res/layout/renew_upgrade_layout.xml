@@ -61,7 +61,7 @@
                 android:id="@+id/tvSubscription"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center"
-                android:fontFamily="@font/clashdisplay_medium"
+                android:fontFamily="@font/clash_display_medium"
                 android:text="@string/subscription_ending_in_30_days"
                 />
             <LinearLayout
@@ -93,7 +93,7 @@
                         android:id="@+id/tvValidity"
                         android:textSize="20sp"
                         android:layout_gravity="center"
-                        android:fontFamily="@font/clashdisplay_medium"
+                        android:fontFamily="@font/clash_display_medium"
                         android:text=""
                         />
                 </LinearLayout>
@@ -121,7 +121,7 @@
                         android:layout_marginTop="10dp"
                         android:textSize="20sp"
                         android:layout_gravity="center"
-                        android:fontFamily="@font/clashdisplay_medium"
+                        android:fontFamily="@font/clash_display_medium"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -150,7 +150,7 @@
                         android:maxLines="1"
                         android:textSize="20sp"
                         android:layout_marginTop="10dp"
-                        android:fontFamily="@font/clashdisplay_medium"
+                        android:fontFamily="@font/clash_display_medium"
                         />
                 </LinearLayout>
 

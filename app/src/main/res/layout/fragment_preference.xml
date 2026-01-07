@@ -23,7 +23,7 @@
             android:layout_marginHorizontal="10dp"
             android:gravity="center"
             android:layout_marginRight="10dp"
-            android:fontFamily="@font/clashdisplay_medium"
+            android:fontFamily="@font/clash_display_medium"
             android:text="@string/how_do_you_prefer_n_working_out"/>
 
 

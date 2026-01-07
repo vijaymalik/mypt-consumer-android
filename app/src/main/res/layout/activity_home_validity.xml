@@ -70,7 +70,7 @@
                     android:layout_marginHorizontal="10dp"
                     android:gravity="center"
                     android:layout_marginRight="10dp"
-                    android:fontFamily="@font/clashdisplay_medium"
+                    android:fontFamily="@font/clash_display_medium"
                     android:text="@string/validity_of_the_npackage"/>
                 <androidx.core.widget.NestedScrollView
                     android:layout_width="match_parent"
@@ -284,7 +284,7 @@
                                         android:layout_marginLeft="10dp"
                                         android:id="@+id/tvRealPrice"
                                         android:visibility="gone"
-                                        android:fontFamily="@font/clashdisplay_medium"
+                                        android:fontFamily="@font/clash_display_medium"
                                         android:text="300"/>
                                     <TextView
                                         android:layout_width="wrap_content"
@@ -295,7 +295,7 @@
                                         android:visibility="gone"
                                         android:layout_marginLeft="10dp"
                                         android:id="@+id/tvAEDSession"
-                                        android:fontFamily="@font/clashdisplay_medium"
+                                        android:fontFamily="@font/clash_display_medium"
                                         android:text="AED / Session"/>
                                 </LinearLayout>
 

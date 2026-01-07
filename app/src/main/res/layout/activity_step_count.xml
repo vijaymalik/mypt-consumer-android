@@ -102,7 +102,7 @@
                         android:textStyle="bold"
                         android:layout_marginVertical="15dp"
                         android:layout_marginHorizontal="15dp"
-                        android:fontFamily="@font/clashdisplay_medium"
+                        android:fontFamily="@font/clash_display_medium"
                         android:text="Target 3000 Steps"
                         />
 

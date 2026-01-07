@@ -90,7 +90,7 @@
                         android:textColor="@color/white"
                         android:textSize="22sp"
                         android:id="@+id/userName"
-                        android:fontFamily="@font/clashdisplay_medium"
+                        android:fontFamily="@font/clash_display_medium"
                         />
                     <ImageView
                         android:layout_marginHorizontal="5dp"
@@ -336,7 +336,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/totalExp"
-                        android:fontFamily="@font/clashdisplay_medium"
+                        android:fontFamily="@font/clash_display_medium"
                         android:textColor="@color/subheadingcolor"
                         android:textSize="30sp"/>
                     <TextView
@@ -364,7 +364,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/avgRating1"
-                        android:fontFamily="@font/clashdisplay_medium"
+                        android:fontFamily="@font/clash_display_medium"
                         android:textColor="@color/subheadingcolor"
                         android:textSize="30sp"/>
                     <TextView
@@ -393,7 +393,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/clientsCoached"
-                        android:fontFamily="@font/clashdisplay_medium"
+                        android:fontFamily="@font/clash_display_medium"
                         android:textColor="@color/subheadingcolor"
                         android:textSize="30sp"/>
                     <TextView
@@ -532,7 +532,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/tvQuote"
-                    android:fontFamily="@font/clashdisplay_medium"
+                    android:fontFamily="@font/clash_display_medium"
                     android:textColor="@color/subheadingcolor"
                     android:textSize="24sp"/>
 
@@ -542,7 +542,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
                     android:visibility="gone"
-                    android:fontFamily="@font/clashdisplay_medium"
+                    android:fontFamily="@font/clash_display_medium"
                     android:textColor="@color/subheadingcolor"
                     android:text="-Theodore Roosevelt"
                     android:layout_gravity="center_horizontal"
@@ -600,7 +600,7 @@
             android:textSize="14sp"
             android:textStyle="bold"
             android:id="@+id/trainerName_1"
-            android:fontFamily="@font/clashdisplay_medium"
+            android:fontFamily="@font/clash_display_medium"
             android:text="Chrstene De Koning"
             />
 

@@ -40,7 +40,7 @@
         android:gravity="center"
         android:layout_marginHorizontal="10dp"
         android:layout_marginBottom="10dp"
-        android:fontFamily="@font/clashdisplay_medium"
+        android:fontFamily="@font/clash_display_medium"
         android:text="@string/you_are_all_set" />
     <TextView
         android:layout_width="match_parent"

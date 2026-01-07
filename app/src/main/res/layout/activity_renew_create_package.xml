@@ -62,7 +62,7 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="50dp"
-                android:fontFamily="@font/clashdisplay_medium"
+                android:fontFamily="@font/clash_display_medium"
                 android:gravity="center"
                 android:text="@string/where_would_you_like_to_train"
                 android:textColor="@color/headingcolor"

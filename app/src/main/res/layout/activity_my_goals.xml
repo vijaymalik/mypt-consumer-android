@@ -96,7 +96,7 @@
                         android:id="@+id/tvBurnCalori"
                         android:layout_marginVertical="15dp"
                         android:layout_marginHorizontal="15dp"
-                        android:fontFamily="@font/clashdisplay_medium"
+                        android:fontFamily="@font/clash_display_medium"
                         android:text="Burn at least 608 Cal "
                         />
                     <TextView
@@ -256,7 +256,7 @@
                         android:id="@+id/tvCalorieIntake"
                         android:layout_marginVertical="15dp"
                         android:layout_marginHorizontal="15dp"
-                        android:fontFamily="@font/clashdisplay_medium"
+                        android:fontFamily="@font/clash_display_medium"
                         android:text="Eat upto 2200 Cal "
                         />
                     <TextView

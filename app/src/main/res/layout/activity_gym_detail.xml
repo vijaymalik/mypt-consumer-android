@@ -56,7 +56,7 @@
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/clashdisplay_medium"
+                            android:fontFamily="@font/clash_display_medium"
                             android:text="MyPT Studio Dubai"
                             android:textColor="@color/white"
                             android:textSize="22sp"
@@ -557,7 +557,7 @@
             android:textSize="14sp"
             android:textStyle="bold"
             android:id="@+id/trainerName_1"
-            android:fontFamily="@font/clashdisplay_medium"
+            android:fontFamily="@font/clash_display_medium"
             android:text="MyPT Studio Dubai"
             />
 

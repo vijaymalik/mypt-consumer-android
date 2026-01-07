@@ -97,7 +97,7 @@ class GymTotalMonthFragment(var studio_id: kotlin.String?) : Fragment() {
             val textView = TextView(context)
             textView.textSize = 50f
             textView.setTextColor(resources.getColor(R.color.headingcolor))
-            textView.setTypeface(ResourcesCompat.getFont(requireActivity(), R.font.clashdisplay_medium))
+            textView.setTypeface(ResourcesCompat.getFont(requireActivity(), R.font.clash_display_medium))
             textView.gravity = Gravity.CENTER
             textView
         }

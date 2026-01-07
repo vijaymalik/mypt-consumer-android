@@ -83,7 +83,7 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/headingcolor"
                             android:textSize="44sp"
-                            android:fontFamily="@font/clashdisplay_medium"
+                            android:fontFamily="@font/clash_display_medium"
                             />
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -136,7 +136,7 @@
                             android:textColor="@color/white"
                             android:textSize="44dp"
 
-                            android:fontFamily="@font/clashdisplay_medium"
+                            android:fontFamily="@font/clash_display_medium"
                             />
                         <TextView
                             android:id="@+id/tvMaxWaterLevel"
@@ -144,7 +144,7 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
                             android:textSize="20sp"
-                            android:fontFamily="@font/clashdisplay_medium"
+                            android:fontFamily="@font/clash_display_medium"
                             />
                     </LinearLayout>
                 </LinearLayout>

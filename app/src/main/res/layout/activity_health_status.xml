@@ -238,7 +238,7 @@
                                         android:textSize="20sp"
                                         android:textStyle="bold"
                                         android:textAllCaps="true"
-                                        android:fontFamily="@font/clashdisplay_medium"
+                                        android:fontFamily="@font/clash_display_medium"
                                         android:text="148"
                                         android:id="@+id/tvcholestrol"
                                         />
@@ -249,7 +249,7 @@
                                         android:textSize="12sp"
                                         android:textStyle="bold"
                                         android:layout_marginLeft="3dp"
-                                        android:fontFamily="@font/clashdisplay_light"
+                                        android:fontFamily="@font/clash_display_light"
                                         android:text="mg/dL"
                                         />
                                 </LinearLayout>
@@ -263,7 +263,7 @@
                                     android:textStyle="bold"
                                     android:visibility="gone"
                                     android:textAllCaps="true"
-                                    android:fontFamily="@font/clashdisplay_medium"
+                                    android:fontFamily="@font/clash_display_medium"
                                     android:text="NA"
                                     android:id="@+id/tvNA1"
                                     />
@@ -373,7 +373,7 @@
                                         android:textSize="20sp"
                                         android:textStyle="bold"
                                         android:textAllCaps="true"
-                                        android:fontFamily="@font/clashdisplay_medium"
+                                        android:fontFamily="@font/clash_display_medium"
                                         android:text="548"
                                         android:id="@+id/tvHDLvalue"
                                         />
@@ -386,7 +386,7 @@
                                         android:textStyle="bold"
                                         android:layout_marginLeft="3dp"
                                         android:id="@+id/intakeBurnCalories"
-                                        android:fontFamily="@font/clashdisplay_light"
+                                        android:fontFamily="@font/clash_display_light"
                                         android:text="mg/dL"
                                         />
                                 </LinearLayout>
@@ -399,7 +399,7 @@
                                     android:visibility="gone"
                                     android:textStyle="bold"
                                     android:textAllCaps="true"
-                                    android:fontFamily="@font/clashdisplay_medium"
+                                    android:fontFamily="@font/clash_display_medium"
                                     android:text="NA"
                                     android:id="@+id/tvNA2"
                                     />
@@ -485,7 +485,7 @@
                         android:paddingVertical="16dp"
                         android:paddingHorizontal="15dp"
                         android:id="@+id/tvLooseWeight"
-                        android:fontFamily="@font/clashdisplay_medium"
+                        android:fontFamily="@font/clash_display_medium"
                         android:text=""
                         />
                     <LinearLayout
@@ -574,14 +574,14 @@
                         android:textSize="25sp"
                         android:textStyle="bold"
                         android:gravity="center_vertical"
-                        android:fontFamily="@font/clashdisplay_medium"
+                        android:fontFamily="@font/clash_display_medium"
                         android:text="“ Believe you can and\nyou're halfway there ”"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="12sp"
-                        android:fontFamily="@font/clashdisplay_medium"
+                        android:fontFamily="@font/clash_display_medium"
                         android:textColor="@color/edittextbordercolor"
                         android:text="-Theodore Roosevelt"
                         android:layout_gravity="center_horizontal"
@@ -668,7 +668,7 @@
                                 android:id="@+id/tvActivities"
                                 android:layout_marginTop="15dp"
                                 android:layout_marginHorizontal="15dp"
-                                android:fontFamily="@font/clashdisplay_medium"
+                                android:fontFamily="@font/clash_display_medium"
                                 android:text="225"
                                 />
                             <TextView
@@ -727,7 +727,7 @@
                                 android:id="@+id/tvCalories"
                                 android:layout_marginTop="15dp"
                                 android:layout_marginHorizontal="15dp"
-                                android:fontFamily="@font/clashdisplay_medium"
+                                android:fontFamily="@font/clash_display_medium"
                                 android:text="225"
                                 />
                             <TextView
@@ -786,7 +786,7 @@
                                 android:id="@+id/tvExercise"
                                 android:layout_marginTop="15dp"
                                 android:layout_marginHorizontal="15dp"
-                                android:fontFamily="@font/clashdisplay_medium"
+                                android:fontFamily="@font/clash_display_medium"
                                 android:text="225"
                                 />
                             <TextView
@@ -874,7 +874,7 @@
                                 android:layout_marginHorizontal="15dp"
                                 android:textStyle="bold"
                                 android:id="@+id/tvStatsHeight"
-                                android:fontFamily="@font/clashdisplay_medium"
+                                android:fontFamily="@font/clash_display_medium"
                                 android:text="5ft 7in"
                                 />
                         </LinearLayout>
@@ -904,7 +904,7 @@
                                 android:layout_marginHorizontal="15dp"
                                 android:textStyle="bold"
                                 android:id="@+id/tvstatsWeight"
-                                android:fontFamily="@font/clashdisplay_medium"
+                                android:fontFamily="@font/clash_display_medium"
                                 android:text="58kg"
                                 />
                         </LinearLayout>
@@ -968,7 +968,7 @@
                             android:textStyle="bold"
 
                             android:id="@+id/tvBodyMass"
-                            android:fontFamily="@font/clashdisplay_medium"
+                            android:fontFamily="@font/clash_display_medium"
                             android:text="17.3"
                             />
                     </LinearLayout>
@@ -1007,7 +1007,7 @@
                             android:textSize="48sp"
                             android:layout_marginHorizontal="15dp"
                             android:id="@+id/tvBodyMassNA"
-                            android:fontFamily="@font/clashdisplay_medium"
+                            android:fontFamily="@font/clash_display_medium"
                             android:text="NA"
                             />
                         <TextView
@@ -1075,7 +1075,7 @@
                             android:layout_marginHorizontal="15dp"
                             android:textStyle="bold"
                             android:id="@+id/tvBodyFat"
-                            android:fontFamily="@font/clashdisplay_medium"
+                            android:fontFamily="@font/clash_display_medium"
                             android:text="17.3%"
                             />
                         <androidx.cardview.widget.CardView
@@ -1335,7 +1335,7 @@
                             android:textSize="48sp"
                             android:layout_marginHorizontal="15dp"
                             android:id="@+id/tvBodyFatNA"
-                            android:fontFamily="@font/clashdisplay_medium"
+                            android:fontFamily="@font/clash_display_medium"
                             android:text="NA"
                             />
                         <TextView
@@ -1403,7 +1403,7 @@
                             android:layout_marginHorizontal="15dp"
                             android:textStyle="bold"
                             android:id="@+id/tvWaistValue"
-                            android:fontFamily="@font/clashdisplay_medium"
+                            android:fontFamily="@font/clash_display_medium"
                             android:text="17.3"
                             />
                         <androidx.cardview.widget.CardView
@@ -1514,7 +1514,7 @@
                             android:textSize="48sp"
                             android:layout_marginHorizontal="15dp"
                             android:id="@+id/tvWaistNA"
-                            android:fontFamily="@font/clashdisplay_medium"
+                            android:fontFamily="@font/clash_display_medium"
                             android:text="NA"
                             />
                         <TextView
@@ -1722,7 +1722,7 @@
                             android:textSize="48sp"
                             android:layout_marginHorizontal="15dp"
                             android:id="@+id/tvCardioNA"
-                            android:fontFamily="@font/clashdisplay_medium"
+                            android:fontFamily="@font/clash_display_medium"
                             android:text="NA"
                             />
                         <TextView
@@ -1757,14 +1757,14 @@
                         android:textSize="25sp"
                         android:textStyle="bold"
                         android:gravity="center_vertical"
-                        android:fontFamily="@font/clashdisplay_medium"
+                        android:fontFamily="@font/clash_display_medium"
                         android:text="“ Believe you can and\nyou're halfway there ”"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="12sp"
-                        android:fontFamily="@font/clashdisplay_medium"
+                        android:fontFamily="@font/clash_display_medium"
                         android:textColor="@color/edittextbordercolor"
                         android:text="-Theodore Roosevelt"
                         android:layout_gravity="center_horizontal"
@@ -1810,7 +1810,7 @@
                     android:gravity="center"
                     android:id="@+id/tv"
                     android:layout_below="@id/im"
-                    android:fontFamily="@font/clashdisplay_medium"
+                    android:fontFamily="@font/clash_display_medium"
                     android:text="@string/locked_for_now"
                     />
                 <TextView

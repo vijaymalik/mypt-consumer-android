@@ -54,7 +54,7 @@ class ProgressBarActivity : AppCompatActivity() {
             val textView = TextView(this)
             textView.textSize = 18f
             textView.setTextColor(resources.getColor(R.color.headingcolor,null))
-            textView.setTypeface(ResourcesCompat.getFont(this, R.font.clashdisplay_medium))
+            textView.setTypeface(ResourcesCompat.getFont(this, R.font.clash_display_medium))
             textView.gravity = Gravity.CENTER
             textView
         }

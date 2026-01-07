@@ -203,7 +203,7 @@
                     android:textColor="@color/headingcolor"
                     android:textSize="24sp"
                     android:id="@+id/tvNodata"
-                    android:fontFamily="@font/clashdisplay_medium"
+                    android:fontFamily="@font/clash_display_medium"
                     android:text="@string/no_slots_found"
                     />
             </LinearLayout>

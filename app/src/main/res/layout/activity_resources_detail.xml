@@ -58,7 +58,7 @@
                 android:id="@+id/tvTitlle"
                 android:layout_alignParentBottom="true"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/clashdisplay_medium"
+                android:fontFamily="@font/clash_display_medium"
                 android:textColor="@color/headingcolor"
                 android:textSize="20sp" />
 
