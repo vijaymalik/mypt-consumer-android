@@ -713,4 +713,5 @@
     <string name="fine_tune">Just fine-tuning your training setup</string>
     <string name="weight_msg">Swipe left or right to adjust your weight</string>
     <string name="height_msg">Swipe up or down to adjust your height</string>
+    <string name="gender_msg">This helps us match you better with a trainer</string>
 </resources>

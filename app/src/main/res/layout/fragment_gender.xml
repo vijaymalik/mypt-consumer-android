@@ -17,9 +17,7 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginHorizontal="36dp"
+            android:layout_marginHorizontal="6dp"
             android:layout_marginTop="46dp"
             android:fontFamily="@font/clash_display_medium"
             android:gravity="center"
@@ -37,18 +35,18 @@
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-        <TextView
-            android:id="@+id/hint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="20dp"
-            android:fontFamily="@font/funnel_sans_semibold"
-            android:gravity="center"
-            android:lineHeight="18sp"
-            android:text="This helps us match you better with a trainer"
-            android:textColor="@color/bg_color_primary_white_55"
-            android:textSize="14sp" />
     </LinearLayout>
+    <TextView
+        android:id="@+id/bottomTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/funnel_sans_semibold"
+        android:gravity="center"
+        android:text="@string/gender_msg"
+        android:textColor="@color/smallTextcolor"
+        android:textSize="14sp"
+        android:layout_alignParentBottom="true" />
+
 </RelativeLayout>

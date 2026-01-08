@@ -185,7 +185,7 @@ class HeightFragment : Fragment() {
                     parentLayout?.let { parent ->
                         val params = parent.layoutParams as? ViewGroup.MarginLayoutParams
                         params?.let {
-                            it.bottomMargin = 100
+                            it.bottomMargin = 150
                             parent.layoutParams = it
                         }
                     }
