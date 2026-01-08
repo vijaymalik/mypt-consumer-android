@@ -710,4 +710,5 @@
     <string name="label_lets_get_started">CONTINUE</string>
     <string name="error_text_invalid_otp">Invalid OTP. Please enter again!</string>
     <string name="login_number">Let’s get started</string>
+    <string name="fine_tune">Just fine-tuning your training setup</string>
 </resources>

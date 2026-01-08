@@ -30,6 +30,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
+            android:visibility="gone"
             android:paddingHorizontal="20dp"
             android:paddingTop="6dp"
             android:paddingBottom="2dp">
@@ -64,6 +65,7 @@
                 android:layout_centerInParent="true"
                 android:indeterminate="false"
                 android:max="100"
+                android:visibility="gone"
                 android:progress="20"
                 android:progressTint="@color/progress_clr_1"
                 app:indicatorColor="@color/progress_color"
@@ -126,14 +128,19 @@
         android:id="@+id/almostDoneLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_centerInParent="true"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
             android:orientation="vertical">
 
+            <pl.droidsonroids.gif.GifImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/gif_load" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -144,7 +151,7 @@
                 android:gravity="center"
                 android:text="@string/almost_done"
                 android:textColor="@color/headingcolor"
-                android:textSize="30sp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -153,18 +160,14 @@
                 android:layout_marginRight="10dp"
                 android:fontFamily="@font/manrope_medium"
                 android:gravity="center"
-                android:text="@string/before_we_get_started_on_your_fitness_journey_help_us_get_to_know_you_better"
+                android:text="@string/fine_tune"
                 android:textColor="@color/smallTextcolor"
                 android:textSize="16sp" />
 
 
         </LinearLayout>
 
-        <pl.droidsonroids.gif.GifImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@drawable/gif_load" />
+
     </RelativeLayout>
 
 </RelativeLayout>
