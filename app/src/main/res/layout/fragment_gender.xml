@@ -20,12 +20,12 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginHorizontal="36dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="46dp"
             android:fontFamily="@font/clash_display_medium"
             android:gravity="center"
             android:text="@string/which_gender_do_you_n_identify_as"
             android:textColor="@color/headingcolor"
-            android:textSize="28sp" />
+            android:textSize="32sp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
@@ -33,7 +33,7 @@
             android:layout_height="450dp"
             android:layout_above="@+id/hint"
             android:layout_below="@id/title"
-            android:layout_marginVertical="22dp"
+            android:layout_marginVertical="32dp"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
@@ -43,8 +43,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center_horizontal"
-            android:fontFamily="@font/clash_display_medium"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/funnel_sans_semibold"
             android:gravity="center"
+            android:lineHeight="18sp"
             android:text="This helps us match you better with a trainer"
             android:textColor="@color/bg_color_primary_white_55"
             android:textSize="14sp" />

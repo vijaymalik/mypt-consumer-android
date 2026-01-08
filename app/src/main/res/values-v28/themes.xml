@@ -5,7 +5,10 @@
         <item name="android:fontFamily">@font/clash_display_bold</item>
         <item name="android:letterSpacing">0</item>
     </style>
-
+    <style name="ClashDisplayMedium">
+        <item name="android:fontFamily">@font/clash_display_medium</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
     <style name="FunnelSansMedium">
         <item name="android:fontFamily">@font/funnel_sans_medium</item>
         <item name="android:letterSpacing">0</item>
@@ -20,6 +23,11 @@
     <style name="Text.ClashDisplay.Bold.38" parent="ClashDisplayBold">
         <item name="android:textSize">38sp</item>
         <item name="android:lineHeight">57sp</item>
+    </style>
+
+    <style name="Text.ClashDisplay.Medium.32" parent="ClashDisplayMedium">
+        <item name="android:textSize">32sp</item>
+        <item name="android:lineHeight">38sp</item>
     </style>
 
     <style name="Text.ClashDisplay.Bold.32" parent="ClashDisplayBold">
