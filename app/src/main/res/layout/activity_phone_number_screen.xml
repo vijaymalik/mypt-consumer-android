@@ -10,8 +10,8 @@
     <co.com.mypt.utils.FullScreenVideoView
         android:id="@+id/idVideoView"
         android:layout_width="match_parent"
-        android:visibility="gone"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
     <View
         android:id="@+id/blurredView"
@@ -145,6 +145,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="20dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -204,7 +205,6 @@
                 android:id="@+id/btnContinue"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_marginTop="32dp"
                 android:layout_marginBottom="2dp"
                 android:drawableEnd="@drawable/ic_arrow_right"
                 android:drawablePadding="8dp"
@@ -229,7 +229,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="45dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -262,8 +262,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:layout_marginBottom="12dp"
+                android:layout_marginTop="22dp"
+                android:layout_marginBottom="17dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
