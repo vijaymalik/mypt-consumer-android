@@ -177,18 +177,20 @@ class HeightFragment : Fragment() {
             ViewCompat.setOnApplyWindowInsetsListener(requireView()) { _, insets ->
                 if (insets.isVisible(WindowInsetsCompat.Type.ime())) {
                     //setLinearLayoutEnd(heightTextView, R.id.scalerView)
+                    enableEditText(txtValue, requireContext())
                     setHeightTextEndTo(heightTextView, false)
                     scalerView.visibility= View.GONE
                     verticalGlow.visibility= View.GONE
                     val parentLayout = txtValue.parent as? View
-                    /*parentLayout?.let { parent ->
+                    parentLayout?.let { parent ->
                         val params = parent.layoutParams as? ViewGroup.MarginLayoutParams
                         params?.let {
                             it.bottomMargin = 100
                             parent.layoutParams = it
                         }
-                    }*/
+                    }
                 } else {
+                    disableEditText(txtValue, requireContext())
                     setHeightTextEndTo(heightTextView, true)
                     scalerView.visibility= View.VISIBLE
                     verticalGlow.visibility= View.VISIBLE

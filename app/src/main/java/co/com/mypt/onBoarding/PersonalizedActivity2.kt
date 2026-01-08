@@ -86,7 +86,6 @@ class PersonalizedActivity2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personalized2)
-
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         // window.statusBarColor = android.graphics.Color.TRANSPARENT
         window.setFlags(

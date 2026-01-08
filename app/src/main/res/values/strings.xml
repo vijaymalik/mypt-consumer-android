@@ -711,4 +711,6 @@
     <string name="error_text_invalid_otp">Invalid OTP. Please enter again!</string>
     <string name="login_number">Let’s get started</string>
     <string name="fine_tune">Just fine-tuning your training setup</string>
+    <string name="weight_msg">Swipe left or right to adjust your weight</string>
+    <string name="height_msg">Swipe up or down to adjust your height</string>
 </resources>

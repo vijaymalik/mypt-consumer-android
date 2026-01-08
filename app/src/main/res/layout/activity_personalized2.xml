@@ -140,7 +140,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/gif_load" />
+                android:src="@drawable/cosmos" />
 
             <TextView
                 android:layout_width="match_parent"

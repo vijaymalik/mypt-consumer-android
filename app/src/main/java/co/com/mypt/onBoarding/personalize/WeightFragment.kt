@@ -1,6 +1,8 @@
 package co.com.mypt.onBoarding.personalize
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -73,6 +75,28 @@ class WeightFragment : Fragment(), ScaleSliderLayoutManager.MovementListener {
             repo.setUnitToLbs()  // Set unit to lbs
             updateWeightLabels()  // Update the labels to lbs
         }
+        weight1.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                val text = s.toString()
+
+                when {
+                    text.isEmpty() -> {
+                        // If user clears everything → restore 0
+                        weight1.setText("0")
+                        weight1.setSelection(1)
+                    }
+
+                    text.length > 1 && text.startsWith("0") && !text.startsWith("0.") -> {
+                        // Remove leading zero when typing
+                        weight1.setText(text.drop(1))
+                        weight1.setSelection(weight1.text.length)
+                    }
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
         /*weightRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(@NonNull rv: RecyclerView, dx: Int, dy: Int) {
                // val lm = rv.getLayoutManager() as LinearLayoutManager?
