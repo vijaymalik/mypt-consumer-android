@@ -57,6 +57,7 @@
             android:textColor="@color/headingcolor" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
             style="@style/EditTextThemeOverlay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,6 +69,9 @@
             app:boxCornerRadiusTopEnd="8dp"
             app:boxCornerRadiusTopStart="8dp"
             app:boxStrokeWidth="0.5dp"
+            app:boxStrokeErrorColor="@color/red"
+            app:errorEnabled="true"
+            app:errorTextColor="@color/red"
             app:hintTextAppearance="@style/HintTextAppearance"
             app:hintTextColor="@color/smallTextcolor">
 
@@ -94,7 +98,7 @@
             android:id="@+id/flBtn"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="24dp"
             android:background="@drawable/bg_shape_btn_disabled">
 

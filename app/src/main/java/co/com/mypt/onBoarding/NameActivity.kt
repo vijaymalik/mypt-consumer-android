@@ -27,6 +27,7 @@ import co.com.mypt.R
 import co.com.mypt.curvedBottomNavigation.dp
 import com.android.volley.VolleyError
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import org.json.JSONObject
 
 class NameActivity : AppCompatActivity() {
@@ -36,6 +37,7 @@ class NameActivity : AppCompatActivity() {
     lateinit var flBtn: FrameLayout
     lateinit var tvcontinue: TextView
     lateinit var linearLayout: LinearLayout
+    lateinit var textInputLayout: TextInputLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +49,7 @@ class NameActivity : AppCompatActivity() {
         flBtn = findViewById(R.id.flBtn)
         tvcontinue = findViewById(R.id.tvcontinue)
         userFirstName = findViewById(R.id.userFirstName)
+        textInputLayout = findViewById(R.id.textInputLayout)
         userFirstName.addTextChangedListener(object : TextWatcher {
             private var currentText = ""
             private var isUpdating = false
@@ -57,6 +60,7 @@ class NameActivity : AppCompatActivity() {
 
             override fun afterTextChanged(s: Editable) {
                 if (s.isNotEmpty()) {
+                    textInputLayout.error =null
                     flBtn.setBackgroundResource(R.drawable.bg_btn_type_1)
                     tvcontinue.setTextColor(application.resources.getColor(R.color.buttontextcolor))
                     tvcontinue.setTextColor(application.resources.getColor(R.color.text_color_primary_black))
@@ -75,7 +79,10 @@ class NameActivity : AppCompatActivity() {
 
         flBtn.setOnClickListener {
             if (userFirstName.text.toString().isNotEmpty()) {
+                textInputLayout.error = null
                 addName()
+            }else{
+                textInputLayout.error = "Full name is required"
             }
         }
 
