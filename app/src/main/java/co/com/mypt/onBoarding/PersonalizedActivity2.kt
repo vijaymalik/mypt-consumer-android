@@ -38,7 +38,6 @@ import co.com.mypt.R
 import co.com.mypt.activities.MainActivity
 import co.com.mypt.adapter.ViewPagerAdapter
 import co.com.mypt.onBoarding.personalize.GenderFragment
-import co.com.mypt.onBoarding.personalize.GetStartedActivity
 import co.com.mypt.onBoarding.personalize.GoalsFragment
 import co.com.mypt.onBoarding.personalize.HeightFragment
 import co.com.mypt.onBoarding.personalize.LocationSelectFragment
@@ -74,7 +73,7 @@ class PersonalizedActivity2 : AppCompatActivity() {
     private var selectedPage = 0
     private var dob = ""
     private var selectedIds = ArrayList<Int>()
-    private  var selectedValue = ""
+    private var selectedValue = ""
     private var apiUrl = ""
     private var tempSelectedValue = ""
     private var tempSelectedHeightValue = ""
@@ -163,7 +162,7 @@ class PersonalizedActivity2 : AppCompatActivity() {
             if (selectedPage > 0) {
                 selectedPage -= 1
                 viewPager.currentItem = selectedPage
-                p_Bar.setProgress(10 * (selectedPage + 2), true)
+                p_Bar.setProgress(15 * (selectedPage+1), true)
             }
             if (selectedPage == 1 || selectedPage == 2 || selectedPage == 3/*|| selectedPage == 6*/) {
                 selectedCount = 1
@@ -199,10 +198,10 @@ class PersonalizedActivity2 : AppCompatActivity() {
         viewDOBModel.data.observe(this) { data ->
             dob = data
         }
-        if (sharedPreferences.getString(Constants.step, "2")!!.toInt() > 1) {
-            selectedPage = sharedPreferences.getString(Constants.step, "4")!!.toInt() - 1
+        if ((sharedPreferences.getString(Constants.step, "2")?.toInt() ?: 0) > 1) {
+            selectedPage = sharedPreferences.getString(Constants.step, "4")!!.toInt() - 3
             viewPager.currentItem = selectedPage
-            p_Bar.setProgress(15 * (selectedPage), true)
+            p_Bar.setProgress(15 * (selectedPage+1), true)
             if (selectedPage == 0 || selectedPage == 4/*|| selectedPage == 5*/) {
                 setButtonUnselected()
             } else {
@@ -220,7 +219,7 @@ class PersonalizedActivity2 : AppCompatActivity() {
             if (selectedPage > 0) {
                 selectedPage -= 1
                 viewPager.currentItem = selectedPage
-                p_Bar.setProgress(15 * (selectedPage), true)
+                p_Bar.setProgress(15 * (selectedPage+1), true)
             }
             if (selectedPage == 1 || selectedPage == 2 || selectedPage == 3/*|| selectedPage == 6*/) {
                 selectedCount = 1
@@ -299,7 +298,7 @@ class PersonalizedActivity2 : AppCompatActivity() {
 
 
                     selectedPage += 1
-                    p_Bar.setProgress(15 * (selectedPage), true)
+                    p_Bar.setProgress(15 * (selectedPage+1), true)
                     viewPager.setCurrentItem(selectedPage, true)
 
                     if (selectedPage == 0) {
@@ -325,7 +324,7 @@ class PersonalizedActivity2 : AppCompatActivity() {
                         viewLocationModel.refreshLocation.value = true
                     }
 
-                    if (selectedPage >=6){
+                    if (selectedPage >= 6) {
                         callToMainActivity()
                         return
                     }
@@ -372,13 +371,14 @@ class PersonalizedActivity2 : AppCompatActivity() {
         })
     }
 
-    private fun callToMainActivity(){
+    private fun callToMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         TaskStackBuilder.create(this).addNextIntentWithParentStack(intent).startActivities()
         finish()
     }
+
     private fun setButtonUnselected() {
         selectedCount = 0
         disableContinueBtn()
@@ -407,9 +407,9 @@ class PersonalizedActivity2 : AppCompatActivity() {
     }
 
     fun disableContinueBtn() {
-        if (selectedPage==0){
+        if (selectedPage == 0) {
             flBtn.setBackgroundColor(ContextCompat.getColor(this, R.color.gender_button))
-        }else{
+        } else {
             flBtn.setBackgroundResource(R.drawable.bg_shape_btn_disabled)
         }
 
