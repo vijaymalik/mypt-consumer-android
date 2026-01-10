@@ -82,5 +82,6 @@
     <color name="login_btn">#4B4F4C</color>
     <color name="name_text_field">#141514</color>
     <color name="gender_button">#4B554F</color>
+    <color name="background_gender">#1E1E1E</color>
 
 </resources>
