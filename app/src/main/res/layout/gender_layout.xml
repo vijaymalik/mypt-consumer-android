@@ -30,8 +30,8 @@
 
         <ImageView
             android:id="@+id/icon"
-            android:layout_width="24dp"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:adjustViewBounds="true"
             android:src="@drawable/im_male" />
 
@@ -43,10 +43,10 @@
             android:layout_marginStart="3dp"
             android:layout_toEndOf="@+id/icon"
             android:fontFamily="@font/funnel_sans_regular"
+            android:lineHeight="24sp"
             android:text="Hello Ashwin"
             android:textColor="@color/text_color_primary_white"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textSize="16sp" />
 
         <ImageView
             android:id="@+id/radioState"
