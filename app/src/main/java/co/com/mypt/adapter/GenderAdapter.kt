@@ -27,6 +27,7 @@ class GenderAdapter(
         val relative: View = itemView.findViewById(R.id.relative)
         val imageView: ImageView = itemView.findViewById(R.id.imageView)
         val icon: ImageView = itemView.findViewById(R.id.icon)
+        val radioState: ImageView = itemView.findViewById(R.id.radioState)
 
     }
 
@@ -38,8 +39,10 @@ class GenderAdapter(
     override fun onBindViewHolder(holder: GenderHolder, position: Int) {
         holder.itemView.tag = position
         if (selectedPositions==position) {
+            holder.radioState.setImageDrawable(holder.itemView.context.getDrawable(R.drawable.radio_select))
             holder.imageView.setImageResource(selectedImageList[position])  // Use selected background
         } else {
+            holder.radioState.setImageDrawable(holder.itemView.context.getDrawable(R.drawable.radio_unselect))
             holder.imageView.setImageResource(imageList[position])  // Use default background
         }
         holder.icon.setImageResource(iconList[position])  // Use default background

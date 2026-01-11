@@ -49,12 +49,12 @@
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/state"
-            android:layout_width="24dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/radioState"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_alignParentEnd="true"
             android:adjustViewBounds="true"
-            android:src="@drawable/im_male" />
+            android:src="@drawable/radio_select" />
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
