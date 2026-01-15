@@ -12,7 +12,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.ProgressBar
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
@@ -47,9 +49,10 @@ class CreatePackagectivity : AppCompatActivity() {
     lateinit var viewPager: ViewPager2
     lateinit var back: ImageView
     lateinit var tvcontinue: TextView
+    lateinit var tvcontinueView: LinearLayout
     lateinit var skip: TextView
     lateinit var p_Bar: ProgressBar
-    lateinit var im:ImageView
+//    lateinit var im:ImageView
     var selectedCount = 0
     var selectedPage = 0
     var selectedOption = 0
@@ -80,8 +83,9 @@ class CreatePackagectivity : AppCompatActivity() {
         back = findViewById(R.id.back)
         skip = findViewById(R.id.skip)
         tvcontinue = findViewById(R.id.tvcontinue)
+        tvcontinueView = findViewById(R.id.tvcontinueView)
         p_Bar = findViewById(R.id.p_Bar)
-        im = findViewById(R.id.im)
+//        im = findViewById(R.id.im)
         viewModel.setstart_dates.observe(this) { data ->
             setstart_dates = data
         }
@@ -135,7 +139,7 @@ class CreatePackagectivity : AppCompatActivity() {
         viewPager.setUserInputEnabled(false)
         //viewPager.setOffscreenPageLimit(0)
 
-        tvcontinue.setOnClickListener {
+        tvcontinueView.setOnClickListener {
             if(selectedCount == 1){
                 if(selectedPage ==3 && (selectedOption == 0 || selectedOption ==1)){
                     var intent=Intent(this,DuringSeesionActivity::class.java)
@@ -199,7 +203,7 @@ class CreatePackagectivity : AppCompatActivity() {
                 if(selectedPage == 0){
                     selectedCount = 1
                     tvcontinue!!.isClickable = true
-                    tvcontinue.background = resources.getDrawable(R.drawable.white_rectangle, null)
+                    tvcontinueView.background = resources.getDrawable(R.drawable.white_rectangle, null)
                     tvcontinue.setTextColor(resources.getColor(R.color.buttontextcolor,null))
                     tvcontinue.setTypeface(null, Typeface.BOLD)
                 }
@@ -213,7 +217,7 @@ class CreatePackagectivity : AppCompatActivity() {
 
             if(selectedPage ==3 || selectedPage == 2|| selectedPage == 1){
                 selectedCount = 1
-                tvcontinue.background = resources.getDrawable(R.drawable.white_rectangle)
+                tvcontinueView.background = resources.getDrawable(R.drawable.white_rectangle)
                 tvcontinue.setTextColor(resources.getColor(R.color.buttontextcolor))
                 tvcontinue.setTypeface(null, Typeface.BOLD)
             }
@@ -239,7 +243,7 @@ class CreatePackagectivity : AppCompatActivity() {
                     if(selectedPage == 0){
                         selectedCount = 1
                         tvcontinue!!.isClickable = true
-                        tvcontinue.background = resources.getDrawable(R.drawable.white_rectangle, null)
+                        tvcontinueView.background = resources.getDrawable(R.drawable.white_rectangle, null)
                         tvcontinue.setTextColor(resources.getColor(R.color.buttontextcolor,null))
                         tvcontinue.setTypeface(null, Typeface.BOLD)
                     }
@@ -253,7 +257,7 @@ class CreatePackagectivity : AppCompatActivity() {
 
                 if(selectedPage ==3 || selectedPage == 2|| selectedPage == 1){
                     selectedCount = 1
-                    tvcontinue.background = resources.getDrawable(R.drawable.white_rectangle)
+                    tvcontinueView.background = resources.getDrawable(R.drawable.white_rectangle)
                     tvcontinue.setTextColor(resources.getColor(R.color.buttontextcolor))
                     tvcontinue.setTypeface(null, Typeface.BOLD)
                 }
@@ -262,7 +266,7 @@ class CreatePackagectivity : AppCompatActivity() {
     }
     private fun setButtonUnselected() {
         selectedCount = 0
-        tvcontinue.background = resources.getDrawable(R.drawable.rectangle_btn)
+        tvcontinueView.background = resources.getDrawable(R.drawable.rectangle_btn)
         tvcontinue.setTextColor(resources.getColor(R.color.white))
         tvcontinue.setTypeface(null, Typeface.NORMAL)
     }
@@ -362,7 +366,7 @@ class CreatePackagectivity : AppCompatActivity() {
         override fun onReceive(context: Context?, intent: Intent?) {
             if(intent!!.getStringExtra("count") == "1"){
                 selectedCount = 1
-                tvcontinue.background = resources.getDrawable(R.drawable.white_rectangle)
+                tvcontinueView.background = resources.getDrawable(R.drawable.white_rectangle)
                 tvcontinue.setTextColor(resources.getColor(R.color.buttontextcolor))
                 tvcontinue.setTypeface(null, Typeface.BOLD)
 
@@ -410,7 +414,7 @@ class CreatePackagectivity : AppCompatActivity() {
 
             }else{
                 selectedCount = 0
-                tvcontinue.background = resources.getDrawable(R.drawable.rectangle_btn)
+                tvcontinueView.background = resources.getDrawable(R.drawable.rectangle_btn)
                 tvcontinue.setTextColor(resources.getColor(R.color.white))
                 tvcontinue.setTypeface(null, Typeface.NORMAL)
             }
@@ -422,7 +426,7 @@ class CreatePackagectivity : AppCompatActivity() {
         override fun onReceive(context: Context?, intent: Intent?) {
             if(intent!!.getStringExtra("count") == "1"){
                 selectedCount = 1
-                tvcontinue.background = resources.getDrawable(R.drawable.white_rectangle)
+                tvcontinueView.background = resources.getDrawable(R.drawable.white_rectangle)
                 tvcontinue.setTextColor(resources.getColor(R.color.buttontextcolor))
                 tvcontinue.setTypeface(null, Typeface.BOLD)
                 /*var count = viewPagerAdapter.itemCount -1
@@ -446,7 +450,7 @@ class CreatePackagectivity : AppCompatActivity() {
 
             }else{
                 selectedCount = 0
-                tvcontinue.background = resources.getDrawable(R.drawable.rectangle_btn)
+                tvcontinueView.background = resources.getDrawable(R.drawable.rectangle_btn)
                 tvcontinue.setTextColor(resources.getColor(R.color.white))
                 tvcontinue.setTypeface(null, Typeface.NORMAL)
             }

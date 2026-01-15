@@ -74,7 +74,7 @@ class HomeGymTrainerActivity :AppCompatActivity() {
             radioStateGym.setImageDrawable(getDrawable(R.drawable.radio_unselect))
 
         }
-        tvcontinue.setOnClickListener {
+        tvcontinueView.setOnClickListener {
             if (type.equals("home",true) || type.equals("work",true)){
                 if(type.equals("home",true)){
                     editor.putString("typeWorkout",type).apply()
