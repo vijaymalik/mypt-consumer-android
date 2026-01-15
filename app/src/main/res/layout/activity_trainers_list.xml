@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
-    android:background="@color/buttontextcolor"
+    android:background="@drawable/onboarding_backgrd_2"
     tools:context=".activities.TrainersListActivity">
     <LinearLayout
         android:gravity="center_vertical"
@@ -20,7 +20,7 @@
             android:id="@+id/back"
             android:layout_marginHorizontal="15dp"
             android:layout_marginVertical="20dp"
-            android:src="@drawable/backarrow"
+            android:src="@drawable/ic_back_arrow_new"
             />
         <TextView
             android:layout_marginEnd="10dp"
@@ -33,31 +33,38 @@
             android:fontFamily="@font/manrope_medium"
             android:text="@string/trainers"
             />
-        <EditText
-            android:visibility="invisible"
-            android:layout_weight="1"
+        <View
             android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="1dp"/>
+        <EditText
+            android:visibility="visible"
+            android:layout_width="88dp"
             android:paddingHorizontal="5dp"
             android:paddingVertical="2dp"
             android:textSize="14sp"
             android:text=""
             android:focusable="true"
+            android:hint="@string/search"
+            android:textColorHint="@color/bg_color_btn_disabled"
             android:focusableInTouchMode="true"
             android:id="@+id/searchEditText"
+            android:drawablePadding="6dp"
             android:textColor="@color/headingcolor"
-            android:drawableEnd="@drawable/close_white_24"
-            android:background="@drawable/grey_rounded_corner_rectangle"
+            android:drawableTint="@color/white"
+            android:drawableStart="@drawable/baseline_search_24"
+            android:background="@drawable/edittext_border"
             android:layout_height="35dp"/>
-        <ImageView
+       <!-- <ImageView
             android:id="@+id/searchTrainer"
             android:gravity="center_vertical"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginEnd="10dp"
-            android:src="@drawable/search"/>
+            android:src="@drawable/search"/>-->
         <LinearLayout
-            android:layout_marginLeft="10dp"
-            android:layout_marginEnd="15dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="20dp"
             android:gravity="center_vertical"
             android:background="@drawable/transparent_white_border"
             android:layout_width="wrap_content"

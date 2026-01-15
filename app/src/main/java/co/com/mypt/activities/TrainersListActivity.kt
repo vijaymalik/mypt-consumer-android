@@ -135,7 +135,7 @@ class TrainersListActivity : AppCompatActivity() {
     lateinit var standard_bottom_sheet: LinearLayout
 
     lateinit var sharedPreferences:SharedPreferences
-    lateinit var searchTrainer : ImageView
+//    lateinit var searchTrainer : ImageView
     lateinit var searchEditText : EditText
     var trainerListAdapter: TrainerListAdapter? = null
     val filternames = ArrayList<String>()
@@ -235,7 +235,7 @@ class TrainersListActivity : AppCompatActivity() {
             trainerRecyclerView.adapter = trainerListAdapter
         }
 
-        searchTrainer.setOnClickListener {
+        /*searchTrainer.setOnClickListener {
             searchTrainer.visibility = View.GONE
             searchEditText.visibility = View.VISIBLE
             searchEditText.requestFocus()
@@ -246,7 +246,7 @@ class TrainersListActivity : AppCompatActivity() {
                 val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.showSoftInput(searchEditText, InputMethodManager.SHOW_IMPLICIT)
             }
-        }
+        }*/
         searchEditText.addTextChangedListener(object : TextWatcher {
 
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
