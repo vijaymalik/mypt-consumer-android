@@ -60,7 +60,7 @@
     <string name="my_activity">My Activity</string>
     <string name="my_workouts">My Workouts</string>
     <string name="completed">Completed</string>
-    <string name="where_would_you_like_to_train">Where would you like to train?</string>
+    <string name="where_would_you_like_to_train">Where do you prefer to train?</string>
     <string name="trainers">Trainers</string>
     <string name="hurry_up">Hurry Up!</string>
     <string name="book_slot">BOOK SLOT</string>
@@ -714,4 +714,5 @@
     <string name="weight_msg">Swipe left or right to adjust your weight</string>
     <string name="height_msg">Swipe up or down to adjust your height</string>
     <string name="gender_msg">This helps us match you better with a trainer</string>
+    <string name="next">Next</string>
 </resources>

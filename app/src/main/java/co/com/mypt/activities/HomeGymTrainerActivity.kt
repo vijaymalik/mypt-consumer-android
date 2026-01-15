@@ -17,8 +17,11 @@ class HomeGymTrainerActivity :AppCompatActivity() {
     lateinit var gymWorkout : ImageView
     lateinit var homeWorkout : ImageView
     lateinit var back : ImageView
+    lateinit var radioStateHome : ImageView
+    lateinit var radioStateGym : ImageView
     lateinit var tvcontinue : TextView
-    lateinit var im:ImageView
+    lateinit var tvcontinueView : LinearLayout
+//    lateinit var im:ImageView
     var type=""
     lateinit var sharedPreferences:SharedPreferences
     lateinit var editor:SharedPreferences.Editor
@@ -31,37 +34,45 @@ class HomeGymTrainerActivity :AppCompatActivity() {
         gymWorkout = findViewById(R.id.gymWorkout)
         homeWorkout = findViewById(R.id.homeWorkout)
         tvcontinue = findViewById(R.id.tvcontinue)
+        tvcontinueView = findViewById(R.id.tvcontinueView)
         back = findViewById(R.id.back)
-        im = findViewById(R.id.im)
+        radioStateHome = findViewById(R.id.radioStateHome)
+        radioStateGym = findViewById(R.id.radioStateGym)
+//        im = findViewById(R.id.im)
         back.setOnClickListener{
             finish()
         }
         editor.putString("typeWorkout","").commit()
         editor.putString("typewithout","").commit()
 
-        val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+        /*val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
         layoutParams.setMargins(30,25,30,0)
         gymWorkout.setLayoutParams(layoutParams)
 
         val layoutParams1 = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
         layoutParams1.setMargins(30,0,30,0)
-        homeWorkout.setLayoutParams(layoutParams1)
+        homeWorkout.setLayoutParams(layoutParams1)*/
 
         gymWorkout.setOnClickListener {
             type="work"
             gymWorkout.setImageResource(R.drawable.selected_gym_workout)
             homeWorkout.setImageResource(R.drawable.home_workout)
 
-            tvcontinue.background = resources.getDrawable(R.drawable.white_rectangle)
+            tvcontinueView.background = resources.getDrawable(R.drawable.white_rectangle)
             tvcontinue.setTextColor(resources.getColor(R.color.buttontextcolor))
+            radioStateHome.setImageDrawable(getDrawable(R.drawable.radio_unselect))
+            radioStateGym.setImageDrawable(getDrawable(R.drawable.radio_select))
         }
         homeWorkout.setOnClickListener {
             type="home"
             gymWorkout.setImageResource(R.drawable.gym_workout)
             homeWorkout.setImageResource(R.drawable.selected_home_workout)
 
-            tvcontinue.background = resources.getDrawable(R.drawable.white_rectangle)
+            tvcontinueView.background = resources.getDrawable(R.drawable.white_rectangle)
             tvcontinue.setTextColor(resources.getColor(R.color.buttontextcolor))
+            radioStateHome.setImageDrawable(getDrawable(R.drawable.radio_select))
+            radioStateGym.setImageDrawable(getDrawable(R.drawable.radio_unselect))
+
         }
         tvcontinue.setOnClickListener {
             if (type.equals("home",true) || type.equals("work",true)){
