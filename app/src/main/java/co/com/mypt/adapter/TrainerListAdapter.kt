@@ -41,8 +41,9 @@ class TrainerListAdapter(
         val userName : TextView = item.findViewById(R.id.userName)
         val distance : TextView = item.findViewById(R.id.distance)
         val place : TextView = item.findViewById(R.id.place)
-        val hurryUp : TextView = item.findViewById(R.id.hurryUp)
-        val availableSlots : TextView = item.findViewById(R.id.availableSlots)
+        val viewProfile : TextView = item.findViewById(R.id.viewProfile)
+        //val hurryUp : TextView = item.findViewById(R.id.hurryUp)
+//        val availableSlots : TextView = item.findViewById(R.id.availableSlots)
         val trainerImage : ImageView = item.findViewById(R.id.trainerImage)
         val relative : RelativeLayout = item.findViewById(R.id.relative)
     }
@@ -102,6 +103,22 @@ class TrainerListAdapter(
             Log.e("studio_id",""+studio_id)
             context.startActivity(intent)
         }
+        holder.viewProfile.setOnClickListener {
+            val pos = it.tag as Int
+            var trainersModel=trainerListModels[pos]
+            val intent = Intent(context, TrainerDetails::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.putExtra("trainer_id",trainersModel.id)
+            intent.putExtra("studio_id",studio_id)
+            intent.putExtra("haveSlot",trainersModel.slot)
+            intent.putExtra("type",typeWorkout)
+            intent.putExtra("long",longitude)
+            Log.e("longitiude",""+longitude)
+            intent.putExtra("lat",latitude)
+            Log.e("lati",""+latitude)
+            Log.e("studio_id",""+studio_id)
+            context.startActivity(intent)
+        }
         holder.userName.text = trainersModel.name
 
         if(trainersModel.averageRating == "null")
@@ -112,15 +129,15 @@ class TrainerListAdapter(
         holder.distance.text = trainersModel.distance
         holder.place.text = trainersModel.location
         if(trainersModel.slot == "no"){
-            holder.hurryUp.text = "No slots available"
+//            holder.hurryUp.text = "No slots available"
             holder.bookSlot.setOnClickListener {}
             holder.bookSlot.background
-            holder.availableSlots.visibility = View.GONE
+//            holder.availableSlots.visibility = View.GONE
             holder.bookSlot.setBackgroundColor(context.resources.getColor(R.color.buttongreycolor,null))
             holder.bookSlot.setTextColor(context.resources.getColor(R.color.white,null))
         }
         else {
-            holder.availableSlots.text = "Only ${trainersModel.slot} slots available"
+//            holder.availableSlots.text = "Only ${trainersModel.slot} slots available"
             holder.bookSlot.setOnClickListener {
                 val pos = it.tag as Int
                 var trainersModel=trainerListModels[pos]
@@ -151,8 +168,8 @@ class TrainerListAdapter(
 
             }
             holder.bookSlot.setBackgroundColor(context.resources.getColor(R.color.headingcolor,null))
-            holder.hurryUp.text = context.resources.getString(R.string.hurry_up)
-            holder.availableSlots.visibility = View.VISIBLE
+//            holder.hurryUp.text = context.resources.getString(R.string.hurry_up)
+//            holder.availableSlots.visibility = View.VISIBLE
             holder.bookSlot.setTextColor(context.resources.getColor(R.color.buttontextcolor,null))
         }
         Glide.with(context).load(trainersModel.profile).fitCenter().into(holder.trainerImage)
