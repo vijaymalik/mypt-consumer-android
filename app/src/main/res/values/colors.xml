@@ -84,5 +84,6 @@
     <color name="gender_button">#4B554F</color>
     <color name="background_gender">#1E1E1E</color>
     <color name="separator">#1AFAFAFA</color>
+    <color name="separator_list">#1AFFFFFF</color>
 
 </resources>

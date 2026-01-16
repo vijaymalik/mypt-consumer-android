@@ -35,7 +35,7 @@ class TrainerListAdapter(
     class ViewHolder(item:View) : RecyclerView.ViewHolder(item) {
         val exerciseRecyclerView : RecyclerView = item.findViewById(R.id.exerciseRecyclerView)
         val bookSlot : TextView = item.findViewById(R.id.bookSlot)
-        val im_verified : ImageView = item.findViewById(R.id.im_verified)
+//        val im_verified : ImageView = item.findViewById(R.id.im_verified)
         val avgRating : TextView = item.findViewById(R.id.avgRating)
         val totalRatings : TextView = item.findViewById(R.id.totalRatings)
         val userName : TextView = item.findViewById(R.id.userName)
@@ -70,12 +70,12 @@ class TrainerListAdapter(
             layoutParams.rightMargin = 15 // Set left margin in pixels
             holder.itemView.layoutParams = layoutParams
         }*/
-        if (trainersModel.is_verified.equals("true")){
+       /* if (trainersModel.is_verified.equals("true")){
             holder.im_verified.visibility = View.VISIBLE
         }else{
             holder.im_verified.visibility = View.GONE
 
-        }
+        }*/
         for(i in 0 until trainersModel.activity.length()){
             var jsonObject=trainersModel.activity.optJSONObject(i)
             var exerciseModel=ExerciseModel()
@@ -104,8 +104,7 @@ class TrainerListAdapter(
             context.startActivity(intent)
         }
         holder.viewProfile.setOnClickListener {
-            val pos = it.tag as Int
-            var trainersModel=trainerListModels[pos]
+            var trainersModel=trainerListModels[position]
             val intent = Intent(context, TrainerDetails::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             intent.putExtra("trainer_id",trainersModel.id)

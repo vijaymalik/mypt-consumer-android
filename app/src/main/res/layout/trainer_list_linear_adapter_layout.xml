@@ -187,7 +187,7 @@
                 android:layout_margin="1dp"
                 android:layout_weight="1"
                 android:backgroundTint="@android:color/transparent"
-                app:cardCornerRadius="10dp"
+                app:cardCornerRadius="8dp"
                 app:cardElevation="0dp"
                 app:cardPreventCornerOverlap="false"
                 app:cardUseCompatPadding="false">
@@ -233,4 +233,10 @@
             </androidx.cardview.widget.CardView>
         </LinearLayout>
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/separator_list" />
 </RelativeLayout>
