@@ -2,12 +2,12 @@
     android:shape="rectangle">
 
     <!-- Solid background color -->
-    <solid android:color="#F38D1B" /> <!-- Use your orange color -->
+    <solid android:color="@color/neon_color" /> <!-- Use your orange color -->
 
     <!-- Only left side rounded -->
     <corners
         android:topLeftRadius="0dp"
         android:bottomLeftRadius="0dp"
-        android:topRightRadius="5dp"
-        android:bottomRightRadius="5dp" />
+        android:topRightRadius="0dp"
+        android:bottomRightRadius="0dp" />
 </shape>

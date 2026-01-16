@@ -65,9 +65,12 @@ android:background="@drawable/top_rounded_corners">
                     android:layout_width="match_parent"
                     android:id="@+id/linearGender"
                     android:orientation="horizontal"
+                    android:background="@drawable/bg_gender_selector"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:layout_height="match_parent">
                     <View
-                        android:layout_width="5dp"
+                        android:layout_width="3dp"
                         android:id="@+id/orangeViewGender"
                         android:visibility="gone"
                         android:background="@drawable/top_rounded_stroke"
@@ -96,7 +99,7 @@ android:background="@drawable/top_rounded_corners">
                     android:id="@+id/linearTime"
                     android:layout_height="match_parent">
                     <View
-                        android:layout_width="5dp"
+                        android:layout_width="3dp"
                         android:id="@+id/orangeViewTime"
                         android:visibility="gone"
                         android:background="@drawable/top_rounded_stroke"
@@ -125,7 +128,7 @@ android:background="@drawable/top_rounded_corners">
                     android:id="@+id/linearLanguage"
                     android:layout_height="match_parent">
                     <View
-                        android:layout_width="5dp"
+                        android:layout_width="3dp"
                         android:visibility="gone"
                         android:id="@+id/orangeViewLanguage"
                         android:background="@drawable/top_rounded_stroke"
@@ -154,7 +157,7 @@ android:background="@drawable/top_rounded_corners">
                     android:id="@+id/linearNationality"
                     android:layout_height="match_parent">
                     <View
-                        android:layout_width="5dp"
+                        android:layout_width="3dp"
                         android:visibility="gone"
                         android:id="@+id/orangeViewNation"
                         android:background="@drawable/top_rounded_stroke"

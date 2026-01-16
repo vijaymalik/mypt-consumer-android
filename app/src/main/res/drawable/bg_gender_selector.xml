@@ -1,0 +1,13 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- ACTIVE when selected / pressed -->
+    <item android:state_selected="true"
+        android:drawable="@drawable/nean_gradient_horizontal"/>
+
+    <item android:state_pressed="true"
+        android:drawable="@drawable/nean_gradient_horizontal"/>
+
+    <!-- DEFAULT (disabled / normal) -->
+    <item android:drawable="@drawable/bg_gender_disabled"/>
+
+</selector>

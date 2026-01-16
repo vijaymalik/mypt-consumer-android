@@ -85,5 +85,6 @@
     <color name="background_gender">#1E1E1E</color>
     <color name="separator">#1AFAFAFA</color>
     <color name="separator_list">#1AFFFFFF</color>
+    <color name="neon_color">#E0FE08</color>
 
 </resources>

@@ -707,8 +707,8 @@ class TrainersListActivity : AppCompatActivity() {
             orangeViewGender.visibility=View.VISIBLE
             viewGender.visibility=View.GONE
             genderRecycler.visibility=View.VISIBLE
-            tvgender.setTextColor(resources.getColor(R.color.orangecolor))
-            tvgender.setBackgroundColor(resources.getColor(R.color.tabbackground))
+//            tvgender.setTextColor(resources.getColor(R.color.orangecolor))
+            tvgender.setBackgroundResource(R.drawable.nean_gradient_horizontal)
 
             orangeViewTime.visibility=View.GONE
             viewTime.visibility=View.VISIBLE
@@ -740,8 +740,8 @@ class TrainersListActivity : AppCompatActivity() {
             orangeViewTime.visibility=View.VISIBLE
             viewTime.visibility=View.GONE
             timeSlotRecycler.visibility=View.VISIBLE
-            tvTimeslot.setTextColor(resources.getColor(R.color.orangecolor))
-            tvTimeslot.setBackgroundColor(resources.getColor(R.color.tabbackground))
+//            tvTimeslot.setTextColor(resources.getColor(R.color.orangecolor))
+            tvTimeslot.setBackgroundResource(R.drawable.nean_gradient_horizontal)
 
             orangeViewLanguage.visibility=View.GONE
             viewLanguage.visibility=View.VISIBLE
@@ -773,8 +773,8 @@ class TrainersListActivity : AppCompatActivity() {
             orangeViewLanguage.visibility=View.VISIBLE
             viewLanguage.visibility=View.GONE
             LanguageRecycler.visibility=View.VISIBLE
-            tvLanguage.setTextColor(resources.getColor(R.color.orangecolor))
-            tvLanguage.setBackgroundColor(resources.getColor(R.color.tabbackground))
+//            tvLanguage.setTextColor(resources.getColor(R.color.orangecolor))
+            tvLanguage.setBackgroundResource(R.drawable.nean_gradient_horizontal)
 
             orangeViewNation.visibility=View.GONE
             viewNationality.visibility=View.VISIBLE
@@ -807,16 +807,16 @@ class TrainersListActivity : AppCompatActivity() {
             orangeViewNation.visibility=View.VISIBLE
             viewNationality.visibility=View.GONE
             nationRecycler.visibility=View.VISIBLE
-            tvNationality.setTextColor(resources.getColor(R.color.orangecolor))
-            tvNationality.setBackgroundColor(resources.getColor(R.color.tabbackground))
+//            tvNationality.setTextColor(resources.getColor(R.color.orangecolor))
+            tvNationality.setBackgroundResource(R.drawable.nean_gradient_horizontal)
 
         }
         linearGender.setOnClickListener {
             orangeViewGender.visibility=View.VISIBLE
             viewGender.visibility=View.GONE
             genderRecycler.visibility=View.VISIBLE
-            tvgender.setTextColor(resources.getColor(R.color.orangecolor))
-            tvgender.setBackgroundColor(resources.getColor(R.color.tabbackground))
+           // tvgender.setTextColor(resources.getColor(R.color.orangecolor))
+            tvgender.setBackgroundResource(R.drawable.nean_gradient_horizontal)
 
             orangeViewTime.visibility=View.GONE
             viewTime.visibility=View.VISIBLE
@@ -847,8 +847,9 @@ class TrainersListActivity : AppCompatActivity() {
             orangeViewTime.visibility=View.VISIBLE
             viewTime.visibility=View.GONE
             timeSlotRecycler.visibility=View.VISIBLE
-            tvTimeslot.setTextColor(resources.getColor(R.color.orangecolor))
-            tvTimeslot.setBackgroundColor(resources.getColor(R.color.tabbackground))
+           // tvTimeslot.setTextColor(resources.getColor(R.color.orangecolor))
+//            tvTimeslot.setBackgroundColor(resources.getColor(R.color.tabbackground))
+            tvTimeslot.setBackgroundResource(R.drawable.nean_gradient_horizontal)
 
             orangeViewLanguage.visibility=View.GONE
             viewLanguage.visibility=View.VISIBLE
@@ -879,8 +880,9 @@ class TrainersListActivity : AppCompatActivity() {
             orangeViewLanguage.visibility=View.VISIBLE
             viewLanguage.visibility=View.GONE
             LanguageRecycler.visibility=View.VISIBLE
-            tvLanguage.setTextColor(resources.getColor(R.color.orangecolor))
-            tvLanguage.setBackgroundColor(resources.getColor(R.color.tabbackground))
+            //tvLanguage.setTextColor(resources.getColor(R.color.orangecolor))
+//            tvLanguage.setBackgroundColor(resources.getColor(R.color.tabbackground))
+            tvLanguage.setBackgroundResource(R.drawable.nean_gradient_horizontal)
 
             orangeViewNation.visibility=View.GONE
             viewNationality.visibility=View.VISIBLE
@@ -913,8 +915,8 @@ class TrainersListActivity : AppCompatActivity() {
             orangeViewNation.visibility=View.VISIBLE
             viewNationality.visibility=View.GONE
             nationRecycler.visibility=View.VISIBLE
-            tvNationality.setTextColor(resources.getColor(R.color.orangecolor))
-            tvNationality.setBackgroundColor(resources.getColor(R.color.tabbackground))
+//            tvNationality.setTextColor(resources.getColor(R.color.orangecolor))
+            tvNationality.setBackgroundResource(R.drawable.nean_gradient_horizontal)
         }
         tvApplyFilter.setOnClickListener {
 
