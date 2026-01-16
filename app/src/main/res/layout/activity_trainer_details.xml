@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
-    android:background="@color/buttontextcolor"
+    android:background="@drawable/onboarding_backgrd_2"
     tools:context=".activities.TrainerDetails">
 
 
@@ -47,10 +47,11 @@
                         android:layout_height="40dp"
                         android:id="@+id/back"
                         android:layout_marginHorizontal="15dp"
-                        android:src="@drawable/backarrow"
+                        android:src="@drawable/ic_back_arrow_new"
                         />
 
                     <androidx.cardview.widget.CardView
+                        android:visibility="gone"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="10dp"
@@ -84,7 +85,7 @@
                     android:layout_marginHorizontal="15dp"
                     android:layout_alignParentBottom="true"
                     android:gravity="center_vertical"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginVertical="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -92,19 +93,55 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:textSize="22sp"
+                        android:textSize="24sp"
+                        android:text="Ruba Darwich"
                         android:id="@+id/userName"
                         android:fontFamily="@font/clash_display_medium"
                         />
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="1dp"/>
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginHorizontal="2dp"
+                        android:src="@drawable/star"/>
+                    <TextView
+                        android:id="@+id/avgRating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/manrope_semi_bold"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"/>
+                    <View
+                        android:layout_marginHorizontal="5dp"
+                        android:layout_width="3dp"
+                        android:layout_height="3dp"
+                        android:background="@drawable/dot"/>
+                    <TextView
+                        android:id="@+id/totalRatings"
+                        android:layout_marginEnd="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/manrope_semi_bold"
+                        android:textColor="@color/subheadingcolor"
+                        android:textSize="12sp"/>
+
+
+
+
                     <ImageView
                         android:layout_marginHorizontal="5dp"
                         android:layout_width="24dp"
+                        android:visibility="gone"
                         android:layout_height="24dp"
                         android:src="@drawable/badge"/>
 
 
                     <RelativeLayout
                         android:layout_width="0dp"
+                        android:visibility="gone"
                         android:layout_height="wrap_content"
                         android:layout_weight="1">
                         <LinearLayout
@@ -152,9 +189,10 @@
                     android:layout_marginHorizontal="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/manrope_semi_bold"
+                    android:fontFamily="@font/funnel_sans_semibold"
                     android:textColor="@color/white"
-                    android:textSize="12sp"/>
+                    android:lineHeight="18sp"
+                    android:textSize="14sp"/>
                 <View
                     android:layout_marginEnd="5dp"
                     android:layout_width="3dp"
@@ -167,37 +205,16 @@
                     android:minLines="1"
                     android:maxLines="1"
                     android:ellipsize="end"
+                    android:lineHeight="18sp"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/manrope_semi_bold"
+                    android:fontFamily="@font/funnel_sans_semibold"
                     android:textColor="@color/white"
-                    android:textSize="12sp"/>
+                    android:textSize="14sp"/>
 
-                <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:src="@drawable/star"/>
-                <TextView
-                    android:id="@+id/avgRating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/manrope_semi_bold"
-                    android:textColor="@color/white"
-                    android:textSize="12sp"/>
-                <View
-                    android:layout_marginHorizontal="5dp"
-                    android:layout_width="3dp"
-                    android:layout_height="3dp"
-                    android:background="@drawable/dot"/>
-                <TextView
-                    android:id="@+id/totalRatings"
-                    android:layout_marginEnd="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/manrope_semi_bold"
-                    android:textColor="@color/subheadingcolor"
-                    android:textSize="12sp"/>
+
             </LinearLayout>
             <HorizontalScrollView
+                android:visibility="gone"
                 android:layout_marginTop="25dp"
                 android:layout_marginHorizontal="15dp"
                 android:scrollbars="none"
@@ -300,16 +317,18 @@
             </HorizontalScrollView>
 
             <TextView
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginHorizontal="15dp"
                 android:text=""
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:id="@+id/aboutTrainerText"
-                android:fontFamily="@font/manrope_medium"
+                android:lineHeight="18sp"
+                android:fontFamily="@font/funnel_sans_regular"
                 android:textColor="@color/subheadingcolor"
                 android:textSize="14sp"/>
+
             <TextView
 
                 android:text="... Read More"
@@ -317,10 +336,17 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tvreadMore"
                 android:visibility="gone"
-                android:fontFamily="@font/manrope_medium"
+                android:fontFamily="@font/funnel_sans_medium"
                 android:textColor="#F6AA54"
                 android:textSize="14sp"/>
-
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginStart="14dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/specialitiesRecyclerView"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal"
+                />
             <LinearLayout
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="20dp"
@@ -414,6 +440,7 @@
             </LinearLayout>
 
             <TextView
+                android:visibility="gone"
                 android:layout_marginTop="30dp"
                 android:layout_marginHorizontal="15dp"
                 android:text="@string/specialities"
@@ -422,14 +449,7 @@
                 android:fontFamily="@font/manrope_medium"
                 android:textColor="@color/smallTextcolor"
                 android:textSize="16sp"/>
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_marginStart="14dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/specialitiesRecyclerView"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:orientation="horizontal"
-                />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:id="@+id/linearCertificate"
