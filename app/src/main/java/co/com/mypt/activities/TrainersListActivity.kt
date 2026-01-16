@@ -70,6 +70,7 @@ import com.google.android.gms.location.Priority
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.textview.MaterialTextView
 import org.json.JSONObject
 import java.util.Locale
 
@@ -95,7 +96,7 @@ class TrainersListActivity : AppCompatActivity() {
     lateinit var viewGender: View
     lateinit var exerciseRecyclerView : RecyclerView
     lateinit var trainerRecyclerView : RecyclerView
-    lateinit var filterRecyclerView : RecyclerView
+//    lateinit var filterRecyclerView : RecyclerView
     lateinit var genderRecycler : RecyclerView
     lateinit var nationRecycler : RecyclerView
     lateinit var timeSlotRecycler : RecyclerView
@@ -137,9 +138,10 @@ class TrainersListActivity : AppCompatActivity() {
     lateinit var sharedPreferences:SharedPreferences
 //    lateinit var searchTrainer : ImageView
     lateinit var searchEditText : EditText
+    lateinit var filterTextView : MaterialTextView
     var trainerListAdapter: TrainerListAdapter? = null
     val filternames = ArrayList<String>()
-
+    private var selectedType=""
 
     var filterBottomSheetDialog: BottomSheetDialog? = null
     @SuppressLint("ClickableViewAccessibility")
@@ -155,8 +157,9 @@ class TrainersListActivity : AppCompatActivity() {
             getCurrentLocation()
         }
         searchEditText = findViewById(R.id.searchEditText)
-        filterRecyclerView = findViewById(R.id.filterRecyclerView)
-        searchTrainer = findViewById(R.id.searchTrainer)
+        filterTextView = findViewById(R.id.filterTextView)
+//        filterRecyclerView = findViewById(R.id.filterRecyclerView)
+//        searchTrainer = findViewById(R.id.searchTrainer)
         gridList = findViewById(R.id.gridList)
         linearList = findViewById(R.id.linearList)
         back = findViewById(R.id.back)
@@ -173,9 +176,16 @@ class TrainersListActivity : AppCompatActivity() {
         }catch (e: Exception){
             e.printStackTrace()
         }
-        var filterAdapter= FilterListAdapter(this@TrainersListActivity, filternames)
-        filterRecyclerView.adapter=filterAdapter
+//        var filterAdapter= FilterListAdapter(this@TrainersListActivity, filternames)
+//        filterRecyclerView.adapter=filterAdapter
         getFilterData()
+
+        filterTextView.setOnClickListener {
+            selectedType="timeslot"
+            filterBottomSHeet(selectedType){
+
+            }
+        }
         back.setOnClickListener{
             finish()
         }
@@ -298,7 +308,7 @@ class TrainersListActivity : AppCompatActivity() {
                         inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
 
 
-                        searchTrainer.visibility = View.VISIBLE
+//                        searchTrainer.visibility = View.VISIBLE
                         searchEditText.visibility = View.INVISIBLE
                         searchEditText.text.clear() // Clear text, or do your action
                         return@setOnTouchListener true
@@ -620,7 +630,7 @@ class TrainersListActivity : AppCompatActivity() {
 
     }
 
-    fun filterBottomSHeet(selectedType: String) {
+    fun filterBottomSHeet(selectedType: String,selectedTypeCall:(String)->Unit) {
         if (filterBottomSheetDialog?.isShowing == true) {
             // Store the pending type and wait for dismissal
             pendingDialogType = selectedType
@@ -640,7 +650,9 @@ class TrainersListActivity : AppCompatActivity() {
             pendingDialogType?.let {
                 val nextType = it
                 pendingDialogType = null
-                filterBottomSHeet(nextType)
+                filterBottomSHeet(nextType){
+
+                }
             }
         }
         standard_bottom_sheet = bottomSheet.findViewById(R.id.standard_bottom_sheet)

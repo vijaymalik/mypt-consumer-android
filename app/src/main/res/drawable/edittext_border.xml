@@ -10,7 +10,7 @@
     <solid android:color="@android:color/transparent" />
 
     <!-- Rounded corners (optional) -->
-    <corners android:radius="6dp" />
+    <corners android:radius="8dp" />
 
     <!-- Inner padding (optional) -->
     <padding

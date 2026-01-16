@@ -45,7 +45,7 @@ class FilterListAdapter(var activity: TrainersListActivity, var filternames: Arr
                 selectedType="Nationality"
 
             }
-            activity.filterBottomSHeet(selectedType)
+            activity.filterBottomSHeet(selectedType){}
             //activity.filterBottomSheetDialog!!.show()
 
 
