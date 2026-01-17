@@ -50,6 +50,11 @@ class CenterWaveScaleViewWeightHorizontal(
     private val WAVE_ITEM_COUNT = 7
     private val WAVE_HALF = WAVE_ITEM_COUNT / 2   // 3
 
+    // ===== WEIGHT SCALE CONFIG =====
+    private val STEP_VALUE = 0.1f        // 0.1, 0.2 ...
+    private val STEPS_PER_UNIT = 10       // 10 steps = 1.0
+    private val CENTER_WEIGHT = 0.5f
+
     var isFirstTime = true
     private val reduceTextGapPx by lazy {
         (20 * resources.displayMetrics.density).toInt() // try 4–8 dp
@@ -94,13 +99,13 @@ class CenterWaveScaleViewWeightHorizontal(
         screenSize = width
         pxmm = screenSize / 50f
 
-        rulerSize = pxmm * 12
+        rulerSize = pxmm * 10
         midScreenPoint = width / 2
         endPoint = height - 40
 
         if (isSizeChanged) {
             isSizeChanged = false
-            mainPoint = midScreenPoint - (userStartingPoint * 12 * pxmm)
+            mainPoint = midScreenPoint - (userStartingPoint * 10 * pxmm)
         }
     }
 
@@ -126,8 +131,8 @@ class CenterWaveScaleViewWeightHorizontal(
             } else 0f
 
             val baseSize = when {
-                i % 12 == 0 -> scaleLineLarge
-                i % 6 == 0 -> scaleLineMedium
+                i % 10 == 0 -> scaleLineLarge
+                i % 5 == 0 -> scaleLineMedium
                 else -> scaleLineSmall
             }
 
@@ -150,7 +155,7 @@ class CenterWaveScaleViewWeightHorizontal(
             )
 
             rulerPaint.strokeWidth =
-                (if (i % 12 == 0 || i % 6 == 0) 5f else 2f) + (waveRatio * 2f)
+                (if (i % 10 == 0 || i % 5 == 0) 5f else 2f) + (waveRatio * 2f)
 
             // ===== DRAW HORIZONTAL SCALE LINE =====
             canvas.drawLine(
@@ -162,7 +167,7 @@ class CenterWaveScaleViewWeightHorizontal(
             )
 
             // ===== DRAW TEXT =====
-            if (i % 12 == 0) {
+            if (i % 10 == 0) {
 
                 val isCenterText = distanceFromCenter < pxmm / 2
 
@@ -182,7 +187,7 @@ class CenterWaveScaleViewWeightHorizontal(
                 } else {
                     resources.getDimension(R.dimen.txt_size)
                 }
-                val label = "${i / 12}"
+                val label = "${i / 10}"
                 val textWidth = textPaint.measureText(label)
                 canvas.drawText(
                     label,
@@ -199,7 +204,7 @@ class CenterWaveScaleViewWeightHorizontal(
     override fun onTouchEvent(event: MotionEvent): Boolean {
 
         mainPointClone = if (mainPoint <= midScreenPoint) -mainPoint else mainPoint
-        mListener?.onViewUpdate((midScreenPoint + mainPointClone) / (pxmm * 12))
+        mListener?.onViewUpdate((midScreenPoint + mainPointClone) / (pxmm * 10))
 
         when (event.action) {
 
@@ -240,7 +245,7 @@ class CenterWaveScaleViewWeightHorizontal(
     }
 
     companion object {
-        var screenSize = 480
+        var screenSize = 500
         var pxmm = screenSize / 50f
     }
 }

@@ -25,6 +25,7 @@ import co.com.mypt.onBoarding.weightClass.WeightRepo
 import co.com.mypt.rulerHeight.CenterWaveScaleViewWeightHorizontal
 import co.com.mypt.rulerHeight.onViewUpdateListenerWeight
 import co.com.mypt.utils.SharedWeightViewModel
+import java.util.Locale
 
 
 class WeightFragment : Fragment(), ScaleSliderLayoutManager.MovementListener {
@@ -134,12 +135,18 @@ class WeightFragment : Fragment(), ScaleSliderLayoutManager.MovementListener {
         rulerWeight.initializeStartingPoint(70F)
         rulerWeight.setUpdateListenerWeight(object : onViewUpdateListenerWeight {
             override fun onViewUpdate(value: Float) {
-                updateWeight(roundTo1Decimal(value).toString())
+               val valueL = if (value>.1)value.minus(.1).toFloat() else value
+                updateWeight(cleanTo1Decimal(valueL).toString())
             }
         })
 
         return view
     }
+
+    fun cleanTo1Decimal(value: Float): Float {
+        return String.format(Locale.US, "%.1f", value).toFloat()
+    }
+
     fun roundTo1Decimal(value: Float): Float {
         return kotlin.math.round(value * 10) / 10
     }

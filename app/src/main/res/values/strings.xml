@@ -72,11 +72,11 @@
     <string name="media_gallery">Media Gallery</string>
     <string name="average_rating">Average Rating</string>
     <string name="average_rating1">Average\nRating</string>
-    <string name="years_of_experience">Years of\nExperience</string>
+    <string name="years_of_experience">Years of Experience</string>
     <string name="clients_coached">Clients Coached</string>
-    <string name="clients_coached1">Clients\nCoached</string>
+    <string name="clients_coached1">Clients Coached</string>
     <string name="specialities">Specialities</string>
-    <string name="certifications">Certifications</string>
+    <string name="certifications">Trainer Certifications</string>
     <string name="personal_training">Personal Training</string>
     <string name="personal_motivation_quote">Personal Motivation Quote</string>
     <string name="book_a_slot">Book a Slot</string>
