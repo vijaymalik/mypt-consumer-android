@@ -79,7 +79,7 @@ class PhoneNumberScreenActivity : AppCompatActivity() {
     var email = ""
     var name = ""
     var id = ""
-//    lateinit var videoView: FullScreenVideoView
+    lateinit var videoView: FullScreenVideoView
     lateinit var edPhoneno: EditText
     lateinit var edemail: EditText
 //    lateinit var flBtn: View
@@ -161,7 +161,7 @@ class PhoneNumberScreenActivity : AppCompatActivity() {
         blurredView = findViewById(R.id.blurredView)
         linearLayout = findViewById(R.id.linearLayout)
         blurImage = findViewById(R.id.blurImage)
-//        videoView = findViewById(R.id.idVideoView)
+        videoView = findViewById(R.id.idVideoView)
         im_gmail = findViewById(R.id.im_gmail)
         edPhoneno = findViewById(R.id.edPhoneno)
 //        flBtn = findViewById(R.id.flBtn)
@@ -179,7 +179,7 @@ class PhoneNumberScreenActivity : AppCompatActivity() {
             countryNameCode = country_code_picker.selectedCountryNameCode
         }
 
-       /* val uri = Uri.parse("android.resource://" + packageName + "/" + R.raw.launcher_video)
+        val uri = Uri.parse("android.resource://" + packageName + "/" + R.raw.launcher_video)
         videoView.setVideoURI(uri)
         videoView.start()
         videoView.setOnPreparedListener { mp ->
@@ -193,7 +193,7 @@ class PhoneNumberScreenActivity : AppCompatActivity() {
             } else {
                 videoView.scaleY = 1f / scaleX
             }
-        }*/
+        }
         val primary = ContextCompat.getColor(this, R.color.login_btn)
         val secondary = ContextCompat.getColor(this, R.color.text_color_neutral_200)
 

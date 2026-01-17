@@ -39,6 +39,6 @@ public class WeightRepo {
     }
 
     public int getStartWeight() {
-        return 699;
+        return 690;
     }
 }

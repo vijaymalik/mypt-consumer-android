@@ -132,13 +132,14 @@ class WeightFragment : Fragment(), ScaleSliderLayoutManager.MovementListener {
                disableEditText(weight1, requireContext())
             }
         }
-        rulerWeight.initializeStartingPoint(70F)
+
         rulerWeight.setUpdateListenerWeight(object : onViewUpdateListenerWeight {
             override fun onViewUpdate(value: Float) {
                val valueL = if (value>.1)value.minus(.1).toFloat() else value
                 updateWeight(roundTo1Decimal(valueL).toString())
             }
         })
+        rulerWeight.initializeStartingPoint(70.1F)
 
         return view
     }
@@ -280,10 +281,10 @@ class WeightFragment : Fragment(), ScaleSliderLayoutManager.MovementListener {
         weightRecyclerView.scrollToPosition(repo.startWeight)*/
 //        weightRecyclerView.addItemDecoration(FadeEdgeDecoration(requireContext()))
 
-        val weightLabel = repo.getWeightLabels()[repo.startWeight]
+//        val weightLabel = repo.getWeightLabels()[repo.startWeight]
         /*val htmlString = "<big><b>$weightLabel</b></big><small><font color=#959595>${if (repo.isKg) "kg" else "lbs"}</font></small>"
         val spanned = HtmlCompat.fromHtml(htmlString, HtmlCompat.FROM_HTML_MODE_COMPACT)*/
-        updateWeight(weightLabel)
+//        updateWeight(weightLabel)
     }
 
 }

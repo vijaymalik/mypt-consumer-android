@@ -168,6 +168,7 @@ class PersonalizedActivity2 : AppCompatActivity() {
                 selectedCount = 1
                 enableContinueBtn()
             }
+            buttonText()
 
         }
 
@@ -219,12 +220,20 @@ class PersonalizedActivity2 : AppCompatActivity() {
             if (selectedPage > 0) {
                 selectedPage -= 1
                 viewPager.currentItem = selectedPage
-                p_Bar.setProgress(15 * (selectedPage+1), true)
+                p_Bar.setProgress(15 * (selectedPage + 1), true)
             }
             if (selectedPage == 1 || selectedPage == 2 || selectedPage == 3/*|| selectedPage == 6*/) {
                 selectedCount = 1
                 enableContinueBtn()
             }
+            buttonText()
+        }
+    }
+    private fun buttonText(){
+        if (selectedPage == 2 || selectedPage == 3 || selectedPage == 4) {
+            tvcontinue.text = getString(R.string.next)
+        }else{
+            tvcontinue.text = getString(R.string.label_lets_get_started)
         }
     }
 
@@ -315,6 +324,7 @@ class PersonalizedActivity2 : AppCompatActivity() {
                             almostDoneLayout.visibility = View.GONE
                         }, 4000)
                     }
+                    buttonText()
                     if (selectedPage == 4) {
                         /*if (GoalsFragment().recycler != null) {
                             GoalsFragment().recycler?.adapter?.notifyDataSetChanged()
@@ -437,6 +447,7 @@ class PersonalizedActivity2 : AppCompatActivity() {
                     selectedIds = intent.getIntegerArrayListExtra("selectedGoals")!!
                     apiUrl = ApiURL.addGoals
                 }
+                buttonText()
 //                if(selectedPage == 6){
 //                    selectedValue = intent.getStringExtra("selectedValue")!!.lowercase(Locale.ROOT)
 //                    apiUrl = ApiURL.addPreferWork
