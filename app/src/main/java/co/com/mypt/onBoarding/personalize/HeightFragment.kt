@@ -67,7 +67,7 @@ class HeightFragment : Fragment() {
             }
         }
 
-        myScaleView.initializeStartingPoint(70F)
+        myScaleView.initializeStartingPoint(60F)
         myScaleView.setUpdateListener(object : onViewUpdateListener {
             override fun onViewUpdate(value: Float) {
                 println("======  $value")
@@ -89,7 +89,7 @@ class HeightFragment : Fragment() {
 
 //        ft = "<big><b>$ft</b></big><small><font color=#959595>ft</font></small>"
 //        val spanned = HtmlCompat.fromHtml(ft, HtmlCompat.FROM_HTML_MODE_COMPACT)
-        val finalHeight = ft + "ft"
+        val finalHeight = "$ft ft"
         txtValue.setText(finalHeight)
         viewModel.data.value = txtValue.text.toString()
 
@@ -98,8 +98,8 @@ class HeightFragment : Fragment() {
             override fun onViewUpdate(value: Float) {
                 val feet = value.toInt() // Extract integer part as feet
                 val inches = ((value - feet) * 12).toInt() // Convert decimal part to inches
-                ft = if (inches == 0) "$feet" + "ft"
-                else "$feet" + "ft" + "$inches" + "in"
+                ft = if (inches == 0) "$feet ft"
+                else "$feet ft $inches in"
                 txtValue.setText(ft)
                 viewModel.data.value = txtValue.text.toString()
             }

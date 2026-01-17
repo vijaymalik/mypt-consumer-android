@@ -7,8 +7,10 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.text.TextPaint
 import android.util.AttributeSet
+import android.view.HapticFeedbackConstants
 import android.view.MotionEvent
 import android.view.View
+import co.com.calculateheight.MyScaleView
 import co.com.mypt.R
 
 class CenterWaveScaleViewFeet(mycontext: Context, attrs: AttributeSet?) :
@@ -51,7 +53,7 @@ class CenterWaveScaleViewFeet(mycontext: Context, attrs: AttributeSet?) :
     // ===== WAVE CONFIG =====
     private val WAVE_ITEM_COUNT = 7
     private val WAVE_HALF = WAVE_ITEM_COUNT / 2   // 3
-
+    private var lastHapticTick = Int.MIN_VALUE
     var isFirstTime: Boolean = true
 
     init {
@@ -135,6 +137,17 @@ class CenterWaveScaleViewFeet(mycontext: Context, attrs: AttributeSet?) :
             val distanceFromCenter =
                 kotlin.math.abs(startingPoint - midScreenPoint)
 
+            if (distanceFromCenter < pxmm / 2f) {
+                if (i != lastHapticTick) {
+                    lastHapticTick = i
+                    if (i % 12 == 0) {
+                        performHapticFeedback(
+                            HapticFeedbackConstants.LONG_PRESS,
+                            HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING
+                        )
+                    }
+                }
+            }
             val waveRatio = if (distanceFromCenter < waveRangePx) {
                 1f - (distanceFromCenter / waveRangePx)
             } else 0f

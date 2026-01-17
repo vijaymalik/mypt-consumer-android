@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.text.TextPaint
 import android.util.AttributeSet
+import android.view.HapticFeedbackConstants
 import android.view.MotionEvent
 import android.view.View
 import co.com.mypt.R
@@ -50,11 +51,7 @@ class CenterWaveScaleViewWeightHorizontal(
     private val WAVE_ITEM_COUNT = 7
     private val WAVE_HALF = WAVE_ITEM_COUNT / 2   // 3
 
-    // ===== WEIGHT SCALE CONFIG =====
-    private val STEP_VALUE = 0.1f        // 0.1, 0.2 ...
-    private val STEPS_PER_UNIT = 10       // 10 steps = 1.0
-    private val CENTER_WEIGHT = 0.5f
-
+    private var lastHapticTick = Int.MIN_VALUE
     var isFirstTime = true
     private val reduceTextGapPx by lazy {
         (20 * resources.displayMetrics.density).toInt() // try 4–8 dp
@@ -125,6 +122,25 @@ class CenterWaveScaleViewWeightHorizontal(
 
             val distanceFromCenter =
                 kotlin.math.abs(startingPoint - midScreenPoint)
+
+            if (distanceFromCenter < pxmm / 2f) {
+
+                if (i != lastHapticTick) {
+                    lastHapticTick = i
+
+                    if (i % 10 == 0) {
+                        performHapticFeedback(
+                            HapticFeedbackConstants.LONG_PRESS,
+                            HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING
+                        )
+                    } /*else {
+                        performHapticFeedback(
+                            HapticFeedbackConstants.KEYBOARD_TAP,
+                            HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING
+                        )
+                    }*/
+                }
+            }
 
             val waveRatio = if (distanceFromCenter < waveRangePx) {
                 1f - (distanceFromCenter / waveRangePx)

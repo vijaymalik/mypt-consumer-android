@@ -7,9 +7,11 @@ import android.graphics.CornerPathEffect
 import android.graphics.Paint
 import android.text.TextPaint
 import android.util.AttributeSet
+import android.view.HapticFeedbackConstants
 import android.view.MotionEvent
 import android.view.View
 import co.com.mypt.R
+import co.com.mypt.rulerHeight.CenterWaveScaleViewWeightHorizontal
 import onViewUpdateListener
 
 
@@ -44,7 +46,7 @@ class   MyScaleView(mycontext: Context, attrs: AttributeSet?) :
     var isFirstTime: Boolean = true
     private val WAVE_ITEM_COUNT = 7
     private val WAVE_HALF = WAVE_ITEM_COUNT / 2   // 3
-
+    private var lastHapticTick = Int.MIN_VALUE
     init {
         if (!isInEditMode) {
             init(context)
@@ -128,6 +130,18 @@ class   MyScaleView(mycontext: Context, attrs: AttributeSet?) :
             // 🔥 MUST be recalculated for every line
             val distanceFromCenter =
                 kotlin.math.abs(startingPoint - midScreenPoint)
+            if (distanceFromCenter < pxmm / 2f) {
+                if (i != lastHapticTick) {
+                    lastHapticTick = i
+
+                    if (i % 10 == 0) {
+                        performHapticFeedback(
+                            HapticFeedbackConstants.LONG_PRESS,
+                            HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING
+                        )
+                    }
+                }
+            }
 
             val waveRatio = if (distanceFromCenter < waveRangePx) {
                 1f - (distanceFromCenter / waveRangePx)
