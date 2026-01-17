@@ -136,16 +136,13 @@ class WeightFragment : Fragment(), ScaleSliderLayoutManager.MovementListener {
         rulerWeight.setUpdateListenerWeight(object : onViewUpdateListenerWeight {
             override fun onViewUpdate(value: Float) {
                val valueL = if (value>.1)value.minus(.1).toFloat() else value
-                updateWeight(cleanTo1Decimal(valueL).toString())
+                updateWeight(roundTo1Decimal(valueL).toString())
             }
         })
 
         return view
     }
 
-    fun cleanTo1Decimal(value: Float): Float {
-        return String.format(Locale.US, "%.1f", value).toFloat()
-    }
 
     fun roundTo1Decimal(value: Float): Float {
         return kotlin.math.round(value * 10) / 10
