@@ -24,7 +24,7 @@
     <string name="how_do_you_prefer_n_working_out">How do you prefer\n working out?</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
-    <string name="others">Others</string>
+    <string name="others">Other</string>
     <string name="what_is_your_height">What is your height?</string>
     <string name="feet">feet</string>
     <string name="cms">cms</string>
@@ -458,7 +458,7 @@
     <string name="landmark_optional">Landmark (Optional)</string>
     <string name="city">City</string>
     <string name="country">Country</string>
-    <string name="office">Office</string>
+    <string name="office">WORK</string>
     <string name="edit_address">Edit Address</string>
     <string name="goal_completed">Goal Completed</string>
     <string name="your_water_intake_is_declining_by_10_every_day">Your Water intake is declining by 10% every day</string>
@@ -530,7 +530,7 @@
     <string name="Cancel">CANCEL</string>
     <string name="select_gym">Select GYM</string>
     <string name="per_package_cost">Per Package Cost</string>
-    <string name="add_new_address_">Add New Address</string>
+    <string name="add_new_address_">Enter your full address details</string>
     <string name="locked_for_now">Locked for Now</string>
     <string name="health_tracking_will_be_lauching_soon">Health tracking will be lauching soon</string>
     <string name="your_achievements_and_milestones_will_be_available_soon">Your achievements and \n milestones will be available soon</string>

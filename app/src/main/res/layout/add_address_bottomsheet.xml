@@ -1,222 +1,302 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="@drawable/top_rounded_corners">
+    android:background="@drawable/top_rounded_corners"
+    android:orientation="vertical">
+
     <androidx.core.widget.NestedScrollView
-        android:layout_marginBottom="60dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:layout_marginHorizontal="15dp"
-            >
+            android:orientation="vertical">
+
             <androidx.cardview.widget.CardView
-                android:layout_marginTop="5dp"
-                android:layout_gravity="center_horizontal"
                 android:layout_width="70dp"
-                app:cardCornerRadius="3dp"
                 android:layout_height="5dp"
-                app:cardBackgroundColor="@color/rulersmallline"/>
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                app:cardBackgroundColor="@color/rulersmallline"
+                app:cardCornerRadius="3dp" />
+
             <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginTop="20dp"
-                android:paddingVertical="15dp"
                 android:id="@+id/linearclose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:gravity="center"
-                android:layout_height="wrap_content">
+                android:orientation="horizontal">
+
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/headingcolor"
-                    android:textSize="18sp"
                     android:id="@+id/tvAddNew"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/manrope_medium"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/clash_display_medium"
                     android:text="@string/add_new_address_"
-                    />
+                    android:textColor="@color/headingcolor"
+                    android:textSize="20sp" />
+
                 <ImageView
                     android:layout_width="24dp"
-                    android:src="@drawable/close"
                     android:layout_height="24dp"
+                    android:src="@drawable/close"
                     app:tint="@color/white" />
             </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/manrope_medium"
+                android:text="Address Type"
+                android:textColor="@color/headingcolor"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:orientation="horizontal">
+
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/checkHome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="@string/home"
+                    android:textAllCaps="true"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/funnel_sans_semibold"
+                    android:textColor="@color/subheadingcolor"
+                    app:icon="@drawable/home"
+                    app:iconTint="@null"
+                    app:iconPadding="8dp"
+                    app:iconGravity="textStart"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/home_button_stroke"
+                    app:backgroundTint="@color/home_button_bg_tint" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/checkOffice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="@string/office"
+                    android:textAllCaps="true"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/funnel_sans_semibold"
+                    android:textColor="@color/subheadingcolor"
+                    app:icon="@drawable/shopping_bag"
+                    app:iconTint="@null"
+                    app:iconPadding="8dp"
+                    app:iconGravity="textStart"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/home_button_stroke"
+                    app:backgroundTint="@color/home_button_bg_tint" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/checkOthers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="@string/others"
+                    android:textAllCaps="true"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/funnel_sans_semibold"
+                    android:textColor="@color/subheadingcolor"
+                    app:icon="@drawable/location"
+                    app:iconTint="@null"
+                    app:iconPadding="8dp"
+                    app:iconGravity="textStart"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/home_button_stroke"
+                    app:backgroundTint="@color/home_button_bg_tint" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/edittext_background">
+
                 <com.google.android.material.textfield.TextInputLayout
 
                     android:layout_width="match_parent"
-                    android:layout_gravity="center"
                     android:layout_height="wrap_content"
-                    app:hintTextColor="@color/booked"
-                    app:boxStrokeColor="@android:color/transparent"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
                     android:paddingVertical="5dp"
+                    android:textColorHint="@color/booked"
+                    app:boxStrokeColor="@android:color/transparent"
                     app:boxStrokeWidth="1dp"
                     app:boxStrokeWidthFocused="1dp"
-                    android:textColorHint="@color/booked"
-                    android:background="@android:color/transparent"
                     app:hintTextAppearance="@style/MyFloatingLabelStyle"
-                    >
+                    app:hintTextColor="@color/booked">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:textCursorDrawable="@null"
                         android:id="@+id/tvBuildingName"
-                        android:imeOptions="actionNext"
-
-                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrst uvwxyz1234567890"
-                        android:inputType="textNoSuggestions|textVisiblePassword"
-                        android:importantForAutofill="noExcludeDescendants"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:autofillHints=""
+                        android:background="@android:color/transparent"
+                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrst uvwxyz1234567890"
+
                         android:fontFamily="@font/manrope_medium"
-                        android:textColorHint="@color/smallTextcolor"
                         android:hint="@string/building_villa_name_or_number"
-                        android:textStyle="bold"
+                        android:imeOptions="actionNext"
+                        android:importantForAutofill="noExcludeDescendants"
+                        android:inputType="textNoSuggestions|textVisiblePassword"
                         android:textColor="@color/headingcolor"
-                        android:background="@android:color/transparent"
+                        android:textColorHint="@color/smallTextcolor"
+                        android:textCursorDrawable="@null"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
 
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/edittext_background">
+
                 <com.google.android.material.textfield.TextInputLayout
-                    android:importantForAutofill="no"
                     android:layout_width="match_parent"
-                    android:layout_gravity="center"
                     android:layout_height="wrap_content"
-                    app:hintTextColor="@color/booked"
-                    app:boxStrokeColor="@android:color/transparent"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:importantForAutofill="no"
                     android:paddingVertical="5dp"
+                    android:textColorHint="@color/booked"
+                    app:boxStrokeColor="@android:color/transparent"
                     app:boxStrokeWidth="1dp"
                     app:boxStrokeWidthFocused="1dp"
-                    android:textColorHint="@color/booked"
-                    android:background="@android:color/transparent"
                     app:hintTextAppearance="@style/MyFloatingLabelStyle"
-                    >
+                    app:hintTextColor="@color/booked">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:textCursorDrawable="@null"
                         android:id="@+id/tvStreetName"
-                        android:inputType="textNoSuggestions|textVisiblePassword"
-                        android:importantForAutofill="noExcludeDescendants"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:autofillHints=""
-                        android:imeOptions="actionNext"
+                        android:background="@android:color/transparent"
                         android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrst uvwxyz1234567890"
                         android:fontFamily="@font/manrope_medium"
-                        android:textColorHint="@color/smallTextcolor"
                         android:hint="@string/street_name_number"
-                        android:textStyle="bold"
-                        android:textColor="@color/headingcolor"
-                        android:background="@android:color/transparent"
-
-                        />
-
-                </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_gravity="center"
-                android:background="@drawable/edittext_background">
-                <com.google.android.material.textfield.TextInputLayout
-
-                    android:layout_width="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content"
-                    app:hintTextColor="@color/booked"
-                    app:boxStrokeColor="@android:color/transparent"
-                    android:paddingVertical="5dp"
-                    app:boxStrokeWidth="1dp"
-                    android:importantForAutofill="no"
-                    app:boxStrokeWidthFocused="1dp"
-                    android:textColorHint="@color/booked"
-                    android:background="@android:color/transparent"
-                    app:hintTextAppearance="@style/MyFloatingLabelStyle"
-                    >
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:textCursorDrawable="@null"
-                        android:id="@+id/tvLandmark"
-                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrst uvwxyz1234567890"
                         android:imeOptions="actionNext"
-                        android:inputType="textNoSuggestions|textVisiblePassword"
                         android:importantForAutofill="noExcludeDescendants"
-                        android:autofillHints=""
-                        android:fontFamily="@font/manrope_medium"
-                        android:textColorHint="@color/smallTextcolor"
-                        android:hint="@string/landmark_optional"
-                        android:textStyle="bold"
+                        android:inputType="textNoSuggestions|textVisiblePassword"
                         android:textColor="@color/headingcolor"
-                        android:background="@android:color/transparent"
+                        android:textColorHint="@color/smallTextcolor"
+                        android:textCursorDrawable="@null"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
 
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/edittext_background">
+
                 <com.google.android.material.textfield.TextInputLayout
 
                     android:layout_width="match_parent"
-                    android:layout_gravity="center"
                     android:layout_height="wrap_content"
-                    app:hintTextColor="@color/booked"
-                    app:boxStrokeColor="@android:color/transparent"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:importantForAutofill="no"
                     android:paddingVertical="5dp"
+                    android:textColorHint="@color/booked"
+                    app:boxStrokeColor="@android:color/transparent"
                     app:boxStrokeWidth="1dp"
                     app:boxStrokeWidthFocused="1dp"
-                    android:importantForAutofill="no"
-                    android:textColorHint="@color/booked"
-                    android:background="@android:color/transparent"
                     app:hintTextAppearance="@style/MyFloatingLabelStyle"
-                    >
+                    app:hintTextColor="@color/booked">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tvLandmark"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="14sp"
+                        android:autofillHints=""
+                        android:background="@android:color/transparent"
+                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrst uvwxyz1234567890"
+                        android:fontFamily="@font/manrope_medium"
+                        android:hint="@string/landmark_optional"
+                        android:imeOptions="actionNext"
+                        android:importantForAutofill="noExcludeDescendants"
+                        android:inputType="textNoSuggestions|textVisiblePassword"
+                        android:textColor="@color/headingcolor"
+                        android:textColorHint="@color/smallTextcolor"
                         android:textCursorDrawable="@null"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/edittext_background">
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:importantForAutofill="no"
+                    android:paddingVertical="5dp"
+                    android:textColorHint="@color/booked"
+                    app:boxStrokeColor="@android:color/transparent"
+                    app:boxStrokeWidth="1dp"
+                    app:boxStrokeWidthFocused="1dp"
+                    app:hintTextAppearance="@style/MyFloatingLabelStyle"
+                    app:hintTextColor="@color/booked">
+
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tvmobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
                         android:digits="1234567890"
+                        android:fontFamily="@font/manrope_medium"
+                        android:hint="@string/mobile_"
+                        android:imeOptions="actionDone"
                         android:inputType="phone"
                         android:maxLength="10"
-                        android:imeOptions="actionDone"
-                        android:fontFamily="@font/manrope_medium"
-                        android:textColorHint="@color/smallTextcolor"
-                        android:hint="@string/mobile_"
-                        android:textStyle="bold"
                         android:textColor="@color/headingcolor"
-                        android:background="@android:color/transparent"
+                        android:textColorHint="@color/smallTextcolor"
+                        android:textCursorDrawable="@null"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
 
                         />
 
@@ -225,177 +305,126 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="30dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp">
+
                 <AutoCompleteTextView
                     android:id="@+id/autoCompleteCity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:padding="16dp"
                     android:layout_alignBottom="@id/stateLinearLayout"
-                    android:cursorVisible="false"
                     android:background="@android:color/transparent"
+                    android:cursorVisible="false"
+                    android:fontFamily="@font/manrope_medium"
+                    android:padding="16dp"
                     android:textColor="@color/tabbackground"
                     android:textColorHint="@color/smallTextcolor"
-                    android:fontFamily="@font/manrope_medium" />
+                    android:textSize="14sp" />
+
                 <LinearLayout
                     android:id="@+id/stateLinearLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:orientation="horizontal"
-                    android:background="@drawable/edittext_background">
+                    android:background="@drawable/edittext_background"
+                    android:orientation="horizontal">
+
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/stateTextInputLayout"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_gravity="center"
                         android:layout_height="wrap_content"
-                        app:hintTextColor="@color/booked"
-                        app:boxStrokeColor="@android:color/transparent"
-                        android:paddingVertical="5dp"
-                        app:boxStrokeWidth="1dp"
-                        android:importantForAutofill="no"
-                        app:boxStrokeWidthFocused="1dp"
-                        android:textColorHint="@color/booked"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:background="@android:color/transparent"
                         android:hint="@string/city"
+                        android:importantForAutofill="no"
+                        android:paddingVertical="5dp"
+                        android:textColorHint="@color/booked"
+                        app:boxStrokeColor="@android:color/transparent"
+                        app:boxStrokeWidth="1dp"
+                        app:boxStrokeWidthFocused="1dp"
                         app:hintTextAppearance="@style/MyFloatingLabelStyle"
-                        >
+                        app:hintTextColor="@color/booked">
+
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/tvCity"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:cursorVisible="false"
-                            android:textSize="14sp"
-                            android:textCursorDrawable="@null"
-                            android:id="@+id/tvCity"
-                            android:fontFamily="@font/manrope_medium"
-                            android:textColorHint="@color/smallTextcolor"
-                            android:textStyle="bold"
-                            android:textColor="@color/headingcolor"
-                            android:background="@android:color/transparent"
-                            android:inputType="textNoSuggestions|textVisiblePassword"
-                            android:importantForAutofill="noExcludeDescendants"
                             android:autofillHints=""
-                            />
+                            android:background="@android:color/transparent"
+                            android:cursorVisible="false"
+                            android:fontFamily="@font/manrope_medium"
+                            android:importantForAutofill="noExcludeDescendants"
+                            android:inputType="textNoSuggestions|textVisiblePassword"
+                            android:textColor="@color/headingcolor"
+                            android:textColorHint="@color/smallTextcolor"
+                            android:textCursorDrawable="@null"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
                     </com.google.android.material.textfield.TextInputLayout>
+
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:src="@drawable/baseline_keyboard_arrow_down_24"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginRight="10dp"
+                        android:src="@drawable/baseline_keyboard_arrow_down_24"
                         app:tint="@color/smallTextcolor" />
                 </LinearLayout>
             </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
                 android:layout_gravity="center"
-                android:orientation="horizontal"
-                android:background="@drawable/edittext_background">
+                android:layout_marginTop="30dp"
+                android:background="@drawable/edittext_background"
+                android:orientation="horizontal">
+
                 <com.google.android.material.textfield.TextInputLayout
 
                     android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
                     android:layout_height="wrap_content"
-                    app:hintTextColor="@color/booked"
-                    app:boxStrokeColor="@android:color/transparent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:importantForAutofill="no"
                     android:paddingVertical="5dp"
+                    android:textColorHint="@color/booked"
+                    app:boxStrokeColor="@android:color/transparent"
                     app:boxStrokeWidth="1dp"
                     app:boxStrokeWidthFocused="1dp"
-                    android:importantForAutofill="no"
-                    android:textColorHint="@color/booked"
-                    android:background="@android:color/transparent"
                     app:hintTextAppearance="@style/MyFloatingLabelStyle"
-                    >
+                    app:hintTextColor="@color/booked">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tvCountry"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:textCursorDrawable="@null"
-                        android:id="@+id/tvCountry"
-                        android:text="United Arab Emirates"
-                        android:focusable="false"
-                        android:cursorVisible="false"
-                        android:fontFamily="@font/manrope_medium"
-                        android:textColorHint="@color/smallTextcolor"
-                        android:hint="@string/country"
-                        android:textStyle="bold"
-                        android:textColor="@color/headingcolor"
-                        android:background="@android:color/transparent"
-                        android:inputType="textNoSuggestions|textVisiblePassword"
-                        android:importantForAutofill="noExcludeDescendants"
                         android:autofillHints=""
-                        />
+                        android:background="@android:color/transparent"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:fontFamily="@font/manrope_medium"
+                        android:hint="@string/country"
+                        android:importantForAutofill="noExcludeDescendants"
+                        android:inputType="textNoSuggestions|textVisiblePassword"
+                        android:text="United Arab Emirates"
+                        android:textColor="@color/headingcolor"
+                        android:textColorHint="@color/smallTextcolor"
+                        android:textCursorDrawable="@null"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:src="@drawable/baseline_keyboard_arrow_down_24"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginRight="10dp"
+                    android:src="@drawable/baseline_keyboard_arrow_down_24"
                     app:tint="@color/smallTextcolor" />
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/headingcolor"
-                android:textSize="14sp"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="10dp"
-                android:textStyle="bold"
-                android:fontFamily="@font/manrope_medium"
-                android:text="Address Type"
-                />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:orientation="horizontal">
-                <CheckBox
-                    android:paddingHorizontal="5dp"
-                    android:id="@+id/checkHome"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:layout_marginRight="10dp"
-                    android:buttonTint="@color/white"
-                    style="@style/CustomCheckboxBrand"
-                    android:fontFamily="@font/manrope_medium"
-                    android:textColor="@color/subheadingcolor"
-                    android:text="@string/home" />
-                <CheckBox
-                    android:paddingHorizontal="5dp"
-                    android:id="@+id/checkOffice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:buttonTint="@color/white"
-                    style="@style/CustomCheckboxBrand"
-                    android:layout_marginRight="10dp"
-                    android:fontFamily="@font/manrope_medium"
-                    android:textColor="@color/subheadingcolor"
-                    android:text="@string/office" />
-                <CheckBox
-                    android:paddingHorizontal="5dp"
-                    android:id="@+id/checkOthers"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:buttonTint="@color/white"
-                    style="@style/CustomCheckboxBrand"
-                    android:fontFamily="@font/manrope_medium"
-                    android:textColor="@color/subheadingcolor"
-                    android:text="@string/others" />
-
-
             </LinearLayout>
 
 
@@ -404,28 +433,28 @@
 
 
     <LinearLayout
+        android:id="@+id/linearSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_marginHorizontal="15dp"
         android:layout_marginBottom="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linearSave"
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="match_parent"
             android:id="@+id/tvDone"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/apply_rectangle"
-            android:gravity="center"
             android:fontFamily="@font/manrope_medium"
+            android:gravity="center"
             android:paddingVertical="15dp"
-            android:textFontWeight="700"
-            android:textAllCaps="true"
             android:text="@string/save_amp_update"
-            android:textStyle="bold"
+            android:textAllCaps="true"
             android:textColor="@color/buttontextcolor"
-            android:textSize="16dp" />
+            android:textFontWeight="700"
+            android:textSize="16dp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -63,6 +63,7 @@ import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import org.json.JSONObject
@@ -243,9 +244,9 @@ class SelectCurrentLocationActivity : AppCompatActivity() , OnMapReadyCallback {
         var tvLandmark=bottomSheet.findViewById<TextInputEditText>(R.id.tvLandmark)
         var stateTextInputLayout=bottomSheet.findViewById<TextInputLayout>(R.id.stateTextInputLayout)
         var linearSave=bottomSheet.findViewById<LinearLayout>(R.id.linearSave)
-        var checkHome=bottomSheet.findViewById<CheckBox>(R.id.checkHome)
-        var checkOffice=bottomSheet.findViewById<CheckBox>(R.id.checkOffice)
-        var checkOthers=bottomSheet.findViewById<CheckBox>(R.id.checkOthers)
+        var checkHome=bottomSheet.findViewById<MaterialButton>(R.id.checkHome)
+        var checkOffice=bottomSheet.findViewById<MaterialButton>(R.id.checkOffice)
+        var checkOthers=bottomSheet.findViewById<MaterialButton>(R.id.checkOthers)
         var tvAddNew=bottomSheet.findViewById<TextView>(R.id.tvAddNew)
         if (intent.getStringExtra("link").equals("edit")){
             tvAddNew.setText(resources.getString(R.string.edit_address))
@@ -263,17 +264,23 @@ class SelectCurrentLocationActivity : AppCompatActivity() , OnMapReadyCallback {
             country_id=""+intent.getStringExtra("country_id")
             if (intent.getStringExtra("type").equals("home")){
                 type="home"
+                checkHome.isCheckable = true
                 checkHome.isChecked=true
+
                 checkOffice.isChecked=false
                 checkOthers.isChecked=false
             }else if ((intent.getStringExtra("type").equals("office"))){
                 type="office"
+                checkOffice.isCheckable = true
                 checkOffice.isChecked=true
+
                 checkHome.isChecked=false
                 checkOthers.isChecked=false
             }else{
                 type="others"
+                checkOthers.isCheckable = true
                 checkOthers.isChecked=true
+
                 checkHome.isChecked=false
                 checkOffice.isChecked=false
             }
@@ -283,19 +290,24 @@ class SelectCurrentLocationActivity : AppCompatActivity() , OnMapReadyCallback {
         }
         checkHome.setOnClickListener{
             type="home"
+            checkHome.isCheckable = true
             checkHome.isChecked=true
             checkOffice.isChecked=false
             checkOthers.isChecked=false
         }
         checkOffice.setOnClickListener{
             type="office"
+            checkOffice.isCheckable = true
             checkOffice.isChecked=true
+
             checkHome.isChecked=false
             checkOthers.isChecked=false
         }
         checkOthers.setOnClickListener{
             type="others"
+            checkOthers.isCheckable = true
             checkOthers.isChecked=true
+
             checkHome.isChecked=false
             checkOffice.isChecked=false
         }
