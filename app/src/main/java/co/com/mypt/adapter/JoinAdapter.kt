@@ -31,6 +31,7 @@ class JoinAdapter(
         var tvname=view.findViewById<TextView>(R.id.tvname)
         var tvgender=view.findViewById<TextView>(R.id.tvgender)
         var tvage=view.findViewById<TextView>(R.id.tvage)
+        var you=view.findViewById<TextView>(R.id.you)
         var relative=view.findViewById<RelativeLayout>(R.id.relative)
         var imEdit=view.findViewById<ImageView>(R.id.imEdit)
         var imDelete=view.findViewById<ImageView>(R.id.imDelete)
@@ -57,18 +58,20 @@ class JoinAdapter(
         holder.tvname.text = joinModel.name
         holder.tvage.text = joinModel.age
         if (joinModel.self.equals("true")){
+            holder.you.visibility=View.VISIBLE
             holder.imEdit.visibility=View.GONE
             holder.imDelete.visibility=View.GONE
         }else{
+            holder.you.visibility=View.GONE
             holder.imEdit.visibility=View.VISIBLE
             holder.imDelete.visibility=View.VISIBLE
         }
         if (joinModel.gender.equals("null")){
             holder.tvgender.setText("")
-            holder.tvgender.setBackgroundDrawable(null);
+//            holder.tvgender.setBackgroundDrawable(null);
         }else{
             holder.tvgender.text = joinModel.gender
-            holder.tvgender.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.joining_rectangle));
+//            holder.tvgender.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.joining_rectangle));
         }
         if (joinModel.age.equals("") || joinModel.age.equals("null")){
             holder.tvage.setText("")

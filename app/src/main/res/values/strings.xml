@@ -24,7 +24,8 @@
     <string name="how_do_you_prefer_n_working_out">How do you prefer\n working out?</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
-    <string name="others">Other</string>
+    <string name="other">Other</string>
+    <string name="others">Others</string>
     <string name="what_is_your_height">What is your height?</string>
     <string name="feet">feet</string>
     <string name="cms">cms</string>
@@ -260,6 +261,7 @@
     <string name="remind_me">Remind Me</string>
     <string name="_5_minutes_before">5 Minutes Before</string>
     <string name="save">Save</string>
+    <string name="save_detail">SAVE details</string>
     <string name="muscles">Muscles</string>
     <string name="add_new_event">Add New Event</string>
     <string name="repeat_every">Repeat Every</string>
@@ -280,7 +282,7 @@
     <string name="you_re_going_to_delete_this_workout_are_you_sure">You’re going to delete this workout. Are \n you sure?</string>
     <string name="my_schedule">My Schedule</string>
     <string name="who_s_joining">Who’s Joining?</string>
-    <string name="add_members">Add Members</string>
+    <string name="add_members">Add member details</string>
     <string name="enter_full_name">Enter Full Name</string>
     <string name="select_gender">Select Gender</string>
     <string name="save_add_next"><![CDATA[Save & Add Next]]></string>
@@ -475,8 +477,11 @@
     <string name="weekly_chart">Weekly Chart</string>
     <string name="mobile_">Mobile</string>
     <string name="enter_building_name">Enter building name</string>
+    <string name="enter_apartment_name">Enter apartment unit</string>
     <string name="enter_street_name">Enter street name</string>
+    <string name="enter_build_name">Enter building/tower name</string>
     <string name="enter_mobile_number">Enter mobile number</string>
+    <string name="enter_street">Enter string name</string>
     <string name="select_city">Select city</string>
     <string name="select_addressType">Select AddressType</string>
     <string name="enter_valid_phone_number">Enter valid phone number</string>
@@ -721,4 +726,6 @@
     <string name="view_profile">View Profile</string>
     <string name="select_trainer">Select this trainer</string>
     <string name="street_name">Street Name</string>
+    <string name="grp_info">Group information</string>
+    <string name="email">Email ID</string>
 </resources>

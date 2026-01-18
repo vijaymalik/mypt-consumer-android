@@ -1,81 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:fitsSystemWindows="true"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".GymWorkout.withoutTrainer.JoiningFragment">
 
     <LinearLayout
+        android:id="@+id/linearadd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linearadd"
-        android:layout_alignParentTop="true"
+        android:layout_marginHorizontal="20dp"
         android:orientation="vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/headingcolor"
-            android:textSize="32dp"
             android:layout_marginVertical="20dp"
-            android:layout_marginHorizontal="10dp"
-            android:gravity="center"
-            android:layout_marginRight="10dp"
             android:fontFamily="@font/clash_display_medium"
-            android:text="@string/who_s_joining"/>
-
-
-
-
+            android:text="@string/grp_info"
+            android:textColor="@color/headingcolor"
+            android:textSize="28sp" />
     </LinearLayout>
+
     <ScrollView
-        android:layout_weight="1"
+        android:id="@+id/nested"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:scrollbars="none"
-        android:id="@+id/nested">
+        android:layout_weight="1"
+        android:scrollbars="none">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
             android:layout_marginVertical="10dp"
-            android:layout_marginHorizontal="15dp"
             android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/Recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:orientation="vertical"
-                android:layout_marginBottom="15dp"
-                android:id="@+id/Recycler"
+                android:layout_marginBottom="25dp"
                 android:nestedScrollingEnabled="false"
-                />
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
             <LinearLayout
-                android:layout_width="match_parent"
-                android:paddingVertical="15dp"
-                android:layout_marginBottom="10dp"
-                android:gravity="center"
                 android:id="@+id/linearAddMember"
-                android:background="@drawable/view_detail_rectangle"
-                android:layout_height="wrap_content">
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_dashed_bg"
+                android:gravity="center"
+                android:paddingVertical="20dp">
+
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/baseline_add_24"
                     app:tint="@color/headingcolor" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/headingcolor"
-                    android:textSize="14sp"
                     android:layout_marginStart="10dp"
-                    android:textStyle="bold"
-                    android:textAllCaps="true"
-                    android:fontFamily="@font/manrope_medium"
+                    android:fontFamily="@font/funnel_sans_semibold"
+                    android:lineHeight="18sp"
                     android:text="@string/add_members"
-                    />
+                    android:textAllCaps="true"
+                    android:textColor="@color/headingcolor"
+                    android:textSize="14sp" />
             </LinearLayout>
 
 
@@ -83,25 +80,21 @@
     </ScrollView>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:paddingVertical="15dp"
-        android:gravity="center"
         android:id="@+id/linearmax"
-       android:layout_alignParentBottom="true"
-        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
-        android:background="@drawable/grey_rounded_corner_rectangle"
-        android:layout_height="wrap_content">
+        android:layout_marginTop="10dp"
+        android:gravity="center">
+
         <TextView
+            android:id="@+id/tvPerson"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/subheadingcolor"
-            android:textSize="14sp"
-            android:layout_marginStart="10dp"
-            android:textStyle="bold"
-            android:id="@+id/tvPerson"
-            android:fontFamily="@font/manrope_medium"
+            android:fontFamily="@font/funnel_sans_semibold"
+            android:lineHeight="18sp"
             android:text="Min 3 Person, Max 10 Person"
-            />
+            android:textColor="@color/grey_text"
+            android:textSize="14sp" />
     </LinearLayout>
 </LinearLayout>

@@ -347,23 +347,22 @@ class SelectCurrentLocationActivity : AppCompatActivity() , OnMapReadyCallback {
 
         })
         linearSave.setOnClickListener{
-            if (tvBuildingName.getText().toString().trim { it <= ' ' }.matches("".toRegex())) {
-                tvBuildingName.setError(resources.getString(R.string.enter_building_name))
+            if (type.equals("")){
+                Toast.makeText(applicationContext,R.string.select_addressType,Toast.LENGTH_LONG).show()
+            }else  if (tvBuildingName.getText().toString().trim { it <= ' ' }.matches("".toRegex())) {
+                tvBuildingName.setError(resources.getString(R.string.enter_apartment_name))
             } else if (tvStreetName.getText().toString().trim { it <= ' ' }.matches("".toRegex())){
-                tvStreetName.setError(resources.getString(R.string.enter_street_name))
+                tvStreetName.setError(resources.getString(R.string.enter_build_name))
 
             }else if (tvmobile.getText().toString().trim { it <= ' ' }.matches("".toRegex())){
-                tvmobile.setError(resources.getString(R.string.enter_mobile_number))
+                tvmobile.setError(resources.getString(R.string.enter_street))
 
             }
-            else if (tvmobile.getText().toString().trim().length<10){
+           /* else if (tvmobile.getText().toString().trim().length<10){
                 tvmobile.setError(resources.getString(R.string.enter_valid_phone_number))
 
-            }else if (city_id.equals("")){
+            }*/else if (city_id.equals("")){
                 Toast.makeText(applicationContext,R.string.select_city,Toast.LENGTH_LONG).show()
-            }
-            else if (type.equals("")){
-                Toast.makeText(applicationContext,R.string.select_addressType,Toast.LENGTH_LONG).show()
             }
             else {
                 sendAddaddressData(tvBuildingName,tvStreetName,tvLandmark,type,tvmobile,city_id)

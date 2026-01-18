@@ -34,6 +34,7 @@ import co.com.mypt.model.ActivityModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+/****NOT USED*****/
 class HomeTotalSessionActivity : AppCompatActivity() {
     lateinit var switchCompat: SwitchCompat
     lateinit var tvTotalcost: TextView

@@ -193,8 +193,8 @@ class JoiningFragment(
 
                 if(s.isNotEmpty() && s.toString().toInt()>150){
                     tvAge.setError("Please enter a valid age (1-150)")
-                    tvSave!!.setBackgroundResource(R.drawable.grey_rectangle_rounded)
-                    tvSave.setTextColor(context1.resources.getColor(R.color.white))
+//                    tvSave!!.setBackgroundResource(R.drawable.grey_rectangle_rounded)
+//                    tvSave.setTextColor(context1.resources.getColor(R.color.white))
                     tvSave.setOnClickListener { /* Do nothing */ }
                     tvSaveAndNext.setOnClickListener{
                     }
@@ -210,20 +210,20 @@ class JoiningFragment(
 
 
          if (tvname!!.text.toString().trim()=="" || tvAge!!.text.toString().trim()=="") {
-            tvSave!!.setBackgroundResource(R.drawable.grey_rectangle_rounded)
-            tvSave.setTextColor(context1.resources.getColor(R.color.white))
+//            tvSave!!.setBackgroundResource(R.drawable.grey_rectangle_rounded)
+//            tvSave.setTextColor(context1.resources.getColor(R.color.white))
             tvSave.setOnClickListener { /* Do nothing */ }
         } else {
             if (tvAge.text.toString().toInt() > 150) {
-                tvSave!!.setBackgroundResource(R.drawable.grey_rectangle_rounded)
-                tvSave.setTextColor(context1.resources.getColor(R.color.white))
+//                tvSave!!.setBackgroundResource(R.drawable.grey_rectangle_rounded)
+//                tvSave.setTextColor(context1.resources.getColor(R.color.white))
                 tvAge.setError("Please enter a valid age (1-150)")
                 tvSave.setOnClickListener {
 
                 }
             } else {
-                tvSave!!.setBackgroundResource(R.drawable.apply_rectangle)
-                tvSave.setTextColor(context1.resources.getColor(R.color.buttontextcolor))
+//                tvSave!!.setBackgroundResource(R.drawable.apply_rectangle)
+//                tvSave.setTextColor(context1.resources.getColor(R.color.buttontextcolor))
                 tvSave.setOnClickListener{
                     addMemberData(tvname.text.toString(), tvAge.text.toString(),checktype)
                     addMemberBottomSheetDialog.dismiss()
@@ -245,14 +245,14 @@ class JoiningFragment(
         tvSaveAndNext: TextView
     ) {
         if (tvname!!.text.toString().trim()=="" || tvAge!!.text.toString().trim()==""){
-            tvSave!!.setBackgroundResource(R.drawable.grey_rectangle_rounded)
-            tvSave.setTextColor(context1.resources.getColor(R.color.white))
-            tvSave.setOnClickListener{}
+//            tvSave!!.setBackgroundResource(R.drawable.grey_rectangle_rounded)
+//            tvSave?.setTextColor(context1.resources.getColor(R.color.white))
+            tvSave?.setOnClickListener{}
             tvSaveAndNext.setOnClickListener{}
         }else{
-            tvSave!!.setBackgroundResource(R.drawable.apply_rectangle)
-            tvSave.setTextColor(context1.resources.getColor(R.color.buttontextcolor))
-            tvSave.setOnClickListener{
+//            tvSave!!.setBackgroundResource(R.drawable.apply_rectangle)
+//            tvSave?.setTextColor(context1.resources.getColor(R.color.buttontextcolor))
+            tvSave?.setOnClickListener{
                 buttonclick="save"
                 addMemberData(tvname.text.toString(), tvAge.text.toString(),checktype)
                 addMemberBottomSheetDialog.dismiss()
@@ -353,15 +353,15 @@ class JoiningFragment(
                         maxvalue=resp.optJSONObject("data").optString("max_member").toInt()
 
                         if (joinList.size>=minvalue){
-                            (activity as? CreatePackagectivity)?.tvcontinue!!.background = resources.getDrawable(R.drawable.white_rectangle)
+                            (activity as? CreatePackagectivity)?.tvcontinueView!!.background = resources.getDrawable(R.drawable.white_rectangle)
                             (activity as? CreatePackagectivity)?.tvcontinue!!.setTextColor(resources.getColor(R.color.buttontextcolor))
-                             (activity as? CreatePackagectivity)?.tvcontinue!!.setTypeface(null, Typeface.BOLD)
+//                             (activity as? CreatePackagectivity)?.tvcontinue!!.setTypeface(null, Typeface.BOLD)
                              (activity as? CreatePackagectivity)?.tvcontinue!!.isClickable = true
                         }else{
                              (activity as? CreatePackagectivity)?.tvcontinue!!.isClickable = false
-                             (activity as? CreatePackagectivity)?.tvcontinue!!.background = resources.getDrawable(R.drawable.rectangle_btn)
+                             (activity as? CreatePackagectivity)?.tvcontinueView!!.background = resources.getDrawable(R.drawable.rectangle_btn)
                              (activity as? CreatePackagectivity)?.tvcontinue!!.setTextColor(resources.getColor(R.color.white))
-                             (activity as? CreatePackagectivity)?.tvcontinue!!.setTypeface(null, Typeface.NORMAL)
+//                             (activity as? CreatePackagectivity)?.tvcontinue!!.setTypeface(null, Typeface.NORMAL)
 
                         }
                         if (joinList.size>=maxvalue){

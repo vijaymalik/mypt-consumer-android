@@ -205,7 +205,7 @@ class CreatePackagectivity : AppCompatActivity() {
                     tvcontinue!!.isClickable = true
                     tvcontinueView.background = resources.getDrawable(R.drawable.white_rectangle, null)
                     tvcontinue.setTextColor(resources.getColor(R.color.buttontextcolor,null))
-                    tvcontinue.setTypeface(null, Typeface.BOLD)
+//                    tvcontinue.setTypeface(null, Typeface.BOLD)
                 }
             }else {
                 sharedPreferences.edit().putString("classCall","0").apply()
@@ -219,7 +219,7 @@ class CreatePackagectivity : AppCompatActivity() {
                 selectedCount = 1
                 tvcontinueView.background = resources.getDrawable(R.drawable.white_rectangle)
                 tvcontinue.setTextColor(resources.getColor(R.color.buttontextcolor))
-                tvcontinue.setTypeface(null, Typeface.BOLD)
+//                tvcontinue.setTypeface(null, Typeface.BOLD)
             }
         }
 
@@ -244,8 +244,8 @@ class CreatePackagectivity : AppCompatActivity() {
                         selectedCount = 1
                         tvcontinue!!.isClickable = true
                         tvcontinueView.background = resources.getDrawable(R.drawable.white_rectangle, null)
-                        tvcontinue.setTextColor(resources.getColor(R.color.buttontextcolor,null))
-                        tvcontinue.setTypeface(null, Typeface.BOLD)
+//                        tvcontinue.setTextColor(resources.getColor(R.color.buttontextcolor,null))
+//                        tvcontinue.setTypeface(null, Typeface.BOLD)
                     }
                 }else {
                     sharedPreferences.edit { putString("classCall", "0") }
@@ -259,7 +259,7 @@ class CreatePackagectivity : AppCompatActivity() {
                     selectedCount = 1
                     tvcontinueView.background = resources.getDrawable(R.drawable.white_rectangle)
                     tvcontinue.setTextColor(resources.getColor(R.color.buttontextcolor))
-                    tvcontinue.setTypeface(null, Typeface.BOLD)
+//                    tvcontinue.setTypeface(null, Typeface.BOLD)
                 }
             }
         })
@@ -268,7 +268,7 @@ class CreatePackagectivity : AppCompatActivity() {
         selectedCount = 0
         tvcontinueView.background = resources.getDrawable(R.drawable.rectangle_btn)
         tvcontinue.setTextColor(resources.getColor(R.color.white))
-        tvcontinue.setTypeface(null, Typeface.NORMAL)
+//        tvcontinue.setTypeface(null, Typeface.NORMAL)
     }
 
     override fun onResume() {
@@ -368,7 +368,7 @@ class CreatePackagectivity : AppCompatActivity() {
                 selectedCount = 1
                 tvcontinueView.background = resources.getDrawable(R.drawable.white_rectangle)
                 tvcontinue.setTextColor(resources.getColor(R.color.buttontextcolor))
-                tvcontinue.setTypeface(null, Typeface.BOLD)
+//                tvcontinue.setTypeface(null, Typeface.BOLD)
 
 
                 var count = viewPagerAdapter.itemCount -1
@@ -416,7 +416,7 @@ class CreatePackagectivity : AppCompatActivity() {
                 selectedCount = 0
                 tvcontinueView.background = resources.getDrawable(R.drawable.rectangle_btn)
                 tvcontinue.setTextColor(resources.getColor(R.color.white))
-                tvcontinue.setTypeface(null, Typeface.NORMAL)
+//                tvcontinue.setTypeface(null, Typeface.NORMAL)
             }
         }
 
@@ -428,7 +428,7 @@ class CreatePackagectivity : AppCompatActivity() {
                 selectedCount = 1
                 tvcontinueView.background = resources.getDrawable(R.drawable.white_rectangle)
                 tvcontinue.setTextColor(resources.getColor(R.color.buttontextcolor))
-                tvcontinue.setTypeface(null, Typeface.BOLD)
+//                tvcontinue.setTypeface(null, Typeface.BOLD)
                 /*var count = viewPagerAdapter.itemCount -1
                 while (count > 0 ){
                     viewPagerAdapter.removeFragment(count)
@@ -452,7 +452,7 @@ class CreatePackagectivity : AppCompatActivity() {
                 selectedCount = 0
                 tvcontinueView.background = resources.getDrawable(R.drawable.rectangle_btn)
                 tvcontinue.setTextColor(resources.getColor(R.color.white))
-                tvcontinue.setTypeface(null, Typeface.NORMAL)
+//                tvcontinue.setTypeface(null, Typeface.NORMAL)
             }
         }
 
