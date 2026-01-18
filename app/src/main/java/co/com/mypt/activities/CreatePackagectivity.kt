@@ -36,6 +36,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import androidx.core.content.edit
+import co.com.mypt.fragments.CreatePackageScreen.BestPlanTotalSessionFragment
 
 class CreatePackagectivity : AppCompatActivity() {
     var session_value=""
@@ -114,7 +115,7 @@ class CreatePackagectivity : AppCompatActivity() {
 
         viewPagerAdapter.add(CreatePackageFragment(),"",0)
         viewPagerAdapter.add(
-            TotalSessionFragment(
+            BestPlanTotalSessionFragment(
                 intent.getStringExtra("type"),
                 intent.getStringExtra("slot_id"),
                 intent.getStringExtra("address_id"),
@@ -381,7 +382,7 @@ class CreatePackagectivity : AppCompatActivity() {
                 if (intent.getIntExtra("selectedPosition",0)==0
                     || intent.getIntExtra("selectedPosition",0)==1){
 
-                    viewPagerAdapter.add(TotalSessionFragment(
+                    viewPagerAdapter.add(BestPlanTotalSessionFragment(
                         getIntent().getStringExtra("type"),
                         getIntent().getStringExtra("slot_id"),
                         getIntent().getStringExtra("address_id"),
@@ -398,7 +399,7 @@ class CreatePackagectivity : AppCompatActivity() {
                 else if(intent.getIntExtra("selectedPosition",0)==2){
                     viewPagerAdapter.add(JoiningFragment( getIntent().getStringExtra("trainer_id"),
                         getIntent().getStringExtra("studio_id"),CreatePackagectivity()),"",1)
-                    viewPagerAdapter.add(TotalSessionFragment(
+                    viewPagerAdapter.add(BestPlanTotalSessionFragment(
                         getIntent().getStringExtra("type"),
                         getIntent().getStringExtra("slot_id"),
                         getIntent().getStringExtra("address_id"),

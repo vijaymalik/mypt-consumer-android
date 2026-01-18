@@ -729,4 +729,7 @@
     <string name="grp_info">Group information</string>
     <string name="email">Email ID</string>
     <string name="add_detail">Add details</string>
+    <string name="best_plan">Best plans</string>
+    <string name="customization">Customization</string>
+    <string name="pick_plan">Pick the plan that fits your goals</string>
 </resources>

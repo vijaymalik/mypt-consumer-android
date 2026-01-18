@@ -10,4 +10,5 @@
     <dimen name="text_start_point">100dp</dimen>
     <dimen name="txt_size">16dp</dimen>
     <dimen name="scale_line_large_cm">32dp</dimen>
+    <dimen name="session_scale_line_large">30dp</dimen>
 </resources>
