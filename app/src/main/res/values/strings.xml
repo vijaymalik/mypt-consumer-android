@@ -453,9 +453,9 @@
     <string name="add_new_address">ADD NEW ADDRESS</string>
     <string name="select_your_location">Select your location</string>
     <string name="save_amp_update"><![CDATA[Save & Update]]></string>
-    <string name="building_villa_name_or_number">Building/Villa Name or Number</string>
-    <string name="street_name_number"><![CDATA[Street Name & Number]]></string>
-    <string name="landmark_optional">Landmark (Optional)</string>
+    <string name="building_villa_name_or_number">Apartment Unit / Number</string>
+    <string name="street_name_number">Building / Tower Name</string>
+    <string name="landmark_optional">Directions to reach (Optional)</string>
     <string name="city">City</string>
     <string name="country">Country</string>
     <string name="office">WORK</string>
@@ -720,4 +720,5 @@
     <string name="search">Search</string>
     <string name="view_profile">View Profile</string>
     <string name="select_trainer">Select this trainer</string>
+    <string name="street_name">Street Name</string>
 </resources>

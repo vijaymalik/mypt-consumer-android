@@ -55,11 +55,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="8dp"
-                android:fontFamily="@font/manrope_medium"
-                android:text="Address Type"
-                android:textColor="@color/headingcolor"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:fontFamily="@font/funnel_sans_regular"
+                android:lineHeight="18sp"
+                android:text="Save address as"
+                android:textColor="@color/smallTextcolor"
+                android:textSize="14sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -67,60 +67,59 @@
                 android:orientation="horizontal">
 
 
-
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/checkHome"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
+                    android:fontFamily="@font/funnel_sans_semibold"
                     android:text="@string/home"
                     android:textAllCaps="true"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/funnel_sans_semibold"
                     android:textColor="@color/subheadingcolor"
+                    android:textSize="12sp"
+                    app:backgroundTint="@color/home_button_bg_tint"
                     app:icon="@drawable/home"
-                    app:iconTint="@null"
-                    app:iconPadding="8dp"
                     app:iconGravity="textStart"
-                    app:strokeWidth="1dp"
+                    app:iconPadding="8dp"
+                    app:iconTint="@null"
                     app:strokeColor="@color/home_button_stroke"
-                    app:backgroundTint="@color/home_button_bg_tint" />
+                    app:strokeWidth="1dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/checkOffice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
+                    android:fontFamily="@font/funnel_sans_semibold"
                     android:text="@string/office"
                     android:textAllCaps="true"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/funnel_sans_semibold"
                     android:textColor="@color/subheadingcolor"
+                    android:textSize="12sp"
+                    app:backgroundTint="@color/home_button_bg_tint"
                     app:icon="@drawable/shopping_bag"
-                    app:iconTint="@null"
-                    app:iconPadding="8dp"
                     app:iconGravity="textStart"
-                    app:strokeWidth="1dp"
+                    app:iconPadding="8dp"
+                    app:iconTint="@null"
                     app:strokeColor="@color/home_button_stroke"
-                    app:backgroundTint="@color/home_button_bg_tint" />
+                    app:strokeWidth="1dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/checkOthers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
+                    android:fontFamily="@font/funnel_sans_semibold"
                     android:text="@string/others"
                     android:textAllCaps="true"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/funnel_sans_semibold"
                     android:textColor="@color/subheadingcolor"
+                    android:textSize="12sp"
+                    app:backgroundTint="@color/home_button_bg_tint"
                     app:icon="@drawable/location"
-                    app:iconTint="@null"
-                    app:iconPadding="8dp"
                     app:iconGravity="textStart"
-                    app:strokeWidth="1dp"
+                    app:iconPadding="8dp"
+                    app:iconTint="@null"
                     app:strokeColor="@color/home_button_stroke"
-                    app:backgroundTint="@color/home_button_bg_tint" />
+                    app:strokeWidth="1dp" />
 
 
             </LinearLayout>
@@ -129,7 +128,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="24dp"
                 android:background="@drawable/edittext_background">
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -174,7 +173,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="12dp"
                 android:background="@drawable/edittext_background">
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -218,7 +217,51 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/edittext_background">
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:importantForAutofill="no"
+                    android:paddingVertical="5dp"
+                    android:textColorHint="@color/booked"
+                    app:boxStrokeColor="@android:color/transparent"
+                    app:boxStrokeWidth="1dp"
+                    app:boxStrokeWidthFocused="1dp"
+                    app:hintTextAppearance="@style/MyFloatingLabelStyle"
+                    app:hintTextColor="@color/booked">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tvmobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:digits="1234567890"
+                        android:fontFamily="@font/manrope_medium"
+                        android:hint="@string/street_name"
+                        android:imeOptions="actionDone"
+                        android:inputType="phone"
+                        android:maxLength="10"
+                        android:textColor="@color/headingcolor"
+                        android:textColorHint="@color/smallTextcolor"
+                        android:textCursorDrawable="@null"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
                 android:background="@drawable/edittext_background">
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -262,81 +305,96 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/edittext_background">
+                android:layout_marginTop="12dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-                <com.google.android.material.textfield.TextInputLayout
-
-                    android:layout_width="match_parent"
+                <RelativeLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@android:color/transparent"
-                    android:importantForAutofill="no"
-                    android:paddingVertical="5dp"
-                    android:textColorHint="@color/booked"
-                    app:boxStrokeColor="@android:color/transparent"
-                    app:boxStrokeWidth="1dp"
-                    app:boxStrokeWidthFocused="1dp"
-                    app:hintTextAppearance="@style/MyFloatingLabelStyle"
-                    app:hintTextColor="@color/booked">
+                    android:layout_marginEnd="12dp"
+                    android:layout_weight=".60">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/tvmobile"
+                    <AutoCompleteTextView
+                        android:id="@+id/autoCompleteCity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/stateLinearLayout"
                         android:background="@android:color/transparent"
-                        android:digits="1234567890"
+                        android:cursorVisible="false"
                         android:fontFamily="@font/manrope_medium"
-                        android:hint="@string/mobile_"
-                        android:imeOptions="actionDone"
-                        android:inputType="phone"
-                        android:maxLength="10"
-                        android:textColor="@color/headingcolor"
+                        android:padding="16dp"
+                        android:textColor="@color/tabbackground"
                         android:textColorHint="@color/smallTextcolor"
-                        android:textCursorDrawable="@null"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
+                        android:textSize="14sp" />
 
-                        />
+                    <LinearLayout
+                        android:id="@+id/stateLinearLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/edittext_background"
+                        android:orientation="horizontal">
 
-                </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/stateTextInputLayout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:background="@android:color/transparent"
+                            android:hint="@string/city"
+                            android:importantForAutofill="no"
+                            android:paddingVertical="5dp"
+                            android:textColorHint="@color/booked"
+                            app:boxStrokeColor="@android:color/transparent"
+                            app:boxStrokeWidth="1dp"
+                            app:boxStrokeWidthFocused="1dp"
+                            app:hintTextAppearance="@style/MyFloatingLabelStyle"
+                            app:hintTextColor="@color/booked">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/tvCity"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:autofillHints=""
+                                android:background="@android:color/transparent"
+                                android:cursorVisible="false"
+                                android:fontFamily="@font/manrope_medium"
+                                android:importantForAutofill="noExcludeDescendants"
+                                android:inputType="textNoSuggestions|textVisiblePassword"
+                                android:textColor="@color/headingcolor"
+                                android:textColorHint="@color/smallTextcolor"
+                                android:textCursorDrawable="@null"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+                        </com.google.android.material.textfield.TextInputLayout>
 
-                <AutoCompleteTextView
-                    android:id="@+id/autoCompleteCity"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@id/stateLinearLayout"
-                    android:background="@android:color/transparent"
-                    android:cursorVisible="false"
-                    android:fontFamily="@font/manrope_medium"
-                    android:padding="16dp"
-                    android:textColor="@color/tabbackground"
-                    android:textColorHint="@color/smallTextcolor"
-                    android:textSize="14sp" />
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/baseline_keyboard_arrow_down_24"
+                            app:tint="@color/smallTextcolor" />
+                    </LinearLayout>
+                </RelativeLayout>
 
                 <LinearLayout
-                    android:id="@+id/stateLinearLayout"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_weight=".40"
                     android:background="@drawable/edittext_background"
                     android:orientation="horizontal">
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/stateTextInputLayout"
+
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:background="@android:color/transparent"
-                        android:hint="@string/city"
                         android:importantForAutofill="no"
                         android:paddingVertical="5dp"
                         android:textColorHint="@color/booked"
@@ -347,20 +405,24 @@
                         app:hintTextColor="@color/booked">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/tvCity"
+                            android:id="@+id/tvCountry"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:autofillHints=""
                             android:background="@android:color/transparent"
                             android:cursorVisible="false"
+                            android:focusable="false"
                             android:fontFamily="@font/manrope_medium"
+                            android:hint="@string/country"
                             android:importantForAutofill="noExcludeDescendants"
                             android:inputType="textNoSuggestions|textVisiblePassword"
+                            android:text="United Arab Emirates"
                             android:textColor="@color/headingcolor"
                             android:textColorHint="@color/smallTextcolor"
                             android:textCursorDrawable="@null"
                             android:textSize="14sp"
                             android:textStyle="bold" />
+
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <ImageView
@@ -371,60 +433,6 @@
                         android:src="@drawable/baseline_keyboard_arrow_down_24"
                         app:tint="@color/smallTextcolor" />
                 </LinearLayout>
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/edittext_background"
-                android:orientation="horizontal">
-
-                <com.google.android.material.textfield.TextInputLayout
-
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:background="@android:color/transparent"
-                    android:importantForAutofill="no"
-                    android:paddingVertical="5dp"
-                    android:textColorHint="@color/booked"
-                    app:boxStrokeColor="@android:color/transparent"
-                    app:boxStrokeWidth="1dp"
-                    app:boxStrokeWidthFocused="1dp"
-                    app:hintTextAppearance="@style/MyFloatingLabelStyle"
-                    app:hintTextColor="@color/booked">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/tvCountry"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:autofillHints=""
-                        android:background="@android:color/transparent"
-                        android:cursorVisible="false"
-                        android:focusable="false"
-                        android:fontFamily="@font/manrope_medium"
-                        android:hint="@string/country"
-                        android:importantForAutofill="noExcludeDescendants"
-                        android:inputType="textNoSuggestions|textVisiblePassword"
-                        android:text="United Arab Emirates"
-                        android:textColor="@color/headingcolor"
-                        android:textColorHint="@color/smallTextcolor"
-                        android:textCursorDrawable="@null"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="10dp"
-                    android:src="@drawable/baseline_keyboard_arrow_down_24"
-                    app:tint="@color/smallTextcolor" />
             </LinearLayout>
 
 
