@@ -236,6 +236,10 @@ class PersonalizedActivity2 : AppCompatActivity() {
             tvcontinue.text = getString(R.string.label_lets_get_started)
         }
     }
+    private fun isValidHeight(input: String): Boolean {
+        val regex = Regex("^\\d+\\s*ft(\\s+\\d+\\s*in)?$")
+        return regex.matches(input.trim())
+    }
 
     private fun updateInfo() {
         Log.e("selectedPage===", "$selectedPage")
@@ -266,6 +270,10 @@ class PersonalizedActivity2 : AppCompatActivity() {
         }
 
         if (selectedPage == 3) {
+            if (!isValidHeight(tempSelectedHeightValue)){
+                Toast.makeText(this, "Enter correct format height", Toast.LENGTH_LONG).show()
+                return
+            }
             param["height"] = tempSelectedHeightValue
             apiUrl = ApiURL.addHeight
         }

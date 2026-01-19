@@ -4,10 +4,13 @@ import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.HapticFeedbackConstants
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.view.HapticFeedbackConstantsCompat
+import androidx.core.view.ViewCompat.performHapticFeedback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearSnapHelper
@@ -156,6 +159,10 @@ class CalendarArc :  Fragment()  {
 
                     val yourAge = calculateAge("$tempDay/$currentMonth/$currentYear")
                     age.text = yourAge
+                    performHapticFeedback(
+                        age ,
+                        HapticFeedbackConstantsCompat.LONG_PRESS
+                    )
                 }
             },
             currentYear,
@@ -217,6 +224,10 @@ class CalendarArc :  Fragment()  {
                     val yourAge = calculateAge("$tempDay/$currentMonth/$currentYear")
 
                     age.text = yourAge
+                    performHapticFeedback(
+                        age ,
+                        HapticFeedbackConstantsCompat.LONG_PRESS
+                    )
                 }
             },
             currentMonth,
@@ -263,6 +274,10 @@ class CalendarArc :  Fragment()  {
                     val yourAge = calculateAge("$tempDay/$currentMonth/$currentYear")
 
                     age.text = yourAge
+                    performHapticFeedback(
+                        age ,
+                        HapticFeedbackConstantsCompat.LONG_PRESS
+                    )
                 }
             },
             currentDay,

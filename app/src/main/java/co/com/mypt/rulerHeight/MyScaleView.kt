@@ -96,7 +96,7 @@ class   MyScaleView(mycontext: Context, attrs: AttributeSet?) :
         viewWidth = w
         viewHeight = h
         screenSize = height
-        pxmm = screenSize / 67f
+        pxmm = screenSize / 50f
         midScreenPoint = height / 2
         endPoint = width - 40
         if (isSizeChanged) {
@@ -320,6 +320,6 @@ class   MyScaleView(mycontext: Context, attrs: AttributeSet?) :
 
     companion object {
         var screenSize: Int = 480
-        private var pxmm = screenSize / 67f
+        private var pxmm = screenSize / 50f
     }
 }

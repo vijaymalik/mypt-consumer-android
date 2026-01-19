@@ -2,6 +2,8 @@ package co.com.mypt.onBoarding.personalize
 
 import android.graphics.Rect
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -37,6 +39,7 @@ class HeightFragment : Fragment() {
 
     lateinit var tvcms: TextView
     lateinit var tvfeet: TextView
+//    lateinit var tvError: TextView
     lateinit var txtValue: EditText
     lateinit var imEdit: FrameLayout
 //    lateinit var rootLayout: LinearLayout
@@ -54,9 +57,11 @@ class HeightFragment : Fragment() {
         tvfeet = view.findViewById(R.id.tvfeet)
         imEdit = view.findViewById(R.id.imEdit)
 //        rootLayout = view.findViewById(R.id.linear)
+
         val myScaleView = view.findViewById<MyScaleView>(R.id.myScaleViewcms)
         val myScaleViewfeet = view.findViewById<CenterWaveScaleViewFeet>(R.id.myScaleViewfeet)
         txtValue = view.findViewById(R.id.txt_height)
+//        tvError = view.findViewById(R.id.txt_height)
 //        unitTextView =view.findViewById(R.id.unit)
         imEdit.setOnClickListener {
             isEditable = !isEditable
@@ -67,11 +72,13 @@ class HeightFragment : Fragment() {
             }
         }
 
-        myScaleView.initializeStartingPoint(60F)
+        myScaleView.initializeStartingPoint(70.1F)
         myScaleView.setUpdateListener(object : onViewUpdateListener {
             override fun onViewUpdate(value: Float) {
                 println("======  $value")
-                val value = (value * 10f).roundToInt().toFloat() / 10f
+                var  value=if (value>.1) value.minus(.1).toFloat() else value
+                 value = (value * 10f).roundToInt().toFloat() / 10f
+
                 println("======2  $value")
 //                val htmlString = "<big><b>$value</b></big><small><font color=#959595>cm</font></small>"
 //                val spanned = HtmlCompat.fromHtml(htmlString, HtmlCompat.FROM_HTML_MODE_COMPACT)
@@ -85,7 +92,7 @@ class HeightFragment : Fragment() {
             }
         })
 
-        myScaleViewfeet.initializeStartingPoint(5F)
+        myScaleViewfeet.initializeStartingPoint(5.1F)
 
 //        ft = "<big><b>$ft</b></big><small><font color=#959595>ft</font></small>"
 //        val spanned = HtmlCompat.fromHtml(ft, HtmlCompat.FROM_HTML_MODE_COMPACT)
@@ -95,9 +102,11 @@ class HeightFragment : Fragment() {
 
         //txtValue.text = "${Html.fromHtml("<font><big>$ft</big></font><font><small>ft</small></font>", HtmlCompat.FROM_HTML_MODE_LEGACY)}"
         myScaleViewfeet.setUpdateListenerfeet(object : onViewUpdateListenerFeet {
-            override fun onViewUpdate(value: Float) {
+            override fun onViewUpdate(valueL: Float) {
+                val value=if (valueL>.1) valueL.minus(.1).toFloat() else valueL
                 val feet = value.toInt() // Extract integer part as feet
                 val inches = ((value - feet) * 12).toInt() // Convert decimal part to inches
+                println("==== $feet")
                 ft = if (inches == 0) "$feet ft"
                 else "$feet ft $inches in"
                 txtValue.setText(ft)
@@ -105,6 +114,30 @@ class HeightFragment : Fragment() {
             }
         })
 
+        txtValue.addTextChangedListener(object : TextWatcher {
+
+            override fun beforeTextChanged(
+                s: CharSequence?, start: Int, count: Int, after: Int
+            ) { }
+
+            override fun onTextChanged(
+                s: CharSequence?, start: Int, before: Int, count: Int
+            ) { }
+
+            override fun afterTextChanged(s: Editable?) {
+                val text = s.toString().trim()
+
+                if (text.isEmpty()) return
+
+
+//                if (!isValid) {
+//                    tvError.error = "Format should be like: 5 ft 8 in"
+//                } else {
+//                    tvError.error = null
+//                }
+                viewModel.data.value = text
+            }
+        })
 
         tvfeet.setOnClickListener {
             tvfeet.setTextColor(resources.getColor(R.color.black))
@@ -140,6 +173,8 @@ class HeightFragment : Fragment() {
 
         return view
     }
+
+
     fun setLinearLayoutEnd(linearLayout: LinearLayout, targetViewId: Int?) {
         val parent = linearLayout.parent as ConstraintLayout
         val constraintSet = ConstraintSet()

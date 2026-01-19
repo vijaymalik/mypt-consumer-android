@@ -101,7 +101,7 @@ class CenterWaveScaleViewFeet(mycontext: Context, attrs: AttributeSet?) :
         viewHeight = h
 
         screenSize = height
-        pxmm = screenSize / 67f
+        pxmm = screenSize / 50f
 
         rulersize = pxmm * 12
         midScreenPoint = height / 2
@@ -298,6 +298,6 @@ class CenterWaveScaleViewFeet(mycontext: Context, attrs: AttributeSet?) :
 
     companion object {
         var screenSize: Int = 480
-        private var pxmm = screenSize / 67f
+        private var pxmm = screenSize / 50f
     }
 }
