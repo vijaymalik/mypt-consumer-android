@@ -88,5 +88,6 @@
     <color name="neon_color">#E0FE08</color>
     <color name="grey_button">#808080</color>
     <color name="grey_text">#B3B3B3</color>
+    <color name="light_blue_text">#ADCCFF</color>
 
 </resources>

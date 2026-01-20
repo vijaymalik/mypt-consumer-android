@@ -49,7 +49,14 @@ class CreatePackagectivity : AppCompatActivity() {
     private val viewModelSessionvalue: SharedSessionvalueViewModel by viewModels()
     lateinit var viewPager: ViewPager2
     lateinit var back: ImageView
+
     lateinit var tvcontinue: TextView
+    lateinit var yourPlan: TextView
+    lateinit var validDay: TextView
+    lateinit var freeMsg: TextView
+    lateinit var upArrow: ImageView
+    lateinit var downArrow: ImageView
+    lateinit var devider: ImageView
     lateinit var tvcontinueView: LinearLayout
     lateinit var skip: TextView
     lateinit var p_Bar: ProgressBar
@@ -85,7 +92,21 @@ class CreatePackagectivity : AppCompatActivity() {
         skip = findViewById(R.id.skip)
         tvcontinue = findViewById(R.id.tvcontinue)
         tvcontinueView = findViewById(R.id.tvcontinueView)
+
+        yourPlan = findViewById(R.id.yourPlan)
+        validDay = findViewById(R.id.validDay)
+        freeMsg = findViewById(R.id.freeMsg)
+        upArrow = findViewById(R.id.upArrow)
+        downArrow = findViewById(R.id.downArrow)
+        devider = findViewById(R.id.devider)
+
         p_Bar = findViewById(R.id.p_Bar)
+        upArrow.setOnClickListener {
+            upArrowClick(true)
+        }
+        downArrow.setOnClickListener {
+            upArrowClick(false)
+        }
 //        im = findViewById(R.id.im)
         viewModel.setstart_dates.observe(this) { data ->
             setstart_dates = data
@@ -264,6 +285,15 @@ class CreatePackagectivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    private fun upArrowClick(isUpArrow: Boolean) {
+        yourPlan.visibility=if (!isUpArrow)View.VISIBLE else View.GONE
+        upArrow.visibility=if (!isUpArrow)View.VISIBLE else View.GONE
+        downArrow.visibility=if (isUpArrow)View.VISIBLE else View.GONE
+        validDay.visibility=if (!isUpArrow)View.VISIBLE else View.GONE
+        freeMsg.visibility=if (!isUpArrow)View.VISIBLE else View.GONE
+        devider.visibility=if (!isUpArrow)View.VISIBLE else View.GONE
     }
     private fun setButtonUnselected() {
         selectedCount = 0
