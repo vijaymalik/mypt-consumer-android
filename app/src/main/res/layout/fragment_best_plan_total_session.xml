@@ -425,16 +425,22 @@
             android:id="@+id/bestPlanParentView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
             android:orientation="vertical">
 
+            <com.yarolegovich.discretescrollview.DiscreteScrollView
+                android:id="@+id/carouselView"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:overScrollMode="never" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/customPlanParentView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"

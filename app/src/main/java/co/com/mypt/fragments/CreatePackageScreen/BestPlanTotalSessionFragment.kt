@@ -29,11 +29,14 @@ import android.widget.TextSwitcher
 import android.widget.TextView
 import androidx.appcompat.widget.SwitchCompat
 import androidx.cardview.widget.CardView
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import co.com.mypt.Api.ApiURL
 import co.com.mypt.Api.GetMethod
@@ -42,13 +45,16 @@ import co.com.mypt.ProgressDialog
 import co.com.mypt.R
 import co.com.mypt.activities.TrainersListActivity
 import co.com.mypt.adapter.ActivityAdapter
+import co.com.mypt.fragments.adapter.CarouselAdapter
+import co.com.mypt.fragments.adapter.CenterRaiseTransformer
 import co.com.mypt.model.ActivityModel
-import co.com.mypt.rulerHeight.CenterWaveScaleViewWeightHorizontal
 import co.com.mypt.rulerHeight.SessionRulerViewHorizontal
 import co.com.mypt.rulerHeight.onViewUpdateListenerWeight
 import co.com.mypt.utils.SharedSessionvalueViewModel
 import com.android.volley.VolleyError
 import com.bumptech.glide.Glide
+import com.yarolegovich.discretescrollview.DiscreteScrollView
+import com.yarolegovich.discretescrollview.transform.ScaleTransformer
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.json.JSONObject
@@ -97,7 +103,7 @@ class BestPlanTotalSessionFragment(
     lateinit var customization: TextView
     lateinit var bestPlanParentView: LinearLayout
     lateinit var customPlanParentView: LinearLayout
-
+    private var carouselRecycler: DiscreteScrollView?=null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -126,6 +132,7 @@ class BestPlanTotalSessionFragment(
         textSwitcher = view.findViewById(R.id.textSwitcher)
         customPlanParentView = view.findViewById(R.id.customPlanParentView)
         bestPlanParentView = view.findViewById(R.id.bestPlanParentView)
+        carouselRecycler = view.findViewById(R.id.carouselView)
 
         seekBar.post {
             val seekBarWidth = seekBar.width - seekBar.paddingLeft - seekBar.paddingRight
@@ -283,8 +290,50 @@ class BestPlanTotalSessionFragment(
         textShader(tvAEDSession)
         tvRealPrice.paintFlags = tvRealPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
       //  getSessionData()
+        initializeCarousel()
         return view
     }
+    private val snapHelper = PagerSnapHelper()
+
+    fun initializeCarousel() {
+        carouselRecycler?.adapter = CarouselAdapter()
+
+        carouselRecycler?.setItemTransformer(
+            ScaleTransformer.Builder()
+                .setMinScale(0.85f)
+                .build()
+        )
+
+        carouselRecycler?.setItemTransformer(CenterRaiseTransformer())
+
+//        carouselRecycler?.layoutManager =
+//            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+//
+//        carouselRecycler?.adapter = CarouselAdapter()
+//        carouselRecycler?.itemAnimator = null
+
+//        snapHelper.attachToRecyclerView(carouselRecycler)
+
+        /*carouselRecycler?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            override fun onScrolled(rv: RecyclerView, dx: Int, dy: Int) {
+                val centerX = rv.width / 2
+
+                for (i in 0 until rv.childCount) {
+                    val child = rv.getChildAt(i) as MotionLayout
+
+                    val childCenterX = (child.left + child.right) / 2
+                    val distance = kotlin.math.abs(centerX - childCenterX)
+
+                    val itemWidth = child.width
+                    val progress = 1f - (distance.toFloat() / itemWidth)
+
+                    child.progress = progress.coerceIn(0f, 1f)
+                }
+            }
+        })*/
+    }
+
     private fun selectTab(
         selectedTab: TextView,
         unselectedTab: TextView,

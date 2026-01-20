@@ -1,3 +1,4 @@
+import org.gradle.kotlin.dsl.implementation
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -112,4 +113,8 @@ dependencies {
     implementation("com.google.android.play:app-update-ktx:2.1.0")
     implementation ("com.hbb20:ccp:2.7.0")
     implementation("com.google.maps.android:android-maps-utils:2.2.5")
+
+    implementation ("com.github.yarolegovich:DiscreteScrollView:1.5.1")
+
+
 }
