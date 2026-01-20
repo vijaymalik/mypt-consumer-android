@@ -78,8 +78,9 @@ class BestPlanTotalSessionFragment(
     lateinit var tvTrainer_name: TextView
     lateinit var recycler:RecyclerView
     lateinit var tvRealPrice:TextView
+    lateinit var sessionSelected:TextView
     lateinit var tvAEDSession:TextView
-    lateinit var sessionValue : TextView
+//    lateinit var sessionValue : TextView
     lateinit var imTrainer : ImageView
     lateinit var greenLine : ImageView
     lateinit var seekBar : SeekBar
@@ -125,7 +126,7 @@ class BestPlanTotalSessionFragment(
         view1=view.findViewById(R.id.view1)
         imTrainer=view.findViewById(R.id.imTrainer)
         seekBar=view.findViewById(R.id.seekBar)
-        sessionValue=view.findViewById(R.id.sessionValue)
+//        sessionValue=view.findViewById(R.id.sessionValue)
         sessionValueCard=view.findViewById(R.id.sessionValueCard)
         customization=view.findViewById(R.id.customization)
         bestPlan=view.findViewById(R.id.bestPlan)
@@ -134,6 +135,7 @@ class BestPlanTotalSessionFragment(
         customPlanParentView = view.findViewById(R.id.customPlanParentView)
         bestPlanParentView = view.findViewById(R.id.bestPlanParentView)
         carouselRecycler = view.findViewById(R.id.carouselView)
+        sessionSelected = view.findViewById(R.id.sessionSelected)
 
         seekBar.post {
             val seekBarWidth = seekBar.width - seekBar.paddingLeft - seekBar.paddingRight
@@ -179,7 +181,57 @@ class BestPlanTotalSessionFragment(
             override fun onViewUpdate(value: Float) {
                 val valueL = if (value>.1)value.minus(.1).toFloat() else value
                 println("===== $value")
-                //updateWeight(roundTo1Decimal(valueL).toString())
+                val updatedValue=value.toInt()
+                if(updatedValue == 0){
+                    seekBar!!.progress = 1
+                    return
+                }
+                if(updatedValue > 1)
+                    sessionSelected.text = "$updatedValue Sessions"
+                else
+                    sessionSelected.text = "$updatedValue Session"
+
+                viewModel.data.value =updatedValue.toString()
+
+                textShader(textSwitcher.currentView as TextView)
+
+
+
+                // Determine the direction of the progress change (increase or decrease)
+                var inAnimation: Animation? = null
+                var outAnimation: Animation? = null
+
+                if (updatedValue > lastProgress) {
+                    // Slide from top to bottom (increasing)
+                    inAnimation = createSlideInAnimation(1.0f, 0.0f) // from up to down
+                    outAnimation = createSlideOutAnimation(0.0f, -1.0f) // slide out upward
+                } else if (updatedValue < lastProgress) {
+                    // Slide from bottom to top (decreasing)
+                    inAnimation = createSlideInAnimation(-1.0f, 0.0f) // from down to up
+                    outAnimation = createSlideOutAnimation(0.0f, 1.0f) // slide out downward
+                }
+
+                // Apply the animations to TextSwitcher
+                textSwitcher.inAnimation = inAnimation
+                textSwitcher.outAnimation = outAnimation
+
+                // Update text in TextSwitcher
+                // textSwitcher.setText(String.valueOf(progress))
+
+                // Update the last progress value
+                lastProgress = updatedValue
+                val layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
+                textSwitcher.setLayoutParams(layoutParams)
+
+                debounceRunnable?.let { debounceHandler.removeCallbacks(it) }
+
+                debounceRunnable = Runnable {
+                    getSessionData(checkedType)
+                }
+                debounceHandler.postDelayed(debounceRunnable!!, 300)
             }
         })
         //textSwitcher.setText("100")
@@ -196,10 +248,10 @@ class BestPlanTotalSessionFragment(
                     seekBar!!.progress = 1
                     return
                 }
-                if(progress > 1)
+               /* if(progress > 1)
                     sessionValue.text = "$progress Sessions"
                 else
-                    sessionValue.text = "$progress Session"
+                    sessionValue.text = "$progress Session"*/
 
                 viewModel.data.value =progress.toString()
 
@@ -368,10 +420,10 @@ class BestPlanTotalSessionFragment(
         progressDialog.show()
         var api=""
         if (sharedPreferences.getString("typeWorkout","").equals("home")){
-            api= ApiURL.packagecreate+sharedPreferences.getInt("selectedPackageType",0)+"&sessions="+sessionValue.text.toString().replace(" Sessions","").replace(" Session","")+"&type="+"home"+
+            api= ApiURL.packagecreate+sharedPreferences.getInt("selectedPackageType",0)+"&sessions="+sessionSelected.text.toString().replace("Sessions","").replace(" Session","").trim()+"&type="+"home"+
                     "&trainer_id="+trainer_id+"&studio_id="+""+"&month="+month+"&address_id="+address_id
         }else{
-            api= ApiURL.packagecreate+sharedPreferences.getInt("selectedPackageType",0)+"&sessions="+sessionValue.text.toString().replace("Sessions","").replace("Session","")+"&type="+"gym"+
+            api= ApiURL.packagecreate+sharedPreferences.getInt("selectedPackageType",0)+"&sessions="+sessionSelected.text.toString().replace("Sessions","").replace("Session","").trim()+"&type="+"gym"+
                     "&trainer_id="+trainer_id+"&studio_id="+studio_id+"&month="+month+"&address_id="+address_id
         }
         Log.e("SessionPackageAPi",api)

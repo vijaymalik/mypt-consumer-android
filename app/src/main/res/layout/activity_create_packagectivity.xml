@@ -180,12 +180,13 @@
 
                     <TextView
                         android:id="@+id/validDay"
-
                         android:visibility="gone"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/planLayout"
                         android:layout_width="wrap_content"
+                        app:layout_constraintBottom_toTopOf="@+id/devider"
                         android:layout_height="wrap_content"
+                        android:layout_marginVertical="16dp"
                         android:fontFamily="@font/clash_display_semibold"
                         android:text="Valid for 120 days"
                         android:textColor="@color/grey_text"
@@ -193,12 +194,11 @@
 
                     <ImageView
                         android:id="@+id/devider"
-
                         android:visibility="gone"
                         app:layout_constraintTop_toBottomOf="@+id/validDay"
+                        app:layout_constraintBottom_toTopOf="@+id/freeMsg"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginTop="16dp"
                         android:background="@drawable/devider" />
 
                     <TextView
@@ -236,10 +236,12 @@
                         android:fontFamily="@font/funnel_sans_medium"
                         android:text="@string/next"
                         android:textAllCaps="true"
+                        android:clickable="false"
                         android:textColor="@color/subheadingcolor"
                         android:textSize="16sp" />
 
                     <ImageView
+                        android:id="@+id/forwardArrow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingStart="10dp"

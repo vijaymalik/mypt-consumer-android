@@ -457,14 +457,30 @@
                     android:paddingHorizontal="24dp"
                     android:paddingVertical="24dp">
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/funnel_sans_medium"
+        android:text="Per Session Cost"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+    <View
+        android:layout_width="4dp"
+        android:background="@drawable/otp_gradient_grey"
+        android:layout_height="4dp"/>
+    <TextView
+        android:id="@+id/sessionSelected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/funnel_sans_regular"
+        android:text="10 Sessions"
+        android:textColor="@color/session"
+        android:textSize="14sp" />
+</LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/funnel_sans_medium"
-                        android:text="Per Session Cost"
-                        android:textColor="@color/white"
-                        android:textSize="16sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -474,9 +490,12 @@
 
                         <TextSwitcher
                             android:id="@+id/textSwitcher"
+                            android:fontFamily="@font/clash_display_medium"
+                            android:textSize="24sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:inAnimation="@anim/slide_in_top"
+                            android:visibility="visible"
                             android:outAnimation="@anim/slide_out_bottom" />
 
                         <TextView
@@ -487,8 +506,7 @@
                             android:text="300"
                             android:textColor="@color/white"
                             android:textSize="24sp"
-                            android:textStyle="bold"
-                            android:visibility="visible" />
+                            android:visibility="gone" />
 
                         <TextView
                             android:id="@+id/tvAEDSession"
@@ -512,7 +530,7 @@
                     <co.com.mypt.rulerHeight.SessionRulerViewHorizontal
                         android:id="@+id/ruler_session"
                         android:layout_width="match_parent"
-                        android:layout_height="130dp"
+                        android:layout_height="120dp"
                         android:layout_marginTop="50dp"
                         app:layout_constraintTop_toTopOf="parent" />
 

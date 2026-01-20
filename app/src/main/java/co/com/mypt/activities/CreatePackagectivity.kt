@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.SharedPreferences
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Build
@@ -20,6 +21,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
@@ -58,6 +60,7 @@ class CreatePackagectivity : AppCompatActivity() {
     lateinit var upArrow: ImageView
     lateinit var downArrow: ImageView
     lateinit var devider: ImageView
+    lateinit var forwardArrow: ImageView
     lateinit var tvcontinueView: LinearLayout
     lateinit var skip: TextView
     lateinit var p_Bar: ProgressBar
@@ -105,6 +108,7 @@ class CreatePackagectivity : AppCompatActivity() {
         devider = findViewById(R.id.devider)
         bottomView = findViewById(R.id.bottomView)
         topView = findViewById(R.id.topView)
+        forwardArrow = findViewById(R.id.forwardArrow)
 
         p_Bar = findViewById(R.id.p_Bar)
         upArrow.setOnClickListener {
@@ -288,6 +292,8 @@ class CreatePackagectivity : AppCompatActivity() {
                     selectedCount = 1
                     tvcontinueView.background = resources.getDrawable(R.drawable.white_rectangle)
                     tvcontinue.setTextColor(resources.getColor(R.color.buttontextcolor))
+                    forwardArrow.imageTintList =
+                        ColorStateList.valueOf(ContextCompat.getColor(this@CreatePackagectivity, R.color.black))
 //                    tvcontinue.setTypeface(null, Typeface.BOLD)
                 }
             }
@@ -301,12 +307,16 @@ class CreatePackagectivity : AppCompatActivity() {
     }
     fun checkPlanSelection(){
         if (selectedPage ==1 && isBestPlanSelected){
+            tvcontinue.text=getString(R.string.continue_summery)
             topView.visibility=View.VISIBLE
             bottomView.background=resources.getDrawable(R.drawable.grey_rectangle, null)
         }else{
             topView.visibility=View.GONE
             bottomView.background=null
+            tvcontinue.text=getString(R.string.cont_inue)
         }
+
+
     }
     private fun upArrowClick(isUpArrow: Boolean) {
         yourPlan.visibility=if (!isUpArrow)View.VISIBLE else View.GONE
@@ -420,6 +430,8 @@ class CreatePackagectivity : AppCompatActivity() {
                 selectedCount = 1
                 tvcontinueView.background = resources.getDrawable(R.drawable.white_rectangle)
                 tvcontinue.setTextColor(resources.getColor(R.color.buttontextcolor))
+                forwardArrow.imageTintList =
+                    ColorStateList.valueOf(ContextCompat.getColor(this@CreatePackagectivity, R.color.black))
 //                tvcontinue.setTypeface(null, Typeface.BOLD)
 
 
@@ -480,6 +492,8 @@ class CreatePackagectivity : AppCompatActivity() {
                 selectedCount = 1
                 tvcontinueView.background = resources.getDrawable(R.drawable.white_rectangle)
                 tvcontinue.setTextColor(resources.getColor(R.color.buttontextcolor))
+                forwardArrow.imageTintList =
+                    ColorStateList.valueOf(ContextCompat.getColor(this@CreatePackagectivity, R.color.black))
 //                tvcontinue.setTypeface(null, Typeface.BOLD)
                 /*var count = viewPagerAdapter.itemCount -1
                 while (count > 0 ){
