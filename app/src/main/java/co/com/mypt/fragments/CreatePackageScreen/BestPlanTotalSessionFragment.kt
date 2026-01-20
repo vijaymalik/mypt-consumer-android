@@ -234,6 +234,7 @@ class BestPlanTotalSessionFragment(
                 debounceHandler.postDelayed(debounceRunnable!!, 300)
             }
         })
+        rulerWeight.setDefaultValue(11F)
         //textSwitcher.setText("100")
 
         val startColor = Color.parseColor("#3DD772")

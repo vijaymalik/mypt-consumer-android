@@ -87,6 +87,7 @@ class SessionRulerViewHorizontal(
 
         midScreenPoint = w / 2
         endPoint = h - 40
+        applyDefaultValue()
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -226,6 +227,22 @@ class SessionRulerViewHorizontal(
         mListener?.onViewUpdate(value.toFloat())
 
         return true
+    }
+    private var defaultValue = 0f
+    fun setDefaultValue(value: Float) {
+        defaultValue = value
+
+        if (viewWidth > 0) {
+            applyDefaultValue()
+            invalidate()
+        }
+    }
+    private fun applyDefaultValue() {
+        // number of ticks from start
+        val totalTicks = (defaultValue - START_VALUE)
+
+        // move ruler so this value is at center
+        mainPoint = midScreenPoint - (totalTicks * pxmm)
     }
 
     companion object {
