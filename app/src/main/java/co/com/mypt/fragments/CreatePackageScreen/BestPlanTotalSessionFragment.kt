@@ -43,6 +43,7 @@ import co.com.mypt.Api.GetMethod
 import co.com.mypt.Api.ResponseData
 import co.com.mypt.ProgressDialog
 import co.com.mypt.R
+import co.com.mypt.activities.CreatePackagectivity
 import co.com.mypt.activities.TrainersListActivity
 import co.com.mypt.adapter.ActivityAdapter
 import co.com.mypt.fragments.adapter.CarouselAdapter
@@ -160,10 +161,16 @@ class BestPlanTotalSessionFragment(
         }
         bestPlan.setOnClickListener {
             selectTab(bestPlan, customization,bestPlanParentView,customPlanParentView)
+            activity?.let {
+                (it as CreatePackagectivity).selectedPlan(true)
+            }
         }
 
         customization.setOnClickListener {
             selectTab(customization, bestPlan,customPlanParentView,bestPlanParentView)
+            activity?.let {
+                (it as CreatePackagectivity).selectedPlan(false)
+            }
         }
 
         val rulerWeight = view.findViewById<SessionRulerViewHorizontal>(R.id.ruler_session)

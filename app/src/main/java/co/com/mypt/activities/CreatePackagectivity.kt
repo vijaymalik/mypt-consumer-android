@@ -19,6 +19,7 @@ import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.preference.PreferenceManager
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
@@ -69,6 +70,9 @@ class CreatePackagectivity : AppCompatActivity() {
     var setstart_dates=""
     lateinit var sharedPreferences : SharedPreferences
     var needRefresh = false
+    var isBestPlanSelected=true
+    lateinit var bottomView: ConstraintLayout
+    lateinit var topView: ConstraintLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -99,6 +103,8 @@ class CreatePackagectivity : AppCompatActivity() {
         upArrow = findViewById(R.id.upArrow)
         downArrow = findViewById(R.id.downArrow)
         devider = findViewById(R.id.devider)
+        bottomView = findViewById(R.id.bottomView)
+        topView = findViewById(R.id.topView)
 
         p_Bar = findViewById(R.id.p_Bar)
         upArrow.setOnClickListener {
@@ -211,6 +217,7 @@ class CreatePackagectivity : AppCompatActivity() {
                 }else if(selectedPage ==4){
                     setButtonUnselected()
                 }
+                checkPlanSelection()
                 //viewPager.currentItem = selectedPage
                 viewPager.setCurrentItem(selectedPage,true)
                 p_Bar.setProgress(25*(selectedPage+1),true)
@@ -236,7 +243,7 @@ class CreatePackagectivity : AppCompatActivity() {
                 unregisterCloseGymClassReceiver()
                 finish()
             }
-
+            checkPlanSelection()
             if(selectedPage ==3 || selectedPage == 2|| selectedPage == 1){
                 selectedCount = 1
                 tvcontinueView.background = resources.getDrawable(R.drawable.white_rectangle)
@@ -276,7 +283,7 @@ class CreatePackagectivity : AppCompatActivity() {
                     unregisterCloseGymClassReceiver()
                     finish()
                 }
-
+                checkPlanSelection()
                 if(selectedPage ==3 || selectedPage == 2|| selectedPage == 1){
                     selectedCount = 1
                     tvcontinueView.background = resources.getDrawable(R.drawable.white_rectangle)
@@ -285,8 +292,22 @@ class CreatePackagectivity : AppCompatActivity() {
                 }
             }
         })
+        checkPlanSelection()
     }
 
+    fun selectedPlan(isBestPlanSelected: Boolean){
+        this.isBestPlanSelected=isBestPlanSelected
+        checkPlanSelection()
+    }
+    fun checkPlanSelection(){
+        if (selectedPage ==1 && isBestPlanSelected){
+            topView.visibility=View.VISIBLE
+            bottomView.background=resources.getDrawable(R.drawable.grey_rectangle, null)
+        }else{
+            topView.visibility=View.GONE
+            bottomView.background=null
+        }
+    }
     private fun upArrowClick(isUpArrow: Boolean) {
         yourPlan.visibility=if (!isUpArrow)View.VISIBLE else View.GONE
         upArrow.visibility=if (!isUpArrow)View.VISIBLE else View.GONE

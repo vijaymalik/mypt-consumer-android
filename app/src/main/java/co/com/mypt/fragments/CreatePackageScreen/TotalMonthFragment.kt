@@ -324,7 +324,7 @@ class TotalMonthFragment(var studio_id: String?) : Fragment() {
             textSwitcher.setText(sharedPreferences.getString("price",""))
             textShader(textSwitcher.currentView as TextView)
 
-            var jsonArray=JSONArray(sharedPreferences.getString("tagsArray",""))
+            val jsonArray=JSONArray(sharedPreferences.getString("tagsArray","[]"))
             activitiesModelList.clear()
             for(i in 0 until jsonArray.length())
             {
@@ -338,7 +338,7 @@ class TotalMonthFragment(var studio_id: String?) : Fragment() {
             seekBar.setOnTouchListener { _, _ -> true }
             lifecycleScope.launch {
                 delay(100)
-                seekBar.progress = sharedPreferences.getString("totalDays","")!!.toInt()
+                seekBar.progress = sharedPreferences.getString("totalDays","")?.toIntOrNull()?:0
 
             }
         }
