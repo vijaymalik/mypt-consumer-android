@@ -162,7 +162,7 @@
                         android:textColorHint="@color/smallTextcolor"
                         android:textCursorDrawable="@null"
                         android:textSize="14sp"
-                        android:textStyle="bold"
+
 
                         />
 
@@ -206,7 +206,7 @@
                         android:textColorHint="@color/smallTextcolor"
                         android:textCursorDrawable="@null"
                         android:textSize="14sp"
-                        android:textStyle="bold"
+
 
                         />
 
@@ -240,19 +240,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
-                        android:digits="1234567890"
                         android:fontFamily="@font/manrope_medium"
                         android:hint="@string/street_name"
                         android:imeOptions="actionDone"
-                        android:inputType="phone"
-                        android:maxLength="10"
                         android:textColor="@color/headingcolor"
                         android:textColorHint="@color/smallTextcolor"
                         android:textCursorDrawable="@null"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-
-                        />
+                        android:textSize="14sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
@@ -295,7 +289,7 @@
                         android:textColorHint="@color/smallTextcolor"
                         android:textCursorDrawable="@null"
                         android:textSize="14sp"
-                        android:textStyle="bold"
+
 
                         />
 
@@ -367,7 +361,7 @@
                                 android:textColorHint="@color/smallTextcolor"
                                 android:textCursorDrawable="@null"
                                 android:textSize="14sp"
-                                android:textStyle="bold" />
+                                 />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <ImageView
@@ -420,8 +414,7 @@
                             android:textColor="@color/headingcolor"
                             android:textColorHint="@color/smallTextcolor"
                             android:textCursorDrawable="@null"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
+                            android:textSize="14sp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 

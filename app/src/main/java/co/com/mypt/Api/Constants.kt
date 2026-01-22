@@ -18,4 +18,5 @@ object Constants {
     val lat = "lat"
     val address = "address"
     val profile_image = "profile_image"
+    val ISFROMGYMWORKOUT="isFromGymWorkout"
 }

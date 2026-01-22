@@ -8,7 +8,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
+import co.com.mypt.Api.Constants.ISFROMGYMWORKOUT
 import co.com.mypt.GymWorkout.withTrainer.GymListActivity
+import co.com.mypt.Profile.ChangeLocationActivity
 import co.com.mypt.R
 
 
@@ -81,9 +83,13 @@ class HomeGymTrainerActivity :AppCompatActivity() {
                     startActivity(Intent(this, TrainersListActivity::class.java))
                 }
                 else{
-                    var intent=Intent(this, GymListActivity::class.java)
                     editor.putString("typeWorkout",type).apply()
+                    var intent=Intent(this,ChangeLocationActivity::class.java)
+                    intent.putExtra(ISFROMGYMWORKOUT,true)
                     startActivity(intent)
+
+//                    var intent=Intent(this, GymListActivity::class.java)
+//                    startActivity(intent)
 
                 }
             }

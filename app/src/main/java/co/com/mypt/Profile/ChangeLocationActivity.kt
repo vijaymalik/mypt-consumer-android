@@ -33,6 +33,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.preference.PreferenceManager
+import co.com.mypt.Api.Constants.ISFROMGYMWORKOUT
+import co.com.mypt.GymWorkout.withTrainer.GymListActivity
 import co.com.mypt.R
 import co.com.mypt.activities.MainActivity
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -75,6 +77,8 @@ class ChangeLocationActivity : AppCompatActivity() , OnMapReadyCallback {
     lateinit var linearheader: LinearLayout
     lateinit var sharedPreferences: SharedPreferences
     var address = ""
+    var isFromGymWorkoutL: Boolean?=false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_change_location)
@@ -84,6 +88,7 @@ class ChangeLocationActivity : AppCompatActivity() , OnMapReadyCallback {
         currentLoc=findViewById(R.id.currentLoc)
         tvContinue=findViewById(R.id.tvContinue)
         linearheader=findViewById(R.id.linearheader)
+        isFromGymWorkoutL=intent?.getBooleanExtra(ISFROMGYMWORKOUT,false)
         sharedPreferences= PreferenceManager.getDefaultSharedPreferences(applicationContext)
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map1) as? SupportMapFragment
 
@@ -138,7 +143,13 @@ class ChangeLocationActivity : AppCompatActivity() , OnMapReadyCallback {
             sharedPreferences.edit().putString("templat",latitude.toString()).apply()
             sharedPreferences.edit().putString("templong",longitude.toString()).apply()
             sharedPreferences.edit().putString("tempaddress",address).apply()
-            finish()
+            if (isFromGymWorkoutL == true){
+                val intent=Intent(this, GymListActivity::class.java)
+                startActivity(intent)
+            }else{
+                finish()
+            }
+
         }
 
     }

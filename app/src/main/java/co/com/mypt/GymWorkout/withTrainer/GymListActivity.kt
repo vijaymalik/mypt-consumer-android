@@ -79,9 +79,9 @@ class GymListActivity : AppCompatActivity() {
     var filter="0"
     var tag_id="0"
     lateinit var tvNodata : TextView
-    lateinit var tvgymCount : TextView
-    lateinit var tvLocation : TextView
-    lateinit var linearLocation : LinearLayout
+//    lateinit var tvgymCount : TextView
+//    lateinit var tvLocation : TextView
+//    lateinit var linearLocation : LinearLayout
     lateinit var back_1 : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -92,11 +92,11 @@ class GymListActivity : AppCompatActivity() {
         exerciseRecyclerView = findViewById(R.id.exerciseRecyclerView)
         trainerRecyclerView = findViewById(R.id.trainerRecyclerView)
         im_search = findViewById(R.id.im_search)
-        tvLocation = findViewById(R.id.tvLocation)
+//        tvLocation = findViewById(R.id.tvLocation)
         tvNodata = findViewById(R.id.tvNodata)
-        tvgymCount = findViewById(R.id.tvgymCount)
+//        tvgymCount = findViewById(R.id.tvgymCount)
         back_1 = findViewById(R.id.back_1)
-        linearLocation = findViewById(R.id.linearLocation)
+//        linearLocation = findViewById(R.id.linearLocation)
         sharedPreferences= PreferenceManager.getDefaultSharedPreferences(applicationContext)
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         geocoder = Geocoder(this, Locale.getDefault())
@@ -115,7 +115,7 @@ class GymListActivity : AppCompatActivity() {
         back_1.setOnClickListener{
            finish()
         }
-        linearLocation.setOnClickListener{
+       /* linearLocation.setOnClickListener{
             val fields = listOf(Place.Field.ID, Place.Field.NAME,Place.Field.LOCATION)
 
             // Start the autocomplete intent.
@@ -124,7 +124,7 @@ class GymListActivity : AppCompatActivity() {
                 .build(this)
 
             startAutocomplete.launch(intent)
-        }
+        }*/
     }
     private val startAutocomplete =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
@@ -138,7 +138,7 @@ class GymListActivity : AppCompatActivity() {
                     longitude = place.location?.longitude
                     Log.e("autolat",""+latitude)
                     Log.e("autolong",""+longitude)
-                    tvLocation.text = place.name
+//                    tvLocation.text = place.name
                     getTagData(latitude,longitude)
                     getgymList(tag_id,filter)
 
@@ -329,7 +329,7 @@ class GymListActivity : AppCompatActivity() {
                                 e.printStackTrace()
                             }
                             Handler(Looper.getMainLooper()).postDelayed({
-                                tvLocation.text = address
+//                                tvLocation.text = address
 
                             }, 500)
                             getTagData(latitude,longitude)
@@ -344,11 +344,11 @@ class GymListActivity : AppCompatActivity() {
                 }
             }
         }
-        mFusedLocationClient.requestLocationUpdates(
+        /*mFusedLocationClient.requestLocationUpdates(
             locationRequest,
             locationCallback,
             Looper.getMainLooper()
-        )
+        )*/
     }
     override fun onResume() {
         super.onResume()
@@ -367,7 +367,19 @@ class GymListActivity : AppCompatActivity() {
             @Suppress("UnspecifiedRegisterReceiverFlag")
             registerReceiver(trainerListBroadCast, IntentFilter("gymtag"))
         }
-    }
+
+        if(sharedPreferences.getString("tempaddress","") != "") {
+            latitude = sharedPreferences.getString("templat", "0.0")!!.toDouble()
+            longitude = sharedPreferences.getString("templong", "0.0")!!.toDouble()
+//            address = "" + sharedPreferences.getString("tempaddress", "")
+
+            sharedPreferences.edit().remove("templat").apply()
+            sharedPreferences.edit().remove("templong").apply()
+            sharedPreferences.edit().remove("tempaddress").apply()
+            getTagData(latitude,longitude)
+            getgymList(tag_id,filter)
+        }
+        }
 
     var trainerListBroadCast: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
@@ -418,10 +430,10 @@ class GymListActivity : AppCompatActivity() {
                             trainerRecyclerView.visibility= View.VISIBLE
                             tvNodata.visibility= View.GONE
 
-                            tvgymCount.setText("${trainerList.size} Gyms Near You")
+//                            tvgymCount.setText("${trainerList.size} Gyms Near You")
 
                         }else{
-                            tvgymCount.setText("No Gyms Near You")
+//                            tvgymCount.setText("No Gyms Near You")
 
                             trainerRecyclerView.visibility= View.GONE
                             tvNodata.visibility= View.VISIBLE
