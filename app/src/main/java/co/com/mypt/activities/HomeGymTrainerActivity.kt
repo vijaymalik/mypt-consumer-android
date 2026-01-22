@@ -55,7 +55,7 @@ class HomeGymTrainerActivity :AppCompatActivity() {
 
         gymWorkout.setOnClickListener {
             type="work"
-            gymWorkout.setImageResource(R.drawable.image_gender_male_selected)
+            gymWorkout.setImageResource(R.drawable.image_gym_gender_male_selected)
             homeWorkout.setImageResource(R.drawable.home_workout)
 
             tvcontinueView.background = resources.getDrawable(R.drawable.white_rectangle)
@@ -65,7 +65,7 @@ class HomeGymTrainerActivity :AppCompatActivity() {
         }
         homeWorkout.setOnClickListener {
             type="home"
-            gymWorkout.setImageResource(R.drawable.image_gender_male_unselected)
+            gymWorkout.setImageResource(R.drawable.image_gym_gender_male_unselected)
             homeWorkout.setImageResource(R.drawable.selected_home_workout)
 
             tvcontinueView.background = resources.getDrawable(R.drawable.white_rectangle)

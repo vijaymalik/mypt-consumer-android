@@ -65,8 +65,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/homeWorkout"
@@ -115,26 +114,15 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="20dp">
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/gymWorkout"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="1dp"
-                android:layout_marginTop="-40dp"
-                android:adjustViewBounds="true"
-                android:src="@drawable/ic_member_ship" />
 
             <ImageView
                 android:id="@+id/gymWorkout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
-                android:src="@drawable/image_gender_male_unselected" />
+                android:src="@drawable/image_gym_gender_male_unselected" />
 
             <TextView
                 android:id="@+id/gymtxt"

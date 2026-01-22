@@ -533,7 +533,7 @@
     <string name="Camera">Camera</string>
     <string name="addphoto">Add Photo!</string>
     <string name="Cancel">CANCEL</string>
-    <string name="select_gym">Select GYM</string>
+    <string name="select_gym">Select This GYM</string>
     <string name="per_package_cost">Per Package Cost</string>
     <string name="add_new_address_">Enter your full address details</string>
     <string name="locked_for_now">Locked for Now</string>

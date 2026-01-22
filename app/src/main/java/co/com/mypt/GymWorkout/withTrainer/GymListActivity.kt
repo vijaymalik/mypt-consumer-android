@@ -362,14 +362,14 @@ class GymListActivity : AppCompatActivity() {
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            registerReceiver(TrainerList, IntentFilter("gymtag"), RECEIVER_EXPORTED)
+            registerReceiver(trainerListBroadCast, IntentFilter("gymtag"), RECEIVER_EXPORTED)
         } else {
             @Suppress("UnspecifiedRegisterReceiverFlag")
-            registerReceiver(TrainerList, IntentFilter("gymtag"))
+            registerReceiver(trainerListBroadCast, IntentFilter("gymtag"))
         }
     }
 
-    var TrainerList: BroadcastReceiver = object : BroadcastReceiver() {
+    var trainerListBroadCast: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             try {
                 filter= intent.getStringExtra("filter")!!
