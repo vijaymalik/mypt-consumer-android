@@ -37,6 +37,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import co.com.mypt.Api.ApiURL
+import co.com.mypt.Api.Constants.ISFROMGYMWORKOUT
 import co.com.mypt.Api.GetMethod
 import co.com.mypt.Api.PostMethod
 import co.com.mypt.Api.ResponseData
@@ -102,6 +103,7 @@ class SelectCurrentLocationActivity : AppCompatActivity() , OnMapReadyCallback {
     lateinit var tvBuildingName:TextInputEditText
     lateinit var autoCompleteCity:AutoCompleteTextView
     var cityArrayList=ArrayList<String>()
+    var isFromGymWorkoutL: Boolean?=false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -113,6 +115,7 @@ class SelectCurrentLocationActivity : AppCompatActivity() , OnMapReadyCallback {
         currentLoc=findViewById(R.id.currentLoc)
         tvContinue=findViewById(R.id.tvContinue)
         linearheader=findViewById(R.id.linearheader)
+        isFromGymWorkoutL=intent?.getBooleanExtra(ISFROMGYMWORKOUT,false)
 
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map1) as? SupportMapFragment
 
@@ -412,8 +415,12 @@ class SelectCurrentLocationActivity : AppCompatActivity() , OnMapReadyCallback {
                     val resp = JSONObject(data!!)
                     if(resp.optBoolean("status")){
                         addressBottomSheetDialog.dismiss()
-                       finish()
-
+                        finish()
+                        if (isFromGymWorkoutL == true){
+                            startActivity(Intent(this@SelectCurrentLocationActivity, TrainersListActivity::class.java))
+                        }
+                    }else{
+                        startActivity(Intent(this@SelectCurrentLocationActivity, TrainersListActivity::class.java))
                     }
                    // Toast.makeText(this@PhoneNumberScreenActivity,resp.optString("msg"),Toast.LENGTH_SHORT).show()
                 }catch (e:Exception){

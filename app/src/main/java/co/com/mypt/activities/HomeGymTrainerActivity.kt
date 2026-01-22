@@ -80,7 +80,11 @@ class HomeGymTrainerActivity :AppCompatActivity() {
             if (type.equals("home",true) || type.equals("work",true)){
                 if(type.equals("home",true)){
                     editor.putString("typeWorkout",type).apply()
-                    startActivity(Intent(this, TrainersListActivity::class.java))
+
+                    val intent= Intent(applicationContext, SelectCurrentLocationActivity::class.java)
+                    intent.putExtra(ISFROMGYMWORKOUT,true)
+                    startActivity(intent)
+                   // startActivity(Intent(this, TrainersListActivity::class.java))
                 }
                 else{
                     editor.putString("typeWorkout",type).apply()
