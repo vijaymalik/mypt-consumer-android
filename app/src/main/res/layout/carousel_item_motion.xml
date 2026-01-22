@@ -1,13 +1,112 @@
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="240dp"
-    android:layout_height="260dp"
-    android:layout_marginHorizontal="12dp">
+    android:background="@drawable/booking_amount_rectangle"
+    android:layout_height="310dp">
 
     <ImageView
         android:id="@+id/image"
         android:layout_width="match_parent"
-        android:layout_height="260dp"
-        android:background="@drawable/after"
-        android:scaleType="centerCrop"/>
-</FrameLayout>
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="18dp"
+        android:paddingVertical="12dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/funnel_sans_medium"
+            android:text="Most Popular"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/funnel_sans_regular"
+            android:paddingTop="2dp"
+            android:text="100 sessions"
+            android:textColor="@color/grey_button"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/funnel_sans_medium"
+            android:paddingTop="10dp"
+            android:text="AED 6,500"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/funnel_sans_medium"
+                android:text="AED 70/session"
+                android:textColor="@color/location_txt"
+                android:textSize="12sp" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="2dp"
+                android:background="@drawable/dot" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/funnel_sans_medium"
+                android:text="Most Popular"
+                android:textColor="@color/location_txt"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/saveTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/category_border_bg"
+            android:fontFamily="@font/funnel_sans_semibold"
+            android:lineHeight="16sp"
+            android:padding="4dp"
+            android:scaleType="centerCrop"
+            android:text="SAVE AED 300"
+            android:textColor="#D1ECCC"
+            android:textSize="12sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/funnel_sans_semibold"
+                android:lineHeight="16sp"
+                android:padding="4dp"
+                android:scaleType="centerCrop"
+                android:text="PERKS"
+                android:textColor="@color/grey_button"
+                android:textSize="12sp" />
+        </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/perksText"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+</RelativeLayout>

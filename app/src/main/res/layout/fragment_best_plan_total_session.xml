@@ -431,7 +431,7 @@
             <com.yarolegovich.discretescrollview.DiscreteScrollView
                 android:id="@+id/carouselView"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="350dp"
                 android:overScrollMode="never" />
         </LinearLayout>
 

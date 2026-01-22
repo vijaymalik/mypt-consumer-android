@@ -3,7 +3,7 @@ package co.com.mypt.fragments.adapter
 import android.view.View
 import com.yarolegovich.discretescrollview.transform.DiscreteScrollItemTransformer
 
-class CenterRaiseTransformer : DiscreteScrollItemTransformer {
+class CenterRaiseTransformer(private val maxDp: Float = -20f) : DiscreteScrollItemTransformer {
 
     override fun transformItem(
         item: View,
@@ -12,7 +12,9 @@ class CenterRaiseTransformer : DiscreteScrollItemTransformer {
         val absPos = kotlin.math.abs(position)
 
         // Raise center item by 40dp
-        val translationY = -40f * (1f - absPos)
+        val density = item.resources.displayMetrics.density
+        val maxPx = maxDp * density
+        val translationY = maxPx * (1f - absPos)
         item.translationY = translationY
 
         // Optional scale polish

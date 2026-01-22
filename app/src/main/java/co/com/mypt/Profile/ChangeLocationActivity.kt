@@ -144,6 +144,10 @@ class ChangeLocationActivity : AppCompatActivity() , OnMapReadyCallback {
             sharedPreferences.edit().putString("templong",longitude.toString()).apply()
             sharedPreferences.edit().putString("tempaddress",address).apply()
             if (isFromGymWorkoutL == true){
+                if ((latitude ==null || latitude ==0.0) ||(longitude ==null || longitude ==0.0) ){
+                    Toast.makeText(this, "Please select location", Toast.LENGTH_LONG).show()
+                    return@setOnClickListener
+                }
                 val intent=Intent(this, GymListActivity::class.java)
                 startActivity(intent)
             }else{
