@@ -28,8 +28,8 @@ class GymListAdapter(
     var type: String?,
     var gym: String?,
     var latitude: Double?,
-    var longitude: Double?
-
+    var longitude: Double?,
+var clickListener:(String,String)->Unit
 ) : RecyclerView.Adapter<GymListAdapter.GymlistHolder>() {
     lateinit var sharedPreferences: SharedPreferences
 
@@ -81,32 +81,10 @@ class GymListAdapter(
                         context?.startActivity(intent)
                     }else{
                         val pos = it.tag as Int
-                        var trainersModel=trainerList.get(pos)
+                        val trainersModel=trainerList.get(pos)
+                        clickListener(type?:"",trainersModel.id)
                         Log.e("typeWorkout",""+sharedPreferences.getString("typeWorkout",""))
-                        if ((type.equals("withoutTrainer")) || (type.equals("withTrainer"))){
-                            if (type.equals("withoutTrainer")){
-                                val intent = Intent(context, GymValidityActivity::class.java)
-                                intent.putExtra("studio_id",trainersModel.id)
-                                intent.putExtra("type","withoutTrainer")
-                                context.startActivity(intent)
-                            }else{
-                                val intent = Intent(context, TrainersListActivity::class.java)
-                                intent.putExtra("type","withTrainer")
-                                intent.putExtra("studio_id",trainersModel.id)
-                                context.startActivity(intent)
-                            }
-                        }else{
-                            val intent = Intent(context, TrainersListActivity::class.java)
-                            if (sharedPreferences.getString("typeWorkout","").equals("work")){
-                                intent.putExtra("studio_id",trainersModel.id)
-                            }
-                            context.startActivity(intent)
-                        }
-
                     }
-
-
-
                 }
                 holder.bookSlot.setTextColor(context.resources.getColor(R.color.buttontextcolor,null))
                 holder.bookSlot.setBackgroundColor(context.resources.getColor(R.color.headingcolor,null))

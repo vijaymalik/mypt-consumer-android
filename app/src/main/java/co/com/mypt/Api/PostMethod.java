@@ -62,7 +62,10 @@ public class PostMethod {
             @Override
             public void onResponse(String response) {
 
-//                Log.d("Response111",response);
+                Log.d("VOLLEY_RESPONSE",
+                        "URL : " + url + "\n" +
+                                "Response : " + response
+                );
                 try {
                     ResponseData.response(response);
                 } catch (Exception e) {
@@ -145,6 +148,7 @@ public class PostMethod {
         request.setRetryPolicy(new DefaultRetryPolicy( 600*30000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        Log.d("VOLLEY_REQUEST", "URL : " + url +"\n"+params);
         requestQueue.add(request);
     }
 }

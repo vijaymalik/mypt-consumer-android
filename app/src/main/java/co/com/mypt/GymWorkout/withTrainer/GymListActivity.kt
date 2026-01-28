@@ -36,9 +36,11 @@ import androidx.recyclerview.widget.RecyclerView
 import co.com.mypt.Api.ApiURL
 import co.com.mypt.Api.GetMethod
 import co.com.mypt.Api.ResponseData
+import co.com.mypt.GymWorkout.withoutTrainer.GymValidityActivity
 import co.com.mypt.ProgressDialog
 import co.com.mypt.R
 import co.com.mypt.activities.SearchGymActivity2
+import co.com.mypt.activities.TrainersListActivity
 import co.com.mypt.adapter.GymListAdapter
 import co.com.mypt.adapter.GymListExerciseAdapter
 import co.com.mypt.model.ExerciseModel
@@ -57,6 +59,7 @@ import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import org.json.JSONObject
 import java.util.Locale
+import kotlin.text.equals
 
 class GymListActivity : AppCompatActivity() {
     lateinit var exerciseRecyclerView : RecyclerView
@@ -425,7 +428,27 @@ class GymListActivity : AppCompatActivity() {
                                 trainerList.add(trainerModel)
                             }
 
-                            trainerRecyclerView.adapter = GymListAdapter(this@GymListActivity,trainerList,intent.getStringExtra("type"),"gym",latitude,longitude)
+                            trainerRecyclerView.adapter = GymListAdapter(this@GymListActivity,trainerList,intent.getStringExtra("type"),"gym",latitude,longitude){type,id->
+                                if ((type.equals("withoutTrainer")) || (type.equals("withTrainer"))){
+                                    if (type.equals("withoutTrainer")){
+                                        val intent = Intent(this@GymListActivity, GymValidityActivity::class.java)
+                                        intent.putExtra("studio_id",id)
+                                        intent.putExtra("type","withoutTrainer")
+                                        startActivity(intent)
+                                    }else{
+                                        val intent = Intent(this@GymListActivity, TrainersListActivity::class.java)
+                                        intent.putExtra("type","withTrainer")
+                                        intent.putExtra("studio_id",id)
+                                        startActivity(intent)
+                                    }
+                                }else{
+                                    val intent = Intent(this@GymListActivity, TrainersListActivity::class.java)
+                                    if (sharedPreferences.getString("typeWorkout","").equals("work")){
+                                        intent.putExtra("studio_id",id)
+                                    }
+                                    startActivity(intent)
+                                }
+                            }
 
                             trainerRecyclerView.visibility= View.VISIBLE
                             tvNodata.visibility= View.GONE

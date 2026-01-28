@@ -581,7 +581,6 @@ class TrainersListActivity : AppCompatActivity() {
             override fun response(data: String?) {
                 progressDialog.dismiss()
                 trainerList.clear()
-                Log.e("getTrainerListResponse",data.toString())
                 try {
                     val jsonObj = JSONObject(data!!)
                     if (jsonObj.optBoolean("status")){
@@ -600,6 +599,59 @@ class TrainersListActivity : AppCompatActivity() {
                                 trainerModel.profile = jsonObject1.optString("profile")
                                 trainerModel.is_verified = jsonObject1.optString("is_verified")
                                 trainerModel.activity = jsonObject1.optJSONArray("tags")
+                                trainerModel.is_group = jsonObject1.optBoolean("is_group")
+                                trainerList.add(trainerModel)
+                            }
+                            trainerListAdapter = TrainerListAdapter(applicationContext,trainerList,typeLayout,sharedPreferences.getString("typeWorkout",""),latitude,longitude,studio_id)
+                            trainerRecyclerView.adapter = trainerListAdapter
+                            trainerRecyclerView.visibility= View.VISIBLE
+                            tvNodata.visibility= View.GONE
+                        }else{
+                            trainerRecyclerView.visibility= View.GONE
+                            tvNodata.visibility= View.VISIBLE
+                        }
+
+
+
+                    }
+
+
+                }catch (e:Exception){
+                    e.printStackTrace()
+                }
+            }
+
+            override fun error(error: VolleyError?) {
+                progressDialog.dismiss()
+                error!!.printStackTrace()
+            }
+
+        })
+
+
+        GetMethod(ApiURL.getTrainerGroup,applicationContext).startMethod(object : ResponseData {
+            override fun response(data: String?) {
+                progressDialog.dismiss()
+                trainerList.clear()
+                try {
+                    val jsonObj = JSONObject(data!!)
+                    if (jsonObj.optBoolean("status")){
+                        var jsonArrayList=jsonObj.optJSONObject("data").optJSONArray("trainers")
+                        if (jsonArrayList.length()>0){
+                            for(i in 0 until jsonArrayList.length()){
+                                var jsonObject1 = jsonArrayList.optJSONObject(i)
+                                val trainerModel = TrainersModel()
+                                trainerModel.name = jsonObject1.optString("name")
+                                trainerModel.id = jsonObject1.optString("id")
+                                trainerModel.distance = jsonObject1.optString("distance")
+                                trainerModel.slot = jsonObject1.optString("slot")
+                                trainerModel.noOfRating = jsonObject1.optString("noOfRating")
+                                trainerModel.averageRating = jsonObject1.optString("averageRating")
+                                trainerModel.location = jsonObject1.optString("location")
+                                trainerModel.profile = jsonObject1.optString("profile")
+                                trainerModel.is_verified = jsonObject1.optString("is_verified")
+                                trainerModel.activity = jsonObject1.optJSONArray("tags")
+                                trainerModel.is_group = jsonObject1.optBoolean("is_group")
                                 trainerList.add(trainerModel)
                             }
                             trainerListAdapter = TrainerListAdapter(applicationContext,trainerList,typeLayout,sharedPreferences.getString("typeWorkout",""),latitude,longitude,studio_id)
