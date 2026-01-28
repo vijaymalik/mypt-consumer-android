@@ -168,5 +168,5 @@
             android:textStyle="bold"
             android:visibility="gone" />
     </LinearLayout>
-    <include layout="@layout/delay_view"/>
+
 </RelativeLayout>

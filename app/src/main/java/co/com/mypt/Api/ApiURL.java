@@ -101,6 +101,6 @@ public class ApiURL {
     public static String upgradeTopUpMakePayment= Baseurl+"make-payment";//transaction_id,id,type,price,sessions,days
     public static String reviewUpgradeTopUpPkg = Baseurl+"review-upgrade-package";//type,id,price,sessions,days
     public static String getActiveSession = Baseurl+"get-session-detail?booking_id=";
-    public static String getTrainerGroup = Baseurl+"get-trainer-group?type=home&trainer_id=49";
+    public static String getTrainerGroup = Baseurl+"get-trainer-group?";
 }
 

@@ -27,7 +27,8 @@ class TrainerListAdapter(
     var typeWorkout: String?,
     var latitude: Double?,
     var longitude: Double?,
-    var studio_id: String
+    var studio_id: String,
+    var clickListener:(Boolean,String, String)->Unit
 ) : RecyclerView.Adapter<TrainerListAdapter.ViewHolder>() {
     lateinit var sharedPreferences:SharedPreferences
     private var trainerListModels: List<TrainersModel>
@@ -140,6 +141,12 @@ class TrainerListAdapter(
             holder.bookSlot.setOnClickListener {
                 val pos = it.tag as Int
                 var trainersModel=trainerListModels[pos]
+
+                if (trainersModel.is_group==false){
+                    val typeloc=if (typeWorkout =="home") "home" else "gym"
+                    clickListener(trainersModel.is_group?:false,typeloc?:"",trainersModel.id)
+                    return@setOnClickListener
+                }
                 if (sharedPreferences.getString("typeWorkout","").equals("home")){
                     var intent = Intent(context, AddressListForTrainerActivity::class.java)
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

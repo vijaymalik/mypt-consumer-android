@@ -44,6 +44,7 @@ import co.com.mypt.Api.ApiURL
 import co.com.mypt.Api.GetMethod
 import co.com.mypt.Api.PostMethod
 import co.com.mypt.Api.ResponseData
+import co.com.mypt.GymWorkout.withoutTrainer.GymValidityActivity
 import co.com.mypt.ProgressDialog
 import co.com.mypt.R
 import co.com.mypt.adapter.FilterListAdapter
@@ -199,7 +200,7 @@ class TrainersListActivity : AppCompatActivity() {
             latitude,
             longitude,
             studio_id
-        )
+        ){bool, string, string1 -> }
         trainerRecyclerView.adapter = trainerListAdapter
 
         linearList.setOnClickListener {
@@ -220,7 +221,7 @@ class TrainersListActivity : AppCompatActivity() {
                 latitude,
                 longitude,
                 studio_id
-            )
+            ){bool, string, string1 -> }
             trainerRecyclerView.adapter = trainerListAdapter
         }
         gridList.setOnClickListener {
@@ -241,7 +242,7 @@ class TrainersListActivity : AppCompatActivity() {
                 latitude,
                 longitude,
                 studio_id
-            )
+            ){bool, string, string1 -> }
             trainerRecyclerView.adapter = trainerListAdapter
         }
 
@@ -273,7 +274,7 @@ class TrainersListActivity : AppCompatActivity() {
                         latitude,
                         longitude,
                         studio_id
-                    )
+                    ){bool, string, string1 -> }
                     trainerRecyclerView.adapter = trainerListAdapter
                     trainerRecyclerView.visibility= View.VISIBLE
                     tvNodata.visibility= View.GONE
@@ -300,7 +301,7 @@ class TrainersListActivity : AppCompatActivity() {
                             latitude,
                             longitude,
                             studio_id
-                        )
+                        ){bool, string, string1 -> }
                         trainerRecyclerView.adapter = trainerListAdapter
                         trainerRecyclerView.visibility= View.VISIBLE
                         tvNodata.visibility= View.GONE
@@ -602,7 +603,12 @@ class TrainersListActivity : AppCompatActivity() {
                                 trainerModel.is_group = jsonObject1.optBoolean("is_group")
                                 trainerList.add(trainerModel)
                             }
-                            trainerListAdapter = TrainerListAdapter(applicationContext,trainerList,typeLayout,sharedPreferences.getString("typeWorkout",""),latitude,longitude,studio_id)
+                            trainerListAdapter = TrainerListAdapter(applicationContext,trainerList,typeLayout,sharedPreferences.getString("typeWorkout",""),latitude,longitude,studio_id){
+                                isGrp,type,id->
+
+                                    getPrimaryTrainer(type,id)
+
+                            }
                             trainerRecyclerView.adapter = trainerListAdapter
                             trainerRecyclerView.visibility= View.VISIBLE
                             tvNodata.visibility= View.GONE
@@ -627,42 +633,24 @@ class TrainersListActivity : AppCompatActivity() {
             }
 
         })
-
-
-        GetMethod(ApiURL.getTrainerGroup,applicationContext).startMethod(object : ResponseData {
+    }
+    fun getPrimaryTrainer(type:String,id:String){
+        val progressDialog: Dialog = ProgressDialog.progressDialog(this,"")
+//        progressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        progressDialog.setContentView(R.layout.delay_view)
+        progressDialog.setCancelable(false)
+        progressDialog.show()
+        //<include android:id="@+id/delayView" layout="@layout/delay_view"/>
+        val finalPath=ApiURL.getTrainerGroup+"type=$type$&trainer_id=$id"
+        GetMethod(finalPath,applicationContext).startMethod(object : ResponseData {
             override fun response(data: String?) {
                 progressDialog.dismiss()
-                trainerList.clear()
+
                 try {
                     val jsonObj = JSONObject(data!!)
                     if (jsonObj.optBoolean("status")){
-                        var jsonArrayList=jsonObj.optJSONObject("data").optJSONArray("trainers")
-                        if (jsonArrayList.length()>0){
-                            for(i in 0 until jsonArrayList.length()){
-                                var jsonObject1 = jsonArrayList.optJSONObject(i)
-                                val trainerModel = TrainersModel()
-                                trainerModel.name = jsonObject1.optString("name")
-                                trainerModel.id = jsonObject1.optString("id")
-                                trainerModel.distance = jsonObject1.optString("distance")
-                                trainerModel.slot = jsonObject1.optString("slot")
-                                trainerModel.noOfRating = jsonObject1.optString("noOfRating")
-                                trainerModel.averageRating = jsonObject1.optString("averageRating")
-                                trainerModel.location = jsonObject1.optString("location")
-                                trainerModel.profile = jsonObject1.optString("profile")
-                                trainerModel.is_verified = jsonObject1.optString("is_verified")
-                                trainerModel.activity = jsonObject1.optJSONArray("tags")
-                                trainerModel.is_group = jsonObject1.optBoolean("is_group")
-                                trainerList.add(trainerModel)
-                            }
-                            trainerListAdapter = TrainerListAdapter(applicationContext,trainerList,typeLayout,sharedPreferences.getString("typeWorkout",""),latitude,longitude,studio_id)
-                            trainerRecyclerView.adapter = trainerListAdapter
-                            trainerRecyclerView.visibility= View.VISIBLE
-                            tvNodata.visibility= View.GONE
-                        }else{
-                            trainerRecyclerView.visibility= View.GONE
-                            tvNodata.visibility= View.VISIBLE
-                        }
 
+                       // trainerList(type,id)
 
 
                     }
@@ -681,6 +669,7 @@ class TrainersListActivity : AppCompatActivity() {
         })
 
     }
+
 
     fun filterBottomSHeet(selectedType: String,selectedTypeCall:(String)->Unit) {
         if (filterBottomSheetDialog?.isShowing == true) {
