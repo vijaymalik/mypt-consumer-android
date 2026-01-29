@@ -49,11 +49,15 @@ import co.com.mypt.adapter.ActivityAdapter
 import co.com.mypt.fragments.adapter.CarouselAdapter
 import co.com.mypt.fragments.adapter.CenterRaiseTransformer
 import co.com.mypt.model.ActivityModel
+import co.com.mypt.model.BestPlanList
+import co.com.mypt.model.BestPlanList.BestPlanData
+import co.com.mypt.model.TrainerGroupDetail
 import co.com.mypt.rulerHeight.SessionRulerViewHorizontal
 import co.com.mypt.rulerHeight.onViewUpdateListenerWeight
 import co.com.mypt.utils.SharedSessionvalueViewModel
 import com.android.volley.VolleyError
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
 import com.yarolegovich.discretescrollview.DiscreteScrollView
 import com.yarolegovich.discretescrollview.transform.ScaleTransformer
 import kotlinx.coroutines.delay
@@ -350,13 +354,14 @@ class BestPlanTotalSessionFragment(
         textShader(tvAEDSession)
         tvRealPrice.paintFlags = tvRealPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
       //  getSessionData()
-        initializeCarousel()
+
+        getBestPlanApi()
         return view
     }
     private val snapHelper = PagerSnapHelper()
 
-    fun initializeCarousel() {
-        carouselRecycler?.adapter = CarouselAdapter()
+    fun initializeCarousel( data: List<BestPlanData?>) {
+        carouselRecycler?.adapter = CarouselAdapter(data)
 
         carouselRecycler?.setItemTransformer(
             ScaleTransformer.Builder()
@@ -412,7 +417,26 @@ class BestPlanTotalSessionFragment(
         unselectedContent.visibility = View.GONE
     }
 
+    fun getBestPlanApi(){
+        val progressDialog: Dialog = ProgressDialog.progressDialog(requireActivity(),"")
+        progressDialog.show()
+        var type=sharedPreferences.getString("typeWorkout","")
+        type=if (type == "home") "home" else "gym"
+        val packageType=sharedPreferences.getInt("selectedPackageType",0)
+        val api=ApiURL.getBestPlan+"package_type=$packageType&type=$type"
+        GetMethod(api,activity).startMethod(object : ResponseData{
+            override fun response(data: String?) {
+                progressDialog.dismiss()
+                val data: BestPlanList = Gson().fromJson(data, BestPlanList::class.java)
+                initializeCarousel(data?.data?:emptyList())
+            }
 
+            override fun error(error: VolleyError?) {
+                progressDialog.dismiss()
+            }
+
+        })
+    }
 
 
     private fun getSessionData(checkedType: String) {

@@ -7,8 +7,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import co.com.mypt.R
+import co.com.mypt.model.BestPlanList.BestPlanData
 
-class CarouselAdapter :
+class CarouselAdapter (val data: List<BestPlanData?>):
     RecyclerView.Adapter<CarouselAdapter.CarouselVH>() {
 
     private val items = List(10) { it }

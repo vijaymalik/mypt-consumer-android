@@ -110,7 +110,7 @@ class SplashScreenActivity : AppCompatActivity() {
         val options = ActivityOptions.makeCustomAnimation(this, R.anim.nav_default_enter_anim, R.anim.nav_default_exit_anim)
         if(sharedPreferences.getString(Constants.token,"-1") != "-1"
             || sharedPreferences.getString(Constants.token,"").toString() != ""){
-            val intent= Intent(this@SplashScreenActivity, MainActivity::class.java)
+            val intent= Intent(this@SplashScreenActivity, CreatePackagectivity::class.java)
             startActivity(intent, options.toBundle())
             //startActivity(intent)
         }else{
