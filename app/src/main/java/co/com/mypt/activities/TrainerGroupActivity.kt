@@ -1,9 +1,14 @@
 package co.com.mypt.activities
 
 import android.app.Activity
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 import co.com.mypt.R
 import co.com.mypt.adapter.PrimaryTrainerTagAdapter
@@ -19,6 +24,8 @@ class TrainerGroupActivity : Activity() {
     lateinit var secondaryRecyclerView: RecyclerView
     lateinit var primaryTrainerName: TextView
     lateinit var imgTrainer: ImageView
+    lateinit var proceedView: LinearLayout
+    lateinit var sharedPreferences: SharedPreferences
 
     val data =
         "{\"status\":true,\"data\":{\"group\":{\"id\":\"1\",\"name\":\"hi enter a group anme\",\"description\":\"Meet the trainers who'll coach and support your progress.\",\"image\":null,\"type\":\"home\"},\"primary_trainer\":{\"id\":\"49\",\"name\":\"Suresh Chaurasia\",\"profile\":\"http://127.0.0.1:3002/storage/trainer/picture/1749736345_Suresh Chaurasia.png\",\"phone\":\"0586832007\",\"rating\":0,\"tags\":[\"Muscle Building\",\"Strength Conditioning\",\"Body Building\",\"Fat Loss\",\"Functional Training\",\"Injury Prevention & Rehab\",\"Sports Conditioning\",\"Cardiovascular Conditioning\",\"Lower/Upper Back Fix\",\"H.I.I.T Training\",\"PNF Stretch\"],\"badge\":\"PRIMARY\"},\"secondary_trainers\":[{\"id\":\"50\",\"name\":\"Thomas Larbi\",\"profile\":\"http://127.0.0.1:3002/storage/trainer/picture/1749737811_Thomas Larbi.png\",\"phone\":\"0561519136\",\"rating\":0,\"tags\":[\"Muscle Building\",\"Strength Conditioning\",\"Body Building\",\"Fat Loss\",\"Functional Training\",\"Boxing\",\"Kick Boxing\"],\"badge\":\"S1 TRAINER\"},{\"id\":\"57\",\"name\":\"Bekhzod Siddikov\",\"profile\":\"http://127.0.0.1:3002/storage/trainer/picture/1750067832_Bekhzod Siddikov.png\",\"phone\":\"0507274942\",\"rating\":0,\"tags\":[\"Muscle Building\",\"Strength Conditioning\",\"Body Building\",\"Fat Loss\",\"Boxing\",\"Kick Boxing\",\"Mixed Martial Arts\"],\"badge\":\"S2 TRAINER\"}],\"secondary_trainers_note\":\"Secondary trainers follow the same plan to maintain progress\"},\"msg\":\"Group details fetched successfully!\"}"
@@ -28,15 +35,44 @@ class TrainerGroupActivity : Activity() {
         setContentView(R.layout.trainer_group_view)
         init()
         dataConversion(data/*intent.getStringExtra(PASS_DATA)*/)
-
-
     }
 
     fun init(){
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         exerciseRecyclerView= findViewById(R.id.exerciseRecyclerView)
         secondaryRecyclerView= findViewById(R.id.secondaryRecyclerView)
         primaryTrainerName= findViewById(R.id.primaryTrainerName)
         imgTrainer= findViewById(R.id.imgTrainer)
+        proceedView= findViewById(R.id.proceedView)
+        proceedView.setOnClickListener {
+            getPrimaryTrainer()
+        }
+    }
+    fun getPrimaryTrainer() {
+        val studio_id=intent.getStringExtra("studio_id")
+        val longitude=intent.getStringExtra("long")
+        val latitude=intent.getStringExtra("lat")
+        val trainerId=intent.getStringExtra("trainerId")
+        if (sharedPreferences.getString("typeWorkout", "").equals("home")) {
+            val intent = Intent(this, AddressListForTrainerActivity::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.putExtra("trainer_id", trainerId)
+            intent.putExtra("studio_id", studio_id)
+            intent.putExtra("type", sharedPreferences.getString("typeWorkout", ""))
+            intent.putExtra("long", longitude)
+            intent.putExtra("lat", latitude)
+            startActivity(intent)
+        } else {
+            val intent = Intent(this, BookSlot::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.putExtra("trainer_id", trainerId)
+            intent.putExtra("studio_id", studio_id)
+            intent.putExtra("type", sharedPreferences.getString("typeWorkout", ""))
+            intent.putExtra("long", longitude)
+            intent.putExtra("lat", latitude)
+            startActivity(intent)
+
+        }
     }
     fun dataConversion(data: String?) {
         val user: TrainerGroupDetail = Gson().fromJson(data, TrainerGroupDetail::class.java)

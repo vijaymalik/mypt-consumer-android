@@ -339,7 +339,7 @@ class TrainersListActivity : AppCompatActivity() {
         } else {
             trainerRecyclerView.visibility = View.VISIBLE
             tvNodata.visibility = View.GONE
-            trainerListAdapter!!.filterList(filteredList)
+            trainerListAdapter?.filterList(filteredList)
         }
     }
 
@@ -636,7 +636,7 @@ class TrainersListActivity : AppCompatActivity() {
                                 if (isGrp) {
                                     getPrimaryTrainer(type, id)
                                 } else {
-                                    getPrimaryTrainer(id)
+                                    getPrimaryTrainerRedirect(id)
                                 }
 
 
@@ -666,7 +666,7 @@ class TrainersListActivity : AppCompatActivity() {
         })
     }
 
-    fun getPrimaryTrainer(id: String) {
+    fun getPrimaryTrainerRedirect(id: String) {
         if (sharedPreferences.getString("typeWorkout", "").equals("home")) {
             val intent = Intent(this, AddressListForTrainerActivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -713,10 +713,10 @@ class TrainersListActivity : AppCompatActivity() {
                 try {
                     val jsonObj = JSONObject(data!!)
                     if (jsonObj.optBoolean("status")) {
-                        getPrimaryTrainer(id)
+                        getPrimaryTrainerRedirect(id)
                     } else {
-//                        getPrimaryTrainer(id)
-                        startActivityNew(data)
+//                        getPrimaryTrainerRedirect(id)
+                        startActivityNew(data,id)
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -731,9 +731,13 @@ class TrainersListActivity : AppCompatActivity() {
         })
 
     }
-    fun startActivityNew(data:String){
+    fun startActivityNew(data:String,trainerId:String){
         val intent= Intent(this, TrainerGroupActivity::class.java)
         intent.putExtra(PASS_DATA,data)
+        intent.putExtra("studio_id",studio_id)
+        intent.putExtra("long",longitude)
+        intent.putExtra("lat",latitude)
+        intent.putExtra("trainerId",trainerId)
         startActivity(intent)
     }
 
