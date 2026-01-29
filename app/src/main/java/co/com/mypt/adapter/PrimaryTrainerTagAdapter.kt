@@ -9,25 +9,24 @@ import androidx.recyclerview.widget.RecyclerView
 import co.com.mypt.R
 import co.com.mypt.model.ExerciseModel
 
-class TrainerTagAdapter(
-    val context: Context?,
+class PrimaryTrainerTagAdapter(
     val exerciseArraylist: List<ExerciseModel>,
-    val type: String
+    val type: String="Linear"
 ) :
-    RecyclerView.Adapter<TrainerTagAdapter.ViewHolder>() {
+    RecyclerView.Adapter<PrimaryTrainerTagAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val exercise = itemView.findViewById<TextView>(R.id.exercise)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.trainer_tags, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.primary_trainer_tags, parent, false)
         return ViewHolder(view)
     }
 
     override fun getItemCount(): Int {
         return if(type == "Linear"){
-            if (exerciseArraylist.size>5)
-                5
+            if (exerciseArraylist.size>3)
+                3
             else
                 exerciseArraylist.size
         }else{
@@ -44,7 +43,7 @@ class TrainerTagAdapter(
         val exerciseModel=exerciseArraylist[position]
         if(position ==2 && type == "grid") {
             holder.exercise.text = "+"+((exerciseArraylist.size) - (position+1))
-        }else if(position ==4 && type == "Linear") {
+        }else if(position ==2 && type == "Linear") {
             holder.exercise.text = "+"+((exerciseArraylist.size) - (position+1))
         }else{
             holder.exercise.text=exerciseModel.name

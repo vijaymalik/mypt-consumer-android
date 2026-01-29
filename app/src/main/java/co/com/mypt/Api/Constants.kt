@@ -19,4 +19,5 @@ object Constants {
     val address = "address"
     val profile_image = "profile_image"
     val ISFROMGYMWORKOUT="isFromGymWorkout"
+    val PASS_DATA="passData"
 }

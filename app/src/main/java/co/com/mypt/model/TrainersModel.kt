@@ -18,6 +18,7 @@ class TrainersModel {
     lateinit var distance: String
     lateinit var id: String
     lateinit var name: String
+    lateinit var studio_id: String
      var is_group: Boolean?=null
 
 }

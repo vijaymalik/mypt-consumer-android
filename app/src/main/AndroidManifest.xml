@@ -525,6 +525,7 @@
         <activity android:name=".PlanRenewal.Renew.RenewHomeGymReviewActivity" />
         <activity android:name=".PlanRenewal.PlanRenewalCCAvenueWebPage" />
         <activity android:name=".Notification.NotificationBookingConfirmActivity" />
+        <activity android:name="co.com.mypt.activities.TrainerGroupActivity" />
 
         <receiver
             android:name=".broadcastReceiverforMessage.MySMSBroadcastReceiver"

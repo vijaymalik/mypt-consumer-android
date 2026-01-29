@@ -142,12 +142,13 @@ class TrainerListAdapter(
                 val pos = it.tag as Int
                 var trainersModel=trainerListModels[pos]
 
-                if (trainersModel.is_group==false){
-                    val typeloc=if (typeWorkout =="home") "home" else "gym"
-                    clickListener(trainersModel.is_group?:false,typeloc?:"",trainersModel.id)
-                    return@setOnClickListener
-                }
-                if (sharedPreferences.getString("typeWorkout","").equals("home")){
+//                if (trainersModel.is_group==false){
+                    val query=if (typeWorkout =="home") "type=home&trainer_id=${trainersModel.id}"  else "type=gym&trainer_id=${trainersModel.id}&studio_id=${trainersModel.studio_id}"
+
+                    clickListener(/*trainersModel.is_group*/true?:false,query,trainersModel.id)
+//                    return@setOnClickListener
+//                }
+                /*if (sharedPreferences.getString("typeWorkout","").equals("home")){
                     var intent = Intent(context, AddressListForTrainerActivity::class.java)
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     intent.putExtra("trainer_id",trainersModel.id)
@@ -170,7 +171,7 @@ class TrainerListAdapter(
                     Log.e("lati",""+latitude)
                     context.startActivity(intent)
 
-                }
+                }*/
 
             }
             holder.bookSlot.setBackgroundColor(context.resources.getColor(R.color.headingcolor,null))
