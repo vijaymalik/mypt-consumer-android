@@ -734,4 +734,5 @@
     <string name="pick_plan">Pick the plan that fits your goals</string>
     <string name="continue_summery">Continue to summary</string>
     <string name="hold_tight">Hold tight! We are curating the best\n team for you</string>
+    <string name="primary_trainer_msg">Secondary trainers follow the same plan to maintain progress</string>
 </resources>
