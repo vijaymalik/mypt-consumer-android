@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="@color/buttontextcolor"
+    android:background="@drawable/onboarding_backgrd_2"
     android:fitsSystemWindows="true"
     android:layout_height="match_parent"
     tools:context=".activities.SelectTime">
@@ -15,7 +15,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <LinearLayout
-            android:background="@color/buttontextcolor"
             android:id="@+id/headerLayout"
             android:gravity="center_vertical"
             android:layout_width="match_parent"
@@ -27,7 +26,7 @@
                 android:id="@+id/back_1"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="20dp"
-                android:src="@drawable/backarrow"
+                android:src="@drawable/ic_back_arrow_new"
                 />
             <TextView
                 android:layout_marginEnd="10dp"

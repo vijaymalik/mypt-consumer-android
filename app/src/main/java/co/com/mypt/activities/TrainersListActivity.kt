@@ -345,7 +345,9 @@ class TrainersListActivity : AppCompatActivity() {
 
     private fun getTagData(latitude: Double?, longitude: Double?) {
         val progressDialog: Dialog = ProgressDialog.progressDialog(this@TrainersListActivity, "")
-        progressDialog.show()
+        if (!isFinishing && !isDestroyed) {
+            progressDialog.show()
+        }
         var api = ""
         if (sharedPreferences.getString("typeWorkout", "").equals("home")) {
             api = ApiURL.getTrainer + 0 + "&tag_id=&type=" + sharedPreferences.getString(
@@ -573,8 +575,9 @@ class TrainersListActivity : AppCompatActivity() {
 
     private fun getTrainerList(tag_id: String?, filter: String?) {
         val progressDialog: Dialog = ProgressDialog.progressDialog(this@TrainersListActivity, "")
-        if (progressDialog != null)
+        if (!isFinishing && !isDestroyed) {
             progressDialog.show()
+        }
         var api = ""
         val param: MutableMap<String, String> = HashMap()
         if (sharedPreferences.getString("typeWorkout", "").equals("home")) {
@@ -713,10 +716,11 @@ class TrainersListActivity : AppCompatActivity() {
                 try {
                     val jsonObj = JSONObject(data!!)
                     if (jsonObj.optBoolean("status")) {
-                        getPrimaryTrainerRedirect(id)
-                    } else {
 //                        getPrimaryTrainerRedirect(id)
                         startActivityNew(data,id)
+                    } else {
+                        getPrimaryTrainerRedirect(id)
+
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()

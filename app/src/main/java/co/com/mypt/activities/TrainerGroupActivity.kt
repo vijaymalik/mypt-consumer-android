@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
+import co.com.mypt.Api.Constants.PASS_DATA
 import co.com.mypt.R
 import co.com.mypt.adapter.PrimaryTrainerTagAdapter
 import co.com.mypt.adapter.SecondaryTrainerListAdapter
@@ -35,7 +36,7 @@ class TrainerGroupActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.trainer_group_view)
         init()
-        dataConversion(data/*intent.getStringExtra(PASS_DATA)*/)
+        dataConversion(intent.getStringExtra(PASS_DATA))
     }
 
     fun init(){

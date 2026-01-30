@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="240dp"
-    android:background="@drawable/booking_amount_rectangle"
-    android:layout_height="310dp">
+
+     android:layout_height="310dp">
 
     <ImageView
-        android:id="@+id/image"
+        android:id="@+id/topBackground"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="310dp"
         android:scaleType="centerCrop" />
 
     <LinearLayout
@@ -18,6 +18,7 @@
         android:paddingVertical="12dp">
 
         <TextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/funnel_sans_medium"
@@ -26,6 +27,7 @@
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/sessionCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/funnel_sans_regular"
@@ -35,6 +37,7 @@
             android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/packagePrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/funnel_sans_medium"
@@ -50,6 +53,7 @@
             android:gravity="center_vertical">
 
             <TextView
+                android:id="@+id/perSession"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/funnel_sans_medium"
