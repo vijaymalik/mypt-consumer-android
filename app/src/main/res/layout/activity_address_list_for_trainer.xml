@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:background="@color/buttontextcolor"
+    android:background="@drawable/onboarding_backgrd_2"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
-
     tools:context=".activities.AddressListForTrainerActivity">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -16,7 +15,7 @@
 
         >
         <LinearLayout
-            android:background="@color/buttontextcolor"
+
             android:id="@+id/headerLayout"
             android:gravity="center_vertical"
             android:layout_width="match_parent"
@@ -28,7 +27,7 @@
                 android:id="@+id/back_1"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginVertical="20dp"
-                android:src="@drawable/backarrow"
+                android:src="@drawable/ic_back_arrow_new"
                 />
             <TextView
                 android:layout_marginEnd="10dp"

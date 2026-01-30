@@ -9,6 +9,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.PorterDuff
 import android.location.Address
 import android.location.Geocoder
 import android.location.LocationManager
@@ -43,6 +44,8 @@ import co.com.mypt.Api.PostMethod
 import co.com.mypt.Api.ResponseData
 import co.com.mypt.ProgressDialog
 import co.com.mypt.R
+import co.com.mypt.adapter.AddressListAdapter
+import co.com.mypt.model.AddressModel
 import co.com.mypt.model.CityModel
 import com.android.volley.VolleyError
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -104,7 +107,7 @@ class SelectCurrentLocationActivity : AppCompatActivity() , OnMapReadyCallback {
     lateinit var autoCompleteCity:AutoCompleteTextView
     var cityArrayList=ArrayList<String>()
     var isFromGymWorkoutL: Boolean?=false
-
+    private var isAddressAdded=false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -128,12 +131,12 @@ class SelectCurrentLocationActivity : AppCompatActivity() , OnMapReadyCallback {
         if (!Places.isInitialized()) {
             Places.initialize(this, apiKey)
         }
-        if (intent.getStringExtra("link").equals("add")){
+//        if (intent.getStringExtra("link").equals("add")){
             if (checkLocationPermission() && isclick==0) {
                 getCurrentLocation()
 
             }
-        }
+//        }
 
         linearheader.setOnClickListener{
             finish()
@@ -171,6 +174,10 @@ class SelectCurrentLocationActivity : AppCompatActivity() , OnMapReadyCallback {
         addressBottomSheet()
 
         tvContinue.setOnClickListener{
+            if (isAddressAdded){
+                startActivity(Intent(this@SelectCurrentLocationActivity, TrainersListActivity::class.java))
+                return@setOnClickListener
+            }
             val sheet = addressBottomSheetDialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
             sheet?.let {
                 val behavior = BottomSheetBehavior.from(it)
@@ -182,9 +189,43 @@ class SelectCurrentLocationActivity : AppCompatActivity() , OnMapReadyCallback {
             }
             addressBottomSheetDialog.show()
         }
+        if (isFromGymWorkoutL == true){
+            getAddressData()
+        }
 
     }
 
+    private fun getAddressData() {
+
+        val progressDialog: Dialog = ProgressDialog.progressDialog(this,"")
+        progressDialog.show()
+
+
+        GetMethod(ApiURL.getaddress,applicationContext).startMethod(object :
+            ResponseData {
+            override fun response(data: String?) {
+                progressDialog.dismiss()
+                Log.e("getAddressResponse",data.toString())
+                try {
+                    val jsonObj = JSONObject(data!!)
+                    if (jsonObj.optBoolean("status")){
+                        val jsonArray=jsonObj.optJSONArray("data")
+                        if (jsonArray.length()>0){
+                            isAddressAdded=true
+                        }
+                    }
+                }catch (e:Exception){
+                    e.printStackTrace()
+                }
+            }
+
+            override fun error(error: VolleyError?) {
+                progressDialog.dismiss()
+                error!!.printStackTrace()
+            }
+
+        })
+    }
     private fun getCityListData() {
 
         val progressDialog: Dialog = ProgressDialog.progressDialog(this,"")

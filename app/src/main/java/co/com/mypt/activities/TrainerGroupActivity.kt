@@ -24,6 +24,7 @@ class TrainerGroupActivity : Activity() {
     lateinit var secondaryRecyclerView: RecyclerView
     lateinit var primaryTrainerName: TextView
     lateinit var imgTrainer: ImageView
+    lateinit var back: ImageView
     lateinit var proceedView: LinearLayout
     lateinit var sharedPreferences: SharedPreferences
 
@@ -44,6 +45,10 @@ class TrainerGroupActivity : Activity() {
         primaryTrainerName= findViewById(R.id.primaryTrainerName)
         imgTrainer= findViewById(R.id.imgTrainer)
         proceedView= findViewById(R.id.proceedView)
+        back= findViewById(R.id.back)
+        back.setOnClickListener {
+            finish()
+        }
         proceedView.setOnClickListener {
             getPrimaryTrainer()
         }

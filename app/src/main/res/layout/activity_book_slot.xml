@@ -1,204 +1,217 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:orientation="vertical"
-    android:background="@color/buttontextcolor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/onboarding_backgrd_2"
     android:fitsSystemWindows="true"
+    android:orientation="vertical"
 
     tools:context=".activities.BookSlot">
 
     <LinearLayout
-        android:background="@color/buttontextcolor"
         android:id="@+id/headerLayout"
-        android:gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
+
         <ImageView
+            android:id="@+id/back_1"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:id="@+id/back_1"
             android:layout_marginHorizontal="10dp"
             android:layout_marginVertical="20dp"
-            android:src="@drawable/backarrow"
-            />
+            android:src="@drawable/ic_back_arrow_new" />
+
         <TextView
-            android:layout_marginEnd="10dp"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textColor="@color/headingcolor"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
             android:fontFamily="@font/manrope_medium"
             android:text="@string/book_a_slot"
-            />
+            android:textColor="@color/headingcolor"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/verticalDots"
             android:layout_width="50dp"
-            android:padding="12dp"
-            android:visibility="gone"
             android:layout_height="match_parent"
-            android:src="@drawable/vertical_dots"/>
+            android:padding="12dp"
+            android:src="@drawable/vertical_dots"
+            android:visibility="gone" />
     </LinearLayout>
+
     <View
-        android:background="@color/tabbackground"
         android:layout_width="match_parent"
-        android:layout_height="2dp"/>
+        android:layout_height="2dp"
+        android:background="@color/tabbackground" />
+
     <RelativeLayout
-        android:layout_marginTop="40dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp">
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
             <androidx.cardview.widget.CardView
-                app:cardBackgroundColor="@color/tabbackground"
-                android:layout_marginHorizontal="20dp"
-                app:cardCornerRadius="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                app:cardBackgroundColor="@color/tabbackground"
+                app:cardCornerRadius="20dp">
+
                 <LinearLayout
-                    android:layout_marginBottom="50dp"
-                    android:gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="50dp"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
-                    <ImageView
-                        android:src="@drawable/arrow_left"
-                        android:layout_width="50dp"
-                        android:padding="10dp"
-                        android:id="@+id/imLeft"
 
-                        android:layout_height="50dp"/>
+                    <ImageView
+                        android:id="@+id/imLeft"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:padding="10dp"
+
+                        android:src="@drawable/arrow_left" />
+
                     <TextView
-                        android:gravity="center"
+                        android:id="@+id/monthName"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/manrope_medium"
+                        android:gravity="center"
                         android:textColor="@color/headingcolor"
                         android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:id="@+id/monthName"
-                        android:fontFamily="@font/manrope_medium"
-                        />
+                        android:textStyle="bold" />
+
                     <ImageView
-                        android:src="@drawable/arrow_right"
-                        android:layout_width="50dp"
-                        android:padding="10dp"
                         android:id="@+id/imRight"
-                        android:layout_height="50dp"/>
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:padding="10dp"
+                        android:src="@drawable/arrow_right" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </RelativeLayout>
+
         <RelativeLayout
-            android:layout_marginTop="50dp"
-            android:layout_marginHorizontal="20dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="50dp">
+
             <ImageView
-                android:scaleType="fitXY"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_alignTop="@id/ll"
                 android:layout_alignBottom="@id/ll"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/calender_bg"/>
+                android:scaleType="fitXY"
+                android:src="@drawable/calender_bg" />
+
             <LinearLayout
                 android:id="@+id/ll"
-                android:layout_margin="1px"
-                android:padding="10dp"
-                android:layout_centerInParent="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_centerInParent="true"
+                android:layout_margin="1px"
+                android:orientation="vertical"
+                android:padding="10dp">
+
                 <com.prolificinteractive.materialcalendarview.MaterialCalendarView
                     android:id="@+id/calendarView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:mcv_showOtherDates="all"
                     android:layout_marginBottom="10dp"
                     app:mcv_dateTextAppearance="@style/CustomDateTextAppearance"
-                    app:mcv_weekDayTextAppearance="@style/CustomWeekDayTextAppearance"
-                    />
+                    app:mcv_showOtherDates="all"
+                    app:mcv_weekDayTextAppearance="@style/CustomWeekDayTextAppearance" />
+
                 <LinearLayout
-                    android:gravity="center_vertical"
-                    android:layout_margin="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
+
                     <androidx.cardview.widget.CardView
                         android:layout_width="16dp"
                         android:layout_height="16dp"
-                        app:cardCornerRadius="5dp"
-                        app:cardBackgroundColor="@color/available"/>
+                        app:cardBackgroundColor="@color/available"
+                        app:cardCornerRadius="5dp" />
+
                     <TextView
-                        android:layout_marginHorizontal="5dp"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/transparent_white_1"
-                        android:textSize="14sp"
+                        android:layout_marginHorizontal="5dp"
                         android:fontFamily="@font/manrope_medium"
                         android:text="@string/available"
-                        />
+                        android:textColor="@color/transparent_white_1"
+                        android:textSize="14sp" />
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="16dp"
                         android:layout_height="16dp"
-                        app:cardCornerRadius="5dp"
-                        app:cardBackgroundColor="@color/fast_filling"/>
+                        app:cardBackgroundColor="@color/fast_filling"
+                        app:cardCornerRadius="5dp" />
+
                     <TextView
-                        android:layout_marginHorizontal="5dp"
-                        android:gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/transparent_white_1"
-                        android:textSize="14sp"
+                        android:layout_marginHorizontal="5dp"
                         android:fontFamily="@font/manrope_medium"
+                        android:gravity="center"
                         android:text="@string/fast_filling"
-                        />
+                        android:textColor="@color/transparent_white_1"
+                        android:textSize="14sp" />
                 </LinearLayout>
+
                 <LinearLayout
-                    android:gravity="center_vertical"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginBottom="20dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        app:cardCornerRadius="5dp"
-                        app:cardBackgroundColor="@color/fully_booked"/>
-                    <TextView
-                        android:layout_marginHorizontal="5dp"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/transparent_white_1"
-                        android:textSize="14sp"
-                        android:fontFamily="@font/manrope_medium"
-                        android:text="@string/fully_booked"
-                        />
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="16dp"
                         android:layout_height="16dp"
-                        app:cardCornerRadius="5dp"
-                        app:cardBackgroundColor="@color/booked"/>
+                        app:cardBackgroundColor="@color/fully_booked"
+                        app:cardCornerRadius="5dp" />
+
                     <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginHorizontal="5dp"
-                        android:gravity="center"
+                        android:fontFamily="@font/manrope_medium"
+                        android:text="@string/fully_booked"
+                        android:textColor="@color/transparent_white_1"
+                        android:textSize="14sp" />
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        app:cardBackgroundColor="@color/booked"
+                        app:cardCornerRadius="5dp" />
+
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/transparent_white_1"
-                        android:textSize="14sp"
+                        android:layout_marginHorizontal="5dp"
                         android:fontFamily="@font/manrope_medium"
+                        android:gravity="center"
                         android:text="@string/closed"
-                        />
+                        android:textColor="@color/transparent_white_1"
+                        android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
         </RelativeLayout>

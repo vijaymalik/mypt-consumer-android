@@ -591,8 +591,8 @@ class TrainersListActivity : AppCompatActivity() {
         }
         param["gender"] = "" + genderId
         param["language"] = "" + languageId
-        param["lat"] = "" + latitude
-        param["long"] = "" + longitude
+        param["lat"] = "" + "25.276987"//latitude
+        param["long"] = "" + "55.296249"//longitude
         param["time_slot"] = "" + timeSlotId
         param["tag_id"] = "" + tag_id
         param["nationality"] = "" + nationId
