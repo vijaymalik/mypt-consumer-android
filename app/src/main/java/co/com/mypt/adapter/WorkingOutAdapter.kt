@@ -109,7 +109,7 @@ class WorkingOutAdapter(
             sharedPreferences.edit {
                 putInt("selectedPackageType", selectedPosition + 1)
             }
-            activity!!.sendBroadcast(intent)
+            activity?.sendBroadcast(intent)
         }
     }
 
