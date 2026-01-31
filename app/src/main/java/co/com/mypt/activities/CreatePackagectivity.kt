@@ -31,6 +31,7 @@ import co.com.mypt.fragments.CreatePackageScreen.BestPlanTotalSessionFragment
 import co.com.mypt.fragments.CreatePackageScreen.CreatePackageFragment
 import co.com.mypt.fragments.CreatePackageScreen.MarkJourneyFragment
 import co.com.mypt.fragments.CreatePackageScreen.TotalMonthFragment
+import co.com.mypt.model.BestPlanList
 import co.com.mypt.utils.SharedDuringSessionViewModel
 import co.com.mypt.utils.SharedSessionvalueViewModel
 import kotlinx.coroutines.Dispatchers
@@ -53,6 +54,8 @@ class CreatePackagectivity : AppCompatActivity() {
     lateinit var tvcontinue: TextView
     lateinit var yourPlan: TextView
     lateinit var validDay: TextView
+    lateinit var packagePrice: TextView
+    lateinit var sessionCount: TextView
     lateinit var freeMsg: TextView
     lateinit var upArrow: ImageView
     lateinit var downArrow: ImageView
@@ -99,6 +102,8 @@ class CreatePackagectivity : AppCompatActivity() {
         tvcontinueView = findViewById(R.id.tvcontinueView)
 
         yourPlan = findViewById(R.id.yourPlan)
+        packagePrice = findViewById(R.id.packagePrice)
+        sessionCount = findViewById(R.id.sessionCount)
         validDay = findViewById(R.id.validDay)
         freeMsg = findViewById(R.id.freeMsg)
         upArrow = findViewById(R.id.upArrow)
@@ -296,14 +301,31 @@ class CreatePackagectivity : AppCompatActivity() {
 
     fun selectedPlan(isBestPlanSelected: Boolean) {
         this.isBestPlanSelected = isBestPlanSelected
-        checkPlanSelection()
-    }
-
-    fun checkPlanSelection() {
-        if (selectedPage == 1 && isBestPlanSelected && selectedOption!=2) {
+        if (isBestPlanSelected) {
             tvcontinue.text = getString(R.string.continue_summery)
             topView.visibility = View.VISIBLE
             bottomView.background = resources.getDrawable(R.drawable.grey_rectangle, null)
+        }else{
+            topView.visibility = View.GONE
+            bottomView.background = null
+            tvcontinue.text = getString(R.string.cont_inue)
+        }
+    }
+    fun updateSelectedItem(bestPlan: BestPlanList.BestPlanData?){
+        packagePrice.text = "AED ${bestPlan?.price}"
+        sessionCount.text = "${bestPlan?.sessions} sessions"
+        validDay.text = "Valid for ${bestPlan?.validity_days} days"
+    }
+   /* fun bestPlanNotAvailable(){
+        topView.visibility = View.GONE
+        bottomView.background = null
+    }*/
+
+    fun checkPlanSelection() {
+        if (selectedPage == 1 && isBestPlanSelected && selectedOption!=2) {
+//            tvcontinue.text = getString(R.string.continue_summery)
+//            topView.visibility = View.VISIBLE
+//            bottomView.background = resources.getDrawable(R.drawable.grey_rectangle, null)
         } else {
             topView.visibility = View.GONE
             bottomView.background = null

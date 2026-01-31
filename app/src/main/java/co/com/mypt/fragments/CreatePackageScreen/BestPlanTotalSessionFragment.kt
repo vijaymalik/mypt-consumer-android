@@ -110,6 +110,7 @@ class BestPlanTotalSessionFragment(
     lateinit var bestPlanParentView: LinearLayout
     lateinit var customPlanParentView: LinearLayout
     private var carouselRecycler: DiscreteScrollView?=null
+    private var isBestPlanAvailable=false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -168,7 +169,7 @@ class BestPlanTotalSessionFragment(
         bestPlan.setOnClickListener {
             selectTab(bestPlan, customization,bestPlanParentView,customPlanParentView)
             activity?.let {
-                (it as CreatePackagectivity).selectedPlan(true)
+                (it as CreatePackagectivity).selectedPlan(isBestPlanAvailable)
             }
         }
 
@@ -176,6 +177,7 @@ class BestPlanTotalSessionFragment(
             selectTab(customization, bestPlan,customPlanParentView,bestPlanParentView)
             activity?.let {
                 (it as CreatePackagectivity).selectedPlan(false)
+
             }
         }
 
@@ -370,6 +372,36 @@ class BestPlanTotalSessionFragment(
         )
 
         carouselRecycler?.setItemTransformer(CenterRaiseTransformer())
+        carouselRecycler?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(rv: RecyclerView, newState: Int) {
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    val snapView = snapHelper.findSnapView(rv.layoutManager)
+                    val position = rv.layoutManager?.getPosition(snapView!!)?:-1
+                    if (position !=-1){
+
+                        activity?.let {
+                            (it as CreatePackagectivity).updateSelectedItem(data[position])
+                        }
+
+                    }
+
+
+                }
+            }
+        })
+        if (!data.isNullOrEmpty()){
+            isBestPlanAvailable=true
+            activity?.let {
+                (it as CreatePackagectivity).selectedPlan(isBestPlanAvailable)
+                (it as CreatePackagectivity).updateSelectedItem(data[0])
+            }
+        }else{
+            isBestPlanAvailable=false
+            activity?.let {
+                (it as CreatePackagectivity).selectedPlan(isBestPlanAvailable)
+            }
+        }
+
 
 //        carouselRecycler?.layoutManager =
 //            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -588,6 +620,9 @@ class BestPlanTotalSessionFragment(
     override fun onResume() {
         super.onResume()
         if(isVisible) {
+            activity?.let {
+                (it as CreatePackagectivity).selectedPlan(isBestPlanAvailable)
+            }
             val currentTextView = textSwitcher.currentView as TextView
             lifecycleScope.launch {
                 delay(100)
