@@ -57,6 +57,7 @@ class CreatePackagectivity : AppCompatActivity() {
     lateinit var packagePrice: TextView
     lateinit var sessionCount: TextView
     lateinit var freeMsg: TextView
+    lateinit var freeMsgCustom: TextView
     lateinit var upArrow: ImageView
     lateinit var downArrow: ImageView
     lateinit var devider: ImageView
@@ -102,6 +103,7 @@ class CreatePackagectivity : AppCompatActivity() {
         tvcontinueView = findViewById(R.id.tvcontinueView)
 
         yourPlan = findViewById(R.id.yourPlan)
+        freeMsgCustom = findViewById(R.id.freeMsgCustom)
         packagePrice = findViewById(R.id.packagePrice)
         sessionCount = findViewById(R.id.sessionCount)
         validDay = findViewById(R.id.validDay)
@@ -304,11 +306,13 @@ class CreatePackagectivity : AppCompatActivity() {
         if (isBestPlanSelected) {
             tvcontinue.text = getString(R.string.continue_summery)
             topView.visibility = View.VISIBLE
+            freeMsgCustom.visibility=View.GONE
             bottomView.background = resources.getDrawable(R.drawable.grey_rectangle, null)
         }else{
             topView.visibility = View.GONE
-            bottomView.background = null
-            tvcontinue.text = getString(R.string.cont_inue)
+            bottomView.background = resources.getDrawable(R.drawable.grey_rectangle, null)
+            freeMsgCustom.visibility=View.VISIBLE
+            tvcontinue.text = getString(R.string.continue_summery)
         }
     }
     fun updateSelectedItem(bestPlan: BestPlanList.BestPlanData?){

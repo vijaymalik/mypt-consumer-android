@@ -206,7 +206,6 @@
 
                     <TextView
                         android:id="@+id/freeMsg"
-
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="16dp"
@@ -218,6 +217,20 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/devider" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/freeMsgCustom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="16dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:fontFamily="@font/clash_display_regular"
+                    android:text="Validity and savings increase with more sessions"
+                    android:textColor="@color/grey_text"
+                    android:textSize="14sp"
+                    android:lineHeight="24sp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/tvcontinueView" />
 
                 <LinearLayout
                     android:id="@+id/tvcontinueView"
