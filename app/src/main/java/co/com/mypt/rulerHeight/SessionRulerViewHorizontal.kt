@@ -49,7 +49,7 @@ class SessionRulerViewHorizontal(
     private val INTERVAL = 5
     private val SUB_TICKS = 5   // 4 small ticks between numbers
     private val reduceTextGapPx by lazy {
-        (40 * resources.displayMetrics.density).toInt() // try 4–8 dp
+        (60 * resources.displayMetrics.density).toInt() // try 4–8 dp
     }
     init {
         if (!isInEditMode) initPaints()

@@ -334,6 +334,7 @@ class CreatePackagectivity : AppCompatActivity() {
             topView.visibility = View.GONE
             bottomView.background = null
             tvcontinue.text = getString(R.string.cont_inue)
+            freeMsgCustom.visibility=View.GONE
             continueButtonClick(true)
         }
     }

@@ -76,25 +76,27 @@ class BestPlanTotalSessionFragment(
     var checkedType="Per_session"
     private val viewModel: SharedSessionvalueViewModel by activityViewModels()
 
-    lateinit var switchCompat: SwitchCompat
-    lateinit var tvTotalcost: TextView
-    lateinit var tvPerSession: TextView
-    lateinit var tvTrainer_name: TextView
-    lateinit var recycler:RecyclerView
+//    lateinit var switchCompat: SwitchCompat
+//    lateinit var tvTotalcost: TextView
+//    lateinit var tvPerSession: TextView
+//    lateinit var tvTrainer_name: TextView
+//    lateinit var recycler:RecyclerView
     lateinit var tvRealPrice:TextView
+    lateinit var validFor:TextView
+    lateinit var totalSession:TextView
     lateinit var sessionSelected:TextView
     lateinit var tvAEDSession:TextView
 //    lateinit var sessionValue : TextView
-    lateinit var imTrainer : ImageView
-    lateinit var greenLine : ImageView
-    lateinit var seekBar : SeekBar
-    lateinit var view1 : View
-    lateinit var view2 : View
-    lateinit var sessionValueCard : LinearLayout
-    lateinit var relaticeSave : RelativeLayout
+//    lateinit var imTrainer : ImageView
+//    lateinit var greenLine : ImageView
+//    lateinit var seekBar : SeekBar
+//    lateinit var view1 : View
+//    lateinit var view2 : View
+//    lateinit var sessionValueCard : LinearLayout
+//    lateinit var relaticeSave : RelativeLayout
     lateinit var endLayout : LinearLayout
-    lateinit var cardEdit : CardView
-    var activitiesModelList :ArrayList<ActivityModel> = ArrayList()
+//    lateinit var cardEdit : CardView
+//    var activitiesModelList :ArrayList<ActivityModel> = ArrayList()
 
     private lateinit var textSwitcher: TextSwitcher
     private var lastProgress = 0
@@ -115,34 +117,36 @@ class BestPlanTotalSessionFragment(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var view=inflater.inflate(R.layout.fragment_best_plan_total_session, container, false)
+        val view=inflater.inflate(R.layout.fragment_best_plan_total_session, container, false)
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireActivity())
 
-        greenLine=view.findViewById(R.id.greenLine)
-        relaticeSave=view.findViewById(R.id.relaticeSave)
-        recycler=view.findViewById(R.id.recycler)
-        tvTrainer_name=view.findViewById(R.id.tvTrainer_name)
+//        greenLine=view.findViewById(R.id.greenLine)
+//        relaticeSave=view.findViewById(R.id.relaticeSave)
+//        recycler=view.findViewById(R.id.recycler)
+//        tvTrainer_name=view.findViewById(R.id.tvTrainer_name)
         tvRealPrice=view.findViewById(R.id.tvRealPrice)
         tvAEDSession=view.findViewById(R.id.tvAEDSession)
-        switchCompat=view.findViewById(R.id.switchCompat)
-        tvTotalcost=view.findViewById(R.id.tvTotalcost)
-        tvPerSession=view.findViewById(R.id.tvPerSession)
-        view2=view.findViewById(R.id.view2)
-        view1=view.findViewById(R.id.view1)
-        imTrainer=view.findViewById(R.id.imTrainer)
-        seekBar=view.findViewById(R.id.seekBar)
+//        switchCompat=view.findViewById(R.id.switchCompat)
+//        tvTotalcost=view.findViewById(R.id.tvTotalcost)
+//        tvPerSession=view.findViewById(R.id.tvPerSession)
+//        view2=view.findViewById(R.id.view2)
+//        view1=view.findViewById(R.id.view1)
+//        imTrainer=view.findViewById(R.id.imTrainer)
+//        seekBar=view.findViewById(R.id.seekBar)
 //        sessionValue=view.findViewById(R.id.sessionValue)
-        sessionValueCard=view.findViewById(R.id.sessionValueCard)
+//        sessionValueCard=view.findViewById(R.id.sessionValueCard)
         customization=view.findViewById(R.id.customization)
         bestPlan=view.findViewById(R.id.bestPlan)
-        cardEdit=view.findViewById(R.id.cardEdit)
+//        cardEdit=view.findViewById(R.id.cardEdit)
         textSwitcher = view.findViewById(R.id.textSwitcher)
         customPlanParentView = view.findViewById(R.id.customPlanParentView)
         bestPlanParentView = view.findViewById(R.id.bestPlanParentView)
         carouselRecycler = view.findViewById(R.id.carouselView)
+        validFor = view.findViewById(R.id.validFor)
+//        totalSession = view.findViewById(R.id.totalSession)
         sessionSelected = view.findViewById(R.id.sessionSelected)
 
-        seekBar.post {
+        /*seekBar.post {
             val seekBarWidth = seekBar.width - seekBar.paddingLeft - seekBar.paddingRight
             val thumbOffset = seekBar.thumbOffset
 
@@ -152,12 +156,12 @@ class BestPlanTotalSessionFragment(
 
             // Center the label horizontally
             relaticeSave.x = positionX - relaticeSave.width / 2
-        }
-        cardEdit.setOnClickListener{
+        }*/
+        /*cardEdit.setOnClickListener{
             val intent = Intent(activity, TrainersListActivity::class.java)
             intent.putExtra("studio_id",studio_id)
             startActivity(intent)
-        }
+        }*/
         textSwitcher.setFactory {
             val textView = TextView(context)
             textView.textSize = 40f
@@ -189,7 +193,7 @@ class BestPlanTotalSessionFragment(
                 println("===== $value")
                 val updatedValue=value.toInt()
                 if(updatedValue == 0){
-                    seekBar!!.progress = 1
+                    //seekBar!!.progress = 1
                     return
                 }
                 if(updatedValue > 1)
@@ -240,14 +244,15 @@ class BestPlanTotalSessionFragment(
                 debounceHandler.postDelayed(debounceRunnable!!, 300)
             }
         })
-        rulerWeight.setDefaultValue(11F)
+        rulerWeight.setDefaultValue(21F)
+        getSessionData(checkedType)
         //textSwitcher.setText("100")
 
         val startColor = Color.parseColor("#3DD772")
         val middleColor = Color.parseColor("#42AB98")
         val endColor = Color.parseColor("#4981F2")
 
-        seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        /*seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             private val valueAnimator: ValueAnimator? = null
 
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -255,10 +260,10 @@ class BestPlanTotalSessionFragment(
                     seekBar!!.progress = 1
                     return
                 }
-               /* if(progress > 1)
+               *//* if(progress > 1)
                     sessionValue.text = "$progress Sessions"
                 else
-                    sessionValue.text = "$progress Session"*/
+                    sessionValue.text = "$progress Session"*//*
 
                 viewModel.data.value =progress.toString()
 
@@ -336,8 +341,8 @@ class BestPlanTotalSessionFragment(
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
             }
 
-        })
-        switchCompat.setOnCheckedChangeListener { _, isChecked ->
+        })*/
+        /*switchCompat.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 checkedType="Total_cost"
                 tvPerSession.setTextColor(requireActivity().resources.getColor(R.color.booked))
@@ -351,7 +356,7 @@ class BestPlanTotalSessionFragment(
 
             }
             getSessionData(checkedType)
-        }
+        }*/
 
         textShader(tvAEDSession)
         tvRealPrice.paintFlags = tvRealPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
@@ -493,22 +498,24 @@ class BestPlanTotalSessionFragment(
                 try {
                     val resp = JSONObject(data!!)
                     if(resp.optBoolean("status")){
-                        sharedPreferences.edit().putString("trainer_image",resp.optJSONObject("data")!!.optJSONObject("trainer").optString("image")).apply()
-                        sharedPreferences.edit().putString("trainer_name",resp.optJSONObject("data")!!.optJSONObject("trainer").optString("name")).apply()
+//                        sharedPreferences.edit().putString("trainer_image",resp.optJSONObject("data")!!.optJSONObject("trainer").optString("image")).apply()
+//                        sharedPreferences.edit().putString("trainer_name",resp.optJSONObject("data")!!.optJSONObject("trainer").optString("name")).apply()
                         sharedPreferences.edit().putString("costType",checkedType).apply()
                         sharedPreferences.edit().putString("validity",resp.optJSONObject("data").optString("validity")).apply()
                         sharedPreferences.edit().putString("totalDays",resp.optJSONObject("data").optString("totalDays")).apply()
-                        sharedPreferences.edit().putString("tagsArray",
+                        /*sharedPreferences.edit().putString("tagsArray",
                             resp.optJSONObject("data")!!.optJSONObject("trainer").optJSONArray("tags")
                                 .toString()
-                        ).apply()
-                        tvTrainer_name.text = resp.optJSONObject("data")!!.optJSONObject("trainer").optString("name")
+                        ).apply()*/
+//                        tvTrainer_name.text = resp.optJSONObject("data")!!.optJSONObject("trainer").optString("name")
                         var price=""
                         if (checkedType == "Per_session"){
                             textSwitcher.setText(resp.optJSONObject("data").optString("pricePerSession"))
                             price=resp.optJSONObject("data").optString("pricePerSession")
+                            val validForTxt=resp.optJSONObject("data").optString("validity")
                             sharedPreferences.edit().putString("price",price).apply()
                             tvAEDSession.text = "AED / Session"
+                            validFor.text="Valid for $validForTxt"
 
                         }else{
                             textSwitcher.setText(resp.optJSONObject("data").optString("totalPrice"))
@@ -526,17 +533,17 @@ class BestPlanTotalSessionFragment(
                         )
                         textSwitcher.setLayoutParams(layoutParams)
 
-                        Glide.with(requireActivity()).load(resp.optJSONObject("data")!!.optJSONObject("trainer").optString("image")).fitCenter().into(imTrainer)
-                        activitiesModelList.clear()
+//                        Glide.with(requireActivity()).load(resp.optJSONObject("data")!!.optJSONObject("trainer").optString("image")).fitCenter().into(imTrainer)
+                        /*activitiesModelList.clear()
                         for(i in 0 until resp.optJSONObject("data")!!.optJSONObject("trainer").optJSONArray("tags").length())
                         {
                             var jsonTags=resp.optJSONObject("data")!!.optJSONObject("trainer").optJSONArray("tags").optJSONObject(i)
                             var activityModel=ActivityModel()
                             activityModel.name=jsonTags.optString("name")
                             activitiesModelList.add(activityModel)
-                        }
-                        var activityAdapter = ActivityAdapter(activity!!, activitiesModelList)
-                        recycler.adapter = activityAdapter
+                        }*/
+//                        var activityAdapter = ActivityAdapter(activity!!, activitiesModelList)
+//                        recycler.adapter = activityAdapter
                     }
 
 
@@ -626,7 +633,7 @@ class BestPlanTotalSessionFragment(
             val currentTextView = textSwitcher.currentView as TextView
             lifecycleScope.launch {
                 delay(100)
-                seekBar.progress = 1
+                //seekBar.progress = 1
                 textShader(currentTextView)
             }
             //getSessionData(checkedType)
