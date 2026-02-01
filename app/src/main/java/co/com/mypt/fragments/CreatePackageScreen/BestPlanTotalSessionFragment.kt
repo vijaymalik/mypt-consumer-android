@@ -40,6 +40,7 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import co.com.mypt.Api.ApiURL
 import co.com.mypt.Api.GetMethod
+import co.com.mypt.Api.Plans
 import co.com.mypt.Api.ResponseData
 import co.com.mypt.ProgressDialog
 import co.com.mypt.R
@@ -113,6 +114,7 @@ class BestPlanTotalSessionFragment(
     lateinit var customPlanParentView: LinearLayout
     private var carouselRecycler: DiscreteScrollView?=null
     private var isBestPlanAvailable=false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -173,14 +175,14 @@ class BestPlanTotalSessionFragment(
         bestPlan.setOnClickListener {
             selectTab(bestPlan, customization,bestPlanParentView,customPlanParentView)
             activity?.let {
-                (it as CreatePackagectivity).selectedPlan(isBestPlanAvailable)
+                (it as CreatePackagectivity).selectedPlan(if (isBestPlanAvailable) Plans.IS_BEST_AVAILABLE else Plans.IS_BEST_NOT_AVAILABLE)
             }
         }
 
         customization.setOnClickListener {
             selectTab(customization, bestPlan,customPlanParentView,bestPlanParentView)
             activity?.let {
-                (it as CreatePackagectivity).selectedPlan(false)
+                (it as CreatePackagectivity).selectedPlan(Plans.CUSTOMIZE)
 
             }
         }
@@ -362,7 +364,6 @@ class BestPlanTotalSessionFragment(
         tvRealPrice.paintFlags = tvRealPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
       //  getSessionData()
 
-        getBestPlanApi()
         return view
     }
     private val snapHelper = PagerSnapHelper()
@@ -397,13 +398,13 @@ class BestPlanTotalSessionFragment(
         if (!data.isNullOrEmpty()){
             isBestPlanAvailable=true
             activity?.let {
-                (it as CreatePackagectivity).selectedPlan(isBestPlanAvailable)
+                (it as CreatePackagectivity).selectedPlan(Plans.IS_BEST_AVAILABLE)
                 (it as CreatePackagectivity).updateSelectedItem(data[0])
             }
         }else{
             isBestPlanAvailable=false
             activity?.let {
-                (it as CreatePackagectivity).selectedPlan(isBestPlanAvailable)
+                (it as CreatePackagectivity).selectedPlan(Plans.IS_BEST_NOT_AVAILABLE)
             }
         }
 
@@ -627,9 +628,10 @@ class BestPlanTotalSessionFragment(
     override fun onResume() {
         super.onResume()
         if(isVisible) {
-            activity?.let {
-                (it as CreatePackagectivity).selectedPlan(isBestPlanAvailable)
-            }
+                getBestPlanApi()
+            /*activity?.let {
+                (it as CreatePackagectivity).selectedPlan(if (isBestPlanAvailable) Plans.IS_BEST_AVAILABLE else Plans.IS_BEST_NOT_AVAILABLE)
+            }*/
             val currentTextView = textSwitcher.currentView as TextView
             lifecycleScope.launch {
                 delay(100)

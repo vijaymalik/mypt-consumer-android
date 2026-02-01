@@ -112,7 +112,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
-                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrst uvwxyz1234567890"
                     android:fontFamily="@font/funnel_sans_regular"
                     android:hint="@string/email"
                     android:imeOptions="actionNext"

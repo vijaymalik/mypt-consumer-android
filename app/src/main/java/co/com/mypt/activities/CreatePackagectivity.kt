@@ -24,6 +24,7 @@ import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import co.com.mypt.Api.Plans
 import co.com.mypt.GymWorkout.withoutTrainer.JoiningFragment
 import co.com.mypt.R
 import co.com.mypt.adapter.ViewPagerAdapter1
@@ -241,6 +242,7 @@ class CreatePackagectivity : AppCompatActivity() {
                 p_Bar.setProgress(25 * (selectedPage + 1), true)
                 if (selectedPage == 0) {
                     selectedCount = 1
+                    tvcontinueView.visibility=View.VISIBLE
                     continueButtonClick(true)
                 }
             } else {
@@ -276,6 +278,7 @@ class CreatePackagectivity : AppCompatActivity() {
                     p_Bar.setProgress(25 * (selectedPage + 1), true)
                     if (selectedPage == 0) {
                         selectedCount = 1
+                        tvcontinueView.visibility=View.VISIBLE
                     }
                 } else {
                     sharedPreferences.edit { putString("classCall", "0") }
@@ -301,19 +304,29 @@ class CreatePackagectivity : AppCompatActivity() {
         checkPlanSelection()
     }
 
-    fun selectedPlan(isBestPlanSelected: Boolean) {
-        this.isBestPlanSelected = isBestPlanSelected
-        if (isBestPlanSelected) {
+    fun selectedPlan(isBestPlanSelected: Plans) {
+//        this.isBestPlanSelected = isBestPlanSelected
+        if (isBestPlanSelected == Plans.IS_BEST_AVAILABLE) {
             tvcontinue.text = getString(R.string.continue_summery)
             topView.visibility = View.VISIBLE
+            tvcontinueView.visibility= View.VISIBLE
             freeMsgCustom.visibility=View.GONE
             bottomView.background = resources.getDrawable(R.drawable.grey_rectangle, null)
+        } else if(isBestPlanSelected == Plans.IS_BEST_NOT_AVAILABLE){
+            hideCustomText()
         }else{
             topView.visibility = View.GONE
             bottomView.background = resources.getDrawable(R.drawable.grey_rectangle, null)
             freeMsgCustom.visibility=View.VISIBLE
+            tvcontinueView.visibility= View.VISIBLE
             tvcontinue.text = getString(R.string.continue_summery)
         }
+    }
+    fun hideCustomText(){
+        topView.visibility = View.GONE
+        bottomView.background=null
+        freeMsgCustom.visibility=View.GONE
+        tvcontinueView.visibility= View.GONE
     }
     fun updateSelectedItem(bestPlan: BestPlanList.BestPlanData?){
         packagePrice.text = "AED ${bestPlan?.price}"

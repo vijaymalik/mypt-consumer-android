@@ -352,7 +352,7 @@ class JoiningFragment(
                         var minvalue=resp.optJSONObject("data").optString("min_member").toInt()
                         maxvalue=resp.optJSONObject("data").optString("max_member").toInt()
 
-                        if (joinList.size>=minvalue){
+                       /* if (joinList.size>=minvalue){
                             (activity as? CreatePackagectivity)?.tvcontinueView!!.background = resources.getDrawable(R.drawable.white_rectangle)
                             (activity as? CreatePackagectivity)?.tvcontinue!!.setTextColor(resources.getColor(R.color.buttontextcolor))
 //                             (activity as? CreatePackagectivity)?.tvcontinue!!.setTypeface(null, Typeface.BOLD)
@@ -363,7 +363,7 @@ class JoiningFragment(
                              (activity as? CreatePackagectivity)?.tvcontinue!!.setTextColor(resources.getColor(R.color.white))
 //                             (activity as? CreatePackagectivity)?.tvcontinue!!.setTypeface(null, Typeface.NORMAL)
 
-                        }
+                        }*/
                         if (joinList.size>=maxvalue){
                             linearAddMember.visibility=View.GONE
                         }else{

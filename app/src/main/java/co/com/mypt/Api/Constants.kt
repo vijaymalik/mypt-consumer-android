@@ -21,3 +21,6 @@ object Constants {
     val ISFROMGYMWORKOUT="isFromGymWorkout"
     val PASS_DATA="passData"
 }
+enum class Plans{
+    IS_BEST_AVAILABLE,IS_BEST_NOT_AVAILABLE,CUSTOMIZE
+}
