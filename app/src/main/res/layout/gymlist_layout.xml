@@ -19,6 +19,9 @@
         android:layout_marginTop="24dp"
         android:layout_marginStart="20dp"
         android:scaleType="centerCrop"
+        android:textSize="12sp"
+        android:fontFamily="@font/funnel_sans_semibold"
+        android:gravity="center"
         android:background="@drawable/partener_gym" />
     <RelativeLayout
         android:layout_width="match_parent"
