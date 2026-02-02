@@ -60,7 +60,7 @@ class TrainerGroupActivity : Activity() {
         val latitude=intent.getStringExtra("lat")
         val trainerId=intent.getStringExtra("trainerId")
         if (sharedPreferences.getString("typeWorkout", "").equals("home")) {
-            val intent = Intent(this, AddressListForTrainerActivity::class.java)
+            val intent = Intent(this, CreatePackagectivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             intent.putExtra("trainer_id", trainerId)
             intent.putExtra("studio_id", studio_id)
@@ -69,7 +69,7 @@ class TrainerGroupActivity : Activity() {
             intent.putExtra("lat", latitude)
             startActivity(intent)
         } else {
-            val intent = Intent(this, BookSlot::class.java)
+            val intent = Intent(this, CreatePackagectivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             intent.putExtra("trainer_id", trainerId)
             intent.putExtra("studio_id", studio_id)

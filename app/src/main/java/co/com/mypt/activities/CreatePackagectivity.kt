@@ -25,6 +25,7 @@ import androidx.preference.PreferenceManager
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import co.com.mypt.Api.Plans
+import co.com.mypt.GymWorkout.withoutTrainer.GymReviewPackageActivity
 import co.com.mypt.GymWorkout.withoutTrainer.JoiningFragment
 import co.com.mypt.R
 import co.com.mypt.adapter.ViewPagerAdapter1
@@ -161,12 +162,12 @@ class CreatePackagectivity : AppCompatActivity() {
                 intent.getIntExtra("month", 0)
             ), "", 1
         )
-        viewPagerAdapter.add(TotalMonthFragment(intent.getStringExtra("studio_id")), "", 2)
+        /*viewPagerAdapter.add(TotalMonthFragment(intent.getStringExtra("studio_id")), "", 2)
         viewPagerAdapter.add(
             MarkJourneyFragment(
                 intent.getStringExtra("trainer_id"),
             ), "", 3
-        )
+        )*/
         viewPager.adapter = viewPagerAdapter
 
         viewPager.registerOnPageChangeCallback(object : OnPageChangeCallback() {
@@ -181,7 +182,27 @@ class CreatePackagectivity : AppCompatActivity() {
 
         tvcontinueView.setOnClickListener {
             if (selectedCount == 1) {
-                if (selectedPage == 3 && (selectedOption == 0 || selectedOption == 1)) {
+                if (selectedPage == 1 && selectedOption == 0) {
+                    if (sharedPreferences.getString("typeWorkout", "").equals("home")) {
+                        val intent = Intent(this, ReviewPackageActivity::class.java)
+                        startActivity(intent)
+                    } else {
+                        val intent = Intent(this, GymReviewPackageActivity::class.java)
+                        startActivity(intent)
+                    }
+                    return@setOnClickListener
+                }else if (selectedPage == 2 && (selectedOption == 1 || selectedOption == 2)){
+                    if (sharedPreferences.getString("typeWorkout", "").equals("home")) {
+                        val intent = Intent(this, ReviewPackageActivity::class.java)
+                        startActivity(intent)
+                    } else {
+                        val intent = Intent(this, GymReviewPackageActivity::class.java)
+                        startActivity(intent)
+                    }
+                    return@setOnClickListener
+                }
+
+               /* if (selectedPage == 1 && (selectedOption == 0 || selectedOption == 1)) {
                     var intent = Intent(this, DuringSeesionActivity::class.java)
                     intent.putExtra("setstart_dates", setstart_dates)
                     intent.putExtra("setstart_days", setstart_days)
@@ -200,7 +221,7 @@ class CreatePackagectivity : AppCompatActivity() {
                     sharedPreferences.edit().putString("classGymCall", "0").apply()
 
                     return@setOnClickListener
-                } else if (selectedPage == 4) {
+                } else if (selectedPage == 2) {
                     var intent = Intent(this, DuringSeesionActivity::class.java)
                     intent.putExtra("setstart_dates", setstart_dates)
                     intent.putExtra("setstart_days", setstart_days)
@@ -221,7 +242,7 @@ class CreatePackagectivity : AppCompatActivity() {
                     sharedPreferences.edit().putString("classCall", "0").apply()
                     sharedPreferences.edit().putString("classGymCall", "0").apply()
                     return@setOnClickListener
-                }
+                }*/
                 selectedPage += 1
                 if (selectedPage == 3 && (selectedOption == 0 || selectedOption == 1)) {
                     setButtonUnselected()
@@ -509,9 +530,7 @@ class CreatePackagectivity : AppCompatActivity() {
                 }
                 selectedOption = intent.getIntExtra("selectedPosition", 0)
 
-                if (intent.getIntExtra("selectedPosition", 0) == 0
-
-                ) {
+                if (intent.getIntExtra("selectedPosition", 0) == 0) {
 
                     viewPagerAdapter.add(
                         BestPlanTotalSessionFragment(
@@ -523,7 +542,7 @@ class CreatePackagectivity : AppCompatActivity() {
                             getIntent().getIntExtra("month", 0)
                         ), "", 1
                     )
-                    viewPagerAdapter.add(
+                   /* viewPagerAdapter.add(
                         TotalMonthFragment(getIntent().getStringExtra("studio_id")),
                         "",
                         2
@@ -531,8 +550,8 @@ class CreatePackagectivity : AppCompatActivity() {
                     viewPagerAdapter.add(
                         MarkJourneyFragment(
                             getIntent().getStringExtra("trainer_id")
-                        ), "", 3
-                    )
+                        ), "", 2
+                    )*/
 
                 } else if (intent.getIntExtra("selectedPosition", 0) == 2|| intent.getIntExtra("selectedPosition", 0) == 1) {
                     viewPagerAdapter.add(
@@ -551,7 +570,7 @@ class CreatePackagectivity : AppCompatActivity() {
                             getIntent().getIntExtra("month", 0)
                         ), "", 2
                     )
-                    viewPagerAdapter.add(
+                    /*viewPagerAdapter.add(
                         TotalMonthFragment(getIntent().getStringExtra("studio_id")),
                         "",
                         3
@@ -560,7 +579,7 @@ class CreatePackagectivity : AppCompatActivity() {
                         MarkJourneyFragment(
                             getIntent().getStringExtra("trainer_id"),
                         ), "", 4
-                    )
+                    )*/
                 }
 
             } else {

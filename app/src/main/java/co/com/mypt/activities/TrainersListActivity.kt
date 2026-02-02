@@ -671,26 +671,22 @@ class TrainersListActivity : AppCompatActivity() {
 
     fun getPrimaryTrainerRedirect(id: String) {
         if (sharedPreferences.getString("typeWorkout", "").equals("home")) {
-            val intent = Intent(this, AddressListForTrainerActivity::class.java)
+            val intent = Intent(this, CreatePackagectivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             intent.putExtra("trainer_id", id)
             intent.putExtra("studio_id", studio_id)
             intent.putExtra("type", sharedPreferences.getString("typeWorkout", ""))
             intent.putExtra("long", longitude)
-            Log.e("longitiude", "" + longitude)
             intent.putExtra("lat", latitude)
-            Log.e("lati", "" + latitude)
             startActivity(intent)
         } else {
-            val intent = Intent(this, BookSlot::class.java)
+            val intent = Intent(this, CreatePackagectivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             intent.putExtra("trainer_id", id)
             intent.putExtra("studio_id", studio_id)
             intent.putExtra("type", sharedPreferences.getString("typeWorkout", ""))
             intent.putExtra("long", longitude)
-            Log.e("longitiude", "" + longitude)
             intent.putExtra("lat", latitude)
-            Log.e("lati", "" + latitude)
             startActivity(intent)
 
         }
