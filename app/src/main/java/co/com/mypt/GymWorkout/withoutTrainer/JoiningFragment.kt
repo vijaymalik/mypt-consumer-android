@@ -45,7 +45,7 @@ import org.json.JSONObject
 class JoiningFragment(
     var trainer_id: String?,
     var studio_id: String?,
-    var createPackagectivity: CreatePackagectivity
+   val selectedPosition:Int
 ) : Fragment() {
     var checktype="male"
     var selectType=""
@@ -275,6 +275,11 @@ class JoiningFragment(
         param["name"] = name
         param["age"] = age
         param["gender"] = checktype
+        if (selectedPosition ==1){
+            param["is_group"] = "0"
+        }else{
+            param["is_group"] = "1"
+        }
         if (selectType.equals("add")){
             param["id"] =""
 
@@ -294,8 +299,11 @@ class JoiningFragment(
                     Log.e("addMemberRes",data.toString())
                     val resp = JSONObject(data!!)
                     if(resp.optBoolean("status")){
-
-                        getMemberList(context!!)
+                        if (selectedPosition ==2) {
+                            getMemberList(context!!)
+                        }else{
+                            getBuddyList(context!!)
+                        }
 
                     }
                     // Toast.makeText(this@PhoneNumberScreenActivity,resp.optString("msg"),Toast.LENGTH_SHORT).show()
@@ -391,11 +399,90 @@ class JoiningFragment(
         })
 
     }
+    private fun getBuddyList(context: Context) {
+        val progressDialog: Dialog = ProgressDialog.progressDialog(context,"")
+        progressDialog.show()
+        var api=""
+        if (sharedPreferences.getString("typeWorkout","").equals("home")){
+            api= ApiURL.getBuddyMember
+        }else{
+            api= ApiURL.getBuddyMember
+        }
+        Log.e("GetMemberPackageAPi",api)
+        GetMethod(api
+            ,activity).startMethod(object :
+            ResponseData {
+            override fun response(data: String?) {
+                progressDialog.dismiss()
+                joinList.clear()
+                Log.e("GetMemberPackageResponse",data.toString())
+                try {
+                    val resp = JSONObject(data!!)
+                    if(resp.optBoolean("status")){
+                        var jsonArray=resp.optJSONObject("data").optJSONArray("members")
+                        tvPerson.text = resp.optJSONObject("data").optString("limit")
+                        for (i in 0 until jsonArray.length()) {
+                            var jsonObject=jsonArray.optJSONObject(i)
+                            var activityModel= JoinModel()
+                            activityModel.id=jsonObject.optString("id")
+                            activityModel.name=jsonObject.optString("name")
+                            activityModel.age=jsonObject.optString("age")
+                            activityModel.gender=jsonObject.optString("gender")
+                            activityModel.self=jsonObject.optString("self")
+                            joinList.add(activityModel)
+                        }
+                        joinAdapter= JoinAdapter(joinList,context)
+                        Log.e("joinLIst",""+joinList.size)
+                        Recycler.adapter=joinAdapter
+                        var minvalue=resp.optJSONObject("data").optString("min_member").toInt()
+                        maxvalue=resp.optJSONObject("data").optString("max_member").toInt()
+
+                        /* if (joinList.size>=minvalue){
+                             (activity as? CreatePackagectivity)?.tvcontinueView!!.background = resources.getDrawable(R.drawable.white_rectangle)
+                             (activity as? CreatePackagectivity)?.tvcontinue!!.setTextColor(resources.getColor(R.color.buttontextcolor))
+ //                             (activity as? CreatePackagectivity)?.tvcontinue!!.setTypeface(null, Typeface.BOLD)
+                              (activity as? CreatePackagectivity)?.tvcontinue!!.isClickable = true
+                         }else{
+                              (activity as? CreatePackagectivity)?.tvcontinue!!.isClickable = false
+                              (activity as? CreatePackagectivity)?.tvcontinueView!!.background = resources.getDrawable(R.drawable.rectangle_btn)
+                              (activity as? CreatePackagectivity)?.tvcontinue!!.setTextColor(resources.getColor(R.color.white))
+ //                             (activity as? CreatePackagectivity)?.tvcontinue!!.setTypeface(null, Typeface.NORMAL)
+
+                         }*/
+                        if (joinList.size>=maxvalue){
+                            linearAddMember.visibility=View.GONE
+                        }else{
+                            linearAddMember.visibility=View.VISIBLE
+
+                        }
+                        if (buttonclick.equals("save_next")){
+                            if (joinList.size<maxvalue){
+                                addmembeBottomsheet(context1)
+                            }
+                        }
+                    }
+
+
+                }catch (e:Exception){
+                    e.printStackTrace()
+                }
+            }
+
+            override fun error(error: VolleyError?) {
+                progressDialog.dismiss()
+                error!!.printStackTrace()
+            }
+
+        })
+
+    }
 
     override fun onResume() {
         super.onResume()
         if (isVisible){
+            if (selectedPosition ==2)
             getMemberList(requireContext())
+            else getBuddyList(requireContext())
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             context1.registerReceiver(editMember, IntentFilter("editMember"),
@@ -426,7 +513,12 @@ class JoiningFragment(
     val deleteMember = object : BroadcastReceiver(){
         override fun onReceive(context: Context?, intent: Intent?) {
             buttonclick=""
-           getMemberList(context!!)
+            if (isAdded && view != null) {
+                if (selectedPosition == 2)
+                    getMemberList(context!!)
+                else
+                    getBuddyList(context!!)
+            }
         }
 
     }

@@ -510,7 +510,7 @@ class CreatePackagectivity : AppCompatActivity() {
                 selectedOption = intent.getIntExtra("selectedPosition", 0)
 
                 if (intent.getIntExtra("selectedPosition", 0) == 0
-                    || intent.getIntExtra("selectedPosition", 0) == 1
+
                 ) {
 
                     viewPagerAdapter.add(
@@ -534,11 +534,11 @@ class CreatePackagectivity : AppCompatActivity() {
                         ), "", 3
                     )
 
-                } else if (intent.getIntExtra("selectedPosition", 0) == 2) {
+                } else if (intent.getIntExtra("selectedPosition", 0) == 2|| intent.getIntExtra("selectedPosition", 0) == 1) {
                     viewPagerAdapter.add(
                         JoiningFragment(
                             getIntent().getStringExtra("trainer_id"),
-                            getIntent().getStringExtra("studio_id"), CreatePackagectivity()
+                            getIntent().getStringExtra("studio_id"), intent.getIntExtra("selectedPosition", 0)
                         ), "", 1
                     )
                     viewPagerAdapter.add(
