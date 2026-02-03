@@ -337,12 +337,12 @@ class CreatePackagectivity : AppCompatActivity() {
             topView.visibility = View.VISIBLE
             tvcontinueView.visibility = View.VISIBLE
             freeMsgCustom.visibility = View.GONE
-            bottomView.background = resources.getDrawable(R.drawable.grey_rectangle, null)
+            bottomView.background = resources.getDrawable(R.drawable.blue_border_container, null)
         } else if (isBestPlanSelected == Plans.IS_BEST_NOT_AVAILABLE) {
             hideCustomText()
         } else {
             topView.visibility = View.GONE
-            bottomView.background = resources.getDrawable(R.drawable.grey_rectangle, null)
+            bottomView.background = resources.getDrawable(R.drawable.blue_border_container, null)
             freeMsgCustom.visibility = View.VISIBLE
             tvcontinueView.visibility = View.VISIBLE
             tvcontinue.text = getString(R.string.continue_summery)
