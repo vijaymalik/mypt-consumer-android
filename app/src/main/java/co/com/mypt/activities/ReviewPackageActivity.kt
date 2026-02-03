@@ -17,6 +17,7 @@ import androidx.core.widget.NestedScrollView
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 import co.com.mypt.Api.ApiURL
+import co.com.mypt.Api.Constants.REVIEW_ADDRESS_ID
 import co.com.mypt.Api.PostMethod
 import co.com.mypt.Api.ResponseData
 import co.com.mypt.ProgressDialog
@@ -239,30 +240,32 @@ class ReviewPackageActivity : AppCompatActivity() {
 
     fun getData()  {
         val param: MutableMap<String, String> = HashMap()
-        param["package_type"] = ""+sharedPreferences.getInt("selectedPackageType",0)
-        param["sessions"] = ""+ intent.getStringExtra("session_value")
+
         if (sharedPreferences.getString("typeWorkout","").equals("home")){
-            param["type"] = ""+sharedPreferences.getString("typeWorkout","")
+            param["type"] = sharedPreferences.getString("typeWorkout","").toString()
         }else{
             param["type"] = "gym"
         }
-        param["trainer_id"] =""+ intent.getStringExtra("trainer_id")
-        param["studio_id"] = ""+ intent.getStringExtra("studio_id")
-        param["date"] =""+ intent.getStringExtra("apistart_date")
-        param["end_date"] =""+ intent.getStringExtra("apiend_date")
+        param["package_type"] = sharedPreferences.getInt("selectedPackageType",0).toString()
+        param["sessions"] = intent.getStringExtra("session_value").toString()
+        param["trainer_id"] =intent.getStringExtra("trainer_id").toString()
+        param["studio_id"] = intent.getStringExtra("studio_id").toString()
+
         if(updatedAddress != "")
             param["address_id"] =updatedAddress
         else
-            param["address_id"] =""+ intent.getStringExtra("address_id")
+            param["address_id"] =sharedPreferences.getString(REVIEW_ADDRESS_ID,"").toString()
 
-        param["slot_id"] = ""+ intent.getStringExtra("slot_id")
-
+//        param["slot_id"] = ""+ intent.getStringExtra("slot_id")
+//        param["date"] =""+ intent.getStringExtra("apistart_date")
+//        param["end_date"] =""+ intent.getStringExtra("apiend_date")
         android.util.Log.e("PackageCheckoutParam", param.toString())
 
         val progressDialog: Dialog = ProgressDialog.progressDialog(this,"")
         progressDialog.show()
 
-        PostMethod(ApiURL.packagecheckout,param, this).startPostMethod(object :
+
+        PostMethod(ApiURL.reviewPackageCheckout,param, this).startPostMethod(object :
             ResponseData {
             override fun response(data: String?) {
                 progressDialog.dismiss()

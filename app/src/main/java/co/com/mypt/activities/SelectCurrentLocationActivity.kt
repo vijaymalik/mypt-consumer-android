@@ -8,6 +8,7 @@ import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.PorterDuff
 import android.location.Address
@@ -37,6 +38,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.preference.PreferenceManager
 import co.com.mypt.Api.ApiURL
 import co.com.mypt.Api.Constants.ISFROMGYMWORKOUT
 import co.com.mypt.Api.GetMethod
@@ -73,6 +75,8 @@ import com.google.android.material.textfield.TextInputLayout
 import org.json.JSONObject
 import java.util.Arrays
 import java.util.Locale
+import androidx.core.content.edit
+import co.com.mypt.Api.Constants.REVIEW_ADDRESS_ID
 
 class SelectCurrentLocationActivity : AppCompatActivity() , OnMapReadyCallback {
 
@@ -108,8 +112,11 @@ class SelectCurrentLocationActivity : AppCompatActivity() , OnMapReadyCallback {
     var cityArrayList=ArrayList<String>()
     var isFromGymWorkoutL: Boolean?=false
     private var isAddressAdded=false
+    private var addressId=""
+    lateinit var sharedPreferences:SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        sharedPreferences=PreferenceManager.getDefaultSharedPreferences(applicationContext)
 
         setContentView(R.layout.activity_select_current_location)
         edaddress=findViewById(R.id.edaddress)
@@ -175,7 +182,7 @@ class SelectCurrentLocationActivity : AppCompatActivity() , OnMapReadyCallback {
 
         tvContinue.setOnClickListener{
             if (isAddressAdded){
-                startActivity(Intent(this@SelectCurrentLocationActivity, TrainersListActivity::class.java))
+                startTrainerList()
                 return@setOnClickListener
             }
             val sheet = addressBottomSheetDialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
@@ -195,6 +202,13 @@ class SelectCurrentLocationActivity : AppCompatActivity() , OnMapReadyCallback {
 
     }
 
+    fun startTrainerList(){
+        sharedPreferences.edit(commit = true) { putString(REVIEW_ADDRESS_ID, addressId) }
+        val intent= Intent(this@SelectCurrentLocationActivity, TrainersListActivity::class.java)
+        intent.putExtra("address_id",addressId)
+        startActivity(intent)
+    }
+
     private fun getAddressData() {
 
         val progressDialog: Dialog = ProgressDialog.progressDialog(this,"")
@@ -210,7 +224,8 @@ class SelectCurrentLocationActivity : AppCompatActivity() , OnMapReadyCallback {
                     val jsonObj = JSONObject(data!!)
                     if (jsonObj.optBoolean("status")){
                         val jsonArray=jsonObj.optJSONArray("data")
-                        if (jsonArray.length()>0){
+                        if (jsonArray != null && jsonArray.length()>0){
+                            addressId= jsonArray.optJSONObject(0).optString("id")
                             isAddressAdded=true
                         }
                     }
@@ -458,11 +473,9 @@ class SelectCurrentLocationActivity : AppCompatActivity() , OnMapReadyCallback {
                         addressBottomSheetDialog.dismiss()
                         finish()
                         if (isFromGymWorkoutL == true){
-                            startActivity(Intent(this@SelectCurrentLocationActivity, TrainersListActivity::class.java))
-                        }
+                            startTrainerList() }
                     }else{
-                        startActivity(Intent(this@SelectCurrentLocationActivity, TrainersListActivity::class.java))
-                    }
+                        startTrainerList()}
                    // Toast.makeText(this@PhoneNumberScreenActivity,resp.optString("msg"),Toast.LENGTH_SHORT).show()
                 }catch (e:Exception){
                     e.printStackTrace()

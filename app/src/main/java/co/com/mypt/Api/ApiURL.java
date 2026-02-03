@@ -104,5 +104,6 @@ public class ApiURL {
     public static String getTrainerGroup = Baseurl+"get-trainer-group?";
     public static String getBestPlan = Baseurl+"best-plans?";
     public static String getBuddyMember = Baseurl+"member-buddy-get";
+    public static String reviewPackageCheckout = Baseurl+"review-package-checkout";
 }
 

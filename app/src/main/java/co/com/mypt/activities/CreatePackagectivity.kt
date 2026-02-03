@@ -80,7 +80,7 @@ class CreatePackagectivity : AppCompatActivity() {
     var isBestPlanSelected = true
     lateinit var bottomView: ConstraintLayout
     lateinit var topView: ConstraintLayout
-
+var sessionCountTxt=""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_packagectivity)
@@ -150,7 +150,13 @@ class CreatePackagectivity : AppCompatActivity() {
         viewPagerAdapter = ViewPagerAdapter1(this)
 
         // add the fragments
-
+      val a=  intent.getStringExtra("type")
+        val b=  intent.getStringExtra("slot_id")
+        val c= intent.getStringExtra("address_id")
+        val d= intent.getStringExtra("trainer_id")
+        val f= intent.getStringExtra("studio_id")
+       val ddd= getIntent().getStringExtra("trainer_id")
+ println("====== $a $d $f  $ddd")
         viewPagerAdapter.add(CreatePackageFragment(), "", 0)
         viewPagerAdapter.add(
             BestPlanTotalSessionFragment(
@@ -183,22 +189,10 @@ class CreatePackagectivity : AppCompatActivity() {
         tvcontinueView.setOnClickListener {
             if (selectedCount == 1) {
                 if (selectedPage == 1 && selectedOption == 0) {
-                    if (sharedPreferences.getString("typeWorkout", "").equals("home")) {
-                        val intent = Intent(this, ReviewPackageActivity::class.java)
-                        startActivity(intent)
-                    } else {
-                        val intent = Intent(this, GymReviewPackageActivity::class.java)
-                        startActivity(intent)
-                    }
+                    reviewPackage()
                     return@setOnClickListener
                 }else if (selectedPage == 2 && (selectedOption == 1 || selectedOption == 2)){
-                    if (sharedPreferences.getString("typeWorkout", "").equals("home")) {
-                        val intent = Intent(this, ReviewPackageActivity::class.java)
-                        startActivity(intent)
-                    } else {
-                        val intent = Intent(this, GymReviewPackageActivity::class.java)
-                        startActivity(intent)
-                    }
+                    reviewPackage()
                     return@setOnClickListener
                 }
 
@@ -325,6 +319,16 @@ class CreatePackagectivity : AppCompatActivity() {
         checkPlanSelection()
     }
 
+    fun reviewPackage(){
+        val intent = Intent(this, ReviewPackageActivity::class.java)
+        println("SSSS  ${getIntent().getStringExtra("address_id")}")
+        intent.putExtra("address_id",getIntent().getStringExtra("address_id"))
+        intent.putExtra("session_value",sessionCountTxt)
+        intent.putExtra("trainer_id",getIntent().getStringExtra("trainer_id"))
+        intent.putExtra("studio_id",getIntent().getStringExtra("studio_id"))
+        intent.putExtra("package_type",selectedOption)
+        startActivity(intent)
+    }
     fun selectedPlan(isBestPlanSelected: Plans) {
 //        this.isBestPlanSelected = isBestPlanSelected
         if (isBestPlanSelected == Plans.IS_BEST_AVAILABLE) {
@@ -353,6 +357,7 @@ class CreatePackagectivity : AppCompatActivity() {
         packagePrice.text = "AED ${bestPlan?.price}"
         sessionCount.text = "${bestPlan?.sessions} sessions"
         validDay.text = "Valid for ${bestPlan?.validity_days} days"
+        sessionCountTxt=bestPlan?.sessions?:""
     }
    /* fun bestPlanNotAvailable(){
         topView.visibility = View.GONE

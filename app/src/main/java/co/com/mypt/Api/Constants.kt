@@ -20,6 +20,7 @@ object Constants {
     val profile_image = "profile_image"
     val ISFROMGYMWORKOUT="isFromGymWorkout"
     val PASS_DATA="passData"
+    val REVIEW_ADDRESS_ID="review_address_id"
 }
 enum class Plans{
     IS_BEST_AVAILABLE,IS_BEST_NOT_AVAILABLE,CUSTOMIZE
