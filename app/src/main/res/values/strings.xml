@@ -116,7 +116,7 @@
     <string name="mark_your_journey">Mark your \n journey</string>
     <string name="starts">Starts</string>
     <string name="ends">Ends</string>
-    <string name="review_package">Review Package</string>
+    <string name="review_package">Review your training plan</string>
     <string name="training_preference">Training Preference</string>
     <string name="one_on_one">One on One</string>
     <string name="booking_slot">Booking Slot</string>
@@ -736,4 +736,5 @@
     <string name="hold_tight">Hold tight! We are curating the best\n team for you</string>
     <string name="primary_trainer_msg">Secondary trainers follow the same plan to maintain progress</string>
     <string name="upgrade_plan_txt">Upgrade plan</string>
+    <string name="confirm_pay">CONFIRM &amp; PAY</string>
 </resources>

@@ -4,7 +4,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/buttontextcolor"
+    android:background="@drawable/onboarding_backgrd_2"
     android:fitsSystemWindows="true"
     tools:context=".activities.ReviewPackageActivity">
 
@@ -21,36 +21,28 @@
             android:layout_height="40dp"
             android:layout_marginHorizontal="20dp"
             android:layout_marginVertical="20dp"
-            android:src="@drawable/backarrow" />
+            android:src="@drawable/ic_back_arrow_new" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
-            android:fontFamily="@font/manrope_medium"
+            android:fontFamily="@font/funnel_sans_medium"
             android:text="@string/review_package"
             android:textColor="@color/headingcolor"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textSize="18sp" />
 
 
     </LinearLayout>
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_below="@id/headerLayout"
-        android:layout_marginBottom="20dp"
-        android:background="@color/tabbackground" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nested"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/linearpay"
-        android:layout_below="@id/view"
+        android:layout_below="@id/headerLayout"
         android:fillViewport="true">
 
         <LinearLayout
@@ -240,7 +232,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:background="@drawable/grey_rectangle"
+                android:background="@drawable/grey_rectangle_12"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -645,7 +637,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="12dp"
-                android:background="@drawable/grey_rectangle"
+                android:background="@drawable/grey_rectangle_12"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -1024,60 +1016,15 @@
         android:layout_height="100dp"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="20dp"
-        android:background="@color/tabbackground"
+        android:background="@drawable/blue_border_container"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingHorizontal="20dp">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="15dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tvPrice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/manrope_bold"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:text=""
-                    android:textColor="@color/white"
-                    android:textSize="28sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="3dp"
-                    android:fontFamily="@font/manrope_regular_400"
-                    android:text="AED"
-                    android:textColor="@color/white"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/manrope_semi_bold"
-                android:text="@string/view_breakdown"
-                android:textColor="@color/smallTextcolor"
-                android:textSize="14sp" />
-        </LinearLayout>
 
         <TextView
             android:id="@+id/tvPayment"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:background="@drawable/white_rectangle"
@@ -1085,7 +1032,7 @@
             android:gravity="center"
             android:paddingHorizontal="25dp"
             android:paddingVertical="18dp"
-            android:text="@string/make_payment"
+            android:text="@string/confirm_pay"
             android:textAllCaps="true"
             android:textColor="@color/black"
             android:textSize="16sp" />

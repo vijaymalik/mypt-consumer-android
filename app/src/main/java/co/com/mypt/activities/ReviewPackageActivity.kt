@@ -32,46 +32,46 @@ import com.bumptech.glide.Glide
 import org.json.JSONObject
 
 class ReviewPackageActivity : AppCompatActivity() {
-    lateinit var linearpay:LinearLayout
-    lateinit var linearslot:LinearLayout
-    lateinit var linearPreference:LinearLayout
-    lateinit var linearShowCoupon:LinearLayout
-    lateinit var linear:LinearLayout
-    lateinit var linearEdit:LinearLayout
-    lateinit var linearSession:LinearLayout
-    lateinit var linear_Duration:LinearLayout
-    lateinit var membersLayout:LinearLayout
+//    lateinit var linearpay:LinearLayout
+//    lateinit var linearslot:LinearLayout
+//    lateinit var linearPreference:LinearLayout
+//    lateinit var linearShowCoupon:LinearLayout
+//    lateinit var linear:LinearLayout
+//    lateinit var linearEdit:LinearLayout
+//    lateinit var linearSession:LinearLayout
+//    lateinit var linear_Duration:LinearLayout
+//    lateinit var membersLayout:LinearLayout
 
     lateinit var imEditTrainer:ImageView
     lateinit var im_star:ImageView
-    lateinit var recycler: RecyclerView
-    lateinit var membersListRecyclerView: RecyclerView
+//    lateinit var recycler: RecyclerView
+//    lateinit var membersListRecyclerView: RecyclerView
     var activitiesModelList :ArrayList<ActivityModel> = ArrayList()
     lateinit var sharedPreferences: SharedPreferences
     lateinit var edit: SharedPreferences.Editor
-    lateinit var headerLayout:LinearLayout
+//    lateinit var headerLayout:LinearLayout
 
-    lateinit var imTrainer:ImageView
-    lateinit var editAddress:ImageView
-    lateinit var editMembers:ImageView
+//    lateinit var imTrainer:ImageView
+//    lateinit var editAddress:ImageView
+//    lateinit var editMembers:ImageView
 
-    lateinit var mobile:TextView
-    lateinit var address:TextView
-    lateinit var addressType:TextView
-    lateinit var tvTrainer_name:TextView
-    lateinit var avgRating:TextView
-    lateinit var totalRatings:TextView
-    lateinit var tvTrainingPrefernce:TextView
-    lateinit var tvTime:TextView
-    lateinit var tvPackageDetail:TextView
-    lateinit var tvStartDate:TextView
-    lateinit var tvPackageName:TextView
-    lateinit var tvTotalDuration:TextView
-    lateinit var tvTotalSession:TextView
-    lateinit var tvEndDate:TextView
-    lateinit var tvPrice:TextView
+//    lateinit var mobile:TextView
+//    lateinit var address:TextView
+//    lateinit var addressType:TextView
+//    lateinit var tvTrainer_name:TextView
+//    lateinit var avgRating:TextView
+//    lateinit var totalRatings:TextView
+//    lateinit var tvTrainingPrefernce:TextView
+//    lateinit var tvTime:TextView
+//    lateinit var tvPackageDetail:TextView
+//    lateinit var tvStartDate:TextView
+//    lateinit var tvPackageName:TextView
+//    lateinit var tvTotalDuration:TextView
+//    lateinit var tvTotalSession:TextView
+//    lateinit var tvEndDate:TextView
+//    lateinit var tvPrice:TextView
     var updatedAddress = ""
-    lateinit var nested:NestedScrollView
+//    lateinit var nested:NestedScrollView
     var membersList = ArrayList<JoinModel>()
     var tax_rate=""
     var main_price=""
@@ -81,9 +81,9 @@ class ReviewPackageActivity : AppCompatActivity() {
         sharedPreferences= PreferenceManager.getDefaultSharedPreferences(applicationContext)
         edit=sharedPreferences.edit()
 
-        editMembers=findViewById(R.id.editMembers)
-        membersListRecyclerView=findViewById(R.id.membersListRecyclerView)
-        membersLayout=findViewById(R.id.membersLayout)
+//        editMembers=findViewById(R.id.editMembers)
+//        membersListRecyclerView=findViewById(R.id.membersListRecyclerView)
+        /*membersLayout=findViewById(R.id.membersLayout)
         mobile=findViewById(R.id.mobile)
         address=findViewById(R.id.address)
         addressType=findViewById(R.id.addressType)
@@ -113,14 +113,14 @@ class ReviewPackageActivity : AppCompatActivity() {
         nested=findViewById(R.id.nested)
         linearpay=findViewById(R.id.linearpay)
         tvTime=findViewById(R.id.tvTime)
-        im_star=findViewById(R.id.im_star)
+        im_star=findViewById(R.id.im_star)*/
 
 
-        headerLayout.setOnClickListener{
+       /* headerLayout.setOnClickListener{
             finish()
-        }
+        }*/
 
-        if (sharedPreferences.getString("typewithout","").equals("withoutTrainer")){
+       /* if (sharedPreferences.getString("typewithout","").equals("withoutTrainer")){
             linearEdit.visibility=View.GONE
             linear_Duration.visibility=View.VISIBLE
             linearSession.visibility=View.GONE
@@ -129,8 +129,8 @@ class ReviewPackageActivity : AppCompatActivity() {
             linear_Duration.visibility=View.GONE
             linearSession.visibility=View.VISIBLE
 
-        }
-        linearpay.setOnClickListener{
+        }*/
+       /* linearpay.setOnClickListener{
            // edit.remove("typeWorkout").apply()
             val intent = Intent(this, PaymentSelectionActivity::class.java)
             intent.putExtra("selectBookOption","BookCreatedPackage")
@@ -147,7 +147,7 @@ class ReviewPackageActivity : AppCompatActivity() {
             intent.putExtra("tax_rate",tax_rate)
             intent.putExtra("main_price",main_price)
             startActivity(intent)
-          /*  val intent = Intent(this, BookingConfirmActivity::class.java)
+          *//*  val intent = Intent(this, BookingConfirmActivity::class.java)
             intent.putExtra("selectBookOption","BookCreatedPackage")
             intent.putExtra("type",getIntent().getStringExtra("type"))
             intent.putExtra("slot_id",getIntent().getStringExtra("slot_id"))
@@ -162,7 +162,7 @@ class ReviewPackageActivity : AppCompatActivity() {
             intent.putExtra("price",tvPrice.text.toString())
             intent.putExtra("tax_rate",tax_rate)
             intent.putExtra("main_price",main_price)
-            startActivity(intent)*/
+            startActivity(intent)*//*
         }
         linearslot.setOnClickListener{
             val intent = Intent(this, DuringSeesionActivity::class.java)
@@ -188,26 +188,26 @@ class ReviewPackageActivity : AppCompatActivity() {
         linearPreference.setOnClickListener{
             sendBroadcast(Intent("closeClass"))
             finish()
-            /*val intent = Intent(this, CreatePackagectivity::class.java)
+            *//*val intent = Intent(this, CreatePackagectivity::class.java)
             intent.putExtra("trainer_id",getIntent().getStringExtra("trainer_id"))
             intent.putExtra("studio_id",getIntent().getStringExtra("studio_id"))
             intent.putExtra("slot_id",getIntent().getStringExtra("slot_id"))
-            startActivity(intent)*/
+            startActivity(intent)*//*
         }
         linear.setOnClickListener{
             val intent = Intent(this, ViewCouponsOfferActivity::class.java)
             startActivity(intent)
-        }
+        }*/
 
-        editAddress.setOnClickListener {
+       /* editAddress.setOnClickListener {
             startActivity(Intent(this, AddressListForPackage::class.java))
-        }
-        editMembers.setOnClickListener {
+        }*/
+       /* editMembers.setOnClickListener {
             val intent = Intent(this, MembersListForPackage::class.java)
             intent.putExtra("",getIntent().getStringExtra("trainer_id"))
             intent.putExtra("",getIntent().getStringExtra("studio_id"))
             startActivity(intent)
-        }
+        }*/
     }
 
     override fun onResume() {
@@ -225,9 +225,9 @@ class ReviewPackageActivity : AppCompatActivity() {
     val countReceiver = object : BroadcastReceiver(){
         override fun onReceive(context: Context?, intent: Intent?) {
             if(intent!!.getIntExtra("selectedPosition",-1) > -1){
-                linearShowCoupon.visibility = View.VISIBLE
+//                linearShowCoupon.visibility = View.VISIBLE
             }else{
-                linearShowCoupon.visibility = View.GONE
+//                linearShowCoupon.visibility = View.GONE
 
             }
         }
@@ -276,36 +276,36 @@ class ReviewPackageActivity : AppCompatActivity() {
                     android.util.Log.e("PackageCheckoutRes",data.toString())
                     val resp = JSONObject(data!!)
                     if(resp.optBoolean("status")){
-                        linearpay.visibility=View.VISIBLE
-                        nested.visibility=View.VISIBLE
+//                        linearpay.visibility=View.VISIBLE
+//                        nested.visibility=View.VISIBLE
 
                         val addressModel = resp.optJSONObject("data").optJSONObject("address")
                         val landmark = if (addressModel.optString("landmark").isNullOrEmpty()) "${addressModel.optString("landmark")}," else ""
 
-                        address.text = addressModel.optString("building_name")+", "+addressModel.optString("street")+", "+landmark+addressModel.optString("city_name")+", "+addressModel.optString("country_name")
-                        addressType.text = addressModel.optString("type")
-                        mobile.text = addressModel.optString("mobile_no")
+//                        address.text = addressModel.optString("building_name")+", "+addressModel.optString("street")+", "+landmark+addressModel.optString("city_name")+", "+addressModel.optString("country_name")
+//                        addressType.text = addressModel.optString("type")
+//                        mobile.text = addressModel.optString("mobile_no")
 
-                        tvTrainer_name.text = resp.optJSONObject("data").optJSONObject("trainer").optString("name")
-                        if (resp.optJSONObject("data").optJSONObject("trainer").optString("averageRating").equals("")){
-                            avgRating.text = "0"
-                        }else{
-                            avgRating.text = resp.optJSONObject("data").optJSONObject("trainer").optString("averageRating")
+//                        tvTrainer_name.text = resp.optJSONObject("data").optJSONObject("trainer").optString("name")
+//                        if (resp.optJSONObject("data").optJSONObject("trainer").optString("averageRating").equals("")){
+//                            avgRating.text = "0"
+//                        }else{
+//                            avgRating.text = resp.optJSONObject("data").optJSONObject("trainer").optString("averageRating")
+//
+//                        }
+//                        totalRatings.text = resp.optJSONObject("data").optJSONObject("trainer").optString("noOfRating")+" ratings"
+//                        tvTrainingPrefernce.text = resp.optJSONObject("data").optString("training_preference")
+//                        Glide.with(applicationContext).load(resp.optJSONObject("data").optJSONObject("trainer").optString("profile")).fitCenter().error(R.drawable.dumbbell).
+//                        placeholder(R.drawable.dumbbell).into(imTrainer)
+                        //tvTime.text = resp.optJSONObject("data").optString("slot_time")
 
-                        }
-                        totalRatings.text = resp.optJSONObject("data").optJSONObject("trainer").optString("noOfRating")+" ratings"
-                        tvTrainingPrefernce.text = resp.optJSONObject("data").optString("training_preference")
-                        Glide.with(applicationContext).load(resp.optJSONObject("data").optJSONObject("trainer").optString("profile")).fitCenter().error(R.drawable.dumbbell).
-                        placeholder(R.drawable.dumbbell).into(imTrainer)
-                        tvTime.text = resp.optJSONObject("data").optString("slot_time")
-
-                        tvPackageDetail.text = resp.optJSONObject("data").optJSONObject("packageDetail").optString("package")
-                        tvStartDate.text = resp.optJSONObject("data").optJSONObject("packageDetail").optString("start_date")
-                        tvEndDate.text = resp.optJSONObject("data").optJSONObject("packageDetail").optString("end_date")
-                        tvTotalSession.text = resp.optJSONObject("data").optJSONObject("packageDetail").optString("totalSessions")
+//                        tvPackageDetail.text = resp.optJSONObject("data").optJSONObject("packageDetail").optString("package")
+//                        tvStartDate.text = resp.optJSONObject("data").optJSONObject("packageDetail").optString("start_date")
+//                        tvEndDate.text = resp.optJSONObject("data").optJSONObject("packageDetail").optString("end_date")
+//                        tvTotalSession.text = resp.optJSONObject("data").optJSONObject("packageDetail").optString("totalSessions")
                         tax_rate = resp.optJSONObject("data").optJSONObject("packageDetail").optString("tax_price")
                         main_price = resp.optJSONObject("data").optJSONObject("packageDetail").optString("main_price")
-                        tvPrice.text = resp.optJSONObject("data").optJSONObject("packageDetail").optString("price").replace("AED","")
+//                        tvPrice.text = resp.optJSONObject("data").optJSONObject("packageDetail").optString("price").replace("AED","")
 
                         for(i in 0 until resp.optJSONObject("data")!!.optJSONObject("trainer").optJSONArray("tags").length()) {
                             val activityModel= ActivityModel()
@@ -313,10 +313,10 @@ class ReviewPackageActivity : AppCompatActivity() {
                             activitiesModelList.add(activityModel)
                         }
                         val activityAdapter = ReviewActivityAdapter(this@ReviewPackageActivity, activitiesModelList)
-                        recycler.adapter = activityAdapter
+//                        recycler.adapter = activityAdapter
 
                         if(resp.optJSONObject("data").has("userMembers")){
-                            membersLayout.visibility = View.VISIBLE
+//                            membersLayout.visibility = View.VISIBLE
                             membersList.clear()
                             val jsonArray=resp.optJSONObject("data").optJSONArray("userMembers")
                             for (i in 0 until jsonArray.length()) {
@@ -328,12 +328,12 @@ class ReviewPackageActivity : AppCompatActivity() {
                                 activityModel.gender=jsonObject.optString("gender")
                                 membersList.add(activityModel)
                             }
-                            val joinAdapter= MembersListAdapter(membersList, applicationContext)
-                            membersListRecyclerView.adapter=joinAdapter
+                           /* val joinAdapter= MembersListAdapter(membersList, applicationContext)
+                            membersListRecyclerView.adapter=joinAdapter*/
                         }
                     }else{
-                        linearpay.visibility=View.GONE
-                        nested.visibility=View.GONE
+//                        linearpay.visibility=View.GONE
+//                        nested.visibility=View.GONE
                     }
                     // Toast.makeText(this@PhoneNumberScreenActivity,resp.optString("msg"),Toast.LENGTH_SHORT).show()
                 }catch (e:Exception){
