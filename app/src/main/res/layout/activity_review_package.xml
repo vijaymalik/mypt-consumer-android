@@ -581,7 +581,7 @@
                             android:layout_gravity="center"
                             android:layout_marginStart="22dp"
                             android:layout_marginEnd="5dp"
-                            android:layout_toStartOf="@+id/applyCoupon"
+                            android:layout_toStartOf="@+id/addressUpdate"
                             android:layout_toEndOf="@+id/homeicon"
                             android:fontFamily="@font/clash_display_regular"
                             android:lineHeight="24sp"
@@ -620,6 +620,392 @@
                             android:text=""
                             android:textAllCaps="true"
                             android:textColor="@color/text_color_neutral_200"
+                            android:textSize="14sp" />
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/clash_display_regular"
+                android:lineHeight="24sp"
+                android:text="Choose how you’d like to pay"
+                android:textColor="@color/location_txt"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/grey_rectangle"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/black_background"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="90dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/payment_continer"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/firstCard"
+                            android:layout_width="0dp"
+                            android:layout_height="90dp"
+                            android:layout_marginHorizontal="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:id="@+id/firstPayIc"
+                                    android:layout_width="36dp"
+                                    android:layout_height="36dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/tabby" />
+
+                                <TextView
+                                    android:id="@+id/payFirst"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="22dp"
+                                    android:layout_marginEnd="5dp"
+                                    android:layout_toStartOf="@+id/tabbyRadio"
+                                    android:layout_toEndOf="@+id/firstPayIc"
+                                    android:fontFamily="@font/clash_display_regular"
+                                    android:lineHeight="24sp"
+                                    android:text="Save AED 35 with ‘GYM20’"
+                                    android:textColor="@color/lightgreycolor"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/payFirstSub"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/payFirst"
+                                    android:layout_alignStart="@+id/payFirst"
+                                    android:layout_marginTop="6dp"
+                                    android:drawableTint="@color/bg_color_primary_white_55"
+                                    android:fontFamily="@font/clash_display_regular"
+                                    android:lineHeight="16sp"
+                                    android:text="Dubai - Al Thanyah First- Barsha Heights, Dubai internet City"
+                                    android:textColor="@color/bg_color_primary_white_55"
+                                    android:textSize="12sp" />
+
+
+                                <RadioButton
+                                    android:id="@+id/tabbyRadio"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignTop="@+id/payFirst"
+                                    android:layout_alignParentEnd="true"
+                                    android:drawableTint="@color/text_color_neutral_200"
+                                    android:fontFamily="@font/funnel_sans_medium"
+                                    android:paddingHorizontal="12dp"
+                                    android:text=""
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/text_color_neutral_200"
+                                    android:textSize="14sp" />
+
+                            </RelativeLayout>
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="90dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/payment_continer"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/tamara"
+                            android:layout_width="0dp"
+                            android:layout_height="90dp"
+                            android:layout_marginHorizontal="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:id="@+id/tamaraIc"
+                                    android:layout_width="36dp"
+                                    android:layout_height="36dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/tamara" />
+
+                                <TextView
+                                    android:id="@+id/tamaraTxt"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="22dp"
+                                    android:layout_marginEnd="5dp"
+                                    android:layout_toStartOf="@+id/tamaraRadio"
+                                    android:layout_toEndOf="@+id/tamaraIc"
+                                    android:fontFamily="@font/clash_display_regular"
+                                    android:lineHeight="24sp"
+                                    android:text="Save AED 35 with ‘GYM20’"
+                                    android:textColor="@color/lightgreycolor"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/tamaraSub"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/tamaraTxt"
+                                    android:layout_alignStart="@+id/tamaraTxt"
+                                    android:layout_marginTop="6dp"
+                                    android:drawableTint="@color/bg_color_primary_white_55"
+                                    android:fontFamily="@font/clash_display_regular"
+                                    android:lineHeight="16sp"
+                                    android:text="Dubai - Al Thanyah First- Barsha Heights, Dubai internet City"
+                                    android:textColor="@color/bg_color_primary_white_55"
+                                    android:textSize="12sp" />
+
+
+                                <RadioButton
+                                    android:id="@+id/tamaraRadio"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignTop="@+id/tamaraTxt"
+                                    android:layout_alignParentEnd="true"
+                                    android:drawableTint="@color/text_color_neutral_200"
+                                    android:fontFamily="@font/funnel_sans_medium"
+                                    android:paddingHorizontal="12dp"
+                                    android:text=""
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/text_color_neutral_200"
+                                    android:textSize="14sp" />
+
+                            </RelativeLayout>
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="90dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/payment_continer"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="90dp"
+                            android:layout_marginHorizontal="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:id="@+id/ccvenueIc"
+                                    android:layout_width="36dp"
+                                    android:layout_height="36dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/master_card" />
+
+                                <TextView
+                                    android:id="@+id/ccvenueTxt"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="22dp"
+                                    android:layout_marginEnd="5dp"
+                                    android:layout_toStartOf="@+id/ccvenueRadio"
+                                    android:layout_toEndOf="@+id/ccvenueIc"
+                                    android:fontFamily="@font/clash_display_regular"
+                                    android:lineHeight="24sp"
+                                    android:text="Save AED 35 with ‘GYM20’"
+                                    android:textColor="@color/lightgreycolor"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/ccvenueTxtSub"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/ccvenueTxt"
+                                    android:layout_alignStart="@+id/ccvenueTxt"
+                                    android:layout_marginTop="6dp"
+                                    android:drawableTint="@color/bg_color_primary_white_55"
+                                    android:fontFamily="@font/clash_display_regular"
+                                    android:lineHeight="16sp"
+                                    android:text="Dubai - Al Thanyah First- Barsha Heights, Dubai internet City"
+                                    android:textColor="@color/bg_color_primary_white_55"
+                                    android:textSize="12sp" />
+
+
+                                <RadioButton
+                                    android:id="@+id/ccvenueRadio"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignTop="@+id/ccvenueTxt"
+                                    android:layout_alignParentEnd="true"
+                                    android:drawableTint="@color/text_color_neutral_200"
+                                    android:fontFamily="@font/funnel_sans_medium"
+                                    android:paddingHorizontal="12dp"
+                                    android:text=""
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/text_color_neutral_200"
+                                    android:textSize="14sp" />
+
+                            </RelativeLayout>
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="6dp">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="12dp"
+                        android:background="@drawable/clock_ic" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/clash_display_regular"
+                        android:lineHeight="16sp"
+                        android:text="Cancel > 6 hours before credit refunded. Freeze anytime. Top-up anytime."
+                        android:textColor="@color/location_txt"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/black_background"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/sslIc"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:background="@drawable/shield_energy" />
+
+                        <TextView
+                            android:id="@+id/sslTxt"
+                            android:layout_toRightOf="@+id/sslIc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:fontFamily="@font/clash_display_regular"
+                            android:lineHeight="24sp"
+                            android:text="SSL Secure"
+                            android:textColor="@color/grey_text"
+                            android:textSize="14sp" />
+                        <ImageView
+                            android:id="@+id/userMulti"
+                            android:layout_width="20dp"
+                            android:layout_toRightOf="@+id/viewCard"
+                            android:layout_height="20dp"
+                            android:background="@drawable/user_multiple" />
+
+                        <TextView
+                            android:id="@+id/userMultTxt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="5dp"
+                            android:maxLines="1"
+                            android:layout_marginEnd="5dp"
+                            android:layout_toRightOf="@+id/userMulti"
+                            android:fontFamily="@font/clash_display_regular"
+                            android:lineHeight="24sp"
+                            android:text="12,000+ members"
+                            android:textColor="@color/lightgreycolor"
+                            android:textSize="14sp" />
+
+                        <ImageView
+                            android:id="@+id/visaIc"
+                            android:layout_width="20dp"
+                            android:layout_toRightOf="@+id/sslTxt"
+                            android:layout_height="20dp"
+                            android:background="@drawable/credit_card" />
+
+                        <TextView
+                            android:id="@+id/viewCard"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_toRightOf="@+id/visaIc"
+                            android:fontFamily="@font/clash_display_regular"
+                            android:lineHeight="24sp"
+                            android:text="Visa / Mastercard"
+                            android:textColor="@color/lightgreycolor"
                             android:textSize="14sp" />
 
                     </RelativeLayout>
