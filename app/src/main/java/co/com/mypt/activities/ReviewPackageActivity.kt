@@ -17,6 +17,7 @@ import androidx.core.widget.NestedScrollView
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 import co.com.mypt.Api.ApiURL
+import co.com.mypt.Api.Constants.BEST_PLAN_ID
 import co.com.mypt.Api.Constants.REVIEW_ADDRESS_ID
 import co.com.mypt.Api.PostMethod
 import co.com.mypt.Api.ResponseData
@@ -246,6 +247,7 @@ class ReviewPackageActivity : AppCompatActivity() {
         }else{
             param["type"] = "gym"
         }
+        param["best_plan_id"] = intent.getStringExtra(BEST_PLAN_ID).toString()
         param["package_type"] = sharedPreferences.getInt("selectedPackageType",0).toString()
         param["sessions"] = intent.getStringExtra("session_value").toString()
         param["trainer_id"] =intent.getStringExtra("trainer_id").toString()

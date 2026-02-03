@@ -24,15 +24,13 @@ import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import co.com.mypt.Api.Constants.BEST_PLAN_ID
 import co.com.mypt.Api.Plans
-import co.com.mypt.GymWorkout.withoutTrainer.GymReviewPackageActivity
 import co.com.mypt.GymWorkout.withoutTrainer.JoiningFragment
 import co.com.mypt.R
 import co.com.mypt.adapter.ViewPagerAdapter1
 import co.com.mypt.fragments.CreatePackageScreen.BestPlanTotalSessionFragment
 import co.com.mypt.fragments.CreatePackageScreen.CreatePackageFragment
-import co.com.mypt.fragments.CreatePackageScreen.MarkJourneyFragment
-import co.com.mypt.fragments.CreatePackageScreen.TotalMonthFragment
 import co.com.mypt.model.BestPlanList
 import co.com.mypt.utils.SharedDuringSessionViewModel
 import co.com.mypt.utils.SharedSessionvalueViewModel
@@ -80,7 +78,8 @@ class CreatePackagectivity : AppCompatActivity() {
     var isBestPlanSelected = true
     lateinit var bottomView: ConstraintLayout
     lateinit var topView: ConstraintLayout
-var sessionCountTxt=""
+    var sessionCountTxt = ""
+    var bestPlanId=""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_packagectivity)
@@ -150,13 +149,13 @@ var sessionCountTxt=""
         viewPagerAdapter = ViewPagerAdapter1(this)
 
         // add the fragments
-      val a=  intent.getStringExtra("type")
-        val b=  intent.getStringExtra("slot_id")
-        val c= intent.getStringExtra("address_id")
-        val d= intent.getStringExtra("trainer_id")
-        val f= intent.getStringExtra("studio_id")
-       val ddd= getIntent().getStringExtra("trainer_id")
- println("====== $a $d $f  $ddd")
+        val a = intent.getStringExtra("type")
+        intent.getStringExtra("slot_id")
+        intent.getStringExtra("address_id")
+        val d = intent.getStringExtra("trainer_id")
+        val f = intent.getStringExtra("studio_id")
+        val ddd = intent.getStringExtra("trainer_id")
+        println("====== $a $d $f  $ddd")
         viewPagerAdapter.add(CreatePackageFragment(), "", 0)
         viewPagerAdapter.add(
             BestPlanTotalSessionFragment(
@@ -191,52 +190,52 @@ var sessionCountTxt=""
                 if (selectedPage == 1 && selectedOption == 0) {
                     reviewPackage()
                     return@setOnClickListener
-                }else if (selectedPage == 2 && (selectedOption == 1 || selectedOption == 2)){
+                } else if (selectedPage == 2 && (selectedOption == 1 || selectedOption == 2)) {
                     reviewPackage()
                     return@setOnClickListener
                 }
 
-               /* if (selectedPage == 1 && (selectedOption == 0 || selectedOption == 1)) {
-                    var intent = Intent(this, DuringSeesionActivity::class.java)
-                    intent.putExtra("setstart_dates", setstart_dates)
-                    intent.putExtra("setstart_days", setstart_days)
-                    intent.putExtra("apistart_date", apistart_date)
+                /* if (selectedPage == 1 && (selectedOption == 0 || selectedOption == 1)) {
+                     var intent = Intent(this, DuringSeesionActivity::class.java)
+                     intent.putExtra("setstart_dates", setstart_dates)
+                     intent.putExtra("setstart_days", setstart_days)
+                     intent.putExtra("apistart_date", apistart_date)
 
-                    intent.putExtra("setend_dates", setend_dates)
-                    intent.putExtra("setend_days", setend_days)
-                    intent.putExtra("apiend_date", apiend_date)
+                     intent.putExtra("setend_dates", setend_dates)
+                     intent.putExtra("setend_days", setend_days)
+                     intent.putExtra("apiend_date", apiend_date)
 
-                    intent.putExtra("trainer_id", getIntent().getStringExtra("trainer_id"))
-                    intent.putExtra("studio_id", getIntent().getStringExtra("studio_id"))
-                    intent.putExtra("address_id", getIntent().getStringExtra("address_id"))
-                    intent.putExtra("session_value", session_value)
-                    startActivity(intent)
-                    sharedPreferences.edit().putString("classCall", "0").apply()
-                    sharedPreferences.edit().putString("classGymCall", "0").apply()
+                     intent.putExtra("trainer_id", getIntent().getStringExtra("trainer_id"))
+                     intent.putExtra("studio_id", getIntent().getStringExtra("studio_id"))
+                     intent.putExtra("address_id", getIntent().getStringExtra("address_id"))
+                     intent.putExtra("session_value", session_value)
+                     startActivity(intent)
+                     sharedPreferences.edit().putString("classCall", "0").apply()
+                     sharedPreferences.edit().putString("classGymCall", "0").apply()
 
-                    return@setOnClickListener
-                } else if (selectedPage == 2) {
-                    var intent = Intent(this, DuringSeesionActivity::class.java)
-                    intent.putExtra("setstart_dates", setstart_dates)
-                    intent.putExtra("setstart_days", setstart_days)
-                    intent.putExtra("apistart_date", apistart_date)
+                     return@setOnClickListener
+                 } else if (selectedPage == 2) {
+                     var intent = Intent(this, DuringSeesionActivity::class.java)
+                     intent.putExtra("setstart_dates", setstart_dates)
+                     intent.putExtra("setstart_days", setstart_days)
+                     intent.putExtra("apistart_date", apistart_date)
 
-                    intent.putExtra("setend_dates", setend_dates)
-                    intent.putExtra("setend_days", setend_days)
-                    intent.putExtra("apiend_date", apiend_date)
+                     intent.putExtra("setend_dates", setend_dates)
+                     intent.putExtra("setend_days", setend_days)
+                     intent.putExtra("apiend_date", apiend_date)
 
-                    intent.putExtra("trainer_id", getIntent().getStringExtra("trainer_id"))
-                    intent.putExtra("studio_id", getIntent().getStringExtra("studio_id"))
-                    intent.putExtra("session_value", session_value)
-                    intent.putExtra("address_id", getIntent().getStringExtra("address_id"))
-                    intent.putExtra("type", getIntent().getStringExtra("type"))
+                     intent.putExtra("trainer_id", getIntent().getStringExtra("trainer_id"))
+                     intent.putExtra("studio_id", getIntent().getStringExtra("studio_id"))
+                     intent.putExtra("session_value", session_value)
+                     intent.putExtra("address_id", getIntent().getStringExtra("address_id"))
+                     intent.putExtra("type", getIntent().getStringExtra("type"))
 
-                    startActivity(intent)
+                     startActivity(intent)
 
-                    sharedPreferences.edit().putString("classCall", "0").apply()
-                    sharedPreferences.edit().putString("classGymCall", "0").apply()
-                    return@setOnClickListener
-                }*/
+                     sharedPreferences.edit().putString("classCall", "0").apply()
+                     sharedPreferences.edit().putString("classGymCall", "0").apply()
+                     return@setOnClickListener
+                 }*/
                 selectedPage += 1
                 if (selectedPage == 3 && (selectedOption == 0 || selectedOption == 1)) {
                     setButtonUnselected()
@@ -257,7 +256,7 @@ var sessionCountTxt=""
                 p_Bar.setProgress(25 * (selectedPage + 1), true)
                 if (selectedPage == 0) {
                     selectedCount = 1
-                    tvcontinueView.visibility=View.VISIBLE
+                    tvcontinueView.visibility = View.VISIBLE
                     continueButtonClick(true)
                 }
             } else {
@@ -293,7 +292,7 @@ var sessionCountTxt=""
                     p_Bar.setProgress(25 * (selectedPage + 1), true)
                     if (selectedPage == 0) {
                         selectedCount = 1
-                        tvcontinueView.visibility=View.VISIBLE
+                        tvcontinueView.visibility = View.VISIBLE
                     }
                 } else {
                     sharedPreferences.edit { putString("classCall", "0") }
@@ -319,53 +318,61 @@ var sessionCountTxt=""
         checkPlanSelection()
     }
 
-    fun reviewPackage(){
+    fun reviewPackage() {
         val intent = Intent(this, ReviewPackageActivity::class.java)
         println("SSSS  ${getIntent().getStringExtra("address_id")}")
-        intent.putExtra("address_id",getIntent().getStringExtra("address_id"))
-        intent.putExtra("session_value",sessionCountTxt)
-        intent.putExtra("trainer_id",getIntent().getStringExtra("trainer_id"))
-        intent.putExtra("studio_id",getIntent().getStringExtra("studio_id"))
-        intent.putExtra("package_type",selectedOption)
+        intent.putExtra("address_id", getIntent().getStringExtra("address_id"))
+        intent.putExtra("session_value", sessionCountTxt)
+        intent.putExtra("trainer_id", getIntent().getStringExtra("trainer_id"))
+        intent.putExtra("studio_id", getIntent().getStringExtra("studio_id"))
+        intent.putExtra("package_type", selectedOption)
+        intent.putExtra(BEST_PLAN_ID, bestPlanId)
         startActivity(intent)
     }
+
     fun selectedPlan(isBestPlanSelected: Plans) {
 //        this.isBestPlanSelected = isBestPlanSelected
         if (isBestPlanSelected == Plans.IS_BEST_AVAILABLE) {
             tvcontinue.text = getString(R.string.continue_summery)
             topView.visibility = View.VISIBLE
-            tvcontinueView.visibility= View.VISIBLE
-            freeMsgCustom.visibility=View.GONE
+            tvcontinueView.visibility = View.VISIBLE
+            freeMsgCustom.visibility = View.GONE
             bottomView.background = resources.getDrawable(R.drawable.grey_rectangle, null)
-        } else if(isBestPlanSelected == Plans.IS_BEST_NOT_AVAILABLE){
+        } else if (isBestPlanSelected == Plans.IS_BEST_NOT_AVAILABLE) {
             hideCustomText()
-        }else{
+        } else {
             topView.visibility = View.GONE
             bottomView.background = resources.getDrawable(R.drawable.grey_rectangle, null)
-            freeMsgCustom.visibility=View.VISIBLE
-            tvcontinueView.visibility= View.VISIBLE
+            freeMsgCustom.visibility = View.VISIBLE
+            tvcontinueView.visibility = View.VISIBLE
             tvcontinue.text = getString(R.string.continue_summery)
         }
     }
-    fun hideCustomText(){
+
+    fun hideCustomText() {
         topView.visibility = View.GONE
-        bottomView.background=null
-        freeMsgCustom.visibility=View.GONE
-        tvcontinueView.visibility= View.GONE
+        bottomView.background = null
+        freeMsgCustom.visibility = View.GONE
+        tvcontinueView.visibility = View.GONE
     }
-    fun updateSelectedItem(bestPlan: BestPlanList.BestPlanData?){
+
+    fun updateBestPlanSession(bestPlan: BestPlanList.BestPlanData?) {
         packagePrice.text = "AED ${bestPlan?.price}"
         sessionCount.text = "${bestPlan?.sessions} sessions"
         validDay.text = "Valid for ${bestPlan?.validity_days} days"
-        sessionCountTxt=bestPlan?.sessions?:""
+        sessionCountTxt = bestPlan?.sessions ?: ""
+        bestPlanId = bestPlan?.id?:""
     }
-   /* fun bestPlanNotAvailable(){
-        topView.visibility = View.GONE
-        bottomView.background = null
-    }*/
+    fun customPlanSession(sessions:String){
+        sessionCountTxt = sessions
+    }
+    /* fun bestPlanNotAvailable(){
+         topView.visibility = View.GONE
+         bottomView.background = null
+     }*/
 
     fun checkPlanSelection() {
-        if (selectedPage == 1 && isBestPlanSelected && selectedOption!=2) {
+        if (selectedPage == 1 && isBestPlanSelected && selectedOption != 2) {
 //            tvcontinue.text = getString(R.string.continue_summery)
 //            topView.visibility = View.VISIBLE
 //            bottomView.background = resources.getDrawable(R.drawable.grey_rectangle, null)
@@ -373,12 +380,13 @@ var sessionCountTxt=""
             topView.visibility = View.GONE
             bottomView.background = null
             tvcontinue.text = getString(R.string.cont_inue)
-            freeMsgCustom.visibility=View.GONE
+            freeMsgCustom.visibility = View.GONE
             continueButtonClick(true)
         }
     }
-    fun continueButtonClick(isEnable: Boolean){
-        if (isEnable){
+
+    fun continueButtonClick(isEnable: Boolean) {
+        if (isEnable) {
             forwardArrow.imageTintList =
                 ColorStateList.valueOf(
                     ContextCompat.getColor(
@@ -388,7 +396,7 @@ var sessionCountTxt=""
                 )
             tvcontinue.setTextColor(resources.getColor(R.color.buttontextcolor))
             tvcontinueView.background = resources.getDrawable(R.drawable.white_rectangle)
-        }else{
+        } else {
             forwardArrow.imageTintList =
                 ColorStateList.valueOf(
                     ContextCompat.getColor(
@@ -547,22 +555,27 @@ var sessionCountTxt=""
                             getIntent().getIntExtra("month", 0)
                         ), "", 1
                     )
-                   /* viewPagerAdapter.add(
-                        TotalMonthFragment(getIntent().getStringExtra("studio_id")),
-                        "",
-                        2
-                    )
-                    viewPagerAdapter.add(
-                        MarkJourneyFragment(
-                            getIntent().getStringExtra("trainer_id")
-                        ), "", 2
-                    )*/
+                    /* viewPagerAdapter.add(
+                         TotalMonthFragment(getIntent().getStringExtra("studio_id")),
+                         "",
+                         2
+                     )
+                     viewPagerAdapter.add(
+                         MarkJourneyFragment(
+                             getIntent().getStringExtra("trainer_id")
+                         ), "", 2
+                     )*/
 
-                } else if (intent.getIntExtra("selectedPosition", 0) == 2|| intent.getIntExtra("selectedPosition", 0) == 1) {
+                } else if (intent.getIntExtra(
+                        "selectedPosition",
+                        0
+                    ) == 2 || intent.getIntExtra("selectedPosition", 0) == 1
+                ) {
                     viewPagerAdapter.add(
                         JoiningFragment(
                             getIntent().getStringExtra("trainer_id"),
-                            getIntent().getStringExtra("studio_id"), intent.getIntExtra("selectedPosition", 0)
+                            getIntent().getStringExtra("studio_id"),
+                            intent.getIntExtra("selectedPosition", 0)
                         ), "", 1
                     )
                     viewPagerAdapter.add(

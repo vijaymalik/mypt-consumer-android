@@ -386,7 +386,7 @@ class BestPlanTotalSessionFragment(
                     if (position !=-1){
 
                         activity?.let {
-                            (it as CreatePackagectivity).updateSelectedItem(data[position])
+                            (it as CreatePackagectivity).updateBestPlanSession(data[position])
                         }
 
                     }
@@ -399,7 +399,7 @@ class BestPlanTotalSessionFragment(
             isBestPlanAvailable=true
             activity?.let {
                 (it as CreatePackagectivity).selectedPlan(Plans.IS_BEST_AVAILABLE)
-                (it as CreatePackagectivity).updateSelectedItem(data[0])
+                (it as CreatePackagectivity).updateBestPlanSession(data[0])
             }
         }else{
             isBestPlanAvailable=false
@@ -501,9 +501,14 @@ class BestPlanTotalSessionFragment(
                     if(resp.optBoolean("status")){
 //                        sharedPreferences.edit().putString("trainer_image",resp.optJSONObject("data")!!.optJSONObject("trainer").optString("image")).apply()
 //                        sharedPreferences.edit().putString("trainer_name",resp.optJSONObject("data")!!.optJSONObject("trainer").optString("name")).apply()
+                        activity?.let {
+                            val session=resp.optJSONObject("data").optJSONObject("details").optString("sessions")
+                            (it as CreatePackagectivity).customPlanSession(session)
+                        }
                         sharedPreferences.edit().putString("costType",checkedType).apply()
                         sharedPreferences.edit().putString("validity",resp.optJSONObject("data").optString("validity")).apply()
                         sharedPreferences.edit().putString("totalDays",resp.optJSONObject("data").optString("totalDays")).apply()
+
                         /*sharedPreferences.edit().putString("tagsArray",
                             resp.optJSONObject("data")!!.optJSONObject("trainer").optJSONArray("tags")
                                 .toString()
