@@ -2,62 +2,70 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    >
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/edittext_border_background">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="15dp"
+        android:layout_toLeftOf="@+id/applyCoupon"
+        android:layout_marginHorizontal="4dp"
+        android:layout_marginVertical="16dp"
         android:orientation="vertical">
+
         <LinearLayout
+            android:id="@+id/linearShowCoupon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/linearShowCoupon"
-            android:paddingRight="10dp"
-            android:gravity="center"
-            android:paddingLeft="-20dp"
-            android:paddingVertical="5dp"
+
             android:orientation="horizontal">
-            <CheckBox
-                android:id="@+id/checkBox2"
-                android:buttonTint="#E8E8E8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                />
+
+
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="20dp"
-                android:paddingVertical="10dp"
-                android:textStyle="bold"
                 android:id="@+id/tvcouponName"
-                android:textSize="16dp"
-                android:fontFamily="@font/manrope_medium"
-                android:background="@drawable/white_dotted_rectangle"
-                android:textColor="@color/booked"
-                android:text="FIRST200"/>
-            <TextView
-                android:text="Save AED 100"
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:fontFamily="@font/manrope_semi_bold"
+                android:fontFamily="@font/funnel_sans_regular"
+                android:text="FIRST200"
+                android:maxLines="1"
+                android:textColor="@color/booked"
+                android:textSize="16sp"
+               />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:maxLines="1"
+                android:fontFamily="@font/funnel_sans_semibold"
+                android:text="Save AED 100"
                 android:textColor="@color/white"
-                android:textSize="14sp"/>
+                android:textSize="12sp" />
 
         </LinearLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="5dp"
-            android:textSize="12sp"
-            android:layout_marginTop="5dp"
             android:layout_below="@+id/linearShowCoupon"
-            android:fontFamily="@font/manrope_light_300"
-            android:textColor="@color/white"
-            android:text="Expires on: 8th Oct, 2024 | 11:59 AM"/>
+            android:layout_marginTop="5dp"
+            android:maxLines="1"
+            android:fontFamily="@font/funnel_sans_regular"
+            android:text="Expires on: 8th Oct, 2024 | 11:59 AM"
+            android:textColor="@color/grey_text"
+            android:textSize="12sp" />
     </LinearLayout>
-
+    <TextView
+        android:id="@+id/applyCoupon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:fontFamily="@font/funnel_sans_semibold"
+        android:text="@string/apply"
+        android:drawableRight="@drawable/baseline_keyboard_arrow_right_24"
+        android:textColor="@color/lightgreycolor"
+        android:textSize="12sp" />
 </RelativeLayout>

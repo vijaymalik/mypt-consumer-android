@@ -1,5 +1,8 @@
 package co.com.mypt.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
 data class ReviewPackageCheckout(
     val data: Data?,
     val msg: String?,
@@ -48,22 +51,7 @@ data class ReviewPackageCheckout(
             val total_sessions: Int?
         )
 
-        data class AvailablePromo(
-            val benefit_type: String?,
-            val description: String?,
-            val discount_amount: Int?,
-            val discount_type: String?,
-            val discount_value: Int?,
-            val free_sessions: Int?,
-            val id: Int?,
-            val is_applied: Boolean?,
-            val name: String?,
-            val offer_code: String?,
-            val offer_details: String?,
-            val offer_mode: String?,
-            val product_type: Int?,
-            val purchase_value: Int?
-        )
+
 
         data class PackageDetails(
             val address_id: String?,
@@ -116,3 +104,20 @@ data class ReviewPackageCheckout(
         )
     }
 }
+@Parcelize
+data class AvailablePromo(
+    val benefit_type: String?,
+    val description: String?,
+    val discount_amount: Int?,
+    val discount_type: String?,
+    val discount_value: Int?,
+    val free_sessions: Int?,
+    val id: Int?,
+    val is_applied: Boolean?,
+    val name: String?,
+    val offer_code: String?,
+    val offer_details: String?,
+    val offer_mode: String?,
+    val product_type: Int?,
+    val purchase_value: Int?
+):  Parcelable

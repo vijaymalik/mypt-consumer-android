@@ -9,13 +9,14 @@ import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import co.com.mypt.R
-import co.com.mypt.model.CouponsModel
+import co.com.mypt.model.AvailablePromo
+import org.w3c.dom.Text
 
-class CouponAdapter(var context: Context, var selectTimeModelList: ArrayList<CouponsModel>) : RecyclerView.Adapter<CouponAdapter.CouponHolder>() {
+class CouponAdapter(var context: Context, var selectTimeModelList: ArrayList<AvailablePromo?>?,var callback:(String,String)->Unit) : RecyclerView.Adapter<CouponAdapter.CouponHolder>() {
     var selectedPosition = -1
     class CouponHolder(view: View):RecyclerView.ViewHolder(view){
         var tvcouponName=view.findViewById<TextView>(R.id.tvcouponName)
-        val checkBox: CheckBox = view.findViewById(R.id.checkBox2)
+        val applyCoupon: TextView = view.findViewById(R.id.applyCoupon)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CouponHolder {
@@ -24,37 +25,38 @@ class CouponAdapter(var context: Context, var selectTimeModelList: ArrayList<Cou
     }
 
     override fun getItemCount(): Int {
-        return selectTimeModelList.size
+        return selectTimeModelList?.size?:0
     }
 
     override fun onBindViewHolder(holder: CouponHolder, position: Int) {
-        val couponsModel= selectTimeModelList[position]
-        holder.tvcouponName.text = couponsModel.name
+        val couponsModel= selectTimeModelList?.get(position)
+        holder.tvcouponName.text = couponsModel?.name
 
-        holder.checkBox.isChecked = position == selectedPosition
-        holder.checkBox.tag = position
+//        holder.checkBox.isChecked = position == selectedPosition
+        holder.applyCoupon.tag = position
 
-        holder.checkBox.setOnClickListener {
+        holder.applyCoupon.setOnClickListener {
             val pos = it.tag as Int
-            val intent = Intent("selectedCoupon")
-            if (holder.checkBox.isChecked) {
+
+//            if (holder.checkBox.isChecked) {
                 // Update the selected position
-                val previousPosition = selectedPosition
-                selectedPosition = position
+//                val previousPosition = selectedPosition
+//                selectedPosition = position
 
                 // Notify RecyclerView to update the views
-                notifyItemChanged(previousPosition)
-                notifyItemChanged(selectedPosition)
-                intent.putExtra("selectedPosition", selectedPosition)
-                intent.putExtra("couponName", selectTimeModelList[pos].name)
-                intent.putExtra("saving", selectTimeModelList[pos].saving)
-            } else {
-                // Deselect the checkbox if clicked again
-                selectedPosition = -1
-                notifyItemChanged(position)
-                intent.putExtra("selectedPosition", selectedPosition)
-            }
-            context.sendBroadcast(intent)
+//                notifyItemChanged(previousPosition)
+//                notifyItemChanged(selectedPosition)
+
+//                intent.putExtra("couponName", selectTimeModelList?.get(pos)?.name)
+//                intent.putExtra("saving", selectTimeModelList?.get(pos)?.offer_details)
+//            } else {
+//                // Deselect the checkbox if clicked again
+//                selectedPosition = -1
+//                notifyItemChanged(position)
+//                intent.putExtra("selectedPosition", selectedPosition)
+//            }
+
+            callback(couponsModel?.id.toString(),couponsModel?.name?:"")
         }
     }
 

@@ -89,11 +89,11 @@
                     <TextView
                         android:id="@+id/upgradePlan"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="36dp"
                         android:layout_alignTop="@+id/subTitle"
                         android:layout_alignParentRight="true"
                         android:layout_gravity="bottom"
-                        android:background="@drawable/white_rectangle"
+                        android:background="@drawable/white_rectangle_8dp"
                         android:fontFamily="@font/clash_display_medium"
                         android:gravity="center"
                         android:lineHeight="16sp"
@@ -172,7 +172,7 @@
                                 android:textSize="16sp" />
 
                             <TextView
-                                android:id="@+id/tvTrainingPrefernce"
+                                android:id="@+id/viewAllCoupon"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/offerTitle"
@@ -209,6 +209,26 @@
                                 android:textColor="@color/text_color_neutral_200"
                                 android:textSize="14sp" />
 
+                            <TextView
+                                android:id="@+id/appliedCoupon"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignTop="@+id/offerTitle"
+                                android:layout_alignParentEnd="true"
+                                android:layout_gravity="center"
+                                android:background="@drawable/edittext_border"
+                                android:drawableEnd="@drawable/ic_arrow_right"
+                                android:drawablePadding="8dp"
+                                android:drawableTint="@color/text_color_neutral_200"
+                                android:fontFamily="@font/funnel_sans_medium"
+                                android:gravity="center"
+                                android:paddingHorizontal="12dp"
+                                android:drawableLeft="@drawable/tick_circle"
+                                android:paddingVertical="10dp"
+                                android:text="Applied"
+                                android:textAllCaps="true"
+                                android:textColor="#1FC16B"
+                                android:textSize="12sp" />
                         </RelativeLayout>
 
 
@@ -698,6 +718,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_below="@+id/payFirst"
                                     android:layout_alignStart="@+id/payFirst"
+                                    android:maxLines="1"
                                     android:layout_marginTop="6dp"
                                     android:drawableTint="@color/bg_color_primary_white_55"
                                     android:fontFamily="@font/clash_display_regular"
@@ -776,6 +797,7 @@
 
                                 <TextView
                                     android:id="@+id/tamaraSub"
+                                    android:maxLines="1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_below="@+id/tamaraTxt"
@@ -863,6 +885,7 @@
                                     android:layout_below="@+id/ccvenueTxt"
                                     android:layout_alignStart="@+id/ccvenueTxt"
                                     android:layout_marginTop="6dp"
+                                    android:maxLines="1"
                                     android:drawableTint="@color/bg_color_primary_white_55"
                                     android:fontFamily="@font/clash_display_regular"
                                     android:lineHeight="16sp"

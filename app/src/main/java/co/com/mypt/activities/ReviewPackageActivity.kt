@@ -1,17 +1,23 @@
 package co.com.mypt.activities
 
+
 import android.app.Dialog
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.SharedPreferences
-import android.os.Build
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import android.widget.RelativeLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.preference.PreferenceManager
 import co.com.mypt.Api.ApiURL
 import co.com.mypt.Api.Constants.BEST_PLAN_ID
@@ -19,12 +25,16 @@ import co.com.mypt.Api.Constants.REVIEW_ADDRESS_ID
 import co.com.mypt.Api.PostMethod
 import co.com.mypt.Api.ResponseData
 import co.com.mypt.ProgressDialog
+import co.com.mypt.R
 import co.com.mypt.databinding.ActivityReviewPackageBinding
 import co.com.mypt.model.ActivityModel
+import co.com.mypt.model.AvailablePromo
 import co.com.mypt.model.JoinModel
 import co.com.mypt.model.ReviewPackageCheckout
+import co.com.mypt.model.ReviewPackageCheckout.Data.UpgradePlan
 import com.android.volley.VolleyError
 import com.google.gson.Gson
+
 
 class ReviewPackageActivity : AppCompatActivity() {
 //    lateinit var linearpay:LinearLayout
@@ -72,6 +82,10 @@ class ReviewPackageActivity : AppCompatActivity() {
     var membersList = ArrayList<JoinModel>()
     var tax_rate = ""
     var main_price = ""
+    var selectedCouponId: String? = ""
+    var upgradIdText: UpgradePlan? = null
+    var available_promos: List<AvailablePromo?>? = null
+    var isupgreadClick = false
     lateinit var binding: ActivityReviewPackageBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,7 +93,24 @@ class ReviewPackageActivity : AppCompatActivity() {
         setContentView(binding.root)
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         edit = sharedPreferences.edit()
-
+        binding.addressUpdate.setOnClickListener {
+            startActivity(Intent(this, AddressListForPackage::class.java))
+        }
+        binding.viewAllCoupon.setOnClickListener {
+            val intent = Intent(this, ViewCouponsOfferActivity::class.java)
+            intent.putParcelableArrayListExtra(
+                "couponList",
+                available_promos as java.util.ArrayList<out Parcelable?>?
+            )
+            startActivity(intent)
+        }
+        binding.appliedCoupon.visibility = View.GONE
+        binding.upgradePlan.setOnClickListener {
+            upgradeDialog()
+        }
+        binding.back1.setOnClickListener {
+            finish()
+        }
 //        editMembers=findViewById(R.id.editMembers)
 //        membersListRecyclerView=findViewById(R.id.membersListRecyclerView)
         /*membersLayout=findViewById(R.id.membersLayout)
@@ -211,31 +242,51 @@ class ReviewPackageActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            registerReceiver(countReceiver, IntentFilter("selectedCoupon"), RECEIVER_NOT_EXPORTED)
-            registerReceiver(
-                updatedAddressId,
-                IntentFilter("updatedAddressId"),
-                RECEIVER_NOT_EXPORTED
-            )
-        } else {
-            registerReceiver(countReceiver, IntentFilter("selectedCoupon"))
-            registerReceiver(updatedAddressId, IntentFilter("updatedAddressId"))
-        }
+        val filter = IntentFilter("selectedCoupon")
+
+        LocalBroadcastManager
+            .getInstance(this)
+            .registerReceiver(countReceiver, filter)
+
         getData()
     }
 
     val countReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            if (intent!!.getIntExtra("selectedPosition", -1) > -1) {
-//                linearShowCoupon.visibility = View.VISIBLE
-            } else {
-//                linearShowCoupon.visibility = View.GONE
-
-            }
+            selectedCouponId = intent?.getStringExtra("couponId")
+            binding.offerTitle.text = intent?.getStringExtra("couponName")
+            binding.appliedCoupon.visibility = View.VISIBLE
+            binding.applyCoupon.visibility = View.GONE
         }
 
     }
+
+    fun upgradeDialog() {
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.upgrade_dialog)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+
+        val offerTitle = dialog.findViewById<TextView?>(R.id.offerTitle)
+        offerTitle.text = upgradIdText?.title
+
+        val savetilesub = dialog.findViewById<TextView?>(R.id.savetilesub)
+        savetilesub.text = "GYM20 every time you book sessions"
+        val savetile = dialog.findViewById<TextView?>(R.id.savetile)
+        savetile.text = upgradIdText?.badge_text
+
+        val btnSave = dialog.findViewById<RelativeLayout?>(R.id.btnSave)
+
+        btnSave.setOnClickListener(View.OnClickListener { v: View? ->
+            isupgreadClick = true
+            getData()
+            dialog.dismiss()
+        })
+
+        dialog.show()
+
+    }
+
     val updatedAddressId = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             updatedAddress = intent?.getStringExtra("addressId").toString()
@@ -258,11 +309,18 @@ class ReviewPackageActivity : AppCompatActivity() {
             param["address_id"] = updatedAddress
         else
             param["address_id"] = sharedPreferences.getString(REVIEW_ADDRESS_ID, "").toString()
+        if (isupgreadClick) {
+            isupgreadClick = false
+            param["best_plan_id"] = upgradIdText?.id ?: ""
+        } else {
+            param["best_plan_id"] = intent.getStringExtra(BEST_PLAN_ID).toString()
+        }
 
-        param["best_plan_id"] = intent.getStringExtra(BEST_PLAN_ID).toString()
         param["package_type"] = sharedPreferences.getInt("selectedPackageType", 0).toString()
         param["sessions"] = intent.getStringExtra("session_value").toString()
         param["trainer_id"] = intent.getStringExtra("trainer_id").toString()
+//        param["skip_offer"] = "true"
+        param["offer_id"] = selectedCouponId ?: ""
 
         Log.e("PackageCheckoutParam", param.toString())
 
@@ -278,6 +336,8 @@ class ReviewPackageActivity : AppCompatActivity() {
                     val data: ReviewPackageCheckout =
                         Gson().fromJson(data, ReviewPackageCheckout::class.java)
                     if (data.status == true) {
+                        available_promos = data.data?.available_promos
+                        upgradIdText = data.data?.upgrade_plan
                         if (data.data?.upgrade_plan != null) {
                             binding.title.text = data.data.upgrade_plan.title
                             binding.subTitle.text =
@@ -285,22 +345,25 @@ class ReviewPackageActivity : AppCompatActivity() {
                         } else {
                             binding.upgradePlanView.visibility = View.GONE
                         }
-                     binding.mode.text =   "${data.data?.package_details?.type} Training"
-                     binding.typeWorkOut.text =   "${data.data?.package_details?.type} "
-                     binding.tvSession.text =   "${data.data?.package_details?.sessions}"
-                     binding.validity.text =   "${data.data?.package_details?.validity}"
-                     binding.packagePrice.text =   "AED ${data.data?.package_details?.price}"
-                     binding.tvSessionMain.text =   "AED ${data.data?.package_details?.price_per_session}/session"
-                     binding.trainerName.text =   "${data.data?.trainer_detail?.primary_trainer}"
-                     binding.selectedGym.text =   "${data.data?.studio?.name}"
-                     if (data.data?.package_details?.type == "Home")
-                      binding.home.text ="Home"
-                      binding.address.text ="${data.data?.address?.building_name},${data.data?.address?.street},${data.data?.address?.landmark},${data.data?.address?.city_name},${data.data?.address?.country_name}"
-                    }else{
-                        binding.home.text ="Gym"
-                        binding.address.text ="${data.data?.studio?.address}"
+                        binding.mode.text = "${data.data?.package_details?.type} Training"
+                        binding.typeWorkOut.text = "${data.data?.package_details?.type} "
+                        binding.tvSession.text = "${data.data?.package_details?.sessions}"
+                        binding.validity.text = "${data.data?.package_details?.validity}"
+                        binding.packagePrice.text = "AED ${data.data?.package_details?.price}"
+                        binding.tvSessionMain.text =
+                            "AED ${data.data?.package_details?.price_per_session}/session"
+                        binding.trainerName.text =
+                            "${data.data?.trainer_detail?.primary_trainer?.name}"
+                        binding.selectedGym.text = "${data.data?.studio?.name}"
+                        if (data.data?.package_details?.type == "Home")
+                            binding.home.text = "Home"
+                        binding.address.text =
+                            "${data.data?.address?.building_name},${data.data?.address?.street},${data.data?.address?.landmark},${data.data?.address?.city_name},${data.data?.address?.country_name}"
+                    } else {
+                        binding.home.text = "Gym"
+                        binding.address.text = "${data.data?.studio?.address}"
                     }
-                    binding.paymentTimeMsg.text="${data.data?.payment_msg}"
+                    binding.paymentTimeMsg.text = "${data.data?.payment_msg}"
                     /*if(resp.optBoolean("status")){
 //                        linearpay.visibility=View.VISIBLE
 //                        nested.visibility=View.VISIBLE
