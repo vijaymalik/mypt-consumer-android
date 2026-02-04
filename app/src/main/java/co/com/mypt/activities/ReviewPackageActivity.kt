@@ -19,21 +19,27 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.preference.PreferenceManager
+import androidx.recyclerview.widget.RecyclerView
 import co.com.mypt.Api.ApiURL
 import co.com.mypt.Api.Constants.BEST_PLAN_ID
 import co.com.mypt.Api.Constants.REVIEW_ADDRESS_ID
+import co.com.mypt.Api.GetMethod
 import co.com.mypt.Api.PostMethod
 import co.com.mypt.Api.ResponseData
 import co.com.mypt.ProgressDialog
 import co.com.mypt.R
+import co.com.mypt.adapter.AddressListAdapter
 import co.com.mypt.databinding.ActivityReviewPackageBinding
 import co.com.mypt.model.ActivityModel
+import co.com.mypt.model.AddressModel
 import co.com.mypt.model.AvailablePromo
 import co.com.mypt.model.JoinModel
 import co.com.mypt.model.ReviewPackageCheckout
 import co.com.mypt.model.ReviewPackageCheckout.Data.UpgradePlan
 import com.android.volley.VolleyError
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.gson.Gson
+import org.json.JSONObject
 
 
 class ReviewPackageActivity : AppCompatActivity() {
@@ -94,6 +100,7 @@ class ReviewPackageActivity : AppCompatActivity() {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         edit = sharedPreferences.edit()
         binding.addressUpdate.setOnClickListener {
+//            showAddresListDialog()
             startActivity(Intent(this, AddressListForPackage::class.java))
         }
         binding.viewAllCoupon.setOnClickListener {
@@ -111,6 +118,7 @@ class ReviewPackageActivity : AppCompatActivity() {
         binding.back1.setOnClickListener {
             finish()
         }
+        getAddressData()
 //        editMembers=findViewById(R.id.editMembers)
 //        membersListRecyclerView=findViewById(R.id.membersListRecyclerView)
         /*membersLayout=findViewById(R.id.membersLayout)
@@ -259,6 +267,79 @@ class ReviewPackageActivity : AppCompatActivity() {
             binding.applyCoupon.visibility = View.GONE
         }
 
+    }
+    fun showAddresListDialog(){
+        val dialog = BottomSheetDialog(this) // Fragment -> requireContext()
+
+        dialog.setContentView(R.layout.activity_address_list_for_trainer)
+
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        var recyclerAddress=dialog.findViewById<RecyclerView>(R.id.recyclerAddress)
+        recyclerAddress?.adapter = AddressListAdapter(addressList,applicationContext)
+
+        dialog.show()
+    }
+    var addressList = ArrayList<AddressModel>()
+    private fun getAddressData() {
+
+        val progressDialog: Dialog = ProgressDialog.progressDialog(this,"")
+        progressDialog.show()
+
+
+        GetMethod(ApiURL.getaddress,applicationContext).startMethod(object :
+            ResponseData {
+            override fun response(data: String?) {
+                progressDialog.dismiss()
+
+                addressList.clear()
+                Log.e("getAddressResponse",data.toString())
+                try {
+                    val jsonObj = JSONObject(data!!)
+                    if (jsonObj.optBoolean("status")){
+                        val jsonArray=jsonObj.optJSONArray("data")
+
+                        if (jsonArray.length()>0){
+                            for(i in 0 until jsonArray.length()){
+                                val jsonObject1=jsonArray.optJSONObject(i)
+                                val addressModel= AddressModel()
+
+                                addressModel.building_name=jsonObject1.optString("building_name")
+                                addressModel.street=jsonObject1.optString("street")
+                                addressModel.landmark=jsonObject1.optString("landmark")
+                                addressModel.type=jsonObject1.optString("type")
+                                addressModel.city_id=jsonObject1.optString("city_id")
+                                addressModel.country_id=jsonObject1.optString("country_id")
+                                addressModel.mobile_no=jsonObject1.optString("mobile_no")
+                                addressModel.country_name=jsonObject1.optString("country_name")
+                                addressModel.city_name=jsonObject1.optString("city_name")
+                                addressModel.lat=jsonObject1.optString("lat")
+                                addressModel.long=jsonObject1.optString("long")
+                                addressModel.id=jsonObject1.optString("id")
+
+                                addressList.add(addressModel)
+
+                            }
+                            //                            linearNoAddress.visibility=View.GONE
+//                            nested.visibility=View.VISIBLE
+
+                        }else{
+//                            linearNoAddress.visibility=View.VISIBLE
+//                            nested.visibility=View.GONE
+                        }
+                    }
+
+
+                }catch (e:Exception){
+                    e.printStackTrace()
+                }
+            }
+
+            override fun error(error: VolleyError?) {
+                progressDialog.dismiss()
+                error!!.printStackTrace()
+            }
+
+        })
     }
 
     fun upgradeDialog() {

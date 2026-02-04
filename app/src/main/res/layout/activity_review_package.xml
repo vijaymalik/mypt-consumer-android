@@ -162,8 +162,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginStart="22dp"
+
                                 android:layout_marginEnd="5dp"
-                                android:layout_toStartOf="@+id/applyCoupon"
+                                android:layout_toStartOf="@+id/applyView"
                                 android:layout_toEndOf="@+id/iconOffer"
                                 android:fontFamily="@font/clash_display_regular"
                                 android:lineHeight="24sp"
@@ -188,47 +189,58 @@
                                 android:textColor="@color/bg_color_primary_white_55"
                                 android:textSize="12sp" />
 
-
-                            <TextView
-                                android:id="@+id/applyCoupon"
+                            <RelativeLayout
+                                android:id="@+id/applyView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignTop="@+id/offerTitle"
-                                android:layout_alignParentEnd="true"
-                                android:layout_gravity="center"
-                                android:background="@drawable/edittext_border"
-                                android:drawableEnd="@drawable/ic_arrow_right"
-                                android:drawablePadding="8dp"
-                                android:drawableTint="@color/text_color_neutral_200"
-                                android:fontFamily="@font/funnel_sans_medium"
-                                android:gravity="center"
-                                android:paddingHorizontal="12dp"
-                                android:paddingVertical="10dp"
-                                android:text="@string/apply"
-                                android:textAllCaps="true"
-                                android:textColor="@color/text_color_neutral_200"
-                                android:textSize="14sp" />
 
-                            <TextView
-                                android:id="@+id/appliedCoupon"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignTop="@+id/offerTitle"
-                                android:layout_alignParentEnd="true"
-                                android:layout_gravity="center"
-                                android:background="@drawable/edittext_border"
-                                android:drawableEnd="@drawable/ic_arrow_right"
-                                android:drawablePadding="8dp"
-                                android:drawableTint="@color/text_color_neutral_200"
-                                android:fontFamily="@font/funnel_sans_medium"
-                                android:gravity="center"
-                                android:paddingHorizontal="12dp"
-                                android:drawableLeft="@drawable/tick_circle"
-                                android:paddingVertical="10dp"
-                                android:text="Applied"
-                                android:textAllCaps="true"
-                                android:textColor="#1FC16B"
-                                android:textSize="12sp" />
+                                android:layout_alignParentEnd="true">
+
+                                <TextView
+                                    android:id="@+id/applyCoupon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/edittext_border"
+                                    android:drawableEnd="@drawable/ic_arrow_right"
+                                    android:drawablePadding="8dp"
+                                    android:drawableTint="@color/text_color_neutral_200"
+                                    android:fontFamily="@font/funnel_sans_medium"
+                                    android:gravity="center"
+                                    android:paddingHorizontal="12dp"
+                                    android:paddingVertical="10dp"
+                                    android:text="@string/apply"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/text_color_neutral_200"
+                                    android:textSize="14sp" />
+
+                                <LinearLayout
+                                    android:id="@+id/appliedCoupon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content">
+
+                                    <ImageView
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:src="@drawable/tick_circle" />
+
+                                    <TextView
+
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:fontFamily="@font/funnel_sans_medium"
+                                        android:gravity="center"
+                                        android:text="Applied"
+                                        android:textAllCaps="true"
+                                        android:textColor="#1FC16B"
+                                        android:textSize="12sp" />
+                                </LinearLayout>
+
+
+                            </RelativeLayout>
                         </RelativeLayout>
 
 
@@ -718,11 +730,11 @@
                                     android:layout_height="wrap_content"
                                     android:layout_below="@+id/payFirst"
                                     android:layout_alignStart="@+id/payFirst"
-                                    android:maxLines="1"
                                     android:layout_marginTop="6dp"
                                     android:drawableTint="@color/bg_color_primary_white_55"
                                     android:fontFamily="@font/clash_display_regular"
                                     android:lineHeight="16sp"
+                                    android:maxLines="1"
                                     android:text="Dubai - Al Thanyah First- Barsha Heights, Dubai internet City"
                                     android:textColor="@color/bg_color_primary_white_55"
                                     android:textSize="12sp" />
@@ -797,7 +809,6 @@
 
                                 <TextView
                                     android:id="@+id/tamaraSub"
-                                    android:maxLines="1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_below="@+id/tamaraTxt"
@@ -806,6 +817,7 @@
                                     android:drawableTint="@color/bg_color_primary_white_55"
                                     android:fontFamily="@font/clash_display_regular"
                                     android:lineHeight="16sp"
+                                    android:maxLines="1"
                                     android:text="Dubai - Al Thanyah First- Barsha Heights, Dubai internet City"
                                     android:textColor="@color/bg_color_primary_white_55"
                                     android:textSize="12sp" />
@@ -885,10 +897,10 @@
                                     android:layout_below="@+id/ccvenueTxt"
                                     android:layout_alignStart="@+id/ccvenueTxt"
                                     android:layout_marginTop="6dp"
-                                    android:maxLines="1"
                                     android:drawableTint="@color/bg_color_primary_white_55"
                                     android:fontFamily="@font/clash_display_regular"
                                     android:lineHeight="16sp"
+                                    android:maxLines="1"
                                     android:text="Dubai - Al Thanyah First- Barsha Heights, Dubai internet City"
                                     android:textColor="@color/bg_color_primary_white_55"
                                     android:textSize="12sp" />
@@ -971,22 +983,23 @@
 
                         <TextView
                             android:id="@+id/sslTxt"
-                            android:layout_toRightOf="@+id/sslIc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginStart="5dp"
                             android:layout_marginEnd="5dp"
+                            android:layout_toRightOf="@+id/sslIc"
                             android:fontFamily="@font/clash_display_regular"
                             android:lineHeight="24sp"
                             android:text="SSL Secure"
                             android:textColor="@color/grey_text"
                             android:textSize="14sp" />
+
                         <ImageView
                             android:id="@+id/userMulti"
                             android:layout_width="20dp"
-                            android:layout_toRightOf="@+id/viewCard"
                             android:layout_height="20dp"
+                            android:layout_toRightOf="@+id/viewCard"
                             android:background="@drawable/user_multiple" />
 
                         <TextView
@@ -995,11 +1008,11 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginStart="5dp"
-                            android:maxLines="1"
                             android:layout_marginEnd="5dp"
                             android:layout_toRightOf="@+id/userMulti"
                             android:fontFamily="@font/clash_display_regular"
                             android:lineHeight="24sp"
+                            android:maxLines="1"
                             android:text="12,000+ members"
                             android:textColor="@color/lightgreycolor"
                             android:textSize="14sp" />
@@ -1007,8 +1020,8 @@
                         <ImageView
                             android:id="@+id/visaIc"
                             android:layout_width="20dp"
-                            android:layout_toRightOf="@+id/sslTxt"
                             android:layout_height="20dp"
+                            android:layout_toRightOf="@+id/sslTxt"
                             android:background="@drawable/credit_card" />
 
                         <TextView
