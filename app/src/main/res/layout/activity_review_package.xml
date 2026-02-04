@@ -52,6 +52,7 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/upgradePlanView"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:background="@drawable/yellow_card"

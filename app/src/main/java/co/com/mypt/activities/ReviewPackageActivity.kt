@@ -8,6 +8,7 @@ import android.content.IntentFilter
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -25,10 +26,14 @@ import co.com.mypt.ProgressDialog
 import co.com.mypt.R
 import co.com.mypt.adapter.MembersListAdapter
 import co.com.mypt.adapter.ReviewActivityAdapter
+import co.com.mypt.databinding.ActivityReviewPackageBinding
 import co.com.mypt.model.ActivityModel
+import co.com.mypt.model.BestPlanList
 import co.com.mypt.model.JoinModel
+import co.com.mypt.model.ReviewPackageCheckout
 import com.android.volley.VolleyError
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
 import org.json.JSONObject
 
 class ReviewPackageActivity : AppCompatActivity() {
@@ -75,9 +80,11 @@ class ReviewPackageActivity : AppCompatActivity() {
     var membersList = ArrayList<JoinModel>()
     var tax_rate=""
     var main_price=""
+    lateinit var binding:ActivityReviewPackageBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_review_package)
+        binding= ActivityReviewPackageBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         sharedPreferences= PreferenceManager.getDefaultSharedPreferences(applicationContext)
         edit=sharedPreferences.edit()
 
@@ -240,31 +247,28 @@ class ReviewPackageActivity : AppCompatActivity() {
     }
 
     fun getData()  {
+        val progressDialog: Dialog = ProgressDialog.progressDialog(this,"")
+        progressDialog.show()
+
         val param: MutableMap<String, String> = HashMap()
 
         if (sharedPreferences.getString("typeWorkout","").equals("home")){
             param["type"] = sharedPreferences.getString("typeWorkout","").toString()
         }else{
             param["type"] = "gym"
+            param["studio_id"] = intent.getStringExtra("studio_id").toString()
         }
-        param["best_plan_id"] = intent.getStringExtra(BEST_PLAN_ID).toString()
-        param["package_type"] = sharedPreferences.getInt("selectedPackageType",0).toString()
-        param["sessions"] = intent.getStringExtra("session_value").toString()
-        param["trainer_id"] =intent.getStringExtra("trainer_id").toString()
-        param["studio_id"] = intent.getStringExtra("studio_id").toString()
-
         if(updatedAddress != "")
             param["address_id"] =updatedAddress
         else
             param["address_id"] =sharedPreferences.getString(REVIEW_ADDRESS_ID,"").toString()
 
-//        param["slot_id"] = ""+ intent.getStringExtra("slot_id")
-//        param["date"] =""+ intent.getStringExtra("apistart_date")
-//        param["end_date"] =""+ intent.getStringExtra("apiend_date")
-        android.util.Log.e("PackageCheckoutParam", param.toString())
+        param["best_plan_id"] = intent.getStringExtra(BEST_PLAN_ID).toString()
+        param["package_type"] = sharedPreferences.getInt("selectedPackageType",0).toString()
+        param["sessions"] = intent.getStringExtra("session_value").toString()
+        param["trainer_id"] =intent.getStringExtra("trainer_id").toString()
 
-        val progressDialog: Dialog = ProgressDialog.progressDialog(this,"")
-        progressDialog.show()
+        Log.e("PackageCheckoutParam", param.toString())
 
 
         PostMethod(ApiURL.reviewPackageCheckout,param, this).startPostMethod(object :
@@ -273,9 +277,18 @@ class ReviewPackageActivity : AppCompatActivity() {
                 progressDialog.dismiss()
 
                 try {
-                    android.util.Log.e("PackageCheckoutRes",data.toString())
-                    val resp = JSONObject(data!!)
-                    if(resp.optBoolean("status")){
+                    Log.e("PackageCheckoutRes",data.toString())
+
+                    val data: ReviewPackageCheckout = Gson().fromJson(data, ReviewPackageCheckout::class.java)
+if (data.status ==true){
+    if (data.data?.upgrade_plan !=null){
+      binding.title.text=data.data.upgrade_plan.title
+        binding.subTitle.text=data.data.upgrade_plan.title
+    }else{
+        binding.upgradePlanView.visibility=View.GONE
+    }
+}
+                    /*if(resp.optBoolean("status")){
 //                        linearpay.visibility=View.VISIBLE
 //                        nested.visibility=View.VISIBLE
 
@@ -328,13 +341,13 @@ class ReviewPackageActivity : AppCompatActivity() {
                                 activityModel.gender=jsonObject.optString("gender")
                                 membersList.add(activityModel)
                             }
-                           /* val joinAdapter= MembersListAdapter(membersList, applicationContext)
-                            membersListRecyclerView.adapter=joinAdapter*/
+                           *//* val joinAdapter= MembersListAdapter(membersList, applicationContext)
+                            membersListRecyclerView.adapter=joinAdapter*//*
                         }
                     }else{
 //                        linearpay.visibility=View.GONE
 //                        nested.visibility=View.GONE
-                    }
+                    }*/
                     // Toast.makeText(this@PhoneNumberScreenActivity,resp.optString("msg"),Toast.LENGTH_SHORT).show()
                 }catch (e:Exception){
                     e.printStackTrace()
