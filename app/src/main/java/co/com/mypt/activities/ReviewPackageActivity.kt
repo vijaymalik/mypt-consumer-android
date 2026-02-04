@@ -11,30 +11,20 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.NestedScrollView
 import androidx.preference.PreferenceManager
-import androidx.recyclerview.widget.RecyclerView
 import co.com.mypt.Api.ApiURL
 import co.com.mypt.Api.Constants.BEST_PLAN_ID
 import co.com.mypt.Api.Constants.REVIEW_ADDRESS_ID
 import co.com.mypt.Api.PostMethod
 import co.com.mypt.Api.ResponseData
 import co.com.mypt.ProgressDialog
-import co.com.mypt.R
-import co.com.mypt.adapter.MembersListAdapter
-import co.com.mypt.adapter.ReviewActivityAdapter
 import co.com.mypt.databinding.ActivityReviewPackageBinding
 import co.com.mypt.model.ActivityModel
-import co.com.mypt.model.BestPlanList
 import co.com.mypt.model.JoinModel
 import co.com.mypt.model.ReviewPackageCheckout
 import com.android.volley.VolleyError
-import com.bumptech.glide.Glide
 import com.google.gson.Gson
-import org.json.JSONObject
 
 class ReviewPackageActivity : AppCompatActivity() {
 //    lateinit var linearpay:LinearLayout
@@ -47,11 +37,12 @@ class ReviewPackageActivity : AppCompatActivity() {
 //    lateinit var linear_Duration:LinearLayout
 //    lateinit var membersLayout:LinearLayout
 
-    lateinit var imEditTrainer:ImageView
-    lateinit var im_star:ImageView
-//    lateinit var recycler: RecyclerView
+    lateinit var imEditTrainer: ImageView
+    lateinit var im_star: ImageView
+
+    //    lateinit var recycler: RecyclerView
 //    lateinit var membersListRecyclerView: RecyclerView
-    var activitiesModelList :ArrayList<ActivityModel> = ArrayList()
+    var activitiesModelList: ArrayList<ActivityModel> = ArrayList()
     lateinit var sharedPreferences: SharedPreferences
     lateinit var edit: SharedPreferences.Editor
 //    lateinit var headerLayout:LinearLayout
@@ -60,7 +51,7 @@ class ReviewPackageActivity : AppCompatActivity() {
 //    lateinit var editAddress:ImageView
 //    lateinit var editMembers:ImageView
 
-//    lateinit var mobile:TextView
+    //    lateinit var mobile:TextView
 //    lateinit var address:TextView
 //    lateinit var addressType:TextView
 //    lateinit var tvTrainer_name:TextView
@@ -76,17 +67,18 @@ class ReviewPackageActivity : AppCompatActivity() {
 //    lateinit var tvEndDate:TextView
 //    lateinit var tvPrice:TextView
     var updatedAddress = ""
-//    lateinit var nested:NestedScrollView
+
+    //    lateinit var nested:NestedScrollView
     var membersList = ArrayList<JoinModel>()
-    var tax_rate=""
-    var main_price=""
-    lateinit var binding:ActivityReviewPackageBinding
+    var tax_rate = ""
+    var main_price = ""
+    lateinit var binding: ActivityReviewPackageBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding= ActivityReviewPackageBinding.inflate(layoutInflater)
+        binding = ActivityReviewPackageBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        sharedPreferences= PreferenceManager.getDefaultSharedPreferences(applicationContext)
-        edit=sharedPreferences.edit()
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+        edit = sharedPreferences.edit()
 
 //        editMembers=findViewById(R.id.editMembers)
 //        membersListRecyclerView=findViewById(R.id.membersListRecyclerView)
@@ -123,38 +115,38 @@ class ReviewPackageActivity : AppCompatActivity() {
         im_star=findViewById(R.id.im_star)*/
 
 
-       /* headerLayout.setOnClickListener{
-            finish()
-        }*/
+        /* headerLayout.setOnClickListener{
+             finish()
+         }*/
 
-       /* if (sharedPreferences.getString("typewithout","").equals("withoutTrainer")){
-            linearEdit.visibility=View.GONE
-            linear_Duration.visibility=View.VISIBLE
-            linearSession.visibility=View.GONE
-        }else{
-            linearEdit.visibility=View.VISIBLE
-            linear_Duration.visibility=View.GONE
-            linearSession.visibility=View.VISIBLE
+        /* if (sharedPreferences.getString("typewithout","").equals("withoutTrainer")){
+             linearEdit.visibility=View.GONE
+             linear_Duration.visibility=View.VISIBLE
+             linearSession.visibility=View.GONE
+         }else{
+             linearEdit.visibility=View.VISIBLE
+             linear_Duration.visibility=View.GONE
+             linearSession.visibility=View.VISIBLE
 
-        }*/
-       /* linearpay.setOnClickListener{
-           // edit.remove("typeWorkout").apply()
-            val intent = Intent(this, PaymentSelectionActivity::class.java)
-            intent.putExtra("selectBookOption","BookCreatedPackage")
-            intent.putExtra("type",getIntent().getStringExtra("type"))
-            intent.putExtra("slot_id",getIntent().getStringExtra("slot_id"))
-            intent.putExtra("address_id",getIntent().getStringExtra("address_id"))
-            intent.putExtra("trainer_id",getIntent().getStringExtra("trainer_id"))
-            intent.putExtra("studio_id",getIntent().getStringExtra("studio_id"))
-            intent.putExtra("session_value",getIntent().getStringExtra("session_value"))
-            intent.putExtra("days",getIntent().getStringExtra("days"))
-            intent.putExtra("price",tvPrice.text.toString())
-            intent.putExtra("apistart_date",getIntent().getStringExtra("apistart_date"))
-            intent.putExtra("apiend_date",getIntent().getStringExtra("apiend_date"))
-            intent.putExtra("tax_rate",tax_rate)
-            intent.putExtra("main_price",main_price)
-            startActivity(intent)
-          *//*  val intent = Intent(this, BookingConfirmActivity::class.java)
+         }*/
+        /* linearpay.setOnClickListener{
+            // edit.remove("typeWorkout").apply()
+             val intent = Intent(this, PaymentSelectionActivity::class.java)
+             intent.putExtra("selectBookOption","BookCreatedPackage")
+             intent.putExtra("type",getIntent().getStringExtra("type"))
+             intent.putExtra("slot_id",getIntent().getStringExtra("slot_id"))
+             intent.putExtra("address_id",getIntent().getStringExtra("address_id"))
+             intent.putExtra("trainer_id",getIntent().getStringExtra("trainer_id"))
+             intent.putExtra("studio_id",getIntent().getStringExtra("studio_id"))
+             intent.putExtra("session_value",getIntent().getStringExtra("session_value"))
+             intent.putExtra("days",getIntent().getStringExtra("days"))
+             intent.putExtra("price",tvPrice.text.toString())
+             intent.putExtra("apistart_date",getIntent().getStringExtra("apistart_date"))
+             intent.putExtra("apiend_date",getIntent().getStringExtra("apiend_date"))
+             intent.putExtra("tax_rate",tax_rate)
+             intent.putExtra("main_price",main_price)
+             startActivity(intent)
+           *//*  val intent = Intent(this, BookingConfirmActivity::class.java)
             intent.putExtra("selectBookOption","BookCreatedPackage")
             intent.putExtra("type",getIntent().getStringExtra("type"))
             intent.putExtra("slot_id",getIntent().getStringExtra("slot_id"))
@@ -206,88 +198,109 @@ class ReviewPackageActivity : AppCompatActivity() {
             startActivity(intent)
         }*/
 
-       /* editAddress.setOnClickListener {
-            startActivity(Intent(this, AddressListForPackage::class.java))
-        }*/
-       /* editMembers.setOnClickListener {
-            val intent = Intent(this, MembersListForPackage::class.java)
-            intent.putExtra("",getIntent().getStringExtra("trainer_id"))
-            intent.putExtra("",getIntent().getStringExtra("studio_id"))
-            startActivity(intent)
-        }*/
+        /* editAddress.setOnClickListener {
+             startActivity(Intent(this, AddressListForPackage::class.java))
+         }*/
+        /* editMembers.setOnClickListener {
+             val intent = Intent(this, MembersListForPackage::class.java)
+             intent.putExtra("",getIntent().getStringExtra("trainer_id"))
+             intent.putExtra("",getIntent().getStringExtra("studio_id"))
+             startActivity(intent)
+         }*/
     }
 
     override fun onResume() {
         super.onResume()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             registerReceiver(countReceiver, IntentFilter("selectedCoupon"), RECEIVER_NOT_EXPORTED)
-            registerReceiver(updatedAddressId, IntentFilter("updatedAddressId"), RECEIVER_NOT_EXPORTED)
-        }else{
+            registerReceiver(
+                updatedAddressId,
+                IntentFilter("updatedAddressId"),
+                RECEIVER_NOT_EXPORTED
+            )
+        } else {
             registerReceiver(countReceiver, IntentFilter("selectedCoupon"))
             registerReceiver(updatedAddressId, IntentFilter("updatedAddressId"))
         }
         getData()
     }
 
-    val countReceiver = object : BroadcastReceiver(){
+    val countReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            if(intent!!.getIntExtra("selectedPosition",-1) > -1){
+            if (intent!!.getIntExtra("selectedPosition", -1) > -1) {
 //                linearShowCoupon.visibility = View.VISIBLE
-            }else{
+            } else {
 //                linearShowCoupon.visibility = View.GONE
 
             }
         }
 
     }
-    val updatedAddressId = object : BroadcastReceiver(){
+    val updatedAddressId = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             updatedAddress = intent?.getStringExtra("addressId").toString()
         }
     }
 
-    fun getData()  {
-        val progressDialog: Dialog = ProgressDialog.progressDialog(this,"")
+    fun getData() {
+        val progressDialog: Dialog = ProgressDialog.progressDialog(this, "")
         progressDialog.show()
 
         val param: MutableMap<String, String> = HashMap()
 
-        if (sharedPreferences.getString("typeWorkout","").equals("home")){
-            param["type"] = sharedPreferences.getString("typeWorkout","").toString()
-        }else{
+        if (sharedPreferences.getString("typeWorkout", "").equals("home")) {
+            param["type"] = sharedPreferences.getString("typeWorkout", "").toString()
+        } else {
             param["type"] = "gym"
             param["studio_id"] = intent.getStringExtra("studio_id").toString()
         }
-        if(updatedAddress != "")
-            param["address_id"] =updatedAddress
+        if (updatedAddress != "")
+            param["address_id"] = updatedAddress
         else
-            param["address_id"] =sharedPreferences.getString(REVIEW_ADDRESS_ID,"").toString()
+            param["address_id"] = sharedPreferences.getString(REVIEW_ADDRESS_ID, "").toString()
 
         param["best_plan_id"] = intent.getStringExtra(BEST_PLAN_ID).toString()
-        param["package_type"] = sharedPreferences.getInt("selectedPackageType",0).toString()
+        param["package_type"] = sharedPreferences.getInt("selectedPackageType", 0).toString()
         param["sessions"] = intent.getStringExtra("session_value").toString()
-        param["trainer_id"] =intent.getStringExtra("trainer_id").toString()
+        param["trainer_id"] = intent.getStringExtra("trainer_id").toString()
 
         Log.e("PackageCheckoutParam", param.toString())
 
 
-        PostMethod(ApiURL.reviewPackageCheckout,param, this).startPostMethod(object :
+        PostMethod(ApiURL.reviewPackageCheckout, param, this).startPostMethod(object :
             ResponseData {
             override fun response(data: String?) {
                 progressDialog.dismiss()
 
                 try {
-                    Log.e("PackageCheckoutRes",data.toString())
+                    Log.e("PackageCheckoutRes", data.toString())
 
-                    val data: ReviewPackageCheckout = Gson().fromJson(data, ReviewPackageCheckout::class.java)
-if (data.status ==true){
-    if (data.data?.upgrade_plan !=null){
-      binding.title.text=data.data.upgrade_plan.title
-        binding.subTitle.text=data.data.upgrade_plan.title
-    }else{
-        binding.upgradePlanView.visibility=View.GONE
-    }
-}
+                    val data: ReviewPackageCheckout =
+                        Gson().fromJson(data, ReviewPackageCheckout::class.java)
+                    if (data.status == true) {
+                        if (data.data?.upgrade_plan != null) {
+                            binding.title.text = data.data.upgrade_plan.title
+                            binding.subTitle.text =
+                                "Avail at ${data.data.upgrade_plan.badge_text} for ${data.data.upgrade_plan.sessions} sessions"
+                        } else {
+                            binding.upgradePlanView.visibility = View.GONE
+                        }
+                     binding.mode.text =   "${data.data?.package_details?.type} Training"
+                     binding.typeWorkOut.text =   "${data.data?.package_details?.type} "
+                     binding.tvSession.text =   "${data.data?.package_details?.sessions}"
+                     binding.validity.text =   "${data.data?.package_details?.validity}"
+                     binding.packagePrice.text =   "AED ${data.data?.package_details?.price}"
+                     binding.tvSessionMain.text =   "AED ${data.data?.package_details?.price_per_session}/session"
+                     binding.trainerName.text =   "${data.data?.trainer_detail?.primary_trainer}"
+                     binding.selectedGym.text =   "${data.data?.studio?.name}"
+                     if (data.data?.package_details?.type == "Home")
+                      binding.home.text ="Home"
+                      binding.address.text ="${data.data?.address?.building_name},${data.data?.address?.street},${data.data?.address?.landmark},${data.data?.address?.city_name},${data.data?.address?.country_name}"
+                    }else{
+                        binding.home.text ="Gym"
+                        binding.address.text ="${data.data?.studio?.address}"
+                    }
+                    binding.paymentTimeMsg.text="${data.data?.payment_msg}"
                     /*if(resp.optBoolean("status")){
 //                        linearpay.visibility=View.VISIBLE
 //                        nested.visibility=View.VISIBLE
@@ -349,7 +362,7 @@ if (data.status ==true){
 //                        nested.visibility=View.GONE
                     }*/
                     // Toast.makeText(this@PhoneNumberScreenActivity,resp.optString("msg"),Toast.LENGTH_SHORT).show()
-                }catch (e:Exception){
+                } catch (e: Exception) {
                     e.printStackTrace()
                 }
             }

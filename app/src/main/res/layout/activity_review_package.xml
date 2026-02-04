@@ -167,7 +167,7 @@
                                 android:layout_toEndOf="@+id/iconOffer"
                                 android:fontFamily="@font/clash_display_regular"
                                 android:lineHeight="24sp"
-                                android:text="Save AED 35 with ‘GYM20’"
+                                android:text="Select Coupon"
                                 android:textColor="@color/lightgreycolor"
                                 android:textSize="16sp" />
 
@@ -302,7 +302,7 @@
                                     android:textSize="12sp" />
 
                                 <TextView
-                                    android:id="@+id/tvPackageDetail"
+                                    android:id="@+id/tvSession"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="8dp"
@@ -405,7 +405,7 @@
                             android:textSize="30sp" />
 
                         <TextView
-                            android:id="@+id/tvEndDate"
+                            android:id="@+id/tvSessionMain"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/funnel_sans_semibold"
@@ -517,11 +517,11 @@
                         android:background="@drawable/workout_gymnastics" />
 
                     <TextView
+                        android:id="@+id/paymentMsg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/clash_display_regular"
                         android:lineHeight="24sp"
-
                         android:text="You will book your first session after payment"
                         android:textColor="@color/location_txt"
                         android:textSize="12sp" />
@@ -908,6 +908,7 @@
                         android:background="@drawable/clock_ic" />
 
                     <TextView
+                        android:id="@+id/paymentTimeMsg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/clash_display_regular"

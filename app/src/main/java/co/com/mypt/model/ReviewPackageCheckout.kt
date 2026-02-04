@@ -12,8 +12,10 @@ data class ReviewPackageCheckout(
         val package_details: PackageDetails?,
         val payment_msg: String?,
         val trainer_detail: TrainerDetail?,
-        val upgrade_plan: UpgradePlan?
+        val upgrade_plan: UpgradePlan?,
+        val studio:Studio?
     ) {
+        data class Studio(val id:String?,val name:String?,val address:String?)
         data class Address(
             val building_name: String?,
             val city_id: Int?,
@@ -34,10 +36,10 @@ data class ReviewPackageCheckout(
             val benefit_type: String?,
             val code: String?,
             val description: String?,
-            val discount_amount: Int?,
+            val discount_amount: Double?,
             val discount_type: String?,
-            val discount_value: Int?,
-            val final_price: Int?,
+            val discount_value: Double?,
+            val final_price: Double?,
             val free_sessions: Int?,
             val id: Int?,
             val name: String?,
