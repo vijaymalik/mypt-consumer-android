@@ -332,20 +332,25 @@ class CreatePackagectivity : AppCompatActivity() {
 
     fun selectedPlan(isBestPlanSelected: Plans) {
 //        this.isBestPlanSelected = isBestPlanSelected
-        if (isBestPlanSelected == Plans.IS_BEST_AVAILABLE) {
-            tvcontinue.text = getString(R.string.continue_summery)
-            topView.visibility = View.VISIBLE
-            tvcontinueView.visibility = View.VISIBLE
-            freeMsgCustom.visibility = View.GONE
-            bottomView.background = resources.getDrawable(R.drawable.blue_border_container, null)
-        } else if (isBestPlanSelected == Plans.IS_BEST_NOT_AVAILABLE) {
-            hideCustomText()
-        } else {
-            topView.visibility = View.GONE
-            bottomView.background = resources.getDrawable(R.drawable.blue_border_container, null)
-            freeMsgCustom.visibility = View.VISIBLE
-            tvcontinueView.visibility = View.VISIBLE
-            tvcontinue.text = getString(R.string.continue_summery)
+        when (isBestPlanSelected) {
+            Plans.IS_BEST_AVAILABLE -> {
+                tvcontinue.text = getString(R.string.continue_summery)
+                topView.visibility = View.VISIBLE
+                tvcontinueView.visibility = View.VISIBLE
+                freeMsgCustom.visibility = View.GONE
+                bottomView.background = resources.getDrawable(R.drawable.blue_border_container, null)
+            }
+            Plans.IS_BEST_NOT_AVAILABLE -> {
+                hideCustomText()
+            }
+            else -> {
+                topView.visibility = View.GONE
+                bottomView.background = resources.getDrawable(R.drawable.blue_border_container, null)
+                freeMsgCustom.visibility = View.VISIBLE
+                tvcontinueView.visibility = View.VISIBLE
+                tvcontinue.text = getString(R.string.continue_summery)
+                bestPlanId=""
+            }
         }
     }
 
