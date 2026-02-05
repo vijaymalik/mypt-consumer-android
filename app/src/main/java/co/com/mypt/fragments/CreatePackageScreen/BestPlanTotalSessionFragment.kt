@@ -114,6 +114,7 @@ class BestPlanTotalSessionFragment(
     lateinit var customPlanParentView: LinearLayout
     private var carouselRecycler: DiscreteScrollView?=null
     private var isBestPlanAvailable=false
+    private var isBestPlanSelected=true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -173,6 +174,7 @@ class BestPlanTotalSessionFragment(
             textView
         }
         bestPlan.setOnClickListener {
+            isBestPlanSelected=true
             selectTab(bestPlan, customization,bestPlanParentView,customPlanParentView)
             activity?.let {
                 (it as CreatePackagectivity).selectedPlan(if (isBestPlanAvailable) Plans.IS_BEST_AVAILABLE else Plans.IS_BEST_NOT_AVAILABLE)
@@ -180,6 +182,7 @@ class BestPlanTotalSessionFragment(
         }
 
         customization.setOnClickListener {
+            isBestPlanSelected=false
             selectTab(customization, bestPlan,customPlanParentView,bestPlanParentView)
             activity?.let {
                 (it as CreatePackagectivity).selectedPlan(Plans.CUSTOMIZE)
@@ -403,8 +406,10 @@ class BestPlanTotalSessionFragment(
             }
         }else{
             isBestPlanAvailable=false
-            activity?.let {
-                (it as CreatePackagectivity).selectedPlan(Plans.IS_BEST_NOT_AVAILABLE)
+            if (isBestPlanSelected){
+                activity?.let {
+                    (it as CreatePackagectivity).selectedPlan(Plans.IS_BEST_NOT_AVAILABLE)
+                }
             }
         }
 

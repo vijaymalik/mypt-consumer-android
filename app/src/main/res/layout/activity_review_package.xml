@@ -1068,10 +1068,10 @@
         <TextView
             android:id="@+id/tvPayment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:layout_gravity="center_vertical"
             android:background="@drawable/white_rectangle"
-            android:fontFamily="@font/manrope_bold"
+            android:fontFamily="@font/funnel_sans_bold"
             android:gravity="center"
             android:paddingHorizontal="25dp"
             android:paddingVertical="18dp"
