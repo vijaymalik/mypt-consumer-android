@@ -8,7 +8,6 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.SharedPreferences
 import android.graphics.Color
-import android.graphics.PorterDuff
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Parcelable
@@ -18,7 +17,6 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
@@ -95,7 +93,8 @@ class ReviewPackageActivity : AppCompatActivity() {
     var upgradIdText: UpgradePlan? = null
     var available_promos: List<AvailablePromo?>? = null
     var isupgreadClick = false
-    var selectedAddressId=""
+    var selectedAddressId = ""
+    private var progressDialog: Dialog? = null
     lateinit var binding: ActivityReviewPackageBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -122,33 +121,46 @@ class ReviewPackageActivity : AppCompatActivity() {
         binding.back1.setOnClickListener {
             finish()
         }
+        if (sharedPreferences.getString("typeWorkout", "").equals("home")) {
+            binding.tranningAddress.visibility = View.VISIBLE
+            binding.tranningLocation.visibility = View.VISIBLE
+            binding.selectedGymView.visibility = View.GONE
+        } else {
+            binding.tranningAddress.visibility = View.GONE
+            binding.tranningLocation.visibility = View.GONE
+            binding.selectedGymView.visibility = View.VISIBLE
+        }
+
         binding.tvPayment.setOnClickListener {
             val intent = Intent(this, CCavenueWebViewActivity::class.java)
 
             if (sharedPreferences.getString("typeWorkout", "").equals("home")) {
-                intent.putExtra("type",sharedPreferences.getString("typeWorkout", "").toString())
+                intent.putExtra("type", sharedPreferences.getString("typeWorkout", "").toString())
             } else {
-                intent.putExtra("type","gym")
+                intent.putExtra("type", "gym")
                 intent.putExtra("studio_id", intent.getStringExtra("studio_id").toString())
-                 }
-           val finalAddressId= if (updatedAddress != "")
+            }
+            val finalAddressId = if (updatedAddress != "")
                 updatedAddress
             else
                 sharedPreferences.getString(REVIEW_ADDRESS_ID, "").toString()
 
-            intent.putExtra("address_id",finalAddressId)
-           val best_plan_id_Final= if (isupgreadClick) {
-                 upgradIdText?.id ?: ""
+            intent.putExtra("address_id", finalAddressId)
+            val best_plan_id_Final = if (isupgreadClick) {
+                upgradIdText?.id ?: ""
             } else {
-                 intent.getStringExtra(BEST_PLAN_ID).toString()
+                intent.getStringExtra(BEST_PLAN_ID).toString()
             }
-            intent.putExtra("address_id",best_plan_id_Final)
+            intent.putExtra("address_id", best_plan_id_Final)
 
-            intent.putExtra("package_type",sharedPreferences.getInt("selectedPackageType", 0).toString())
-            intent.putExtra("session_value",intent.getStringExtra("session_value").toString())
-            intent.putExtra("trainer_id",intent.getStringExtra("trainer_id").toString())
+            intent.putExtra(
+                "package_type",
+                sharedPreferences.getInt("selectedPackageType", 0).toString()
+            )
+            intent.putExtra("session_value", intent.getStringExtra("session_value").toString())
+            intent.putExtra("trainer_id", intent.getStringExtra("trainer_id").toString())
 //        param["skip_offer"] = "true"
-            intent.putExtra("offer_id",selectedCouponId ?: "")
+            intent.putExtra("offer_id", selectedCouponId ?: "")
 
             /*if(getIntent().getStringExtra("selectBookOption").equals("BookCreatedPackage")){
                 intent.putExtra("selectBookOption","BookCreatedPackage")
@@ -304,22 +316,22 @@ class ReviewPackageActivity : AppCompatActivity() {
              intent.putExtra("",getIntent().getStringExtra("studio_id"))
              startActivity(intent)
          }*/
+        val filter = IntentFilter("selectedCoupon")
+        LocalBroadcastManager
+            .getInstance(this)
+            .registerReceiver(countReceiver, filter)
+        /*val selectAddressFilter = IntentFilter("selectAddressFilter")
+        LocalBroadcastManager
+            .getInstance(this)
+            .registerReceiver(updatedAddressId, selectAddressFilter)*/
+        getData()
     }
 
     override fun onResume() {
         super.onResume()
-        val filter = IntentFilter("selectedCoupon")
 
-        LocalBroadcastManager
-            .getInstance(this)
-            .registerReceiver(countReceiver, filter)
-        val selectAddressFilter = IntentFilter("selectedCoupon")
-        LocalBroadcastManager
-            .getInstance(this)
-            .registerReceiver(updatedAddressId, selectAddressFilter)
-
-        getData()
     }
+
     val updatedAddressId = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             updatedAddress = intent?.getStringExtra("addressId").toString()
@@ -332,57 +344,59 @@ class ReviewPackageActivity : AppCompatActivity() {
             binding.offerTitle.text = intent?.getStringExtra("couponName")
             binding.appliedCoupon.visibility = View.VISIBLE
             binding.applyCoupon.visibility = View.GONE
+            getData()
         }
 
     }
-    fun showAddresListDialog(){
+
+    fun showAddresListDialog() {
         val dialog = BottomSheetDialog(this) // Fragment -> requireContext()
         dialog.setContentView(R.layout.adress_list_dialog)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        val recyclerAddress=dialog.findViewById<RecyclerView>(R.id.recyclerAddress)
-        recyclerAddress?.adapter = AddressListAdapter(addressList,applicationContext){
+        val recyclerAddress = dialog.findViewById<RecyclerView>(R.id.recyclerAddress)
+        recyclerAddress?.adapter = AddressListAdapter(addressList, applicationContext) {
+            dialog.dismiss()
             updatedAddress = it
             getData()
-            dialog.dismiss()
         }
         dialog.show()
     }
+
     var addressList = ArrayList<AddressModel>()
     private fun getAddressData() {
 
-        val progressDialog: Dialog = ProgressDialog.progressDialog(this,"")
-        progressDialog.show()
+       showProgress()
 
 
-        GetMethod(ApiURL.getaddress,applicationContext).startMethod(object :
+        GetMethod(ApiURL.getaddress, applicationContext).startMethod(object :
             ResponseData {
             override fun response(data: String?) {
-                progressDialog.dismiss()
+               hideProgress()
 
                 addressList.clear()
-                Log.e("getAddressResponse",data.toString())
+                Log.e("getAddressResponse", data.toString())
                 try {
                     val jsonObj = JSONObject(data!!)
-                    if (jsonObj.optBoolean("status")){
-                        val jsonArray=jsonObj.optJSONArray("data")
+                    if (jsonObj.optBoolean("status")) {
+                        val jsonArray = jsonObj.optJSONArray("data")
 
-                        if (jsonArray.length()>0){
-                            for(i in 0 until jsonArray.length()){
-                                val jsonObject1=jsonArray.optJSONObject(i)
-                                val addressModel= AddressModel()
+                        if (jsonArray.length() > 0) {
+                            for (i in 0 until jsonArray.length()) {
+                                val jsonObject1 = jsonArray.optJSONObject(i)
+                                val addressModel = AddressModel()
 
-                                addressModel.building_name=jsonObject1.optString("building_name")
-                                addressModel.street=jsonObject1.optString("street")
-                                addressModel.landmark=jsonObject1.optString("landmark")
-                                addressModel.type=jsonObject1.optString("type")
-                                addressModel.city_id=jsonObject1.optString("city_id")
-                                addressModel.country_id=jsonObject1.optString("country_id")
-                                addressModel.mobile_no=jsonObject1.optString("mobile_no")
-                                addressModel.country_name=jsonObject1.optString("country_name")
-                                addressModel.city_name=jsonObject1.optString("city_name")
-                                addressModel.lat=jsonObject1.optString("lat")
-                                addressModel.long=jsonObject1.optString("long")
-                                addressModel.id=jsonObject1.optString("id")
+                                addressModel.building_name = jsonObject1.optString("building_name")
+                                addressModel.street = jsonObject1.optString("street")
+                                addressModel.landmark = jsonObject1.optString("landmark")
+                                addressModel.type = jsonObject1.optString("type")
+                                addressModel.city_id = jsonObject1.optString("city_id")
+                                addressModel.country_id = jsonObject1.optString("country_id")
+                                addressModel.mobile_no = jsonObject1.optString("mobile_no")
+                                addressModel.country_name = jsonObject1.optString("country_name")
+                                addressModel.city_name = jsonObject1.optString("city_name")
+                                addressModel.lat = jsonObject1.optString("lat")
+                                addressModel.long = jsonObject1.optString("long")
+                                addressModel.id = jsonObject1.optString("id")
 
                                 addressList.add(addressModel)
 
@@ -390,20 +404,20 @@ class ReviewPackageActivity : AppCompatActivity() {
                             //                            linearNoAddress.visibility=View.GONE
 //                            nested.visibility=View.VISIBLE
 
-                        }else{
+                        } else {
 //                            linearNoAddress.visibility=View.VISIBLE
 //                            nested.visibility=View.GONE
                         }
                     }
 
 
-                }catch (e:Exception){
+                } catch (e: Exception) {
                     e.printStackTrace()
                 }
             }
 
             override fun error(error: VolleyError?) {
-                progressDialog.dismiss()
+               hideProgress()
                 error!!.printStackTrace()
             }
 
@@ -437,10 +451,8 @@ class ReviewPackageActivity : AppCompatActivity() {
     }
 
 
-
     fun getData() {
-        val progressDialog: Dialog = ProgressDialog.progressDialog(this, "")
-        progressDialog.show()
+        showProgress()
 
         val param: MutableMap<String, String> = HashMap()
 
@@ -473,7 +485,7 @@ class ReviewPackageActivity : AppCompatActivity() {
         PostMethod(ApiURL.reviewPackageCheckout, param, this).startPostMethod(object :
             ResponseData {
             override fun response(data: String?) {
-                progressDialog.dismiss()
+                hideProgress()
 
                 try {
                     Log.e("PackageCheckoutRes", data.toString())
@@ -504,7 +516,7 @@ class ReviewPackageActivity : AppCompatActivity() {
                             binding.home.text = "Home"
                         binding.address.text =
                             "${data.data?.address?.building_name},${data.data?.address?.street},${data.data?.address?.landmark},${data.data?.address?.city_name},${data.data?.address?.country_name}"
-                        selectedAddressId= data.data?.address?.id.toString()
+                        selectedAddressId = data.data?.address?.id.toString()
                     } else {
                         binding.home.text = "Gym"
                         binding.address.text = "${data.data?.studio?.address}"
@@ -577,11 +589,29 @@ class ReviewPackageActivity : AppCompatActivity() {
             }
 
             override fun error(error: VolleyError?) {
-                progressDialog.dismiss()
+                hideProgress()
                 error!!.printStackTrace()
             }
 
         })
+    }
+
+    private fun showProgress() {
+        if (!isFinishing && !isDestroyed) {
+            if (progressDialog == null) {
+                progressDialog = ProgressDialog.progressDialog(this, "")
+            }
+
+            if (progressDialog?.isShowing == false) {
+                progressDialog?.show()
+            }
+        }
+    }
+
+    private fun hideProgress() {
+        if (!isFinishing && !isDestroyed) {
+            progressDialog?.dismiss()
+        }
     }
 
 }
