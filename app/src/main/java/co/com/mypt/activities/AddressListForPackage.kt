@@ -141,7 +141,7 @@ class AddressListForPackage : AppCompatActivity() {
                                 addressList.add(addressModel)
 
                             }
-                            recyclerAddress.adapter = AddressListAdapter(addressList,applicationContext)
+                            recyclerAddress.adapter = AddressListAdapter(addressList,applicationContext){}
                             linearNoAddress.visibility=View.GONE
                             nested.visibility=View.VISIBLE
 

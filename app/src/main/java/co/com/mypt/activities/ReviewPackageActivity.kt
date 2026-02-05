@@ -8,6 +8,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.SharedPreferences
 import android.graphics.Color
+import android.graphics.PorterDuff
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Parcelable
@@ -17,6 +18,7 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,6 +30,7 @@ import co.com.mypt.Api.PostMethod
 import co.com.mypt.Api.ResponseData
 import co.com.mypt.ProgressDialog
 import co.com.mypt.R
+import co.com.mypt.Webview.CCavenueWebViewActivity
 import co.com.mypt.adapter.AddressListAdapter
 import co.com.mypt.databinding.ActivityReviewPackageBinding
 import co.com.mypt.model.ActivityModel
@@ -92,6 +95,7 @@ class ReviewPackageActivity : AppCompatActivity() {
     var upgradIdText: UpgradePlan? = null
     var available_promos: List<AvailablePromo?>? = null
     var isupgreadClick = false
+    var selectedAddressId=""
     lateinit var binding: ActivityReviewPackageBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -117,6 +121,60 @@ class ReviewPackageActivity : AppCompatActivity() {
         }
         binding.back1.setOnClickListener {
             finish()
+        }
+        binding.tvPayment.setOnClickListener {
+            val intent = Intent(this, CCavenueWebViewActivity::class.java)
+
+            if (sharedPreferences.getString("typeWorkout", "").equals("home")) {
+                intent.putExtra("type",sharedPreferences.getString("typeWorkout", "").toString())
+            } else {
+                intent.putExtra("type","gym")
+                intent.putExtra("studio_id", intent.getStringExtra("studio_id").toString())
+                 }
+           val finalAddressId= if (updatedAddress != "")
+                updatedAddress
+            else
+                sharedPreferences.getString(REVIEW_ADDRESS_ID, "").toString()
+
+            intent.putExtra("address_id",finalAddressId)
+           val best_plan_id_Final= if (isupgreadClick) {
+                 upgradIdText?.id ?: ""
+            } else {
+                 intent.getStringExtra(BEST_PLAN_ID).toString()
+            }
+            intent.putExtra("address_id",best_plan_id_Final)
+
+            intent.putExtra("package_type",sharedPreferences.getInt("selectedPackageType", 0).toString())
+            intent.putExtra("session_value",intent.getStringExtra("session_value").toString())
+            intent.putExtra("trainer_id",intent.getStringExtra("trainer_id").toString())
+//        param["skip_offer"] = "true"
+            intent.putExtra("offer_id",selectedCouponId ?: "")
+
+            /*if(getIntent().getStringExtra("selectBookOption").equals("BookCreatedPackage")){
+                intent.putExtra("selectBookOption","BookCreatedPackage")
+                intent.putExtra("type",getIntent().getStringExtra("type"))
+                intent.putExtra("slot_id",getIntent().getStringExtra("slot_id"))
+                intent.putExtra("address_id",getIntent().getStringExtra("address_id"))
+                intent.putExtra("trainer_id",getIntent().getStringExtra("trainer_id"))
+                intent.putExtra("studio_id",getIntent().getStringExtra("studio_id"))
+                intent.putExtra("session_value",getIntent().getStringExtra("session_value"))
+                intent.putExtra("days",getIntent().getStringExtra("days"))
+                intent.putExtra("price",getIntent().getStringExtra("price"))
+                intent.putExtra("selectedPaymentOption","ccavenue")
+
+            }else{
+                intent.putExtra("price", getIntent().getStringExtra("price"))
+                intent.putExtra("type",getIntent().getStringExtra("type"))
+                intent.putExtra("selectBookOption","normalBookSlot")
+                intent.putExtra("slot_id",getIntent().getStringExtra("slot_id"))
+                intent.putExtra("address_id",getIntent().getStringExtra("address_id"))
+                intent.putExtra("trainer_id",getIntent().getStringExtra("trainer_id"))
+                intent.putExtra("studio_id",getIntent().getStringExtra("studio_id"))
+                intent.putExtra("selectedPaymentOption","ccavenue")
+
+            }*/
+
+            startActivity(intent)
         }
         getAddressData()
 //        editMembers=findViewById(R.id.editMembers)
@@ -255,10 +313,19 @@ class ReviewPackageActivity : AppCompatActivity() {
         LocalBroadcastManager
             .getInstance(this)
             .registerReceiver(countReceiver, filter)
+        val selectAddressFilter = IntentFilter("selectedCoupon")
+        LocalBroadcastManager
+            .getInstance(this)
+            .registerReceiver(updatedAddressId, selectAddressFilter)
 
         getData()
     }
-
+    val updatedAddressId = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            updatedAddress = intent?.getStringExtra("addressId").toString()
+            getData()
+        }
+    }
     val countReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             selectedCouponId = intent?.getStringExtra("couponId")
@@ -270,13 +337,14 @@ class ReviewPackageActivity : AppCompatActivity() {
     }
     fun showAddresListDialog(){
         val dialog = BottomSheetDialog(this) // Fragment -> requireContext()
-
         dialog.setContentView(R.layout.adress_list_dialog)
-
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        var recyclerAddress=dialog.findViewById<RecyclerView>(R.id.recyclerAddress)
-        recyclerAddress?.adapter = AddressListAdapter(addressList,applicationContext)
-
+        val recyclerAddress=dialog.findViewById<RecyclerView>(R.id.recyclerAddress)
+        recyclerAddress?.adapter = AddressListAdapter(addressList,applicationContext){
+            updatedAddress = it
+            getData()
+            dialog.dismiss()
+        }
         dialog.show()
     }
     var addressList = ArrayList<AddressModel>()
@@ -368,11 +436,7 @@ class ReviewPackageActivity : AppCompatActivity() {
 
     }
 
-    val updatedAddressId = object : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) {
-            updatedAddress = intent?.getStringExtra("addressId").toString()
-        }
-    }
+
 
     fun getData() {
         val progressDialog: Dialog = ProgressDialog.progressDialog(this, "")
@@ -440,6 +504,7 @@ class ReviewPackageActivity : AppCompatActivity() {
                             binding.home.text = "Home"
                         binding.address.text =
                             "${data.data?.address?.building_name},${data.data?.address?.street},${data.data?.address?.landmark},${data.data?.address?.city_name},${data.data?.address?.country_name}"
+                        selectedAddressId= data.data?.address?.id.toString()
                     } else {
                         binding.home.text = "Gym"
                         binding.address.text = "${data.data?.studio?.address}"

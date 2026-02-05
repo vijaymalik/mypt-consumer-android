@@ -20,6 +20,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
         android:layout_marginTop="10dp"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/line">
@@ -27,7 +28,6 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="15dp"
             android:layout_marginTop="20dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -51,7 +51,6 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="15dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/manrope_medium"
             android:text="Select a saved address or add a new one."
@@ -70,10 +69,9 @@
             android:id="@+id/addAddress2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="15dp"
             android:layout_marginTop="25dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/view_detail_rectangle"
+            android:background="@drawable/dotted_rectangle_grey"
             android:fontFamily="@font/manrope_medium"
             android:gravity="center"
             android:paddingHorizontal="40dp"

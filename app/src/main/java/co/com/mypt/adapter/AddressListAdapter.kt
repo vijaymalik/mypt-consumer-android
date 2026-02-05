@@ -25,14 +25,14 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import kotlin.text.replace
 
-class AddressListAdapter(var addressList: ArrayList<AddressModel>,var activity: Context) :
+class AddressListAdapter(var addressList: ArrayList<AddressModel>,var activity: Context,val selectedAddressId:String="",val callBack:(String)->Unit) :
     RecyclerView.Adapter<AddressListAdapter.AddressListHolder>() {
     private var selectedPosition = 0 // Track selected position
     class AddressListHolder(view: View):RecyclerView.ViewHolder(view) {
         var tvlocation=view.findViewById<TextView>(R.id.tvlocation)
-        var tvEdit=view.findViewById<TextView>(R.id.tvEdit)
+//        var tvEdit=view.findViewById<TextView>(R.id.tvEdit)
         var tvHome=view.findViewById<TextView>(R.id.tvHome)
-        var tvmobile=view.findViewById<TextView>(R.id.tvmobile)
+//        var tvmobile=view.findViewById<TextView>(R.id.tvmobile)
         var checkname=view.findViewById<CheckBox>(R.id.checkname)
     }
 
@@ -50,11 +50,11 @@ class AddressListAdapter(var addressList: ArrayList<AddressModel>,var activity: 
 
         holder.tvlocation.text=(addressModel.building_name+","+addressModel.street+","+landmark+addressModel.city_name+addressModel.country_name).replace("null,","")
         holder.tvHome.setText(addressModel.type)
-        holder.tvmobile.text=(addressModel.mobile_no).replace("null","")
+//        holder.tvmobile.text=(addressModel.mobile_no).replace("null","")
         holder.checkname.isChecked = (position == selectedPosition)
-        holder.tvEdit.setTag(position)
+//        holder.tvEdit.setTag(position)
         holder.checkname.setTag(position)
-        holder.tvEdit.setOnClickListener{
+     /*   holder.tvEdit.setOnClickListener{
             val pos = it.tag as Int
             var addressModel=addressList[pos]
             var intent= Intent(activity,SelectCurrentLocationActivity::class.java)
@@ -75,7 +75,7 @@ class AddressListAdapter(var addressList: ArrayList<AddressModel>,var activity: 
             intent.putExtra("address_id",addressModel.id)
             activity.startActivity(intent)
             //editaddressBottomSheet(addressModel.building_name,addressModel.street,addressModel.city_name,addressModel.landmark,addressModel.mobile_no)
-        }
+        }*/
         holder.checkname.setOnClickListener {
             var j=it.tag
             var addressModel=addressList.get(j as Int)
@@ -83,8 +83,6 @@ class AddressListAdapter(var addressList: ArrayList<AddressModel>,var activity: 
             if (selectedPosition == j) {
                 selectedPosition = -1
                 intent.putExtra("address_id", "")
-                android.util.Log.e("address_id",""+"addrblaess_id")
-
                 intent.putExtra("typeselect", "uncheck")
             }
             else{
@@ -95,9 +93,8 @@ class AddressListAdapter(var addressList: ArrayList<AddressModel>,var activity: 
                 android.util.Log.e("address_id",""+addressModel.id)
 
             }
-            notifyDataSetChanged()
-
             activity.sendBroadcast(intent)
+            callBack( addressModel.id)
 
         }
 

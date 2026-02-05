@@ -154,7 +154,7 @@ class AddressListForTrainerActivity : AppCompatActivity() {
                             bookSlot.setTextColor(getColor(R.color.buttontextcolor))
                             im.setColorFilter(ContextCompat.getColor(applicationContext, R.color.buttontextcolor), PorterDuff.Mode.SRC_IN)
 
-                            recyclerAddress.adapter = AddressListAdapter(addressList,applicationContext)
+                            recyclerAddress.adapter = AddressListAdapter(addressList,applicationContext){}
                             linearNoAddress.visibility=View.GONE
                             nested.visibility=View.VISIBLE
 
