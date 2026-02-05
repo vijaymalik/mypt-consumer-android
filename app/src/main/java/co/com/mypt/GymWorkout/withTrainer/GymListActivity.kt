@@ -44,7 +44,6 @@ import co.com.mypt.activities.SearchGymActivity2
 import co.com.mypt.activities.TrainersListActivity
 import co.com.mypt.adapter.GymListAdapter
 import co.com.mypt.adapter.GymListExerciseAdapter
-import co.com.mypt.adapter.TrainerListAdapter
 import co.com.mypt.model.ExerciseModel
 import co.com.mypt.model.TrainersModel
 import com.android.volley.VolleyError
@@ -111,8 +110,13 @@ class GymListActivity : AppCompatActivity() {
             Places.initialize(getApplicationContext(), "AIzaSyBVhnjhV5pynJXnSN2VTn-zhLGeIc7VcRw");
         }
         if (checkLocationPermission() && isclick==0) {
-            getCurrentLocation()
+//            getCurrentLocation()
         }
+        latitude =intent?.getDoubleExtra("longitude",0.0)
+        longitude =intent?.getDoubleExtra("latitude",0.0)
+        getTagData(latitude,longitude)
+        getgymList(tag_id,filter)
+
         im_search.setOnClickListener{
             var intent= Intent(applicationContext,SearchGymActivity2::class.java)
             startActivity(intent)
@@ -221,7 +225,7 @@ class GymListActivity : AppCompatActivity() {
     private val requestPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
-                getCurrentLocation()
+//                getCurrentLocation()
                 Log.i("DEBUG", "permission granted")
             } else {
                 // if permission denied then check whether never ask
@@ -282,15 +286,15 @@ class GymListActivity : AppCompatActivity() {
         alert.show()
     }
     @SuppressLint("MissingPermission")
-    private fun getCurrentLocation() {
+    /*private fun getCurrentLocation() {
         //mMap.clear();
 
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED /*&& ActivityCompat.checkSelfPermission(
+            ) != PackageManager.PERMISSION_GRANTED *//*&& ActivityCompat.checkSelfPermission(
                 requireActivity(), Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED*/
+            ) != PackageManager.PERMISSION_GRANTED*//*
         ) {
 
         }
@@ -349,12 +353,12 @@ class GymListActivity : AppCompatActivity() {
                 }
             }
         }
-        /*mFusedLocationClient.requestLocationUpdates(
+        *//*mFusedLocationClient.requestLocationUpdates(
             locationRequest,
             locationCallback,
             Looper.getMainLooper()
-        )*/
-    }
+        )*//*
+    }*/
     override fun onResume() {
         super.onResume()
         isResumed1 = true

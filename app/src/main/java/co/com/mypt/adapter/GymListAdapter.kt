@@ -91,12 +91,16 @@ class GymListAdapter(
                                 context.startActivity(intent)
                             }else{
                                 val intent = Intent(context, TrainersListActivity::class.java)
+                                intent.putExtra("longitude",longitude)
+                                intent.putExtra("latitude",latitude)
                                 intent.putExtra("type","withTrainer")
                                 intent.putExtra("studio_id",trainersModel.id)
                                 context.startActivity(intent)
                             }
                         }else{
                             val intent = Intent(context, TrainersListActivity::class.java)
+                            intent.putExtra("longitude",longitude)
+                            intent.putExtra("latitude",latitude)
                             if (sharedPreferences.getString("typeWorkout","").equals("work")){
                                 intent.putExtra("studio_id",trainersModel.id)
                             }
@@ -142,12 +146,16 @@ class GymListAdapter(
                                 context.startActivity(intent)
                             }else{
                                 val intent = Intent(context, TrainersListActivity::class.java)
+                                intent.putExtra("longitude",longitude)
+                                intent.putExtra("latitude",latitude)
                                 intent.putExtra("type","withTrainer")
                                 intent.putExtra("studio_id",trainersModel.id)
                                 context.startActivity(intent)
                             }
                         }else{
                             val intent = Intent(context, TrainersListActivity::class.java)
+                            intent.putExtra("longitude",longitude)
+                            intent.putExtra("latitude",latitude)
                             if (sharedPreferences.getString("typeWorkout","").equals("work")){
                                 intent.putExtra("studio_id",trainersModel.id)
                             }

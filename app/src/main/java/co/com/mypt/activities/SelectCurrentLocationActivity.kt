@@ -182,6 +182,10 @@ class SelectCurrentLocationActivity : AppCompatActivity() , OnMapReadyCallback {
 
         tvContinue.setOnClickListener{
             if (isAddressAdded){
+                if ((latitude ==null || latitude ==0.0) ||(longitude ==null || longitude ==0.0) ){
+                    Toast.makeText(this, "Please select location", Toast.LENGTH_LONG).show()
+                    return@setOnClickListener
+                }
                 startTrainerList()
                 return@setOnClickListener
             }
@@ -206,6 +210,8 @@ class SelectCurrentLocationActivity : AppCompatActivity() , OnMapReadyCallback {
         sharedPreferences.edit(commit = true) { putString(REVIEW_ADDRESS_ID, addressId) }
         val intent= Intent(this@SelectCurrentLocationActivity, TrainersListActivity::class.java)
         intent.putExtra("address_id",addressId)
+        intent.putExtra("longitude",longitude)
+        intent.putExtra("latitude",latitude)
         startActivity(intent)
     }
 
@@ -475,7 +481,8 @@ class SelectCurrentLocationActivity : AppCompatActivity() , OnMapReadyCallback {
                         if (isFromGymWorkoutL == true){
                             startTrainerList() }
                     }else{
-                        startTrainerList()}
+                        startTrainerList()
+                    }
                    // Toast.makeText(this@PhoneNumberScreenActivity,resp.optString("msg"),Toast.LENGTH_SHORT).show()
                 }catch (e:Exception){
                     e.printStackTrace()

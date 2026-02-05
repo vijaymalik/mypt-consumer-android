@@ -158,8 +158,13 @@ class TrainersListActivity : AppCompatActivity() {
         geocoder = Geocoder(this, Locale.getDefault())
         locationManager = this.getSystemService(LOCATION_SERVICE) as LocationManager
         if (checkLocationPermission() && isclick == 0) {
-            getCurrentLocation()
+//            getCurrentLocation()
         }
+        latitude =intent?.getDoubleExtra("longitude",0.0)
+        longitude =intent?.getDoubleExtra("latitude",0.0)
+        getTagData(latitude, longitude)
+        getTrainerList(tag_id, filter)
+
         searchEditText = findViewById(R.id.searchEditText)
         filterTextView = findViewById(R.id.filterTextView)
 //        filterRecyclerView = findViewById(R.id.filterRecyclerView)
@@ -430,7 +435,7 @@ class TrainersListActivity : AppCompatActivity() {
     private val requestPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
-                getCurrentLocation()
+//                getCurrentLocation()
                 Log.i("DEBUG", "permission granted")
             } else {
                 // if permission denied then check whether never ask
@@ -492,15 +497,15 @@ class TrainersListActivity : AppCompatActivity() {
     }
 
     @SuppressLint("MissingPermission")
-    private fun getCurrentLocation() {
+    /*private fun getCurrentLocation() {
         //mMap.clear();
 
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED /*&& ActivityCompat.checkSelfPermission(
+            ) != PackageManager.PERMISSION_GRANTED *//*&& ActivityCompat.checkSelfPermission(
                 requireActivity(), Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED*/
+            ) != PackageManager.PERMISSION_GRANTED*//*
         ) {
 
         }
@@ -526,8 +531,8 @@ class TrainersListActivity : AppCompatActivity() {
                             getTagData(latitude, longitude)
                             getTrainerList(tag_id, filter)
 
-                            /*tvlocation.text = address
-                            edaddress.setText(address)*/
+//                            tvlocation.text = address
+//                            edaddress.setText(address)
 
                             mFusedLocationClient.removeLocationUpdates(locationCallback)
                             isResumed1 = false
@@ -541,7 +546,7 @@ class TrainersListActivity : AppCompatActivity() {
             locationCallback,
             Looper.getMainLooper()
         )
-    }
+    }*/
 
     override fun onResume() {
         super.onResume()

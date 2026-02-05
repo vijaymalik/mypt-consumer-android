@@ -149,6 +149,8 @@ class ChangeLocationActivity : AppCompatActivity() , OnMapReadyCallback {
                     return@setOnClickListener
                 }
                 val intent=Intent(this, GymListActivity::class.java)
+                intent.putExtra("longitude",longitude)
+                intent.putExtra("latitude",latitude)
                 startActivity(intent)
             }else{
                 finish()
