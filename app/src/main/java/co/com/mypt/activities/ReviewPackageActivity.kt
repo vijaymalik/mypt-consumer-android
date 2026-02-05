@@ -100,8 +100,8 @@ class ReviewPackageActivity : AppCompatActivity() {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         edit = sharedPreferences.edit()
         binding.addressUpdate.setOnClickListener {
-//            showAddresListDialog()
-            startActivity(Intent(this, AddressListForPackage::class.java))
+            showAddresListDialog()
+//            startActivity(Intent(this, AddressListForPackage::class.java))
         }
         binding.viewAllCoupon.setOnClickListener {
             val intent = Intent(this, ViewCouponsOfferActivity::class.java)
@@ -271,7 +271,7 @@ class ReviewPackageActivity : AppCompatActivity() {
     fun showAddresListDialog(){
         val dialog = BottomSheetDialog(this) // Fragment -> requireContext()
 
-        dialog.setContentView(R.layout.activity_address_list_for_trainer)
+        dialog.setContentView(R.layout.adress_list_dialog)
 
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         var recyclerAddress=dialog.findViewById<RecyclerView>(R.id.recyclerAddress)

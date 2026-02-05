@@ -13,24 +13,22 @@
             android:layout_width="match_parent"
             android:layout_marginTop="15dp"
             android:layout_height="wrap_content">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/manrope_medium"
-                android:paddingVertical="5dp"
-                android:paddingHorizontal="20dp"
-                android:text="Home"
-                android:id="@+id/tvHome"
-                android:layout_centerVertical="true"
-                android:background="@drawable/type_drawable"
-                android:layout_marginHorizontal="15dp"
-                android:textColor="#DBDBDB"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@+id/checkname"
+                android:layout_marginRight="80dp"
+                android:id="@+id/tvlocation"
+                android:text="Villa 12, Street 5, Al Barsha 3, Dubai, UAE 157698"
+                android:textColor="@color/headingcolor"
                 android:textSize="14sp" />
             <CheckBox
                 android:paddingLeft="10dp"
                 android:paddingRight="15dp"
                 android:id="@+id/checkname"
-                android:layout_alignParentEnd="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/white"
@@ -45,12 +43,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/manrope_medium"
-            android:layout_marginLeft="15dp"
-
-            android:layout_marginRight="80dp"
-            android:id="@+id/tvlocation"
-            android:text="Villa 12, Street 5, Al Barsha 3, Dubai, UAE 157698"
-            android:textColor="@color/headingcolor"
+            android:paddingVertical="5dp"
+            android:paddingHorizontal="20dp"
+            android:text="Home"
+            android:id="@+id/tvHome"
+            android:layout_centerVertical="true"
+            android:background="@drawable/type_drawable"
+            android:layout_marginHorizontal="15dp"
+            android:textColor="#DBDBDB"
             android:textSize="14sp" />
         <LinearLayout
             android:layout_width="match_parent"
