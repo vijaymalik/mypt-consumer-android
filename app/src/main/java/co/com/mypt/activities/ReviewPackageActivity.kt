@@ -316,7 +316,7 @@ class ReviewPackageActivity : AppCompatActivity() {
              intent.putExtra("",getIntent().getStringExtra("studio_id"))
              startActivity(intent)
          }*/
-        val filter = IntentFilter("selectedCoupon")
+        val filter = IntentFilter("selectedReviewCoupon")
         LocalBroadcastManager
             .getInstance(this)
             .registerReceiver(countReceiver, filter)
@@ -457,26 +457,29 @@ class ReviewPackageActivity : AppCompatActivity() {
         val param: MutableMap<String, String> = HashMap()
 
         if (sharedPreferences.getString("typeWorkout", "").equals("home")) {
-            param["type"] = sharedPreferences.getString("typeWorkout", "").toString()
+            param["type"] = sharedPreferences.getString("typeWorkout", "")?:""
         } else {
             param["type"] = "gym"
-            param["studio_id"] = intent.getStringExtra("studio_id").toString()
+            param["studio_id"] = intent.getStringExtra("studio_id")?:""
         }
         if (updatedAddress != "")
             param["address_id"] = updatedAddress
         else
-            param["address_id"] = sharedPreferences.getString(REVIEW_ADDRESS_ID, "").toString()
+            param["address_id"] = sharedPreferences.getString(REVIEW_ADDRESS_ID, "")?:""
         if (isupgreadClick) {
             isupgreadClick = false
             param["best_plan_id"] = upgradIdText?.id ?: ""
         } else {
-            param["best_plan_id"] = intent.getStringExtra(BEST_PLAN_ID).toString()
+            val bestPlanId=intent.getStringExtra(BEST_PLAN_ID)
+            if (bestPlanId !=null)
+            param["best_plan_id"] = bestPlanId
         }
 
         param["package_type"] = sharedPreferences.getInt("selectedPackageType", 0).toString()
         param["sessions"] = intent.getStringExtra("session_value").toString()
         param["trainer_id"] = intent.getStringExtra("trainer_id").toString()
 //        param["skip_offer"] = "true"
+        if (!selectedCouponId.isNullOrEmpty())
         param["offer_id"] = selectedCouponId ?: ""
 
         Log.e("PackageCheckoutParam", param.toString())

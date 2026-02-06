@@ -37,7 +37,7 @@ class ViewCouponsOfferActivity : AppCompatActivity() {
             couponsModelList.add(activityModel)
         }*/
         var couponAdapter= CouponAdapter(this,couponsModelList){it,name->
-            val intent = Intent("selectedCoupon")
+            val intent = Intent("selectedReviewCoupon")
             intent.putExtra("couponId", it)
             intent.putExtra("couponName", name)
             LocalBroadcastManager
