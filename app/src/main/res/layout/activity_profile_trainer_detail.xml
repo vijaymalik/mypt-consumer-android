@@ -631,8 +631,8 @@
             </androidx.cardview.widget.CardView>
         </androidx.cardview.widget.CardView>
     </LinearLayout>
-    <TextView
-        android:visibility="gone"
+   <!-- <TextView
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:id="@+id/bookSlot"
         android:layout_height="wrap_content"
@@ -648,5 +648,5 @@
         android:layout_alignParentBottom="true"
         android:text="@string/book_a_slot"
         android:textColor="@color/buttontextcolor"
-        android:textSize="16sp" />
+        android:textSize="16sp" />-->
 </RelativeLayout>

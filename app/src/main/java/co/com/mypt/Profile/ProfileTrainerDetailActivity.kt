@@ -69,7 +69,7 @@ class ProfileTrainerDetailActivity : AppCompatActivity() , ViewTreeObserver.OnSc
     lateinit var clientsCoached : TextView
     lateinit var totalExp : TextView
     lateinit var avgRating1 : TextView
-    lateinit var bookSlot : TextView
+//    lateinit var bookSlot : TextView
     lateinit var distance : TextView
     lateinit var place : TextView
     lateinit var followersCount : TextView
@@ -126,7 +126,7 @@ class ProfileTrainerDetailActivity : AppCompatActivity() , ViewTreeObserver.OnSc
         follow = findViewById(R.id.follow)
         (galleryRecyclerView.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
 
-        bookSlot = findViewById(R.id.bookSlot)
+//        bookSlot = findViewById(R.id.bookSlot)
         play = findViewById(R.id.play)
         videoView = findViewById(R.id.videoView)
 
@@ -405,12 +405,12 @@ class ProfileTrainerDetailActivity : AppCompatActivity() , ViewTreeObserver.OnSc
                             }
                         }
 
-                        if (intent.getStringExtra("haveSlot")=="no"){
+                        /*if (intent.getStringExtra("haveSlot")=="no"){
                             bookSlot.background = resources.getDrawable(R.drawable.grey_rectangle_rounded,null)
                             bookSlot.setTextColor(resources.getColor(R.color.white,null))
-                        }
+                        }*/
 
-                        bookSlot.setOnClickListener {
+                        /*bookSlot.setOnClickListener {
                             if (intent.getStringExtra("haveSlot")!="no"){
                                 if (sharedPreferences.getString("typeWorkout","").equals("home")){
                                     val intent1 = Intent(this@ProfileTrainerDetailActivity, AddressListForTrainerActivity::class.java)
@@ -435,7 +435,7 @@ class ProfileTrainerDetailActivity : AppCompatActivity() , ViewTreeObserver.OnSc
                                     startActivity(intent1)
                                 }
                             }
-                        }
+                        }*/
 
                     }
 

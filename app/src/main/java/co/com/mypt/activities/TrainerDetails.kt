@@ -62,13 +62,13 @@ class TrainerDetails : AppCompatActivity(), ViewTreeObserver.OnScrollChangedList
 
 
     lateinit var trainerName_1 : TextView
-    lateinit var follow_1 : TextView
-    lateinit var follow : TextView
+//    lateinit var follow_1 : TextView
+//    lateinit var follow : TextView
     lateinit var userName : TextView
     lateinit var clientsCoached : TextView
     lateinit var totalExp : TextView
     lateinit var avgRating1 : TextView
-    lateinit var bookSlot : TextView
+//    lateinit var bookSlot : TextView
     lateinit var distance : TextView
     lateinit var place : TextView
     lateinit var followersCount : TextView
@@ -121,11 +121,11 @@ class TrainerDetails : AppCompatActivity(), ViewTreeObserver.OnScrollChangedList
         specialitiesRecyclerView = findViewById(R.id.specialitiesRecyclerView)
         aboutMe = findViewById(R.id.aboutMe)
         review = findViewById(R.id.review)
-        follow_1 = findViewById(R.id.follow_1)
-        follow = findViewById(R.id.follow)
+//        follow_1 = findViewById(R.id.follow_1)
+//        follow = findViewById(R.id.follow)
         (galleryRecyclerView.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
 
-        bookSlot = findViewById(R.id.bookSlot)
+//        bookSlot = findViewById(R.id.bookSlot)
         play = findViewById(R.id.play)
         videoView = findViewById(R.id.videoView)
 
@@ -186,12 +186,12 @@ class TrainerDetails : AppCompatActivity(), ViewTreeObserver.OnScrollChangedList
         back_1.setOnClickListener {
            finish()
         }
-        follow.setOnClickListener {
+        /*follow.setOnClickListener {
          sendFolowData(intent.getStringExtra("trainer_id"))
-        }
-        follow_1.setOnClickListener {
+        }*/
+        /*follow_1.setOnClickListener {
          sendFolowData(intent.getStringExtra("trainer_id"))
-        }
+        }*/
 
 
         back.setOnClickListener {
@@ -242,11 +242,11 @@ class TrainerDetails : AppCompatActivity(), ViewTreeObserver.OnScrollChangedList
                     if(resp.optBoolean("status")){
 
                         if(resp.optJSONObject("data").optBoolean("isFollowed") == false){
-                            follow.text = resources.getString(R.string.follow)
-                            follow_1.text = resources.getString(R.string.follow)
+//                            follow.text = resources.getString(R.string.follow)
+//                            follow_1.text = resources.getString(R.string.follow)
                         }else{
-                            follow.text = resources.getString(R.string.unfollow)
-                            follow_1.text = resources.getString(R.string.unfollow)
+//                            follow.text = resources.getString(R.string.unfollow)
+//                            follow_1.text = resources.getString(R.string.unfollow)
                         }
                     }else{
 
@@ -311,7 +311,7 @@ class TrainerDetails : AppCompatActivity(), ViewTreeObserver.OnScrollChangedList
             override fun response(data: String?) {
                 progressDialog.dismiss()
                 scrollView.visibility = View.VISIBLE
-                bookSlot.visibility = View.VISIBLE
+//                bookSlot.visibility = View.VISIBLE
 
                 Log.e("TrainerDetailResponse",data.toString())
                 try {
@@ -324,12 +324,12 @@ class TrainerDetails : AppCompatActivity(), ViewTreeObserver.OnScrollChangedList
                         tvQuote.text = jsonData.optString("quote")
                         followersCount.text = jsonData.optString("follower")
                         if (!jsonData.optBoolean("isFollowing")){
-                            follow.text = resources.getString(R.string.follow)
-                            follow_1.text = resources.getString(R.string.follow)
+//                            follow.text = resources.getString(R.string.follow)
+//                            follow_1.text = resources.getString(R.string.follow)
                         }
                         else{
-                            follow.text = resources.getString(R.string.unfollow)
-                            follow_1.text = resources.getString(R.string.unfollow)
+//                            follow.text = resources.getString(R.string.unfollow)
+//                            follow_1.text = resources.getString(R.string.unfollow)
                         }
                         if (jsonData.optString("train_with_me").equals("")){
                             LinearWhyTrainWithMe.visibility=View.GONE
@@ -409,12 +409,12 @@ class TrainerDetails : AppCompatActivity(), ViewTreeObserver.OnScrollChangedList
                             }
                         }
 
-                        if (intent.getStringExtra("haveSlot")=="no"){
+                        /*if (intent.getStringExtra("haveSlot")=="no"){
                             bookSlot.background = resources.getDrawable(R.drawable.grey_rectangle_rounded,null)
                             bookSlot.setTextColor(resources.getColor(R.color.white,null))
-                        }
+                        }*/
 
-                        bookSlot.setOnClickListener {
+                        /*bookSlot.setOnClickListener {
                             if (intent.getStringExtra("haveSlot")!="no"){
                                 if (sharedPreferences.getString("typeWorkout","").equals("home")){
                                     val intent1 = Intent(this@TrainerDetails, AddressListForTrainerActivity::class.java)
@@ -439,7 +439,7 @@ class TrainerDetails : AppCompatActivity(), ViewTreeObserver.OnScrollChangedList
                                     startActivity(intent1)
                                 }
                             }
-                        }
+                        }*/
 
                     }
 
