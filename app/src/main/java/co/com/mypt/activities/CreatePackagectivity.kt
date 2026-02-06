@@ -78,7 +78,8 @@ class CreatePackagectivity : AppCompatActivity() {
     var isBestPlanSelected = true
     lateinit var bottomView: ConstraintLayout
     lateinit var topView: ConstraintLayout
-    var sessionCountTxt = ""
+    var bestPlanSessionCountTxt = ""
+    var customSessionCountTxt = ""
     var bestPlanId=""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -322,18 +323,24 @@ class CreatePackagectivity : AppCompatActivity() {
         val intent = Intent(this, ReviewPackageActivity::class.java)
         println("SSSS  ${getIntent().getStringExtra("address_id")}")
         intent.putExtra("address_id", getIntent().getStringExtra("address_id"))
-        intent.putExtra("session_value", sessionCountTxt)
+
         intent.putExtra("trainer_id", getIntent().getStringExtra("trainer_id"))
         intent.putExtra("studio_id", getIntent().getStringExtra("studio_id"))
         intent.putExtra("package_type", selectedOption)
-        intent.putExtra(BEST_PLAN_ID, bestPlanId)
+        if (isBestPlanSelected){
+            intent.putExtra("session_value", bestPlanSessionCountTxt)
+            intent.putExtra(BEST_PLAN_ID, bestPlanId)
+        }else{
+            intent.putExtra("session_value", customSessionCountTxt)
+        }
+
         startActivity(intent)
     }
 
     fun selectedPlan(isBestPlanSelected: Plans) {
-//        this.isBestPlanSelected = isBestPlanSelected
         when (isBestPlanSelected) {
             Plans.IS_BEST_AVAILABLE -> {
+                this.isBestPlanSelected = true
                 tvcontinue.text = getString(R.string.continue_summery)
                 topView.visibility = View.VISIBLE
                 tvcontinueView.visibility = View.VISIBLE
@@ -344,6 +351,7 @@ class CreatePackagectivity : AppCompatActivity() {
                 hideCustomText()
             }
             else -> {
+                this.isBestPlanSelected = false
                 topView.visibility = View.GONE
                 bottomView.background = resources.getDrawable(R.drawable.blue_border_container, null)
                 freeMsgCustom.visibility = View.VISIBLE
@@ -365,11 +373,11 @@ class CreatePackagectivity : AppCompatActivity() {
         packagePrice.text = "AED ${bestPlan?.price}"
         sessionCount.text = "${bestPlan?.sessions} sessions"
         validDay.text = "Valid for ${bestPlan?.validity_days} days"
-        sessionCountTxt = bestPlan?.sessions ?: ""
+        bestPlanSessionCountTxt = bestPlan?.sessions ?: ""
         bestPlanId = bestPlan?.id?:""
     }
     fun customPlanSession(sessions:String){
-        sessionCountTxt = sessions
+        customSessionCountTxt = sessions
     }
     /* fun bestPlanNotAvailable(){
          topView.visibility = View.GONE
