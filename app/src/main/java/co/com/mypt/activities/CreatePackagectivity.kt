@@ -357,7 +357,6 @@ class CreatePackagectivity : AppCompatActivity() {
                 freeMsgCustom.visibility = View.VISIBLE
                 tvcontinueView.visibility = View.VISIBLE
                 tvcontinue.text = getString(R.string.continue_summery)
-                bestPlanId=""
             }
         }
     }

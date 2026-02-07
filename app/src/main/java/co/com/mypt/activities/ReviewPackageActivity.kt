@@ -16,6 +16,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.preference.PreferenceManager
@@ -515,16 +516,22 @@ class ReviewPackageActivity : AppCompatActivity() {
                         binding.trainerName.text =
                             "${data.data?.trainer_detail?.primary_trainer?.name}"
                         binding.selectedGym.text = "${data.data?.studio?.name}"
-                        if (data.data?.package_details?.type == "Home")
+                        if (data.data?.package_details?.type == "Home") {
                             binding.home.text = "Home"
-                        binding.address.text =
-                            "${data.data?.address?.building_name},${data.data?.address?.street},${data.data?.address?.landmark},${data.data?.address?.city_name},${data.data?.address?.country_name}"
-                        selectedAddressId = data.data?.address?.id.toString()
-                    } else {
-                        binding.home.text = "Gym"
-                        binding.address.text = "${data.data?.studio?.address}"
+                            binding.address.text =
+                                "${data.data?.address?.building_name},${data.data?.address?.street},${data.data?.address?.landmark},${data.data?.address?.city_name},${data.data?.address?.country_name}"
+                            selectedAddressId = data.data?.address?.id.toString()
+                        }else {
+                            binding.home.text = "Gym"
+                            binding.address.text = "${data.data?.studio?.address}"
+                        }
+                        binding.paymentTimeMsg.text = "${data.data?.payment_msg}"
+                    }else{
+                        Toast.makeText(this@ReviewPackageActivity,"Package not available.", Toast.LENGTH_LONG).show()
+                        binding.tvPayment.isClickable=false
+                        binding.tvPayment.background = resources.getDrawable(R.drawable.grey_rectangle, null)
                     }
-                    binding.paymentTimeMsg.text = "${data.data?.payment_msg}"
+
                     /*if(resp.optBoolean("status")){
 //                        linearpay.visibility=View.VISIBLE
 //                        nested.visibility=View.VISIBLE

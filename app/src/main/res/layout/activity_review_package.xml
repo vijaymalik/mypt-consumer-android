@@ -82,7 +82,7 @@
                         android:layout_marginTop="4dp"
                         android:layout_toLeftOf="@+id/upgradePlan"
                         android:fontFamily="@font/clash_display_regular"
-                        android:text="Avail at AED 6,500 for 150 sessions"
+                        android:text="NA"
                         android:textColor="#D9D3CE"
                         android:textSize="14sp" />
 
@@ -313,7 +313,7 @@
                                     android:fontFamily="@font/clash_display_semibold"
                                     android:gravity="end"
                                     android:lineHeight="18sp"
-                                    android:text="Home Training"
+                                    android:text="NA"
                                     android:textColor="@color/white"
                                     android:textSize="14sp" />
                             </LinearLayout>
@@ -342,7 +342,7 @@
                                     android:fontFamily="@font/clash_display_semibold"
                                     android:gravity="end"
                                     android:lineHeight="18sp"
-                                    android:text="12"
+                                    android:text="NA"
                                     android:textColor="@color/white"
                                     android:textSize="14sp" />
                             </LinearLayout>
@@ -378,7 +378,7 @@
                                     android:fontFamily="@font/clash_display_semibold"
                                     android:gravity="end"
                                     android:lineHeight="18sp"
-                                    android:text="Home Training"
+                                    android:text="NA"
                                     android:textColor="@color/white"
                                     android:textSize="14sp" />
                             </LinearLayout>
@@ -407,7 +407,7 @@
                                     android:fontFamily="@font/clash_display_semibold"
                                     android:gravity="end"
                                     android:lineHeight="18sp"
-                                    android:text="12"
+                                    android:text="NA"
                                     android:textColor="@color/white"
                                     android:textSize="14sp" />
                             </LinearLayout>
@@ -628,7 +628,7 @@
                             android:drawableTint="@color/bg_color_primary_white_55"
                             android:fontFamily="@font/clash_display_regular"
                             android:lineHeight="16sp"
-                            android:text="Dubai - Al Thanyah First- Barsha Heights, Dubai internet City"
+                            android:text="NA"
                             android:textColor="@color/bg_color_primary_white_55"
                             android:textSize="12sp" />
 

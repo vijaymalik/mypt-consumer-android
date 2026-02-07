@@ -398,15 +398,15 @@ class BestPlanTotalSessionFragment(
                 }
             }
         })
-        if (!data.isNullOrEmpty()){
-            isBestPlanAvailable=true
-            activity?.let {
-                (it as CreatePackagectivity).selectedPlan(Plans.IS_BEST_AVAILABLE)
-                (it as CreatePackagectivity).updateBestPlanSession(data[0])
-            }
-        }else{
-            isBestPlanAvailable=false
-            if (isBestPlanSelected){
+        if (isBestPlanSelected) {
+            if (!data.isNullOrEmpty()) {
+                isBestPlanAvailable = true
+                activity?.let {
+                    (it as CreatePackagectivity).selectedPlan(Plans.IS_BEST_AVAILABLE)
+                    (it as CreatePackagectivity).updateBestPlanSession(data[0])
+                }
+            } else {
+                isBestPlanAvailable = false
                 activity?.let {
                     (it as CreatePackagectivity).selectedPlan(Plans.IS_BEST_NOT_AVAILABLE)
                 }
