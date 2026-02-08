@@ -4,6 +4,7 @@
     android:viewportWidth="360"
     android:viewportHeight="80">
 
+    <!-- Background Shape -->
     <path
         android:fillColor="#111111"
         android:pathData="
@@ -12,4 +13,17 @@
             L360,80
             L0,80
             Z" />
+
+    <!-- Neon Curve Stroke -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#00FFCC"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="
+            M0,20
+            Q180,-20 360,20" />
+
 </vector>
+

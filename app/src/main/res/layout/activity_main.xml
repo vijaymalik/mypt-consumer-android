@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:fitsSystemWindows="true"
     android:layout_height="match_parent"
-    android:background="@color/buttontextcolor"
+    android:background="@android:color/transparent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.fragment.app.FragmentContainerView
@@ -12,7 +12,7 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/curveBg"
+        android:layout_above="@id/bottomNavigationView"
         app:defaultNavHost="true"
         app:navGraph="@navigation/app_navigation" />
     <FrameLayout
@@ -21,7 +21,7 @@
         android:layout_height="match_parent"
         android:id="@+id/fragment_container"
         android:layout_alignParentTop="true"
-        android:layout_above="@id/curveBg"
+        android:layout_above="@id/bottomNavigationView"
         />
     <!--<co.com.mypt.curvedBottomNavigation.CurvedBottomNavigation
         android:id="@+id/bottomNavigation"
@@ -34,20 +34,24 @@
         app:cbn_selected_icon_size="48dp"
         app:cbn_selectedIconColor="@null"
         android:layout_height="wrap_content"/>-->
-    <!--<RelativeLayout
+    <RelativeLayout
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
-        android:background="@color/red"
+        android:background="@android:color/transparent"
         android:layout_alignParentBottom="true"
         android:layout_height="70dp"
-        android:layout_gravity="bottom">-->
+        android:layout_gravity="bottom">
 
         <!-- 1️⃣ Curved Neon Background -->
-        <co.com.mypt.curvedBottomNavigation.CurvedBottomBar
+        <!--<co.com.mypt.curvedBottomNavigation.CurvedBottomBar
             android:id="@+id/curveBg"
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
-            android:layout_height="70dp" />
+            android:layout_height="70dp" />-->
+        <View
+            android:background="@drawable/bottom_nav_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
         <!-- 2️⃣ Bottom Navigation -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -56,12 +60,13 @@
             android:layout_height="60dp"
             android:layout_alignParentBottom="true"
             android:background="@android:color/transparent"
+            app:backgroundTint="@android:color/transparent"
             android:elevation="0dp"
             app:menu="@menu/bottom_menu"
             app:labelVisibilityMode="labeled"
             app:itemIconTint="@color/white"
             app:itemTextColor="@color/red"/>
 
-    <!--</RelativeLayout>-->
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -16,10 +16,10 @@ class CurvedBottomBar @JvmOverloads constructor(
     attrs: AttributeSet? = null
 ) : View(context, attrs) {
 
-    private val bgPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = Color.parseColor("#111111")
-        style = Paint.Style.FILL
-    }
+    /*private val bgPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        color = Color.TRANSPARENT
+        style = Paint.Style.STROKE
+    }*/
 
     private val neonPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.STROKE
@@ -39,7 +39,7 @@ class CurvedBottomBar @JvmOverloads constructor(
         val w = width.toFloat()
         val h = height.toFloat()
 
-        val curveHeight = h * 0.3f
+        val curveHeight = h * 0.2f
 
         /* ---------- Background Path ---------- */
 
@@ -51,7 +51,7 @@ class CurvedBottomBar @JvmOverloads constructor(
             close()
         }
 
-        canvas.drawPath(bgPath, bgPaint)
+//        canvas.drawPath(bgPath, bgPaint)
 
         /* ---------- Neon Curve Path ---------- */
 
