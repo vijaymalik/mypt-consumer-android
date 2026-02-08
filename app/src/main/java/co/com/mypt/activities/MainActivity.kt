@@ -90,6 +90,7 @@ class MainActivity : AppCompatActivity() {
             initNavHost()
             setUpBottomNavigation()
         }
+        handleTabSelection(R.id.homeFragment)
         onBackPressedDispatcher.addCallback(this,object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 Log.e("back","back")
@@ -98,7 +99,7 @@ class MainActivity : AppCompatActivity() {
 
                 if (currentId != R.id.homeFragment) {
                     // Navigate to home tab
-                    binding.bottomNavigation.show(R.id.homeFragment)
+//                    binding.bottomNavigation.show(R.id.homeFragment)
                     handleTabSelection(R.id.homeFragment) // optional if you want to trigger logic manually
                 } else {
                     // Already on home, double back to exit
@@ -147,22 +148,22 @@ class MainActivity : AppCompatActivity() {
     private fun setUpBottomNavigation() {
         progressDialog = ProgressDialog.progressDialog(this, "")
 
-        val bottomNavigationItems = listOf(
+        /*val bottomNavigationItems = listOf(
             CurvedBottomNavigation.Model(ID_HOME, getString(R.string.home), R.drawable.home),
             CurvedBottomNavigation.Model(ID_BOOKING, getString(R.string.bookings), R.drawable.book),
             CurvedBottomNavigation.Model(ID_Library, getString(R.string.library), R.drawable.dumbbell),
             CurvedBottomNavigation.Model(ID_CALENDAR, getString(R.string.calendar), R.drawable.calendar),
             CurvedBottomNavigation.Model(ID_CART, getString(R.string.more), R.drawable.menu)
-        )
+        )*/
 
-        binding.bottomNavigation.apply {
-            bottomNavigationItems.forEachIndexed { index, item ->
+        /*binding.bottomNavigation.apply {
+           *//* bottomNavigationItems.forEachIndexed { index, item ->
                 add(item, index)
-            }
+            }*//*
 
             setOnClickMenuListener { item ->
-                /*if (item.id==R.id.homeFragment)
-                    progressDialog?.show()*/
+                *//*if (item.id==R.id.homeFragment)
+                    progressDialog?.show()*//*
 
                 selectedId = item.id
 
@@ -173,7 +174,7 @@ class MainActivity : AppCompatActivity() {
             }
             setupNavController(navController)
             navigationType = NavigationType.LABELED
-        }
+        }*/
 
 
         getData(false,true)
