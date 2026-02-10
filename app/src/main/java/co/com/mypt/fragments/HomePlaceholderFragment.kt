@@ -28,7 +28,7 @@ class HomePlaceholderFragment : Fragment(R.layout.fragment_placeholder) {
                 val frag = if (isActiveUser) {
                     InactivePlanHomeFragment.newInstance(name, lat, long, chooseAddress)
                 } else {
-                    GuestUserHomeFragment.newInstance(lat, long, chooseAddress)
+                    GuestUserHomeFragmentNew.newInstance(lat, long, chooseAddress)
                 }
 
                 childFragmentManager.beginTransaction()

@@ -175,6 +175,29 @@ class MainActivity : AppCompatActivity() {
             setupNavController(navController)
             navigationType = NavigationType.LABELED
         }*/
+        binding.bottomNav.setOnItemSelectedListener {item->
+            when (item.itemId) {
+                R.id.home->{
+                    handleTabSelection(ID_HOME)
+                    true
+                }
+                R.id.plans->{
+                    handleTabSelection(ID_BOOKING)
+                    true
+                }
+                R.id.bookings->{
+                    handleTabSelection(ID_CALENDAR)
+                    true
+                }
+                R.id.menu->{
+                    handleTabSelection(ID_CART)
+                    true
+                }
+
+                else ->{false}
+            }
+
+        }
 
 
         getData(false,true)

@@ -49,6 +49,11 @@ android {
         viewBinding = true
     }
     ndkVersion = "26.1.10909125"
+    packaging {
+        resources {
+            excludes += "META-INF/versions/9/OSGI-INF/MANIFEST.MF"
+        }
+    }
 }
 
 dependencies {
@@ -115,6 +120,16 @@ dependencies {
     implementation("com.google.maps.android:android-maps-utils:2.2.5")
 
     implementation ("com.github.yarolegovich:DiscreteScrollView:1.5.1")
+    implementation("com.squareup.retrofit2:retrofit:3.0.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:5.3.2")
+    implementation("com.squareup.retrofit2:converter-gson:3.0.0")
+// Lifecycle
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.6")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.6")
+// Coroutines + Flow
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
+    implementation ("com.google.dagger:hilt-android:2.51")
+
 
 
 }

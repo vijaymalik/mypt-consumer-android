@@ -8,21 +8,21 @@
 
     <item
         android:id="@+id/plans"
-        android:icon="@drawable/menu"
+        android:icon="@drawable/book"
         android:title="Plans" />
 
     <item
         android:id="@+id/bookings"
-        android:icon="@drawable/dumbbell"
+        android:icon="@drawable/calendar"
         android:title="Bookings" />
 
-    <item
+    <!--<item
         android:id="@+id/menu"
         android:icon="@drawable/calendar"
-        android:title="Menu" />
+        android:title="Menu" />-->
     <item
-        android:id="@+id/setting"
-        android:icon="@drawable/setting"
+        android:id="@+id/menu"
+        android:icon="@drawable/menu"
         android:title="Menu" />
 
 </menu>
