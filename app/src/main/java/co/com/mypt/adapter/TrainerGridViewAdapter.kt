@@ -40,7 +40,7 @@ class TrainerGridViewAdapter(
         val totalRatings: TextView = item.findViewById(R.id.totalRatings)
         val userName: TextView = item.findViewById(R.id.userName)
         val distance: TextView = item.findViewById(R.id.distance)
-        val place: TextView = item.findViewById(R.id.place)
+        val bookThisTrainer: TextView = item.findViewById(R.id.bookThisTrainer)
 
         //        val viewProfile : TextView = item.findViewById(R.id.viewProfile)
         //val hurryUp : TextView = item.findViewById(R.id.hurryUp)
@@ -74,7 +74,7 @@ class TrainerGridViewAdapter(
             exerciseModel.name = it?.name.toString()
             exerciseModel
         }
-        holder.exerciseRecyclerView.adapter = TrainerTagAdapter(context, listTag, type)
+        holder.exerciseRecyclerView.adapter = TrainerHomeTagAdapter(context, listTag, type)
 
         holder.bookSlot.tag = position
         holder.relative.tag = position
@@ -102,7 +102,7 @@ class TrainerGridViewAdapter(
             holder.avgRating.text = trainersModel.averageRating
         holder.totalRatings.text = trainersModel.noOfRating + " ratings"
         holder.distance.text = trainersModel.distance
-        holder.place.text = trainersModel.location
+//        holder.place.text = trainersModel.location
         if (trainersModel.slot == "no") {
 //            holder.hurryUp.text = "No slots available"
             holder.bookSlot.setOnClickListener {}

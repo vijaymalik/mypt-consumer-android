@@ -369,7 +369,7 @@
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-            <TextView
+            <!--<TextView
                 android:id="@+id/allTransformationStories"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -391,7 +391,7 @@
                 android:layout_marginStart="8dp"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
+-->
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -400,26 +400,6 @@
                 android:src="@drawable/buy_session_image"
                 android:visibility="gone" />
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="599dp"
-                android:layout_marginTop="40dp"
-                android:adjustViewBounds="true"
-                android:src="@drawable/session_blur" />
-
-            <TextView
-                android:id="@+id/allUpcomingClass"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="30dp"
-                android:fontFamily="@font/manrope_medium"
-                android:gravity="center_vertical"
-                android:text="@string/upcoming_classes_near_you"
-                android:textColor="@color/smallTextcolor"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:drawableEndCompat="@drawable/baseline_keyboard_arrow_right_24" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/upcomingClassRecyclerView"
@@ -436,8 +416,14 @@
                 android:layout_height="350dp"
                 android:adjustViewBounds="true"
                 android:src="@drawable/upcoming_blur" />
-
-            <TextView
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/home_header_image" />
+            <!--<TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
@@ -499,15 +485,9 @@
                 android:fontFamily="@font/clash_display_regular"
                 android:text="-Theodore Roosevelt"
                 android:textColor="@color/edittextbordercolor"
-                android:textSize="12sp" />
+                android:textSize="12sp" />-->
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:adjustViewBounds="true"
-                android:scaleType="centerCrop"
-                android:src="@drawable/home_header_image" />
+
         </LinearLayout>
     </ScrollView>
 

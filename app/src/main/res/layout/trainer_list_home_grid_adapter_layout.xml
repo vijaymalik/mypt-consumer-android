@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/relative"
     android:layout_width="200dp"
-    android:layout_height="300dp"
+    android:layout_height="330dp"
+    android:layout_marginEnd="20dp"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
@@ -20,7 +21,7 @@
             <ImageView
                 android:id="@+id/trainerImage"
                 android:layout_width="match_parent"
-                android:layout_height="390dp"
+                android:layout_height="300dp"
                 android:scaleType="centerCrop" />
 
             <FrameLayout
@@ -32,7 +33,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:gravity="center"
                 android:orientation="vertical"
                 android:padding="10dp">
 
@@ -47,14 +47,14 @@
                         android:fontFamily="@font/clash_display_medium"
                         android:text="MyPT Studio Dubai"
                         android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        android:textSize="16sp" />
 
-                    <ImageView
+                    <!--<ImageView
                         android:id="@+id/im_verified"
                         android:layout_width="14dp"
                         android:layout_height="14dp"
                         android:layout_marginHorizontal="10dp"
-                        android:src="@drawable/badge" />
+                        android:src="@drawable/badge" />-->
                 </LinearLayout>
 
 
@@ -62,31 +62,28 @@
                     android:id="@+id/exerciseRecyclerView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:orientation="horizontal">
 
-
-
-                    <View
-                        android:layout_width="3dp"
-                        android:layout_height="3dp"
-                        android:layout_marginEnd="5dp"
-                        android:background="@drawable/dot" />
-
                     <TextView
-                        android:id="@+id/place"
+                        android:id="@+id/bookThisTrainer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:fontFamily="@font/manrope_semi_bold"
                         android:maxLines="1"
-                        android:text="Near Dubai Mall"
+                        android:paddingTop="7dp"
+                        android:drawableRight="@drawable/ic_arrow_right"
+                        android:text="Book this trainer"
+                        android:drawablePadding="5dp"
+                        android:textAllCaps="true"
+                        android:drawableTint="@color/white"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
 
