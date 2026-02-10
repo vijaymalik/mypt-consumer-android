@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
             initNavHost()
             setUpBottomNavigation()
         }
-        handleTabSelection(R.id.homeFragment)
+//        handleTabSelection(R.id.homeFragment)
         onBackPressedDispatcher.addCallback(this,object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 Log.e("back","back")
@@ -192,7 +192,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        getData(false,true)
+//        getData(false,true)
     }
 
     private fun handleTabSelection(id: Int) {

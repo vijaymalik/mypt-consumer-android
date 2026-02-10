@@ -38,6 +38,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.preference.PreferenceManager
+import androidx.recyclerview.widget.LinearSnapHelper
 import co.com.mypt.Api.ApiURL
 import co.com.mypt.Api.Constants
 import co.com.mypt.Api.GetMethod
@@ -47,17 +48,17 @@ import co.com.mypt.R
 import co.com.mypt.activities.ChooseLocationActivity
 import co.com.mypt.activities.HomeGymTrainerActivity
 import co.com.mypt.activities.MainActivity
+import co.com.mypt.adapter.RenewUpgradeAdapter
 import co.com.mypt.adapter.StoryAdapter
 import co.com.mypt.adapter.TrainerGridViewAdapter
-import co.com.mypt.adapter.TrainerListAdapter
-import co.com.mypt.databinding.FragmentGuestUserHomeNewBinding
+import co.com.mypt.adapter.UpcomingSessionsAdapter
+import co.com.mypt.databinding.FragmentActiveUserHomeNewBinding
 import co.com.mypt.fragments.viewModels.GuestUserViewModel
 import co.com.mypt.model.NearByGymModel
-import co.com.mypt.model.ShopCategoryModel
-import co.com.mypt.model.ShopProductsModel
+import co.com.mypt.model.RenewalUpgradeModel
 import co.com.mypt.model.TrainersModel
-import co.com.mypt.model.TransformationModel
 import co.com.mypt.model.UpcomingClassModel
+import co.com.mypt.model.UpcomingSessionsModel
 import co.com.mypt.onBoarding.PhoneNumberScreenActivity
 import co.com.mypt.retrofitApi.UiState
 import co.com.mypt.retrofitApi.UserViewModelFactory
@@ -71,10 +72,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.Places
-import com.google.gson.Gson
-import com.google.gson.JsonArray
 import kotlinx.coroutines.launch
-import org.json.JSONArray
 import org.json.JSONObject
 import java.util.Calendar
 import java.util.Locale
@@ -107,7 +105,8 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
     var long = ""
     lateinit var sharedPreferences: SharedPreferences
     lateinit var edit: SharedPreferences.Editor
-    lateinit var bindingView: FragmentGuestUserHomeNewBinding
+    lateinit var bindingView: FragmentActiveUserHomeNewBinding
+    var renewalUpgradeArraylist = ArrayList<RenewalUpgradeModel>()
 
     companion object {
         private const val KEY_LAT = "lat"
@@ -132,7 +131,7 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        bindingView = FragmentGuestUserHomeNewBinding.inflate(inflater, container, false)
+        bindingView = FragmentActiveUserHomeNewBinding.inflate(inflater, container, false)
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireActivity())
         edit = sharedPreferences.edit()
         tvlocation = bindingView.location
@@ -178,6 +177,9 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
         viewModel = ViewModelProvider(this, factory).get(GuestUserViewModel::class.java)
         collectUsers()
         viewModel.fetchUsers("Bearer " + sharedPreferences.getString("token", ""))
+        viewModel.getContent("Bearer " + sharedPreferences.getString("token", ""))
+        getBookingData()
+        getRenewalPlanList()
     }
 
     override fun onTouch(v: View?, event: MotionEvent?): Boolean {
@@ -258,7 +260,6 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
             }
         }
 
-
         viewLifecycleOwner.lifecycleScope.launch {
 
             viewLifecycleOwner.repeatOnLifecycle(
@@ -279,19 +280,19 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
 
                             } else {
                                 val dataList = state.data?.map {
-                                    val trainerModel=TrainersModel()
-                                    trainerModel.name = it?.name?:""
-                                    trainerModel.id = it?.id?:""
-                                    trainerModel.distance =it?.distance?:""
-                                    trainerModel.slot = it?.slot?:""
-                                    trainerModel.noOfRating = it?.noOfRating?:""
-                                    trainerModel.averageRating =it?.averageRating.toString()
-                                    trainerModel.location = it?.location?:""
-                                    trainerModel.profile =  it?.profile?:""
-                                    trainerModel.is_verified =it?.is_verified.toString()
-                                    trainerModel.tags =it?.tags?:emptyList()
-                                    trainerModel.is_group =it?.is_group
-                                    trainerModel.name=it?.name?:""
+                                    val trainerModel = TrainersModel()
+                                    trainerModel.name = it?.name ?: ""
+                                    trainerModel.id = it?.id ?: ""
+                                    trainerModel.distance = it?.distance ?: ""
+                                    trainerModel.slot = it?.slot ?: ""
+                                    trainerModel.noOfRating = it?.noOfRating ?: ""
+                                    trainerModel.averageRating = it?.averageRating.toString()
+                                    trainerModel.location = it?.location ?: ""
+                                    trainerModel.profile = it?.profile ?: ""
+                                    trainerModel.is_verified = it?.is_verified.toString()
+                                    trainerModel.tags = it?.tags ?: emptyList()
+                                    trainerModel.is_group = it?.is_group
+                                    trainerModel.name = it?.name ?: ""
                                     trainerModel
                                 }
                                 val trainerListAdapter = TrainerGridViewAdapter(
@@ -308,6 +309,64 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                         }
 
                         is UiState.Error -> {
+                        }
+                    }
+                }
+
+
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+
+            viewLifecycleOwner.repeatOnLifecycle(
+                Lifecycle.State.STARTED
+            ) {
+
+                viewModel.contentState.collect { state ->
+
+                    when (state) {
+
+                        is UiState.Loading -> {
+                            println("1111")
+                        }
+
+                        is UiState.Success -> {
+                            println("11112222")
+                            if (state.data?.isNullOrEmpty() == true) {
+
+                            } else {
+
+                                val home_background =
+                                    state.data?.firstOrNull { it?.key == "home_background" }
+                                val buy_gym_pt = state.data?.firstOrNull { it?.key == "buy_gym_pt" }
+                                val buy_home_pt =
+                                    state.data?.firstOrNull { it?.key == "buy_home_pt" }
+                                val buy_gym_membership =
+                                    state.data?.firstOrNull { it?.key == "buy_gym_membership" }
+                                val offer_banner =
+                                    state.data?.firstOrNull { it?.key == "offer_banner" }
+
+                                if (home_background != null)
+                                    Glide.with(bindingView.backgroundImg)
+                                        .load(home_background?.image).fitCenter()
+                                        .into(bindingView.backgroundImg)
+                                if (offer_banner != null)
+                                    Glide.with(bindingView.homeBanner).load(offer_banner?.image)
+                                        .fitCenter().into(bindingView.homeBanner)
+                                // else bindingView.homeBanner.visibility=View.GONE
+
+                                Glide.with(bindingView.homePt).load(buy_home_pt?.image).fitCenter()
+                                    .into(bindingView.homePt)
+                                Glide.with(bindingView.memberShip).load(buy_gym_membership?.image)
+                                    .fitCenter().into(bindingView.memberShip)
+                                Glide.with(bindingView.GymPt).load(buy_gym_pt?.image).fitCenter()
+                                    .into(bindingView.GymPt)
+                            }
+                        }
+
+                        is UiState.Error -> {
+                            println("11113333")
                         }
                     }
                 }
@@ -381,25 +440,6 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
         })
     }
 
-    private fun getTrainerList() {
-
-        var api = ""
-        val param: MutableMap<String, String> = HashMap()
-
-        param["type"] = "home"
-
-//        param["gender"] = "" + genderId
-//        param["language"] = "" + languageId
-        param["lat"] = "" + "25.276987"//latitude
-        param["long"] = "" + "55.296249"//longitude
-//        param["time_slot"] = "" + timeSlotId
-//        param["tag_id"] = "" + tag_id
-//        param["nationality"] = "" + nationId
-        Log.e("trainerListParam", param.toString())
-
-        viewModel.getTrainerList("Bearer " + sharedPreferences.getString("token", ""), param)
-
-    }
 
     private fun checkLocationPermission(): Boolean {
         val location = ContextCompat.checkSelfPermission(
@@ -540,7 +580,7 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                                 })
 
                             }, 2000)
-                            getTrainerList()
+//                            getTrainerList()
                             // getgymList(latitude!!, longitude!!)
 //                            getClasses(latitude!!, longitude!!)
                             mFusedLocationClient.removeLocationUpdates(locationCallback)
@@ -620,7 +660,7 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                     tvlocation.text = sharedPreferences.getString(Constants.address, "")
                     latitude = sharedPreferences.getString(Constants.lat, "")!!.toDouble()
                     longitude = sharedPreferences.getString(Constants.long, "")!!.toDouble()
-                    getTrainerList()
+//                    getTrainerList()
 //                    getgymList(latitude!!, longitude!!)
 //                    getClasses(latitude!!, longitude!!)
                 }
@@ -629,7 +669,7 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                 tvlocation.text = chooseAddress
                 latitude = lat.toDouble()
                 longitude = long.toDouble()
-                getTrainerList()
+//                getTrainerList()
 //                getgymList(latitude!!, longitude!!)
 //                getClasses(latitude!!, longitude!!)
             }
@@ -647,7 +687,7 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                 longitude = long.toDouble()
                 tvlocation.visibility = View.VISIBLE
                 tvlocation.text = chooseAddress
-                getTrainerList()
+//                getTrainerList()
 //                getgymList(latitude!!, longitude!!)
 //                getClasses(latitude!!, longitude!!)
             }
@@ -661,64 +701,59 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
         }
     }
 
-    private fun getClasses(latitude: Double, longitude: Double) {
+    var upcomingSessionsArraylist = ArrayList<UpcomingSessionsModel>()
+    private fun getBookingData() {
         val progressDialog: Dialog = ProgressDialog.progressDialog(requireActivity(), "")
         progressDialog.show()
-
         var api = ""
-        api = ApiURL.upcoming_classes + latitude + "&long=" + longitude
+        api = ApiURL.getbooking + "2" + "&date=" + "" + "&session_type=" + "" + "&location=" + ""
 
-        Log.e("UpcomingclassnearUrl", api)
-        GetMethod(
-            api, activity
-        ).startMethod(object :
+
+        GetMethod(api, activity).startMethod(object :
             ResponseData {
             override fun response(data: String?) {
                 progressDialog.dismiss()
-                upcomingClassArraylist.clear()
-                Log.e("UpcomingNearResponse", data.toString())
+                upcomingSessionsArraylist.clear()
+                Log.e("getBookingResponse", data.toString())
                 try {
                     val jsonObj = JSONObject(data!!)
                     if (jsonObj.optBoolean("status")) {
+                        var jsonArray = jsonObj.optJSONArray("data")
+                        if (jsonArray.length() > 0) {
+                            for (i in 0 until jsonArray.length()) {
+                                var jsonObject = jsonArray.optJSONObject(i)
+                                var upcomingbokingModel = UpcomingSessionsModel()
 
-                        var jsonArrayAllClassess =
-                            jsonObj.optJSONObject("data").optJSONArray("allClasses")
-
-                        if (jsonArrayAllClassess.length() > 0) {
-
-                            for (i in 0 until jsonArrayAllClassess.length()) {
-                                var json = jsonArrayAllClassess.optJSONObject(i)
-                                var nearUpcomingCLassModel = UpcomingClassModel()
-                                nearUpcomingCLassModel.cla_ss = json.optString("class")
-                                nearUpcomingCLassModel.id = json.optString("id")
-                                nearUpcomingCLassModel.image = json.optString("image")
-                                nearUpcomingCLassModel.status = json.optString("status")
-                                nearUpcomingCLassModel.location = json.optString("location")
-                                nearUpcomingCLassModel.type = json.optString("type")
-                                nearUpcomingCLassModel.time = json.optString("time")
-                                nearUpcomingCLassModel.start_end = json.optString("start_end")
-                                nearUpcomingCLassModel.price = json.optString("price")
-                                nearUpcomingCLassModel.trained_by = json.optString("trained_by")
-                                nearUpcomingCLassModel.trainer_image =
-                                    json.optString("trainer_image")
-                                nearUpcomingCLassModel.studio_name = json.optString("studio_name")
-                                nearUpcomingCLassModel.schedule_id = json.optString("schedule_id")
-                                upcomingClassArraylist.add(nearUpcomingCLassModel)
+                                upcomingbokingModel.id = jsonObject.optString("id")
+                                upcomingbokingModel.type = jsonObject.optString("type")
+                                upcomingbokingModel.timing = jsonObject.optString("timing")
+                                upcomingbokingModel.distance = jsonObject.optString("distance")
+                                upcomingbokingModel.selected_slot =
+                                    jsonObject.optString("selected_slot")
+                                upcomingbokingModel.session_type =
+                                    jsonObject.optString("session_type")
+                                upcomingbokingModel.duration = jsonObject.optString("duration")
+                                upcomingbokingModel.trainer = jsonObject.optString("trainer")
+                                upcomingbokingModel.trainer_image =
+                                    jsonObject.optString("trainer_image")
+                                upcomingbokingModel.location = jsonObject.optString("location")
+                                upcomingbokingModel.is_reschedule =
+                                    jsonObject.optString("is_reschedule")
+                                upcomingbokingModel.msg = jsonObject.optString("msg")
+                                upcomingbokingModel.is_Trainer = jsonObject.optString("isTrainer")
+                                upcomingbokingModel.workout_focus =
+                                    jsonObject.optJSONArray("workout_focus")
+                                upcomingSessionsArraylist.add(upcomingbokingModel)
                             }
 
-//                            upcomingClassRecyclerView.adapter = UpcomingClassAdapter(context,upcomingClassArraylist,latitude,longitude)
+                            bindingView.upcomingSessionsRecyclerView.adapter =
+                                UpcomingSessionsAdapter(context, upcomingSessionsArraylist)
+                            bindingView.upcomingSessionsRecyclerView.visibility = View.VISIBLE
 
-                            imUpcomingBlur.visibility = View.GONE
                         } else {
-                            imUpcomingBlur.visibility = View.VISIBLE
+                            bindingView.upcomingSessionsRecyclerView.visibility = View.GONE
                         }
-
-
-                    } else {
-
                     }
-
-
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -728,9 +763,64 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                 progressDialog.dismiss()
                 error!!.printStackTrace()
             }
-
         })
+    }
 
+    private fun getRenewalPlanList() {
+        GetMethod(ApiURL.getRenewalPlanDetails, activity).startMethod(object : ResponseData {
+            override fun response(data: String?) {
+                renewalUpgradeArraylist.clear()
+                try {
+                    val jsonObj = JSONObject(data!!)
+                    if (jsonObj.optBoolean("status")) {
+                        val jsonArray = jsonObj.optJSONArray("data")
+                        if (jsonArray.length() > 0) {
+                            val subscriptionTypeArrayList = ArrayList<String>()
+
+                            for (i in 0 until jsonArray.length()) {
+                                val jsonObject = jsonArray.optJSONObject(i)
+                                val renewalUpgradeModel = RenewalUpgradeModel()
+                                renewalUpgradeModel.id = jsonObject.optString("id")
+                                renewalUpgradeModel.type = jsonObject.optString("type")
+                                renewalUpgradeModel.remSession =
+                                    jsonObject.optString("remaining_sessions")
+                                renewalUpgradeModel.validity = jsonObject.optString("validity_days")
+                                renewalUpgradeModel.sessions = jsonObject.optString("sessions")
+                                renewalUpgradeModel.name = jsonObject.optString("name")
+                                renewalUpgradeModel.amount = jsonObject.optString("amount")
+                                renewalUpgradeModel.remainingDays =
+                                    jsonObject.optString("remaining_days")
+                                renewalUpgradeModel.msg = jsonObject.optString("msg")
+                                renewalUpgradeModel.isUpgrade = jsonObject.optBoolean("isUpgrade")
+                                renewalUpgradeModel.isShow = jsonObject.optBoolean("isShow")
+                                renewalUpgradeModel.isRenew = jsonObject.optBoolean("renew_new")
+                                renewalUpgradeArraylist.add(renewalUpgradeModel)
+                                if (jsonObject.optBoolean("renew_new"))
+                                    subscriptionTypeArrayList.add(jsonObject.optString("type"))
+
+                            }
+                            bindingView.renewUpgradeRecyclerView.adapter = RenewUpgradeAdapter(
+                                context,
+                                renewalUpgradeArraylist,
+                                subscriptionTypeArrayList
+                            )
+                            bindingView.renewUpgradeRecyclerView.visibility = View.VISIBLE
+
+                            val snapHelper = LinearSnapHelper()
+                            snapHelper.attachToRecyclerView(bindingView.renewUpgradeRecyclerView)
+                        } else {
+                            bindingView.renewUpgradeRecyclerView.visibility = View.GONE
+                        }
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+
+            override fun error(error: VolleyError?) {
+                error!!.printStackTrace()
+            }
+        })
     }
 
     private fun getchecktype() {

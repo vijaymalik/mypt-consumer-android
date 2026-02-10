@@ -259,7 +259,6 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
             }
         }
 
-
         viewLifecycleOwner.lifecycleScope.launch {
 
             viewLifecycleOwner.repeatOnLifecycle(
@@ -348,7 +347,7 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                                 Glide.with(bindingView.backgroundImg).load(home_background?.image).fitCenter().into(bindingView.backgroundImg)
                                 if (offer_banner !=null)
                                     Glide.with(bindingView.homeBanner).load(offer_banner?.image).fitCenter().into(bindingView.homeBanner)
-                                else bindingView.homeBanner.visibility=View.GONE
+                               // else bindingView.homeBanner.visibility=View.GONE
 
                                 Glide.with(bindingView.homePt).load(buy_home_pt?.image).fitCenter().into(bindingView.homePt)
                                 Glide.with(bindingView.memberShip).load(buy_gym_membership?.image).fitCenter().into(bindingView.memberShip)

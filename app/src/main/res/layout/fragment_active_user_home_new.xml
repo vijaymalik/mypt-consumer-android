@@ -247,13 +247,14 @@
                     android:layout_below="@+id/notSureView"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="12dp"
-                    android:paddingBottom="20dp"
-                    android:background="@drawable/book_assesment" />
+                    android:background="@drawable/book_assesment"
+                    android:paddingBottom="20dp" />
+
                 <View
                     android:id="@+id/botomview"
-                    android:layout_below="@+id/bookAssesment"
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp"/>
+                    android:layout_height="20dp"
+                    android:layout_below="@+id/bookAssesment" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -427,6 +428,20 @@
                 android:layout_margin="10dp"
                 android:adjustViewBounds="true"
                 android:src="@drawable/certified_banner" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/upcomingSessionsRecyclerView"
+                android:layout_marginStart="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/renewUpgradeRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             <LinearLayout
                 android:layout_width="match_parent"
