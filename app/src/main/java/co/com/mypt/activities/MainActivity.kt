@@ -261,8 +261,6 @@ class MainActivity : AppCompatActivity() {
                 try {
                     val jsonObj = JSONObject(data ?: "")
                     var isActiveUser = false
-                    Log.e("jsonObj", "$jsonObj")
-
                     //val isActiveUser = jsonObj.optBoolean("status") && (jsonObj.optJSONArray("data")?.length() ?: 0) > 0
                     if(jsonObj.optBoolean("status"))
                         isActiveUser = jsonObj.optJSONObject("data").optBoolean("isActive")

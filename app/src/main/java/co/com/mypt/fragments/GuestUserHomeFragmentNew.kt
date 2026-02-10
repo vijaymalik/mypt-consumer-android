@@ -161,45 +161,11 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
         savedInstanceState: Bundle?
     ): View {
         bindingView = FragmentGuestUserHomeNewBinding.inflate(inflater, container, false)
-//        val rootView: View = inflater.inflate(R.layout.fragment_guest_user_home_new, container, false)
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireActivity())
         edit = sharedPreferences.edit()
-
-//        logout = rootView.findViewById(R.id.logout)
-//        profileView = rootView.findViewById(R.id.profileView)
-//        red_circle = rootView.findViewById(R.id.red_circle)
-//        notification = rootView.findViewById(R.id.notification)
-//        planWorkout = rootView.findViewById(R.id.planWorkout)
-//        allNearByGym = rootView.findViewById(R.id.allNearByGym)
-//        headerLayout = rootView.findViewById(R.id.headerLayout)
-//        mScrollView = rootView.findViewById(R.id.scrollView)
         tvlocation = bindingView.location
-//        imUpcomingBlur = rootView.findViewById(R.id.imUpcomingBlur)
         improfile = bindingView.improfile
-//        purchaseGymPass = rootView.findViewById(R.id.purchaseGymPass)
-//        allUpcomingClass = rootView.findViewById(R.id.allUpcomingClass)
-//        differentWorkouts = rootView.findViewById(R.id.differentWorkouts)
-//        linearProfile = rootView.findViewById(R.id.linearProfile)
-//        tvmember = rootView.findViewById(R.id.tvmember)
 
-//        allTransformationStories = rootView.findViewById(R.id.allTransformationStories)
-//
-//        shopProductsRecyclerView = rootView.findViewById(R.id.shopProductsRecyclerView)
-//        shopCategoryRecyclerView = rootView.findViewById(R.id.shopCategoryRecyclerView)
-//        transformationRecyclerView = rootView.findViewById(R.id.transformationRecyclerView)
-//        upcomingClassRecyclerView = rootView.findViewById(R.id.upcomingClassRecyclerView)
-//        nearByGymRecyclerView = rootView.findViewById(R.id.nearByGymRecyclerView)
-//
-//        bookATrainer = rootView.findViewById(R.id.bookATrainer)
-//        userName = rootView.findViewById(R.id.userName)
-
-        // Invoking touch listener to detect movement of ScrollView
-//        mScrollView.setOnTouchListener(this)
-//        mScrollView.viewTreeObserver.addOnScrollChangedListener(this)
-
-//        transformationRecyclerView.adapter = TransformationAdapter(context,transformationArraylist)
-//        shopProductsRecyclerView.adapter = ShopProductsAdapter(context,shopProductsArraylist)
-//        shopCategoryRecyclerView.adapter = ShopCategoryAdapter(context,shopCategoryArraylist)
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
         geocoder = Geocoder(requireActivity(), Locale.getDefault())
         locationManager =
@@ -322,8 +288,7 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
              edit.putString("typeWorkout","work").apply()
              startActivity(intent_)
          }*/
-        //0location.setText()
-//        bindingView.myPtRecycleView
+
         return bindingView.root
     }
 
@@ -704,7 +669,7 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                             }, 2000)
                             getTrainerList()
                             // getgymList(latitude!!, longitude!!)
-                            getClasses(latitude!!, longitude!!)
+//                            getClasses(latitude!!, longitude!!)
                             mFusedLocationClient.removeLocationUpdates(locationCallback)
                             isResumed1 = false
                         }
@@ -784,7 +749,7 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                     longitude = sharedPreferences.getString(Constants.long, "")!!.toDouble()
                     getTrainerList()
 //                    getgymList(latitude!!, longitude!!)
-                    getClasses(latitude!!, longitude!!)
+//                    getClasses(latitude!!, longitude!!)
                 }
             } else {
                 tvlocation.visibility = View.VISIBLE
@@ -793,7 +758,7 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                 longitude = long.toDouble()
                 getTrainerList()
 //                getgymList(latitude!!, longitude!!)
-                getClasses(latitude!!, longitude!!)
+//                getClasses(latitude!!, longitude!!)
             }
         } else {
             if (chooseAddress == "" || chooseAddress == "null" || chooseAddress.equals(null)) {
@@ -811,7 +776,7 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                 tvlocation.text = chooseAddress
                 getTrainerList()
 //                getgymList(latitude!!, longitude!!)
-                getClasses(latitude!!, longitude!!)
+//                getClasses(latitude!!, longitude!!)
             }
         }
 
@@ -871,16 +836,8 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
 //                            upcomingClassRecyclerView.adapter = UpcomingClassAdapter(context,upcomingClassArraylist,latitude,longitude)
 
                             imUpcomingBlur.visibility = View.GONE
-//                            upcomingClassRecyclerView.visibility= View.VISIBLE
-                            /* allUpcomingClass.setOnClickListener {
-                                 var intent=Intent(activity, UpComingClassActivity::class.java)
-                                 startActivity(intent)
-                             }*/
                         } else {
                             imUpcomingBlur.visibility = View.VISIBLE
-//                            upcomingClassRecyclerView.visibility= View.GONE
-                            /* allUpcomingClass.setOnClickListener {
-                             }*/
                         }
 
 
