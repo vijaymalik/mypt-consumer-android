@@ -1,6 +1,7 @@
 package co.com.mypt.retrofitApi
 
 import co.com.mypt.model.GetStoriesList
+import co.com.mypt.model.HomeContent
 import co.com.mypt.model.TrainerListModelX
 import retrofit2.Response
 import retrofit2.http.FieldMap
@@ -16,4 +17,8 @@ interface ApiService {
     @FormUrlEncoded
     @POST("get-trainers")
     suspend fun getTrainerList(@Header("Authorization") token: String,@FieldMap params: Map<String, String>): Response<TrainerListModelX>
+
+    @GET("get-contents")
+    suspend fun getContent(@Header("Authorization") token: String): Response<HomeContent>
+
 }

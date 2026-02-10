@@ -16,158 +16,246 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <LinearLayout
-                android:id="@+id/headerLayout"
+
+            <RelativeLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="20dp"
-                android:gravity="center_vertical"
-                android:background="#142A43"
-                android:orientation="horizontal"
-                android:paddingVertical="20dp">
+                android:orientation="vertical">
 
-                <RelativeLayout
-                    android:id="@+id/parentLocation"
+                <ImageView
+                    android:id="@+id/backgroundImg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_alignTop="@+id/headerLayout"
+                    android:layout_alignBottom="@+id/botomview"
+                    android:scaleType="fitXY" />
 
-                    <LinearLayout
-                        android:id="@+id/locId"
+                <LinearLayout
+                    android:id="@+id/headerLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingVertical="20dp"
+                    android:paddingStart="20dp">
+
+                    <RelativeLayout
+                        android:id="@+id/parentLocation"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical">
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/locId"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical">
+
+                            <ImageView
+                                android:layout_width="14dp"
+                                android:layout_height="14dp"
+                                android:src="@drawable/ic_location" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="5dp"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/clash_display_medium"
+                                android:gravity="center_vertical"
+                                android:maxLines="1"
+                                android:text="Home"
+                                android:textColor="@color/white"
+                                app:drawableEndCompat="@drawable/down_arrow" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/location"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/locId"
+                            android:layout_alignStart="@+id/locId"
+                            android:layout_marginHorizontal="20dp"
+                            android:layout_toLeftOf="@+id/profileView"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/clash_display_medium"
+                            android:maxLines="1"
+                            android:text="@string/choose_location"
+                            android:textColor="@color/headingcolor"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:visibility="visible" />
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/profileView"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginEnd="20dp"
+                            app:cardCornerRadius="18dp">
+
+                            <ImageView
+                                android:id="@+id/improfile"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:scaleType="centerCrop"
+
+                                android:src="@drawable/guest_user" />
+                        </androidx.cardview.widget.CardView>
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/homeBanner"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_below="@+id/headerLayout"
+                    android:scaleType="fitCenter" />
+
+                <LinearLayout
+                    android:id="@+id/ptGym"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/homeBanner"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="-20dp">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
 
                         <ImageView
-                            android:layout_width="14dp"
-                            android:layout_height="14dp"
-                            android:src="@drawable/ic_location" />
+                            android:id="@+id/homePt"
+                            android:layout_width="match_parent"
+                            android:layout_height="170dp"
+
+                            android:scaleType="fitCenter" />
+
+                        <TextView
+                            android:id="@+id/tvmember"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="20dp"
+                            android:fontFamily="@font/clash_display_medium"
+                            android:text="Buy \nHome PT"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="8dp"
+                        android:layout_height="wrap_content" />
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/GymPt"
+                            android:layout_width="match_parent"
+                            android:layout_height="170dp"
+                            android:scaleType="fitCenter" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="5dp"
-                            android:ellipsize="end"
-                            android:gravity="center_vertical"
-                            app:drawableEndCompat="@drawable/down_arrow"
-                            android:text="Home"
-                            android:textColor="@color/white"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="20dp"
                             android:fontFamily="@font/clash_display_medium"
-                            android:maxLines="1"/>
-                    </LinearLayout>
+                            android:text="Buy\nGym PT"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
 
-                    <TextView
-                        android:id="@+id/location"
-                        android:layout_width="wrap_content"
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="8dp"
+                        android:layout_height="wrap_content" />
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="20dp"
-                        android:ellipsize="end"
-                        android:fontFamily="@font/clash_display_medium"
-                        android:maxLines="1"
-                        android:layout_below="@+id/locId"
-                        android:layout_alignStart="@+id/locId"
-                        android:layout_toLeftOf="@+id/profileView"
-                        android:text="@string/choose_location"
-                        android:textColor="@color/headingcolor"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:visibility="visible" />
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/profileView"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginEnd="20dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerInParent="true"
-                        app:cardCornerRadius="18dp">
+                        android:layout_weight="1">
 
                         <ImageView
-                            android:id="@+id/improfile"
+                            android:id="@+id/memberShip"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:scaleType="centerCrop"
+                            android:layout_height="170dp"
+                            android:layout_weight="1"
+                            android:scaleType="fitCenter" />
 
-                            android:src="@drawable/guest_user" />
-                    </androidx.cardview.widget.CardView>
-                </RelativeLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="20dp"
+                            android:fontFamily="@font/clash_display_medium"
+                            android:text="Buy Gym \nMembership"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
 
+                    </RelativeLayout>
+                </LinearLayout>
 
                 <RelativeLayout
-                    android:layout_width="wrap_content"
+                    android:id="@+id/notSureView"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="15dp">
+                    android:layout_below="@+id/ptGym">
 
                     <ImageView
-                        android:id="@+id/notification"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/notification_bell" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toStartOf="@+id/notSure"
+                        android:background="@drawable/left_arrow" />
+
+                    <TextView
+                        android:id="@+id/notSure"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:fontFamily="@font/clash_display_medium"
+                        android:gravity="center_horizontal"
+                        android:paddingHorizontal="12dp"
+                        android:text="NOT SURE WHERE TO START?"
+                        android:textColor="#FAFAFABF"
+                        android:textSize="12sp" />
 
                     <ImageView
-                        android:id="@+id/red_circle"
-                        android:layout_width="8dp"
-                        android:layout_height="8dp"
-                        android:layout_marginLeft="14dp"
-                        android:layout_marginTop="2dp"
-                        android:src="@drawable/red_dot"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/notSure"
+                        android:background="@drawable/right_arrow" />
 
-                        android:visibility="gone"
-                        app:tint="#F43E33" />
                 </RelativeLayout>
 
-
                 <ImageView
-                    android:id="@+id/logout"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginHorizontal="10dp"
-                    android:src="@drawable/logout"
-                    android:visibility="gone" />
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="14dp"
-                    android:layout_marginStart="10dp"
-                    android:src="@drawable/points_image"
-                    android:visibility="gone" />
-
-                <TextView
+                    android:id="@+id/bookAssesment"
+                    android:layout_width="300dp"
+                    android:layout_height="42dp"
+                    android:layout_below="@+id/notSureView"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="12dp"
+                    android:paddingBottom="20dp"
+                    android:background="@drawable/book_assesment" />
+                <View
+                    android:id="@+id/botomview"
+                    android:layout_below="@+id/bookAssesment"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:fontFamily="@font/manrope_medium"
-                    android:gravity="center"
-                    android:text="0"
-                    android:textColor="@color/headingcolor"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:visibility="gone" />
-            </LinearLayout>
-            <ImageView
-                android:layout_width="match_parent"
-                android:background="@drawable/home_banner"
-                android:layout_height="wrap_content"/>
+                    android:layout_height="20dp"/>
+            </RelativeLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_marginHorizontal="20dp"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:id="@+id/homeGym"
-                    android:layout_width="0dp"
-                    android:background="@drawable/guest_user_book_trainer"
-                    android:layout_weight="1"
-                    android:layout_height="170dp"/>
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_height="170dp"/>
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="170dp"/>
-            </LinearLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -253,37 +341,41 @@
 
                 </LinearLayout>-->
             </RelativeLayout>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:gravity="center_vertical"
-    android:paddingHorizontal="20dp"
-    android:layout_marginTop="30dp"
-    android:layout_marginBottom="16dp"
-    android:layout_height="wrap_content">
-    <View
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:background="@color/separator_list"
-        android:layout_height="1dp"/>
-    <TextView
-        android:text="See MyPT in action"
-        android:layout_width="wrap_content"
-        android:textColor="@color/white"
-        android:paddingHorizontal="20dp"
-        android:fontFamily="@font/clash_display_medium"
-        android:layout_height="wrap_content"/>
-    <View
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:background="@color/separator_list"
-        android:layout_height="1dp"/>
-</LinearLayout>
 
             <LinearLayout
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="16dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="20dp">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="@color/separator_list" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/clash_display_medium"
+                    android:paddingHorizontal="20dp"
+                    android:text="See MyPT in action"
+                    android:textColor="@color/white" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="@color/separator_list" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/bookATrainer"
@@ -319,6 +411,7 @@
                         android:src="@drawable/guest_user_plan_workout" />
                 </LinearLayout>
             </LinearLayout>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/storiesListRecyclerView"
                 android:layout_width="match_parent"
@@ -337,28 +430,31 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:gravity="center_vertical"
-                android:paddingHorizontal="20dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="16dp"
-                android:layout_height="wrap_content">
+                android:gravity="center_vertical"
+                android:paddingHorizontal="20dp">
+
                 <View
                     android:layout_width="0dp"
+                    android:layout_height="1dp"
                     android:layout_weight="1"
-                    android:background="@color/separator_list"
-                    android:layout_height="1dp"/>
+                    android:background="@color/separator_list" />
+
                 <TextView
-                    android:text="Meet your match"
                     android:layout_width="wrap_content"
-                    android:textColor="@color/white"
-                    android:paddingHorizontal="20dp"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/clash_display_medium"
-                    android:layout_height="wrap_content"/>
+                    android:paddingHorizontal="20dp"
+                    android:text="Meet your match"
+                    android:textColor="@color/white" />
+
                 <View
                     android:layout_width="0dp"
+                    android:layout_height="1dp"
                     android:layout_weight="1"
-                    android:background="@color/separator_list"
-                    android:layout_height="1dp"/>
+                    android:background="@color/separator_list" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -416,6 +512,7 @@
                 android:layout_height="350dp"
                 android:adjustViewBounds="true"
                 android:src="@drawable/upcoming_blur" />
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

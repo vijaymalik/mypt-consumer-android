@@ -152,7 +152,7 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
             Places.initialize(activity, "AIzaSyBVhnjhV5pynJXnSN2VTn-zhLGeIc7VcRw")
         }
 
-        bindingView.homeGym.setOnClickListener {
+        bindingView.homePt.setOnClickListener {
             if (sharedPreferences.getString(
                     Constants.token,
                     "-1"

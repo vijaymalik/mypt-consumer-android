@@ -152,7 +152,7 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
             Places.initialize(activity, "AIzaSyBVhnjhV5pynJXnSN2VTn-zhLGeIc7VcRw")
         }
 
-        bindingView.homeGym.setOnClickListener {
+        bindingView.homePt.setOnClickListener {
             if (sharedPreferences.getString(
                     Constants.token,
                     "-1"
@@ -178,6 +178,7 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
         viewModel = ViewModelProvider(this, factory).get(GuestUserViewModel::class.java)
         collectUsers()
         viewModel.fetchUsers("Bearer " + sharedPreferences.getString("token", ""))
+        viewModel.getContent("Bearer " + sharedPreferences.getString("token", ""))
     }
 
     override fun onTouch(v: View?, event: MotionEvent?): Boolean {
@@ -308,6 +309,53 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                         }
 
                         is UiState.Error -> {
+                        }
+                    }
+                }
+
+
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+
+            viewLifecycleOwner.repeatOnLifecycle(
+                Lifecycle.State.STARTED
+            ) {
+
+                viewModel.contentState.collect { state ->
+
+                    when (state) {
+
+                        is UiState.Loading -> {
+                         println("1111")
+                        }
+
+                        is UiState.Success -> {
+                            println("11112222")
+                            if (state.data?.isNullOrEmpty() == true) {
+
+                            } else {
+
+                             val home_background=
+                                 state.data?.firstOrNull { it?.key == "home_background" }
+                                val buy_gym_pt=state.data?.firstOrNull { it?.key =="buy_gym_pt" }
+                             val buy_home_pt=state.data?.firstOrNull { it?.key =="buy_home_pt" }
+                             val buy_gym_membership=state.data?.firstOrNull { it?.key =="buy_gym_membership" }
+                             val offer_banner=state.data?.firstOrNull { it?.key =="offer_banner" }
+
+                                Glide.with(bindingView.backgroundImg).load(home_background?.image).fitCenter().into(bindingView.backgroundImg)
+                                Glide.with(bindingView.homeBanner).load(offer_banner?.image).fitCenter().into(bindingView.homeBanner)
+                                Glide.with(bindingView.homePt).load(buy_home_pt?.image).fitCenter().into(bindingView.homePt)
+                                Glide.with(bindingView.memberShip).load(buy_gym_membership?.image).fitCenter().into(bindingView.memberShip)
+                                Glide.with(bindingView.GymPt).load(buy_gym_pt?.image).fitCenter().into(bindingView.GymPt)
+
+                            }
+
+                        }
+
+                        is UiState.Error -> {
+                            println("11113333")
                         }
                     }
                 }
