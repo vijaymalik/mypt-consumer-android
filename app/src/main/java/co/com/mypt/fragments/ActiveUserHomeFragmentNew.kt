@@ -79,7 +79,7 @@ import org.json.JSONObject
 import java.util.Calendar
 import java.util.Locale
 
-class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
+class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
     ViewTreeObserver.OnScrollChangedListener {
     var upcomingClassArraylist = ArrayList<UpcomingClassModel>()
     var nearByGymArraylist = ArrayList<NearByGymModel>()
@@ -114,8 +114,8 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
         private const val KEY_LNG = "lng"
         private const val KEY_ADD = "add"
 
-        fun newInstance(param1: String, param2: String, param3: String): GuestUserHomeFragmentNew {
-            val fragment = GuestUserHomeFragmentNew()
+        fun newInstance(param1: String, param2: String, param3: String): ActiveUserHomeFragmentNew {
+            val fragment = ActiveUserHomeFragmentNew()
             val args = Bundle()
             args.putString(KEY_LAT, param1)
             args.putString(KEY_LNG, param2)

@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/inActivePanUserHomeFragment"
-        android:name="co.com.mypt.fragments.InactivePlanHomeFragment"
+        android:name="co.com.mypt.fragments.ActiveUserHomeFragmentNew"
         android:label="User Home"
         tools:layout="@layout/fragment_inactive_plan_home" />
 

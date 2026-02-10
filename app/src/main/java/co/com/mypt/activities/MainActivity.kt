@@ -27,15 +27,7 @@ import co.com.mypt.Api.GetMethod
 import co.com.mypt.Api.ResponseData
 import co.com.mypt.ProgressDialog
 import co.com.mypt.R
-import co.com.mypt.curvedBottomNavigation.CurvedBottomNavigation
-import co.com.mypt.curvedBottomNavigation.NavigationType
 import co.com.mypt.databinding.ActivityMainBinding
-import co.com.mypt.fragments.BookingFragment
-import co.com.mypt.fragments.CalendarFragment
-import co.com.mypt.fragments.GuestUserHomeFragment
-import co.com.mypt.fragments.InactivePlanHomeFragment
-import co.com.mypt.fragments.LibraryFragment
-import co.com.mypt.fragments.MoreFragment
 import co.com.mypt.onBoarding.PhoneNumberScreenActivity
 import com.android.volley.VolleyError
 import org.json.JSONObject
