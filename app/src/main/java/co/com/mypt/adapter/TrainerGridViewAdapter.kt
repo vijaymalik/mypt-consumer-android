@@ -20,7 +20,7 @@ import co.com.mypt.model.ExerciseModel
 import co.com.mypt.model.TrainersModel
 import com.bumptech.glide.Glide
 
-class TrainerListAdapter(
+class TrainerGridViewAdapter(
     val context: Context,
     val trainerList: List<TrainersModel>,
     val type: String,
@@ -29,7 +29,7 @@ class TrainerListAdapter(
     var longitude: Double?,
     var studio_id: String,
     var clickListener:(Boolean,String, String)->Unit
-) : RecyclerView.Adapter<TrainerListAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<TrainerGridViewAdapter.ViewHolder>() {
     lateinit var sharedPreferences:SharedPreferences
     private var trainerListModels: List<TrainersModel>
 
@@ -42,7 +42,7 @@ class TrainerListAdapter(
         val userName : TextView = item.findViewById(R.id.userName)
         val distance : TextView = item.findViewById(R.id.distance)
         val place : TextView = item.findViewById(R.id.place)
-        val viewProfile : TextView = item.findViewById(R.id.viewProfile)
+//        val viewProfile : TextView = item.findViewById(R.id.viewProfile)
         //val hurryUp : TextView = item.findViewById(R.id.hurryUp)
 //        val availableSlots : TextView = item.findViewById(R.id.availableSlots)
         val trainerImage : ImageView = item.findViewById(R.id.trainerImage)
@@ -77,14 +77,21 @@ class TrainerListAdapter(
             holder.im_verified.visibility = View.GONE
 
         }*/
-        for(i in 0 until trainersModel.activity.length()){
+       /* for(i in 0 until trainersModel.activity.length()){
             var jsonObject=trainersModel.activity.optJSONObject(i)
             var exerciseModel=ExerciseModel()
             exerciseModel.id=jsonObject.optString("id")
             exerciseModel.name=jsonObject.optString("name")
             exerciseList.add(exerciseModel)
+        }*/
+
+     val listTag=   trainersModel.tags.map {
+            var exerciseModel=ExerciseModel()
+            exerciseModel.id=it?.id.toString()
+            exerciseModel.name=it?.name.toString()
+         exerciseModel
         }
-        holder.exerciseRecyclerView.adapter = TrainerTagAdapter(context,exerciseList,type)
+        holder.exerciseRecyclerView.adapter = TrainerTagAdapter(context,listTag,type)
 
         holder.bookSlot.tag = position
         holder.relative.tag = position
@@ -104,7 +111,7 @@ class TrainerListAdapter(
             Log.e("studio_id",""+studio_id)
             context.startActivity(intent)
         }
-        holder.viewProfile.setOnClickListener {
+       /* holder.viewProfile.setOnClickListener {
             var trainersModel=trainerListModels[position]
             val intent = Intent(context, TrainerDetails::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -118,7 +125,7 @@ class TrainerListAdapter(
             Log.e("lati",""+latitude)
             Log.e("studio_id",""+studio_id)
             context.startActivity(intent)
-        }
+        }*/
         holder.userName.text = trainersModel.name
 
         if(trainersModel.averageRating == "null")

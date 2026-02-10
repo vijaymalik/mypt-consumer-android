@@ -1,5 +1,6 @@
 package co.com.mypt.model
 
+import co.com.mypt.model.TrainerListModelX.Data.Trainer.Tag
 import org.json.JSONArray
 
 class TrainersModel {
@@ -19,6 +20,8 @@ class TrainersModel {
     lateinit var id: String
     lateinit var name: String
     lateinit var studio_id: String
+    lateinit var tags: List<Tag?>
      var is_group: Boolean?=null
+
 
 }

@@ -153,7 +153,9 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_height="wrap_content">
                 <ImageView
+                    android:id="@+id/homeGym"
                     android:layout_width="0dp"
+                    android:background="@drawable/guest_user_book_trainer"
                     android:layout_weight="1"
                     android:layout_height="170dp"/>
                 <ImageView
@@ -318,7 +320,7 @@
                 </LinearLayout>
             </LinearLayout>
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/myPtRecycleView"
+                android:id="@+id/storiesListRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -331,32 +333,32 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:adjustViewBounds="true"
-                android:src="@drawable/purchase_gym_pass" />
+                android:src="@drawable/certified_banner" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="20dp"
                 android:layout_marginTop="30dp"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:id="@+id/allNearByGym"
+                android:layout_marginBottom="16dp"
+                android:layout_height="wrap_content">
+                <View
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:fontFamily="@font/manrope_medium"
-                    android:gravity="center_vertical"
-                    android:text="@string/mypt_gyms_nearby"
-                    android:textColor="@color/smallTextcolor"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:padding="2dp"
-                    android:src="@drawable/arrow_right" />
+                    android:background="@color/separator_list"
+                    android:layout_height="1dp"/>
+                <TextView
+                    android:text="Meet your match"
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/white"
+                    android:paddingHorizontal="20dp"
+                    android:fontFamily="@font/clash_display_medium"
+                    android:layout_height="wrap_content"/>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="@color/separator_list"
+                    android:layout_height="1dp"/>
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
