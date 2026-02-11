@@ -26,11 +26,9 @@ class UpcomingSessionsAdapter(
     val upcomingSessionsArraylist: ArrayList<UpcomingSessionsModel>) : RecyclerView.Adapter<UpcomingSessionsAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val card : CardView = itemView.findViewById(R.id.card)
-        val trainerName : TextView = itemView.findViewById(R.id.trainerName)
+        val sessionWith : TextView = itemView.findViewById(R.id.sessionWith)
         val sessionNumber : TextView = itemView.findViewById(R.id.sessionNumber)
         val time : TextView = itemView.findViewById(R.id.time)
-        val date : TextView = itemView.findViewById(R.id.date)
-        val distance : TextView = itemView.findViewById(R.id.distance)
         val place : TextView = itemView.findViewById(R.id.place)
         val im : ImageView = itemView.findViewById(R.id.im)
         val imTrack : ImageView = itemView.findViewById(R.id.imTrack)
@@ -54,29 +52,23 @@ class UpcomingSessionsAdapter(
         var upcomingSessionsModel=upcomingSessionsArraylist.get(position)
 
         holder.card.setTag(position)
-        holder.trainerName.setText(upcomingSessionsModel.trainer)
+        holder.sessionWith.setText("Session with "+upcomingSessionsModel.trainer)
         holder.sessionNumber.setText(""+(position+1)+" th Session")
         holder.place.setText(upcomingSessionsModel.location)
-        holder.distance.setText(upcomingSessionsModel.distance)
+//        holder.distance.setText(upcomingSessionsModel.distance)
         holder.time.setText(upcomingSessionsModel.selected_slot)
         holder.relative.setTag(position)
         holder.imTrack.setTag(position)
         Glide.with(context!!).load(upcomingSessionsModel.trainer_image).fitCenter().error(R.drawable.dummy_trainer).into(holder.im)
-        if (upcomingSessionsModel.type.equals("gym") || upcomingSessionsModel.is_reschedule == "true"){
-            holder.imTrack.visibility=View.INVISIBLE
-        }else{
-            holder.imTrack.visibility=View.VISIBLE
-
-        }
 
 
         var input=upcomingSessionsModel.timing
         val inputFormat = SimpleDateFormat("MMM dd, yyyy, h:mm a", Locale.ENGLISH)
         val outputFormat = SimpleDateFormat("dd/MM/yy", Locale.ENGLISH)
 
-        val date = inputFormat.parse(input)
-        val formatted = outputFormat.format(date)  // "21/05/25"
-        holder.date.setText(formatted)
+//        val date = inputFormat.parse(input)
+//        val formatted = outputFormat.format(date)  // "21/05/25"
+//        holder.date.setText(formatted)
 
 
      /*   if (upcomingbokingModel.is_reschedule == "false"){
@@ -87,14 +79,14 @@ class UpcomingSessionsAdapter(
             holder.im_dot.visibility=View.VISIBLE
             holder.tvPayment.setText(upcomingbokingModel.msg)
         }*/
-        holder.imTrack.setOnClickListener{
+       /* holder.imTrack.setOnClickListener{
             var k = it.tag as Int
             var upcomingbokingModel= upcomingSessionsArraylist.get(k)
             val intent = Intent(context, BeforeArrivingActivity::class.java)
             intent.putExtra("bookingid",upcomingbokingModel.id)
             context.startActivity(intent)
-        }
-        holder.relative.setOnClickListener {
+        }*/
+        /*holder.relative.setOnClickListener {
             var k = it.tag as Int
             var upcomingbokingModel= upcomingSessionsArraylist.get(k)
             Log.e("bookiing_id",upcomingSessionsModel.id)
@@ -114,7 +106,7 @@ class UpcomingSessionsAdapter(
                 Log.e("booking_id",upcomingbokingModel.id)
 
             }
-        }
+        }*/
 
     }
 

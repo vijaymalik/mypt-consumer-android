@@ -1,20 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/relative"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_below="@+id/card"
+        android:layout_marginTop="-30dp"
+        android:background="@drawable/grey_rectangle">
+
+        <View
+            android:id="@+id/aliner"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="30dp" />
+
+        <ImageView
+            android:id="@+id/imTrack"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:gravity="center"
+            android:layout_marginStart="16dp"
+            android:layout_alignTop="@+id/aliner"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/timer_icon" />
+        <TextView
+            android:ellipsize="end"
+            android:layout_toRightOf="@+id/imTrack"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/aliner"
+            android:layout_alignParentBottom="true"
+            android:fontFamily="@font/funnel_sans_regular"
+            android:paddingStart="8dp"
+            android:maxLines="2"
+            android:text="Starts in 3h 25m"
+            android:textColor="#B3B3B3"
+            android:textSize="14sp" />
+        <LinearLayout
+            android:id="@+id/ddd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/aliner"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_centerVertical="true"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/upcomingSessions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+
+                android:fontFamily="@font/manrope_semi_bold"
+                android:text="Check-in"
+                android:textAllCaps="true"
+                android:textColor="@color/headingcolor"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/imarrow"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/arrow" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
 
     <androidx.cardview.widget.CardView
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        app:cardCornerRadius="24dp"
         android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
         app:cardBackgroundColor="@color/home_frag_blk"
-        android:layout_width="330dp"
-        android:layout_height="220dp">
+        app:cardCornerRadius="16dp">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -22,154 +90,151 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/trainer_bg_home"/>
+                android:background="@drawable/trainer_bg_home" />
+
             <ImageView
+                android:id="@+id/im"
                 android:layout_width="140dp"
                 android:layout_height="match_parent"
-                android:adjustViewBounds="true"
-                android:id="@+id/im"
-                android:scaleType="centerCrop"
                 android:layout_alignParentEnd="true"
-            />
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop" />
+
             <LinearLayout
-                android:orientation="vertical"
-                android:layout_marginEnd="100dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginEnd="100dp"
+                android:orientation="vertical">
+
                 <TextView
-                    android:layout_marginTop="30dp"
-                    android:layout_marginHorizontal="10dp"
+                    android:id="@+id/sessionNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/manrope_semi_bold"
                     android:gravity="center_vertical"
+                    android:text="4th Session"
                     android:textColor="@color/smallTextcolor"
                     android:textSize="12sp"
-                    android:id="@+id/sessionNumber"
-                    android:fontFamily="@font/manrope_semi_bold"
-                    android:text="4th Session"
-                    />
-                <LinearLayout
-                    android:gravity="center_vertical"
-                    android:layout_marginHorizontal="10dp"
-                    android:orientation="horizontal"
+                    android:visibility="gone" />
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    >
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
                     <TextView
-                        android:text="13/12/24"
-                        android:id="@+id/date"
+                        android:id="@+id/sessionWith"
                         android:layout_width="wrap_content"
+
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/manrope_semi_bold"
+                        android:fontFamily="@font/clash_display_medium"
+                        android:text="Session with Jessica"
                         android:textColor="@color/white"
-                        android:textSize="12sp"/>
-                    <View
-                        android:layout_marginHorizontal="5dp"
-                        android:layout_width="3dp"
-                        android:layout_height="3dp"
-                        android:background="@drawable/dot"/>
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/timer"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_below="@+id/sessionWith"
+                        android:layout_marginTop="12dp"
+                        android:background="@drawable/clock_icon" />
+
                     <TextView
-                        android:text="10:00am - 11:00am"
                         android:id="@+id/time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/manrope_semi_bold"
-                        android:textColor="@color/white"
-                        android:textSize="12sp"/>
-                </LinearLayout>
+                        android:layout_alignTop="@+id/timer"
+                        android:layout_toRightOf="@+id/timer"
+                        android:fontFamily="@font/funnel_sans_regular"
+                        android:paddingStart="8dp"
+                        android:text="10:00am - 11:00am"
+                        android:textColor="#FAFAFABF"
+                        android:textSize="12sp" />
 
-                <TextView
-                    android:layout_marginTop="30dp"
-                    android:layout_marginHorizontal="10dp"
-                    android:text="Christene De Koning"
-                    android:id="@+id/trainerName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/clash_display_semibold"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"/>
-                <LinearLayout
-                    android:gravity="center_vertical"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
                     <ImageView
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:src="@drawable/location"/>
+                        android:id="@+id/loc_icon"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_below="@+id/timer"
+                        android:layout_marginTop="12dp"
+                        android:background="@drawable/location_icon" />
+
                     <TextView
-                        android:text="2.5km"
-                        android:id="@+id/distance"
-                        android:layout_marginHorizontal="5dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/manrope_medium"
-                        android:textColor="@color/white"
-                        android:textSize="12sp"/>
-                    <View
-                        android:layout_marginEnd="5dp"
-                        android:layout_width="3dp"
-                        android:layout_height="3dp"
-                        android:background="@drawable/dot"/>
-                    <TextView
-                        android:text="Near Dubai Mall"
                         android:id="@+id/place"
-                        android:maxLines="1"
                         android:ellipsize="end"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/manrope_medium"
-                        android:textColor="@color/white"
-                        android:textSize="12sp"/>
-                </LinearLayout>
+                        android:layout_alignTop="@+id/loc_icon"
+                        android:layout_toRightOf="@+id/loc_icon"
+                        android:fontFamily="@font/funnel_sans_regular"
+                        android:paddingStart="8dp"
+                        android:maxLines="2"
+                        android:text="Near Dubai Mall"
+                        android:textColor="#FAFAFABF"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <!--<TextView
+                    android:id="@+id/trainerName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/clash_display_semibold"
+                    android:text="Christene De Koning"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />-->
+
+                <!-- <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_marginHorizontal="10dp"
+                     android:layout_marginTop="3dp"
+                     android:gravity="center_vertical"
+                     android:orientation="horizontal">
+
+                     <ImageView
+                         android:layout_width="16dp"
+                         android:layout_height="16dp"
+                         android:src="@drawable/location" />
+
+                     <TextView
+                         android:id="@+id/distance"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_marginHorizontal="5dp"
+                         android:fontFamily="@font/manrope_medium"
+                         android:text="2.5km"
+                         android:textColor="@color/white"
+                         android:textSize="12sp" />
+
+                     <View
+                         android:layout_width="3dp"
+                         android:layout_height="3dp"
+                         android:layout_marginEnd="5dp"
+                         android:background="@drawable/dot" />
+
+                     <TextView
+                         android:id="@+id/place"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:ellipsize="end"
+                         android:fontFamily="@font/manrope_medium"
+                         android:maxLines="1"
+                         android:text="Near Dubai Mall"
+                         android:textColor="@color/white"
+                         android:textSize="12sp" />
+                 </LinearLayout>-->
 
             </LinearLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:paddingLeft="10dp"
-                android:paddingVertical="10dp"
-                android:background="@drawable/black_70_transparent_rounded_corner"
-                android:layout_alignParentBottom="true"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginEnd="10dp"
-                    android:id="@+id/imTrack"
-                    android:visibility="invisible"
-                    android:src="@drawable/track_button"
-                    android:layout_height="32dp"/>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:gravity="center"
-                    android:layout_centerVertical="true"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/headingcolor"
-                        android:textSize="14sp"
 
-                        android:id="@+id/upcomingSessions"
-                        android:layout_marginEnd="10dp"
-                        android:fontFamily="@font/manrope_semi_bold"
-                        android:text="@string/training_session_details"
-                        />
-                    <ImageView
-                        android:layout_marginTop="2dp"
-                        android:layout_width="12dp"
-                        android:layout_marginEnd="20dp"
-                        android:id="@+id/imarrow"
-                        android:src="@drawable/arrow"
-                        android:layout_height="10dp"/>
-                </LinearLayout>
-
-
-            </RelativeLayout>
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

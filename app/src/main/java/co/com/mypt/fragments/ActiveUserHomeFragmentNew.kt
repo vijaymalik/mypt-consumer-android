@@ -260,62 +260,6 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
             }
         }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-
-            viewLifecycleOwner.repeatOnLifecycle(
-                Lifecycle.State.STARTED
-            ) {
-
-                viewModel.trainerListState.collect { state ->
-
-                    when (state) {
-
-                        is UiState.Loading -> {
-                            //binding.progressBar.visibility = View.VISIBLE
-                        }
-
-                        is UiState.Success -> {
-                            // binding.progressBar.visibility = View.GONE
-                            if (state.data?.isNullOrEmpty() == true) {
-
-                            } else {
-                                val dataList = state.data?.map {
-                                    val trainerModel = TrainersModel()
-                                    trainerModel.name = it?.name ?: ""
-                                    trainerModel.id = it?.id ?: ""
-                                    trainerModel.distance = it?.distance ?: ""
-                                    trainerModel.slot = it?.slot ?: ""
-                                    trainerModel.noOfRating = it?.noOfRating ?: ""
-                                    trainerModel.averageRating = it?.averageRating.toString()
-                                    trainerModel.location = it?.location ?: ""
-                                    trainerModel.profile = it?.profile ?: ""
-                                    trainerModel.is_verified = it?.is_verified.toString()
-                                    trainerModel.tags = it?.tags ?: emptyList()
-                                    trainerModel.is_group = it?.is_group
-                                    trainerModel.name = it?.name ?: ""
-                                    trainerModel
-                                }
-                                val trainerListAdapter = TrainerGridViewAdapter(
-                                    requireContext(),
-                                    dataList ?: emptyList(),
-                                    "grid",
-                                    sharedPreferences.getString("typeWorkout", ""),
-                                    latitude,
-                                    longitude, ""
-                                ) { isGrp, type, id -> }
-                                bindingView.nearByGymRecyclerView.adapter = trainerListAdapter
-                            }
-
-                        }
-
-                        is UiState.Error -> {
-                        }
-                    }
-                }
-
-
-            }
-        }
 
         viewLifecycleOwner.lifecycleScope.launch {
 

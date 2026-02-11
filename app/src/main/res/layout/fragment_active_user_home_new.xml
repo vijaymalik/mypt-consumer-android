@@ -117,18 +117,17 @@
 
                 <HorizontalScrollView
                     android:id="@+id/ptGym"
-                    android:scrollbars="none"
-                    android:layout_marginTop="-20dp"
-                    android:layout_marginHorizontal="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/homeBanner">
+                    android:layout_below="@+id/homeBanner"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="-20dp"
+                    android:scrollbars="none">
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        >
+                        android:layout_height="wrap_content">
 
                         <RelativeLayout
                             android:layout_width="100dp"
@@ -337,6 +336,111 @@
                 android:gravity="center_vertical"
                 android:paddingHorizontal="20dp">
 
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/clash_display_medium"
+                    android:paddingEnd="20dp"
+                    android:text="My Bookings"
+                    android:textColor="@color/white" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="@color/separator_list" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/ic_arrow_right"
+                    android:drawablePadding="5dp"
+                    android:drawableTint="@color/white"
+                    android:fontFamily="@font/clash_display_medium"
+                    android:paddingStart="20dp"
+                    android:text="View all"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/upcomingSessionsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="16dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="20dp">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="@color/separator_list" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/clash_display_medium"
+                    android:paddingHorizontal="20dp"
+                    android:text="Smart Suggestions for You"
+                    android:textColor="@color/white" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="@color/separator_list" />
+            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/renewUpgradeRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="16dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="20dp">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="@color/separator_list" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/clash_display_medium"
+                    android:paddingHorizontal="20dp"
+                    android:text="Your Training Team"
+                    android:textColor="@color/white" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="@color/separator_list" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="16dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="20dp">
+
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1dp"
@@ -415,176 +519,17 @@
                 android:adjustViewBounds="true"
                 android:src="@drawable/certified_banner" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/upcomingSessionsRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/renewUpgradeRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="16dp"
-                android:gravity="center_vertical"
-                android:paddingHorizontal="20dp">
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1"
-                    android:background="@color/separator_list" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/clash_display_medium"
-                    android:paddingHorizontal="20dp"
-                    android:text="Meet your match"
-                    android:textColor="@color/white" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1"
-                    android:background="@color/separator_list" />
-            </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/nearByGymRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-            <!--<TextView
-                android:id="@+id/allTransformationStories"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="30dp"
-                android:fontFamily="@font/manrope_medium"
-                android:gravity="center_vertical"
-                android:text="@string/transformation_stories"
-                android:textColor="@color/smallTextcolor"
-                android:textSize="16sp"
-                android:textStyle="bold"
-
-                />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/transformationRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
--->
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:paddingTop="30dp"
                 android:adjustViewBounds="true"
-                android:src="@drawable/buy_session_image"
-                android:visibility="gone" />
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/upcomingClassRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:orientation="horizontal"
-                android:visibility="gone"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-            <ImageView
-                android:id="@+id/imUpcomingBlur"
-                android:layout_width="match_parent"
-                android:layout_height="350dp"
-                android:adjustViewBounds="true"
-                android:src="@drawable/upcoming_blur" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:adjustViewBounds="true"
-                android:scaleType="centerCrop"
-                android:src="@drawable/home_header_image" />
-            <!--<TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="30dp"
-                android:fontFamily="@font/manrope_medium"
-                android:gravity="center_vertical"
-                android:text="@string/shop_products"
-                android:textColor="@color/smallTextcolor"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:drawableEndCompat="@drawable/baseline_keyboard_arrow_right_24" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/shopCategoryRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:orientation="horizontal"
-                android:visibility="gone"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/shopProductsRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:orientation="horizontal"
-                android:visibility="gone"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="367dp"
-                android:adjustViewBounds="true"
-                android:src="@drawable/shop_blur" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="30dp"
-                android:src="@drawable/divider" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:fontFamily="@font/clash_display_medium"
-                android:gravity="center_vertical"
-                android:text="“ Believe you can and\nyou're halfway there ”"
-                android:textColor="@color/smallTextcolor"
-                android:textSize="25sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginVertical="15dp"
-                android:fontFamily="@font/clash_display_regular"
-                android:text="-Theodore Roosevelt"
-                android:textColor="@color/edittextbordercolor"
-                android:textSize="12sp" />-->
+                android:background="@color/black"
+                android:scaleType="fitXY"
+                android:src="@drawable/home_footer" />
 
 
         </LinearLayout>
