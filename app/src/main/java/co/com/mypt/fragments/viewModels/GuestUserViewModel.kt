@@ -31,7 +31,7 @@ class GuestUserViewModel(
     val contentState = _contentState.asStateFlow()
 
 
-    fun fetchUsers(token: String) {
+    fun getStories(token: String) {
 
         viewModelScope.launch(Dispatchers.IO) {
 
@@ -39,7 +39,7 @@ class GuestUserViewModel(
 
             try {
 
-                val response = repository.getUsers(token)
+                val response = repository.getStories(token)
 
                 if (response.isSuccessful) {
 

@@ -81,7 +81,7 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
     ViewTreeObserver.OnScrollChangedListener {
     var upcomingClassArraylist = ArrayList<UpcomingClassModel>()
     var nearByGymArraylist = ArrayList<NearByGymModel>()
-    lateinit var red_circle: ImageView
+//    lateinit var red_circle: ImageView
     lateinit var imUpcomingBlur: ImageView
     lateinit var improfile: ImageView
     lateinit var tvlocation: TextView
@@ -176,7 +176,7 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
 
         viewModel = ViewModelProvider(this, factory).get(GuestUserViewModel::class.java)
         collectUsers()
-        viewModel.fetchUsers("Bearer " + sharedPreferences.getString("token", ""))
+        viewModel.getStories("Bearer " + sharedPreferences.getString("token", ""))
         viewModel.getContent("Bearer " + sharedPreferences.getString("token", ""))
         getBookingData()
         getRenewalPlanList()
@@ -339,11 +339,15 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
 
                                 val home_background =
                                     state.data?.firstOrNull { it?.key == "home_background" }
-                                val buy_gym_pt = state.data?.firstOrNull { it?.key == "buy_gym_pt" }
+                                val book_session = state.data?.firstOrNull { it?.key == "book_session" }
+                                val topup_plan =
+                                    state.data?.firstOrNull { it?.key == "topup_plan" }
                                 val buy_home_pt =
                                     state.data?.firstOrNull { it?.key == "buy_home_pt" }
-                                val buy_gym_membership =
-                                    state.data?.firstOrNull { it?.key == "buy_gym_membership" }
+                                val renew_plan =
+                                    state.data?.firstOrNull { it?.key == "renew_plan" }
+                                val upgrade_plan =
+                                    state.data?.firstOrNull { it?.key == "upgrade_plan" }
                                 val offer_banner =
                                     state.data?.firstOrNull { it?.key == "offer_banner" }
 
@@ -358,10 +362,12 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
 
                                 Glide.with(bindingView.homePt).load(buy_home_pt?.image).fitCenter()
                                     .into(bindingView.homePt)
-                                Glide.with(bindingView.memberShip).load(buy_gym_membership?.image)
+                                Glide.with(bindingView.memberShip).load(buy_home_pt?.image)
                                     .fitCenter().into(bindingView.memberShip)
-                                Glide.with(bindingView.GymPt).load(buy_gym_pt?.image).fitCenter()
+                                Glide.with(bindingView.GymPt).load(buy_home_pt?.image).fitCenter()
                                     .into(bindingView.GymPt)
+                                Glide.with(bindingView.upgradePlan).load(buy_home_pt?.image).fitCenter()
+                                    .into(bindingView.upgradePlan)
                             }
                         }
 
@@ -855,9 +861,9 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
 
 
                         if (!jsonObj.optJSONObject("data").optBoolean("userHaveRequest")) {
-                            red_circle.visibility = View.GONE
+//                            red_circle.visibility = View.GONE
                         } else {
-                            red_circle.visibility = View.VISIBLE
+//                            red_circle.visibility = View.VISIBLE
 
                         }
 

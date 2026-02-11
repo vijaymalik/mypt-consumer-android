@@ -20,7 +20,7 @@ class HomePlaceholderFragment : Fragment(R.layout.fragment_placeholder) {
 
         Handler(Looper.getMainLooper()).postDelayed({
             val frag = if (!isActiveUser) {
-                ActiveUserHomeFragmentNew.newInstance(name, lat, long)
+                ActiveUserHomeFragmentNew.newInstance( lat, long,chooseAddress)
             } else {
                 GuestUserHomeFragmentNew.newInstance(lat, long, chooseAddress)
             }

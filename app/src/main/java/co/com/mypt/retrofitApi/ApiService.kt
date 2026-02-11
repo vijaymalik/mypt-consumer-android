@@ -12,7 +12,7 @@ import retrofit2.http.POST
 
 interface ApiService {
     @GET("get-stories?page=1")
-    suspend fun getUsers(@Header("Authorization") token: String): Response<GetStoriesList>
+    suspend fun getStories(@Header("Authorization") token: String): Response<GetStoriesList>
 
     @FormUrlEncoded
     @POST("get-trainers")

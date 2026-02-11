@@ -115,96 +115,125 @@
                     android:layout_below="@+id/headerLayout"
                     android:scaleType="fitCenter" />
 
-                <LinearLayout
+                <HorizontalScrollView
                     android:id="@+id/ptGym"
+                    android:scrollbars="none"
+                    android:layout_marginTop="-20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/homeBanner"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="-20dp">
+                    android:layout_below="@+id/homeBanner">
 
-                    <RelativeLayout
-                        android:layout_width="0dp"
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        android:layout_marginHorizontal="20dp">
 
-                        <ImageView
-                            android:id="@+id/homePt"
-                            android:layout_width="match_parent"
-                            android:layout_height="170dp"
+                        <RelativeLayout
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content">
 
-                            android:scaleType="fitCenter" />
+                            <ImageView
+                                android:id="@+id/homePt"
+                                android:layout_width="match_parent"
+                                android:layout_height="135dp"
+                                android:scaleType="fitCenter" />
 
-                        <TextView
-                            android:id="@+id/tvmember"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="20dp"
-                            android:fontFamily="@font/clash_display_medium"
-                            android:text="Buy \nHome PT"
-                            android:textColor="@color/white"
-                            android:textSize="14sp" />
-
-
-                    </RelativeLayout>
-
-                    <View
-                        android:layout_width="8dp"
-                        android:layout_height="wrap_content" />
-
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
-
-                        <ImageView
-                            android:id="@+id/GymPt"
-                            android:layout_width="match_parent"
-                            android:layout_height="170dp"
-                            android:scaleType="fitCenter" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="20dp"
-                            android:fontFamily="@font/clash_display_medium"
-                            android:text="Buy\nGym PT"
-                            android:textColor="@color/white"
-                            android:textSize="14sp" />
+                            <TextView
+                                android:id="@+id/tvmember"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="20dp"
+                                android:fontFamily="@font/clash_display_medium"
+                                android:text="Book \nsession"
+                                android:textColor="@color/white"
+                                android:textSize="14sp" />
 
 
-                    </RelativeLayout>
+                        </RelativeLayout>
 
-                    <View
-                        android:layout_width="8dp"
-                        android:layout_height="wrap_content" />
+                        <View
+                            android:layout_width="8dp"
+                            android:layout_height="wrap_content" />
 
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        <RelativeLayout
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content">
 
-                        <ImageView
-                            android:id="@+id/memberShip"
-                            android:layout_width="match_parent"
-                            android:layout_height="170dp"
-                            android:layout_weight="1"
-                            android:scaleType="fitCenter" />
+                            <ImageView
+                                android:id="@+id/GymPt"
+                                android:layout_width="match_parent"
+                                android:layout_height="132dp"
+                                android:scaleType="fitCenter" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="20dp"
-                            android:fontFamily="@font/clash_display_medium"
-                            android:text="Buy Gym \nMembership"
-                            android:textColor="@color/white"
-                            android:textSize="14sp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="20dp"
+                                android:fontFamily="@font/clash_display_medium"
+                                android:text="Top Up\nPlan"
+                                android:textColor="@color/white"
+                                android:textSize="14sp" />
 
-                    </RelativeLayout>
-                </LinearLayout>
+
+                        </RelativeLayout>
+
+                        <View
+                            android:layout_width="8dp"
+                            android:layout_height="wrap_content" />
+
+                        <RelativeLayout
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/memberShip"
+                                android:layout_width="match_parent"
+                                android:layout_height="132dp"
+                                android:layout_weight="1"
+                                android:scaleType="fitCenter" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="20dp"
+                                android:fontFamily="@font/clash_display_medium"
+                                android:text="Renew\nPlan"
+                                android:textColor="@color/white"
+                                android:textSize="14sp" />
+
+                        </RelativeLayout>
+
+                        <View
+                            android:layout_width="8dp"
+                            android:layout_height="wrap_content" />
+
+                        <RelativeLayout
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/upgradePlan"
+                                android:layout_width="match_parent"
+                                android:layout_height="132dp"
+                                android:scaleType="fitCenter" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="20dp"
+                                android:fontFamily="@font/clash_display_medium"
+                                android:text="Upgrade\nPlan"
+                                android:textColor="@color/white"
+                                android:textSize="14sp" />
+
+                        </RelativeLayout>
+                    </LinearLayout>
+                </HorizontalScrollView>
 
                 <RelativeLayout
                     android:id="@+id/notSureView"
@@ -428,14 +457,15 @@
                 android:layout_margin="10dp"
                 android:adjustViewBounds="true"
                 android:src="@drawable/certified_banner" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/upcomingSessionsRecyclerView"
-                android:layout_marginStart="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
                 android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                />
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/renewUpgradeRecyclerView"
                 android:layout_width="match_parent"

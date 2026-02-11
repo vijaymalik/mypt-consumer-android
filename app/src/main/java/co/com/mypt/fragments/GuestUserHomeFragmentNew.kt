@@ -177,7 +177,7 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
 
         viewModel = ViewModelProvider(this, factory).get(GuestUserViewModel::class.java)
         collectUsers()
-        viewModel.fetchUsers("Bearer " + sharedPreferences.getString("token", ""))
+        viewModel.getStories("Bearer " + sharedPreferences.getString("token", ""))
         viewModel.getContent("Bearer " + sharedPreferences.getString("token", ""))
     }
 
