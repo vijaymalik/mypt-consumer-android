@@ -755,10 +755,11 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                                 subscriptionTypeArrayList
                             )
                             bindingView.renewUpgradeRecyclerView.visibility = View.VISIBLE
-
+                            bindingView.smartSuggestion.visibility= View.VISIBLE
                             val snapHelper = LinearSnapHelper()
                             snapHelper.attachToRecyclerView(bindingView.renewUpgradeRecyclerView)
                         } else {
+                            bindingView.smartSuggestion.visibility= View.GONE
                             bindingView.renewUpgradeRecyclerView.visibility = View.GONE
                         }
                     }
