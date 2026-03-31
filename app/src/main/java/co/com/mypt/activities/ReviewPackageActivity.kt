@@ -17,6 +17,7 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.preference.PreferenceManager
@@ -30,12 +31,14 @@ import co.com.mypt.Api.ResponseData
 import co.com.mypt.ProgressDialog
 import co.com.mypt.R
 import co.com.mypt.Webview.CCavenueWebViewActivity
+import co.com.mypt.Webview.CreatePackageCCavenueWebViewActivity
 import co.com.mypt.adapter.AddressListAdapter
 import co.com.mypt.databinding.ActivityReviewPackageBinding
 import co.com.mypt.model.ActivityModel
 import co.com.mypt.model.AddressModel
 import co.com.mypt.model.AvailablePromo
 import co.com.mypt.model.JoinModel
+import co.com.mypt.model.PackageDetails
 import co.com.mypt.model.ReviewPackageCheckout
 import co.com.mypt.model.ReviewPackageCheckout.Data.UpgradePlan
 import com.android.volley.VolleyError
@@ -96,6 +99,8 @@ class ReviewPackageActivity : AppCompatActivity() {
     var isupgreadClick = false
     var selectedAddressId = ""
     private var progressDialog: Dialog? = null
+
+    private var packageDetails: PackageDetails?=null
     lateinit var binding: ActivityReviewPackageBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -113,7 +118,7 @@ class ReviewPackageActivity : AppCompatActivity() {
                 "couponList",
                 available_promos as java.util.ArrayList<out Parcelable?>?
             )
-            startActivity(intent)
+            resultLauncher.launch(intent)
         }
         binding.appliedCoupon.visibility = View.GONE
         binding.upgradePlan.setOnClickListener {
@@ -133,7 +138,9 @@ class ReviewPackageActivity : AppCompatActivity() {
         }
 
         binding.tvPayment.setOnClickListener {
-            val intent = Intent(this, CCavenueWebViewActivity::class.java)
+            val intent = Intent(this, CreatePackageCCavenueWebViewActivity::class.java)
+
+            intent.putExtra("package_data",packageDetails)
 
             if (sharedPreferences.getString("typeWorkout", "").equals("home")) {
                 intent.putExtra("type", sharedPreferences.getString("typeWorkout", "").toString())
@@ -317,10 +324,7 @@ class ReviewPackageActivity : AppCompatActivity() {
              intent.putExtra("",getIntent().getStringExtra("studio_id"))
              startActivity(intent)
          }*/
-        val filter = IntentFilter("selectedReviewCoupon")
-        LocalBroadcastManager
-            .getInstance(this)
-            .registerReceiver(countReceiver, filter)
+
         /*val selectAddressFilter = IntentFilter("selectAddressFilter")
         LocalBroadcastManager
             .getInstance(this)
@@ -339,15 +343,18 @@ class ReviewPackageActivity : AppCompatActivity() {
             getData()
         }
     }
-    val countReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) {
-            selectedCouponId = intent?.getStringExtra("couponId")
-            binding.offerTitle.text = intent?.getStringExtra("couponName")
+
+    private val resultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val data = result.data
+            selectedCouponId = data?.getStringExtra("couponId")
+            binding.offerTitle.text = data?.getStringExtra("couponName")
             binding.appliedCoupon.visibility = View.VISIBLE
             binding.applyCoupon.visibility = View.GONE
             getData()
         }
-
     }
 
     fun showAddresListDialog() {
@@ -497,7 +504,13 @@ class ReviewPackageActivity : AppCompatActivity() {
                     val data: ReviewPackageCheckout =
                         Gson().fromJson(data, ReviewPackageCheckout::class.java)
                     if (data.status == true) {
+                        packageDetails = data.data?.package_details
                         available_promos = data.data?.available_promos
+                        available_promos?.let {
+                            if(it.isNotEmpty()){
+                                binding.offerTitle.text = it.firstOrNull()?.name?:"Select Coupon"
+                            }
+                        }
                         upgradIdText = data.data?.upgrade_plan
                         if (data.data?.upgrade_plan != null) {
                             binding.title.text = data.data.upgrade_plan.title

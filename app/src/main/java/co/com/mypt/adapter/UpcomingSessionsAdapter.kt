@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
@@ -23,7 +24,9 @@ import java.util.Locale
 
 class UpcomingSessionsAdapter(
     val context: Context?,
-    val upcomingSessionsArraylist: ArrayList<UpcomingSessionsModel>) : RecyclerView.Adapter<UpcomingSessionsAdapter.ViewHolder>() {
+    val upcomingSessionsArraylist: ArrayList<UpcomingSessionsModel>,
+    private val onCheckInClick: (UpcomingSessionsModel) -> Unit = {}
+) : RecyclerView.Adapter<UpcomingSessionsAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val card : CardView = itemView.findViewById(R.id.card)
         val sessionWith : TextView = itemView.findViewById(R.id.sessionWith)
@@ -33,7 +36,7 @@ class UpcomingSessionsAdapter(
         val im : ImageView = itemView.findViewById(R.id.im)
         val imTrack : ImageView = itemView.findViewById(R.id.imTrack)
         val relative : RelativeLayout = itemView.findViewById(R.id.relative)
-
+        val llCheckIn : LinearLayout = itemView.findViewById(R.id.llCheckIn)
 
     }
 
@@ -61,6 +64,9 @@ class UpcomingSessionsAdapter(
         holder.imTrack.setTag(position)
         Glide.with(context!!).load(upcomingSessionsModel.trainer_image).fitCenter().error(R.drawable.dummy_trainer).into(holder.im)
 
+        holder.llCheckIn.setOnClickListener {
+            onCheckInClick(upcomingSessionsModel)
+        }
 
         var input=upcomingSessionsModel.timing
         val inputFormat = SimpleDateFormat("MMM dd, yyyy, h:mm a", Locale.ENGLISH)

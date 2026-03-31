@@ -29,7 +29,6 @@ import co.com.mypt.Api.Plans
 import co.com.mypt.GymWorkout.withoutTrainer.JoiningFragment
 import co.com.mypt.R
 import co.com.mypt.adapter.ViewPagerAdapter1
-import co.com.mypt.fragments.CreatePackageScreen.BestPlanTotalSessionFragment
 import co.com.mypt.fragments.CreatePackageScreen.CreatePackageFragment
 import co.com.mypt.model.BestPlanList
 import co.com.mypt.utils.SharedDuringSessionViewModel
@@ -158,7 +157,7 @@ class CreatePackagectivity : AppCompatActivity() {
         val ddd = intent.getStringExtra("trainer_id")
         println("====== $a $d $f  $ddd")
         viewPagerAdapter.add(CreatePackageFragment(), "", 0)
-        viewPagerAdapter.add(
+        /*viewPagerAdapter.add(
             BestPlanTotalSessionFragment(
                 intent.getStringExtra("type"),
                 intent.getStringExtra("slot_id"),
@@ -167,7 +166,7 @@ class CreatePackagectivity : AppCompatActivity() {
                 intent.getStringExtra("studio_id"),
                 intent.getIntExtra("month", 0)
             ), "", 1
-        )
+        )*/
         /*viewPagerAdapter.add(TotalMonthFragment(intent.getStringExtra("studio_id")), "", 2)
         viewPagerAdapter.add(
             MarkJourneyFragment(
@@ -188,11 +187,11 @@ class CreatePackagectivity : AppCompatActivity() {
 
         tvcontinueView.setOnClickListener {
             if (selectedCount == 1) {
-                if (selectedPage == 1 && selectedOption == 0) {
-                    reviewPackage()
+                if (selectedPage == 0 && selectedOption == 0) {
+                    openTrainingTeamScreen()
                     return@setOnClickListener
-                } else if (selectedPage == 2 && (selectedOption == 1 || selectedOption == 2)) {
-                    reviewPackage()
+                } else if (selectedPage == 1 && (selectedOption == 1 || selectedOption == 2)) {
+                    openTrainingTeamScreen()
                     return@setOnClickListener
                 }
 
@@ -245,8 +244,13 @@ class CreatePackagectivity : AppCompatActivity() {
                 }
                 checkPlanSelection()
                 //viewPager.currentItem = selectedPage
-                viewPager.setCurrentItem(selectedPage, true)
-                p_Bar.setProgress(25 * (selectedPage + 1), true)
+                val itemCount = viewPager.adapter?.itemCount ?: 0
+
+                if (selectedPage < itemCount) {
+                    viewPager.setCurrentItem(selectedPage, true)
+                    p_Bar.setProgress(25 * (selectedPage + 1), true)
+                }
+
             }
         }
 
@@ -334,6 +338,17 @@ class CreatePackagectivity : AppCompatActivity() {
             intent.putExtra("session_value", customSessionCountTxt)
         }
 
+        startActivity(intent)
+    }
+
+    fun openTrainingTeamScreen() {
+        val intent = Intent(this, TrainingTeamWrapperActivity::class.java)
+        intent.putExtra("address_id", getIntent().getStringExtra("address_id"))
+        intent.putExtra("longitude", getIntent().getDoubleExtra("longitude",0.0))
+        intent.putExtra("latitude", getIntent().getDoubleExtra("latitude",0.0))
+        if(getIntent().hasExtra("studio_id")) {
+            intent.putExtra("studio_id", getIntent().getStringExtra("studio_id"))
+        }
         startActivity(intent)
     }
 
@@ -557,7 +572,7 @@ class CreatePackagectivity : AppCompatActivity() {
 
                 if (intent.getIntExtra("selectedPosition", 0) == 0) {
 
-                    viewPagerAdapter.add(
+                    /*viewPagerAdapter.add(
                         BestPlanTotalSessionFragment(
                             getIntent().getStringExtra("type"),
                             getIntent().getStringExtra("slot_id"),
@@ -566,7 +581,7 @@ class CreatePackagectivity : AppCompatActivity() {
                             getIntent().getStringExtra("studio_id"),
                             getIntent().getIntExtra("month", 0)
                         ), "", 1
-                    )
+                    )*/
                     /* viewPagerAdapter.add(
                          TotalMonthFragment(getIntent().getStringExtra("studio_id")),
                          "",
@@ -590,7 +605,7 @@ class CreatePackagectivity : AppCompatActivity() {
                             intent.getIntExtra("selectedPosition", 0)
                         ), "", 1
                     )
-                    viewPagerAdapter.add(
+                    /*viewPagerAdapter.add(
                         BestPlanTotalSessionFragment(
                             getIntent().getStringExtra("type"),
                             getIntent().getStringExtra("slot_id"),
@@ -599,10 +614,10 @@ class CreatePackagectivity : AppCompatActivity() {
                             getIntent().getStringExtra("studio_id"),
                             getIntent().getIntExtra("month", 0)
                         ), "", 2
-                    )
+                    )*/
                     /*viewPagerAdapter.add(
                         TotalMonthFragment(getIntent().getStringExtra("studio_id")),
-                        "",
+                        "",/
                         3
                     )
                     viewPagerAdapter.add(

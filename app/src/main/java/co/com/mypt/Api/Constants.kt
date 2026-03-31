@@ -22,6 +22,11 @@ object Constants {
     val PASS_DATA="passData"
     val REVIEW_ADDRESS_ID="review_address_id"
     val BEST_PLAN_ID= "best_plan_id"
+    val HAS_HOME = "HAS_HOME"
+    val HAS_GYM = "HAS_GYM"
+    val IS_GYM_MEMBERSHIP_FLOW = "isGYMMembershipFlow"
+
+    val KEY_STORIES_DATA = "stories_data"
 }
 enum class Plans{
     IS_BEST_AVAILABLE,IS_BEST_NOT_AVAILABLE,CUSTOMIZE

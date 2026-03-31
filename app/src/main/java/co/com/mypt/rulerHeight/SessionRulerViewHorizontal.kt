@@ -10,8 +10,7 @@ import android.view.HapticFeedbackConstants
 import android.view.MotionEvent
 import android.view.View
 import co.com.mypt.R
-
-
+import kotlin.math.roundToInt
 
 
 class SessionRulerViewHorizontal(
@@ -48,6 +47,10 @@ class SessionRulerViewHorizontal(
     private val START_VALUE = 0
     private val INTERVAL = 5
     private val SUB_TICKS = 5   // 4 small ticks between numbers
+
+    private var maxValue = 100f
+
+    private val valuePerTick = INTERVAL / SUB_TICKS.toFloat()
     private val reduceTextGapPx by lazy {
         (60 * resources.displayMetrics.density).toInt() // try 4–8 dp
     }
@@ -107,12 +110,15 @@ class SessionRulerViewHorizontal(
             val distanceFromCenter =
                 kotlin.math.abs(startingPoint - midScreenPoint)
 
-            val isCenterTick = distanceFromCenter < pxmm / 2f
+            val tickIndex = i
+            val centerTickIndex = ((midScreenPoint - mainPoint) / pxmm).roundToInt()
+
+            val isCenterTick = tickIndex == centerTickIndex
             val isMajorTick = i % SUB_TICKS == 0
 //            val isMediumTick = i % SUB_TICKS == SUB_TICKS / 2
 
             val value = START_VALUE + (i / SUB_TICKS) * INTERVAL
-
+            if (value > maxValue) break
             // ===== HAPTIC =====
             if (isCenterTick && isMajorTick && i != lastHapticTick) {
                 lastHapticTick = i
@@ -206,8 +212,13 @@ class SessionRulerViewHorizontal(
                     mainPoint += diff
                     downPoint = event.x
 
+                    val minPoint = getMinMainPoint()
+
                     if (mainPoint > midScreenPoint) {
                         mainPoint = midScreenPoint.toFloat()
+                        isMove = false
+                    } else if (mainPoint < minPoint) {
+                        mainPoint = minPoint
                         isMove = false
                     }
 
@@ -220,17 +231,24 @@ class SessionRulerViewHorizontal(
             }
         }
 
-        val majorIndex =
-            ((midScreenPoint - mainPoint) / (pxmm /** SUB_TICKS*/)).toInt()
+        val totalTicks = (midScreenPoint - mainPoint) / pxmm
 
-        val value = START_VALUE + (majorIndex/* * INTERVAL*/)
-        mListener?.onViewUpdate(value.toFloat())
+        var value = START_VALUE + (totalTicks * valuePerTick)
+
+// snap to exact tick
+        value = (value / valuePerTick).toInt() * valuePerTick
+
+// clamp
+        value = value.coerceIn(START_VALUE.toFloat(), maxValue)
+
+        mListener?.onViewUpdate(value)
 
         return true
     }
     private var defaultValue = 0f
+
     fun setDefaultValue(value: Float) {
-        defaultValue = value
+        defaultValue = value.coerceIn(START_VALUE.toFloat(), maxValue)
 
         if (viewWidth > 0) {
             applyDefaultValue()
@@ -239,10 +257,20 @@ class SessionRulerViewHorizontal(
     }
     private fun applyDefaultValue() {
         // number of ticks from start
-        val totalTicks = (defaultValue - START_VALUE)
+        val totalTicks = (defaultValue - START_VALUE) / valuePerTick
 
         // move ruler so this value is at center
         mainPoint = midScreenPoint - (totalTicks * pxmm)
+    }
+
+    fun setMaxValue(max: Float) {
+        maxValue = max
+        invalidate()
+    }
+
+    private fun getMinMainPoint(): Float {
+        val totalTicks = (maxValue - START_VALUE)
+        return midScreenPoint - (totalTicks * pxmm)
     }
 
     companion object {

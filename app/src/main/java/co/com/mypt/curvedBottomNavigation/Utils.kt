@@ -1,6 +1,7 @@
 package co.com.mypt.curvedBottomNavigation
 
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.BlendMode
 import android.graphics.BlendModeColorFilter
 import android.graphics.PorterDuff

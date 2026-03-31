@@ -76,6 +76,8 @@ import org.json.JSONObject
 import java.util.Arrays
 import java.util.Locale
 import androidx.core.content.edit
+import co.com.mypt.Api.Constants.HAS_GYM
+import co.com.mypt.Api.Constants.HAS_HOME
 import co.com.mypt.Api.Constants.REVIEW_ADDRESS_ID
 
 class SelectCurrentLocationActivity : AppCompatActivity() , OnMapReadyCallback {
@@ -206,12 +208,27 @@ class SelectCurrentLocationActivity : AppCompatActivity() , OnMapReadyCallback {
 
     }
 
-    fun startTrainerList(){
+    fun startTrainerList() {
         sharedPreferences.edit(commit = true) { putString(REVIEW_ADDRESS_ID, addressId) }
-        val intent= Intent(this@SelectCurrentLocationActivity, TrainersListActivity::class.java)
-        intent.putExtra("address_id",addressId)
-        intent.putExtra("longitude",longitude)
-        intent.putExtra("latitude",latitude)
+        val type = sharedPreferences.getString("typeWorkout", "")
+        val hasPlan = when (type) {
+            "home" -> intent.getBooleanExtra(HAS_HOME, false)
+            "work" -> intent.getBooleanExtra(HAS_GYM, false)
+            else -> false
+        }
+
+        val targetActivity = if (hasPlan) {
+            TrainersListActivity::class.java
+        } else {
+            CreatePackagectivity::class.java
+        }
+
+        val intent = Intent(this, targetActivity).apply {
+            putExtra("address_id", addressId)
+            putExtra("longitude", longitude)
+            putExtra("latitude", latitude)
+        }
+
         startActivity(intent)
     }
 

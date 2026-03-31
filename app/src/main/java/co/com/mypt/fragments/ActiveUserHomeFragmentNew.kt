@@ -28,6 +28,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
@@ -38,30 +39,44 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.preference.PreferenceManager
-import androidx.recyclerview.widget.LinearSnapHelper
 import co.com.mypt.Api.ApiURL
 import co.com.mypt.Api.Constants
+import co.com.mypt.Api.Constants.HAS_GYM
+import co.com.mypt.Api.Constants.HAS_HOME
+import co.com.mypt.Api.Constants.PASS_DATA
 import co.com.mypt.Api.GetMethod
 import co.com.mypt.Api.ResponseData
+import co.com.mypt.BookingScreen.RescheduledUpComingBookingDetailActivity
+import co.com.mypt.BookingScreen.UpcomingBookingDetails
+import co.com.mypt.ComingSoonViewMode
+import co.com.mypt.Profile.NewUserProfileActivity
 import co.com.mypt.ProgressDialog
 import co.com.mypt.R
 import co.com.mypt.activities.ChooseLocationActivity
+import co.com.mypt.activities.ComingSoonActivity
+import co.com.mypt.activities.ComingSoonActivity.Companion.KEY_VIEW_MODE
 import co.com.mypt.activities.HomeGymTrainerActivity
 import co.com.mypt.activities.MainActivity
-import co.com.mypt.adapter.RenewUpgradeAdapter
+import co.com.mypt.activities.TrainerGroupActivity
+import co.com.mypt.adapter.GetPlanDetailAdapter
+import co.com.mypt.adapter.HomeSmartSuggestionsAdapter
 import co.com.mypt.adapter.StoryAdapter
-import co.com.mypt.adapter.TrainerGridViewAdapter
+import co.com.mypt.adapter.SubscriptionDateSlotAdapter
 import co.com.mypt.adapter.UpcomingSessionsAdapter
 import co.com.mypt.databinding.FragmentActiveUserHomeNewBinding
 import co.com.mypt.fragments.viewModels.GuestUserViewModel
+import co.com.mypt.model.GetPlansResponse
+import co.com.mypt.model.Group
 import co.com.mypt.model.NearByGymModel
 import co.com.mypt.model.RenewalUpgradeModel
-import co.com.mypt.model.TrainersModel
+import co.com.mypt.model.SubscriptionSlotsResponse
+import co.com.mypt.model.TrainerGroupDetail
 import co.com.mypt.model.UpcomingClassModel
 import co.com.mypt.model.UpcomingSessionsModel
 import co.com.mypt.onBoarding.PhoneNumberScreenActivity
 import co.com.mypt.retrofitApi.UiState
 import co.com.mypt.retrofitApi.UserViewModelFactory
+import co.com.mypt.utils.HorizontalSpaceItemDecoration
 import com.android.volley.VolleyError
 import com.bumptech.glide.Glide
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -72,8 +87,10 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.Places
+import com.google.gson.Gson
 import kotlinx.coroutines.launch
 import org.json.JSONObject
+import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
@@ -83,7 +100,7 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
     var nearByGymArraylist = ArrayList<NearByGymModel>()
 //    lateinit var red_circle: ImageView
     lateinit var imUpcomingBlur: ImageView
-    lateinit var improfile: ImageView
+    lateinit var tvProfile: TextView
     lateinit var tvlocation: TextView
     lateinit var allNearByGym: TextView
 
@@ -107,10 +124,18 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
     lateinit var edit: SharedPreferences.Editor
     lateinit var bindingView: FragmentActiveUserHomeNewBinding
     var renewalUpgradeArraylist = ArrayList<RenewalUpgradeModel>()
+    var plansResponse: GetPlansResponse?=null
+    var group: Group?=null
 
     companion object {
         private const val KEY_LAT = "lat"
         private const val KEY_LNG = "lng"
+        private const val HOME_BACKGROUND_ID = 4
+        private const val BOOK_SESSION_ID = 9
+        private const val TOP_UP_PLAN_ID = 10
+        private const val RENEW_PLAN_ID = 11
+        private const val UPGRADE_PLAN_ID = 12
+        private const val OFFER_BANNER_ID = 14
         private const val KEY_ADD = "add"
 
         fun newInstance(param1: String, param2: String, param3: String): ActiveUserHomeFragmentNew {
@@ -135,7 +160,7 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireActivity())
         edit = sharedPreferences.edit()
         tvlocation = bindingView.location
-        improfile = bindingView.improfile
+        tvProfile = bindingView.tvProfile
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
         geocoder = Geocoder(requireActivity(), Locale.getDefault())
@@ -159,15 +184,33 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                     Constants.token, ""
                 ).toString() != ""
             ) {
-                val intent = Intent(context, HomeGymTrainerActivity::class.java)
-                startActivity(intent)
+                openHomeGymActivity()
             } else {
                 val intent = Intent(context, PhoneNumberScreenActivity::class.java)
                 startActivity(intent)
             }
 
         }
+
+        bindingView.topUpPlan.setOnClickListener { openComingSoonScreen(ComingSoonViewMode.TOPU_UP) }
+        bindingView.renewPlan.setOnClickListener { openComingSoonScreen(ComingSoonViewMode.RENEW_PLAN) }
+        bindingView.upgradePlan.setOnClickListener { openComingSoonScreen(ComingSoonViewMode.UPGRADE_PLAN) }
+        bindingView.tvBookingViewAll.setOnClickListener {
+            (activity as? MainActivity)?.selectBottomItem(
+                R.id.bookings
+            )
+        }
+        bindingView.profileView.setOnClickListener {
+            val intent = Intent(requireContext(), NewUserProfileActivity::class.java)
+            startActivity(intent)
+        }
         return bindingView.root
+    }
+
+    private fun openComingSoonScreen(viewMode:Int){
+        val intent = Intent(context, ComingSoonActivity::class.java)
+        intent.putExtra(KEY_VIEW_MODE,viewMode)
+        startActivity(intent)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -180,6 +223,19 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
         viewModel.getContent("Bearer " + sharedPreferences.getString("token", ""))
         getBookingData()
         getRenewalPlanList()
+        val dates = getNextSevenDays()
+        val dateAdapter = SubscriptionDateSlotAdapter(dates) { date, position ->
+            getSubscriptionSlots(date)
+        }
+        bindingView.dateSlotRecyclerView.adapter = dateAdapter
+        bindingView.homeSuggestionsRecyclerView.addItemDecoration(
+            HorizontalSpaceItemDecoration(30)
+        )
+        getSubscriptionSlots(dates.first())
+
+        bindingView.btnViewTeam.setOnClickListener {
+            group?.id?.let { groupId -> getGroupDetail(groupId) }
+        }
     }
 
     override fun onTouch(v: View?, event: MotionEvent?): Boolean {
@@ -201,12 +257,12 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
     private lateinit var viewModel: GuestUserViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                context?.sendBroadcast(Intent("finish"))
-                (context as MainActivity).finish()
-            }
-        })
+//        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
+//            override fun handleOnBackPressed() {
+//                context?.sendBroadcast(Intent("finish"))
+//                (context as MainActivity).finish()
+//            }
+//        })
         arguments?.let {
             lat = it.getString(KEY_LAT, "") ?: "" // Provide a default value
             long = it.getString(KEY_LNG, "") ?: "" // Provide a default value
@@ -235,10 +291,13 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                             println("DDLDLDLDLDL")
                             // binding.progressBar.visibility = View.GONE
                             if (state.data?.isNullOrEmpty() == true) {
-
+                                bindingView.tvNodatMyPt.visibility = View.VISIBLE
+                                bindingView.storiesListRecyclerView.visibility = View.GONE
                             } else {
                                 bindingView.storiesListRecyclerView.adapter =
                                     StoryAdapter(requireContext(), state.data, longitude, latitude)
+                                bindingView.tvNodatMyPt.visibility = View.GONE
+                                bindingView.storiesListRecyclerView.visibility = View.VISIBLE
                             }
 //                            binding.recyclerView.adapter = UserAdapter(state.data)
                         }
@@ -282,35 +341,33 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                             } else {
 
                                 val home_background =
-                                    state.data?.firstOrNull { it?.key == "home_background" }
-                                val book_session = state.data?.firstOrNull { it?.key == "book_session" }
+                                    state.data?.firstOrNull { it?.id == HOME_BACKGROUND_ID }
+                                val book_session = state.data?.firstOrNull { it?.id == BOOK_SESSION_ID }
                                 val topup_plan =
-                                    state.data?.firstOrNull { it?.key == "topup_plan" }
-                                val buy_home_pt =
-                                    state.data?.firstOrNull { it?.key == "buy_home_pt" }
+                                    state.data?.firstOrNull { it?.id == TOP_UP_PLAN_ID }
                                 val renew_plan =
-                                    state.data?.firstOrNull { it?.key == "renew_plan" }
+                                    state.data?.firstOrNull { it?.id == RENEW_PLAN_ID }
                                 val upgrade_plan =
-                                    state.data?.firstOrNull { it?.key == "upgrade_plan" }
+                                    state.data?.firstOrNull { it?.id == UPGRADE_PLAN_ID }
                                 val offer_banner =
-                                    state.data?.firstOrNull { it?.key == "offer_banner" }
+                                    state.data?.firstOrNull { it?.id == OFFER_BANNER_ID }
 
                                 if (home_background != null)
-                                    Glide.with(bindingView.backgroundImg)
+                                    Glide.with(requireContext())
                                         .load(home_background?.image).fitCenter()
                                         .into(bindingView.backgroundImg)
                                 if (offer_banner != null)
-                                    Glide.with(bindingView.homeBanner).load(offer_banner?.image)
+                                    Glide.with(requireContext()).load(offer_banner?.image)
                                         .fitCenter().into(bindingView.homeBanner)
                                 // else bindingView.homeBanner.visibility=View.GONE
 
-                                Glide.with(bindingView.homePt).load(buy_home_pt?.image).fitCenter()
+                                Glide.with(requireContext()).load(book_session?.image).fitCenter()
                                     .into(bindingView.homePt)
-                                Glide.with(bindingView.memberShip).load(buy_home_pt?.image)
-                                    .fitCenter().into(bindingView.memberShip)
-                                Glide.with(bindingView.GymPt).load(buy_home_pt?.image).fitCenter()
-                                    .into(bindingView.GymPt)
-                                Glide.with(bindingView.upgradePlan).load(buy_home_pt?.image).fitCenter()
+                                Glide.with(requireContext()).load(renew_plan?.image)
+                                    .fitCenter().into(bindingView.renewPlan)
+                                Glide.with(requireContext()).load(topup_plan?.image).fitCenter()
+                                    .into(bindingView.topUpPlan)
+                                Glide.with(requireContext()).load(upgrade_plan?.image).fitCenter()
                                     .into(bindingView.upgradePlan)
                             }
                         }
@@ -577,10 +634,10 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                 Constants.token, ""
             ).toString() != ""
         ) {
-//            userName.text = "$msg ${sharedPreferences.getString(Constants.name,"")}!"
-            Glide.with(requireActivity()!!)
-                .load(sharedPreferences.getString(Constants.profile_image, "")).fitCenter()
-                .error(R.drawable.guest_user).into(improfile)
+           val nameInitial = sharedPreferences.getString(Constants.name,"")?.firstOrNull()
+            nameInitial?.let {
+                tvProfile.text = it.toString()
+            }
             getchecktype()
         } else {
 //            userName.text = msg
@@ -695,13 +752,31 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                                     jsonObject.optJSONArray("workout_focus")
                                 upcomingSessionsArraylist.add(upcomingbokingModel)
                             }
+                           // if(upcomingSessionsArraylist.isNotEmpty()){
 
                             bindingView.upcomingSessionsRecyclerView.adapter =
-                                UpcomingSessionsAdapter(context, upcomingSessionsArraylist)
+                                UpcomingSessionsAdapter(context, upcomingSessionsArraylist, onCheckInClick = { model ->
+                                    if (model.is_Trainer.equals("false")) {
+                                        val intent = Intent(requireContext(), UpcomingBookingDetails::class.java)
+                                        intent.putExtra("bookingid",model.id)
+                                        intent.putExtra("type",model.type)
+                                        startActivity(intent)
+                                    } else {
+                                        val intent = Intent(activity, RescheduledUpComingBookingDetailActivity::class.java)
+                                        intent.putExtra("bookingid",model.id)
+                                        intent.putExtra("type",model.type)
+                                        startActivity(intent)
+                                    }
+                                })
+                            bindingView.llNodataMyBooking.visibility = View.GONE
                             bindingView.upcomingSessionsRecyclerView.visibility = View.VISIBLE
+                            bindingView.upcomingSessionsRecyclerView.addItemDecoration(
+                                HorizontalSpaceItemDecoration(30)
+                            )
 
                         } else {
                             bindingView.upcomingSessionsRecyclerView.visibility = View.GONE
+                            bindingView.llNodataMyBooking.visibility = View.VISIBLE
                         }
                     }
                 } catch (e: Exception) {
@@ -719,9 +794,28 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
     private fun getRenewalPlanList() {
         GetMethod(ApiURL.getRenewalPlanDetails, activity).startMethod(object : ResponseData {
             override fun response(data: String?) {
-                renewalUpgradeArraylist.clear()
+               // renewalUpgradeArraylist.clear()
                 try {
-                    val jsonObj = JSONObject(data!!)
+                     plansResponse = Gson().fromJson(
+                        data,
+                        GetPlansResponse::class.java
+                    )
+                    plansResponse?.let {
+                        bindingView.homePlansRecyclerView.adapter = GetPlanDetailAdapter(
+                            context,
+                            it.data,
+                            onUseSessionClick = { planDetail ->
+                                openHomeGymActivity(planDetail.type)
+                            },
+                            onBuyMoreClick = {
+                                openComingSoonScreen(ComingSoonViewMode.TOPU_UP)
+                            }
+                        )
+                        bindingView.homePlansRecyclerView.addItemDecoration(
+                            HorizontalSpaceItemDecoration(30)
+                        )
+                    }
+                   /* val jsonObj = JSONObject(data!!)
                     if (jsonObj.optBoolean("status")) {
                         val jsonArray = jsonObj.optJSONArray("data")
                         if (jsonArray.length() > 0) {
@@ -762,7 +856,7 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                             bindingView.smartSuggestion.visibility= View.GONE
                             bindingView.renewUpgradeRecyclerView.visibility = View.GONE
                         }
-                    }
+                    }*/
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -831,4 +925,156 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
 
     }
 
+    private fun getNextSevenDays(): List<String> {
+        val days = mutableListOf<String>()
+        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+        val calendar = Calendar.getInstance()
+
+        repeat(7) {
+            days.add(sdf.format(calendar.time))
+            calendar.add(Calendar.DAY_OF_YEAR, 1)
+        }
+        return days
+    }
+    private fun getSubscriptionSlots(date: String) {
+        val progressDialog: Dialog = ProgressDialog.progressDialog(requireContext(), "")
+        progressDialog.show()
+
+        val api = ApiURL.getSubscriptionSlots + date
+
+        GetMethod(api, requireContext()).startMethod(object : ResponseData {
+
+            override fun response(data: String?) {
+                progressDialog.dismiss()
+
+                try {
+                    val subscriptionSlotsResponse = Gson().fromJson(data, SubscriptionSlotsResponse::class.java)
+                    val trainers = subscriptionSlotsResponse.data.trainers
+
+                    val hasTrainers = !trainers.isNullOrEmpty()
+
+                    bindingView.apply {
+
+                        // Trainers list
+                        if (hasTrainers) {
+                            homeSuggestionsRecyclerView.adapter =
+                                HomeSmartSuggestionsAdapter(
+                                    requireContext(),
+                                    trainers!!,
+                                    listenerQuickBook = { trainer ->
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "QuickBook: ${trainer.name}",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    },
+                                    listenerFullSchedule = { trainer ->
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "FullSchedule: ${trainer.name}",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                )
+                        }
+
+                        homeSuggestionsRecyclerView.visibility =
+                            if (hasTrainers) View.VISIBLE else View.GONE
+
+                        llNodataSubscription.visibility =
+                            if (hasTrainers) View.GONE else View.VISIBLE
+
+                        // Group info
+                        subscriptionSlotsResponse.data.group?.let { grp ->
+                            tvGroupName.text = grp.name
+                            tvGroupSubTitle.text = grp.msg
+
+                            Glide.with(requireContext())
+                                .load(grp.image)
+                                .fitCenter()
+                                .placeholder(R.drawable.train_group_img)
+                                .error(R.drawable.train_group_img)
+                                .into(ivGroup)
+                        }
+                        group = subscriptionSlotsResponse.data.group
+
+                        // Training team visibility
+                        rlTrainingTeam.visibility =
+                            if (subscriptionSlotsResponse.data.isGroup) View.VISIBLE else View.GONE
+                        llNodataTeam.visibility = if (!subscriptionSlotsResponse.data.isGroup) View.VISIBLE else View.GONE
+                    }
+
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+
+            override fun error(error: VolleyError?) {
+                progressDialog.dismiss()
+                error?.printStackTrace()
+            }
+        })
+    }
+
+    private fun showComingSoonMsg() {
+        Toast.makeText(
+            requireContext(), "Coming soon", Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    private fun getGroupDetail(groudId: Int) {
+        val progressDialog: Dialog = ProgressDialog.progressDialog(requireContext(),"")
+        progressDialog.show()
+        val finalPath = ApiURL.getGroupDetail + groudId
+        GetMethod(finalPath, requireContext()).startMethod(object : ResponseData {
+            override fun response(data: String?) {
+                progressDialog.dismiss()
+
+                try {
+                    val groupDetail = Gson().fromJson(data, TrainerGroupDetail::class.java)
+
+                    if (groupDetail.status == true) {
+                        data?.let { openGroupDetailScreen(it, groupDetail.data?.group?.type) }
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+
+            override fun error(error: VolleyError?) {
+                progressDialog.dismiss()
+                error!!.printStackTrace()
+            }
+
+        })
+
+    }
+    private fun openGroupDetailScreen(data: String, type:String?){
+
+        edit.putString("typeWorkout",type).apply()
+        val intent= Intent(requireContext(), TrainerGroupActivity::class.java)
+        intent.putExtra(PASS_DATA,data)
+       // intent.putExtra("studio_id",studio_id) // need this to be discussed
+        intent.putExtra("long",longitude)
+        intent.putExtra("lat",latitude)
+        intent.putExtra("isFromHome",true)
+       // intent.putExtra("trainerId",trainerId) // need this to be discussed
+        startActivity(intent)
+    }
+
+    private fun openHomeGymActivity(type: String? = null) {
+        val intent = Intent(requireContext(), HomeGymTrainerActivity::class.java)
+        val typeSet = plansResponse?.data?.map { it.type }?.toSet() ?: emptySet()
+        val hasHome = "home" in typeSet
+        val hasGym = "gym" in typeSet
+        intent.putExtra(HAS_HOME, hasHome)
+        intent.putExtra(HAS_GYM, hasGym)
+        type?.let {
+            intent.putExtra(
+                HomeGymTrainerActivity.KEY_PT_TYPE,
+                if (it == HomeGymTrainerActivity.KEY_HOME) HomeGymTrainerActivity.KEY_HOME else HomeGymTrainerActivity.KEY_WORK
+            )
+        }
+        startActivity(intent)
+    }
 }

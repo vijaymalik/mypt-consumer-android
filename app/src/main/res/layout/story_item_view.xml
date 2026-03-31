@@ -27,17 +27,18 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:background="@drawable/black_background"
-                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="5dp"
                 app:cardBackgroundColor="@color/home_frag_blk"
                 app:cardCornerRadius="8dp">
 
                 <ImageView
                     android:id="@+id/iconTrn"
-                    android:layout_width="13dp"
-                    android:layout_height="13dp"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
                     android:src="@drawable/menu"
                     android:layout_gravity="center"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="fitXY" />
             </androidx.cardview.widget.CardView>
 
 

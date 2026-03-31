@@ -1,15 +1,16 @@
 package co.com.mypt.fragments.viewModels
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import co.com.mypt.fragments.repository.GuestUserRepository
 import co.com.mypt.model.GetStoriesList.Data.StoryList
 import co.com.mypt.model.HomeContent.Data.Content
+import co.com.mypt.model.TrainerListModelX
 import co.com.mypt.model.TrainerListModelX.Data.Trainer
 import co.com.mypt.retrofitApi.UiState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
@@ -29,6 +30,11 @@ class GuestUserViewModel(
     private val _contentState =
         MutableStateFlow<UiState< List<Content?>?>>(UiState.Loading)
     val contentState = _contentState.asStateFlow()
+
+    private val _exerciseList = MutableLiveData<List<TrainerListModelX.Data.Tag?>>()
+    val exerciseList = _exerciseList
+
+    var isTagsAlreadyFetched = false
 
 
     fun getStories(token: String) {
@@ -74,8 +80,28 @@ class GuestUserViewModel(
                 if (response.isSuccessful) {
 
                     val list = response.body()?.data?.trainers
-                    if (list != null)
+                    if (list != null) {
                         _trainerListState.value = UiState.Success(list)
+
+                        if(!isTagsAlreadyFetched) {
+                            response.body()?.data?.tags?.let { tags ->
+                                if (tags.isNotEmpty()) {
+                                    val updatedTags = tags.toMutableList()
+                                    val allWorkoutTag = TrainerListModelX.Data.Tag(
+                                        description = null,
+                                        icon = null,
+                                        id = null,
+                                        image = null,
+                                        name = "All Workouts"
+                                    )
+
+                                    updatedTags.add(0, allWorkoutTag)
+                                    _exerciseList.postValue(updatedTags)
+                                    isTagsAlreadyFetched = true
+                                }
+                            }
+                        }
+                    }
 
                 } else {
 

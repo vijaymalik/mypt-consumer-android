@@ -53,28 +53,6 @@ data class ReviewPackageCheckout(
 
 
 
-        data class PackageDetails(
-            val address_id: String?,
-            val applied_offer_id: Int?,
-            val best_plan_id: String?,
-            val bonus_sessions: Int?,
-            val is_best_plan: Boolean?,
-            val main_price: Double?,
-            val package_type: String?,
-            val price: Double?,
-            val price_per_session: String?,
-            val sessions: String?,
-            val studio_id: String?,
-            val tax_amount: Double?,
-            val tax_rate: Double?,
-            val text_msg: String?,
-            val total_sessions: Int?,
-            val trainer_id: String?,
-            val type: String?,
-            val validity: String?,
-            val validity_days: Int?
-        )
-
         data class TrainerDetail(
             val is_group: Boolean?,
             val primary_trainer: PrimaryTrainer?,
@@ -121,3 +99,28 @@ data class AvailablePromo(
     val product_type: Int?,
     val purchase_value: Double?
 ):  Parcelable
+@Parcelize
+data class PackageDetails(
+    val address_id: String?,
+    val applied_offer_id: Int?,
+    val best_plan_id: String?,
+    val bonus_sessions: Int?,
+    val is_best_plan: Boolean?,
+    val main_price: Double?,
+    val package_type: String?,
+    val price: Double?,
+    val price_per_session: String?,
+    val sessions: String?,
+    val studio_id: String?,
+    val tax_amount: Double?,
+    val tax_rate: Double?,
+    val text_msg: String?,
+    val total_sessions: Int?,
+    val trainer_id: String?,
+    val type: String?,
+    val validity: String?,
+    val validity_days: Int?,
+    val package_name: String?,
+    val start_date: String?,
+    val end_date: String?
+): Parcelable

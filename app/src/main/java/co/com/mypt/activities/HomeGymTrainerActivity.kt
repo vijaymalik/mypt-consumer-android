@@ -8,8 +8,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
+import co.com.mypt.Api.Constants.HAS_GYM
+import co.com.mypt.Api.Constants.HAS_HOME
 import co.com.mypt.Api.Constants.ISFROMGYMWORKOUT
-import co.com.mypt.GymWorkout.withTrainer.GymListActivity
 import co.com.mypt.Profile.ChangeLocationActivity
 import co.com.mypt.R
 
@@ -47,6 +48,9 @@ class HomeGymTrainerActivity :AppCompatActivity() {
         editor.putString("typeWorkout","").commit()
         editor.putString("typewithout","").commit()
 
+        val hasHome = intent.getBooleanExtra(HAS_HOME, false)
+        val hasGym = intent.getBooleanExtra(HAS_GYM, false)
+
         /*val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
         layoutParams.setMargins(30,25,30,0)
         gymWorkout.setLayoutParams(layoutParams)
@@ -83,6 +87,8 @@ class HomeGymTrainerActivity :AppCompatActivity() {
 
                     val intent= Intent(applicationContext, SelectCurrentLocationActivity::class.java)
                     intent.putExtra(ISFROMGYMWORKOUT,true)
+                    intent.putExtra(HAS_HOME,hasHome)
+                    intent.putExtra(HAS_GYM,hasGym)
                     startActivity(intent)
                    // startActivity(Intent(this, TrainersListActivity::class.java))
                 }
@@ -90,6 +96,8 @@ class HomeGymTrainerActivity :AppCompatActivity() {
                     editor.putString("typeWorkout",type).apply()
                     var intent=Intent(this,ChangeLocationActivity::class.java)
                     intent.putExtra(ISFROMGYMWORKOUT,true)
+                    intent.putExtra(HAS_HOME,hasHome)
+                    intent.putExtra(HAS_GYM,hasGym)
                     startActivity(intent)
 
 //                    var intent=Intent(this, GymListActivity::class.java)
@@ -100,5 +108,18 @@ class HomeGymTrainerActivity :AppCompatActivity() {
 
         }
 
+        val type = intent.getStringExtra(HomeGymTrainerActivity.KEY_PT_TYPE)
+        if (type == KEY_HOME) {
+            homeWorkout.performClick()
+        } else if (type == KEY_WORK) {
+            gymWorkout.performClick()
+        }
+
+    }
+
+    companion object {
+        const val KEY_PT_TYPE = "pt_type"
+        const val KEY_HOME = "home"
+        const val KEY_WORK = "work"
     }
 }

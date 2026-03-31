@@ -234,6 +234,7 @@
                                         android:fontFamily="@font/funnel_sans_medium"
                                         android:gravity="center"
                                         android:text="Applied"
+                                        android:layout_marginStart="5dp"
                                         android:textAllCaps="true"
                                         android:textColor="#1FC16B"
                                         android:textSize="12sp" />
@@ -680,7 +681,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="130dp"
                     android:background="@drawable/black_background"
                     android:orientation="vertical">
 
@@ -904,7 +905,9 @@
                                     android:layout_height="wrap_content"
                                     android:layout_below="@+id/ccvenueTxt"
                                     android:layout_alignStart="@+id/ccvenueTxt"
+                                    android:layout_toStartOf="@+id/ccvenueRadio"
                                     android:layout_marginTop="6dp"
+                                    android:layout_marginEnd="5dp"
                                     android:drawableTint="@color/bg_color_primary_white_55"
                                     android:fontFamily="@font/clash_display_regular"
                                     android:lineHeight="16sp"

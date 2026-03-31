@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -53,29 +54,37 @@ class TrainerGroupActivity : Activity() {
         proceedView.setOnClickListener {
             getPrimaryTrainer()
         }
+        if (intent.getBooleanExtra("isFromHome", false)) {
+            proceedView.visibility = View.GONE
+        } else {
+            proceedView.visibility = View.VISIBLE
+        }
     }
     fun getPrimaryTrainer() {
         val studio_id=intent.getStringExtra("studio_id")
         val longitude=intent.getStringExtra("long")
         val latitude=intent.getStringExtra("lat")
         val trainerId=intent.getStringExtra("trainerId")
+        val addressId=intent.getStringExtra("address_id")
         if (sharedPreferences.getString("typeWorkout", "").equals("home")) {
-            val intent = Intent(this, CreatePackagectivity::class.java)
+            val intent = Intent(this, BestPlanTotalSessionWrapperActivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             intent.putExtra("trainer_id", trainerId)
             intent.putExtra("studio_id", studio_id)
             intent.putExtra("type", sharedPreferences.getString("typeWorkout", ""))
             intent.putExtra("long", longitude)
             intent.putExtra("lat", latitude)
+            intent.putExtra("address_id", addressId)
             startActivity(intent)
         } else {
-            val intent = Intent(this, CreatePackagectivity::class.java)
+            val intent = Intent(this, BestPlanTotalSessionWrapperActivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             intent.putExtra("trainer_id", trainerId)
             intent.putExtra("studio_id", studio_id)
             intent.putExtra("type", sharedPreferences.getString("typeWorkout", ""))
             intent.putExtra("long", longitude)
             intent.putExtra("lat", latitude)
+            intent.putExtra("address_id", addressId)
             startActivity(intent)
 
         }

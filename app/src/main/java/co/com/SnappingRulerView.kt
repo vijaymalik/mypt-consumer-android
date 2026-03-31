@@ -25,7 +25,6 @@ class SnappingRulerView @JvmOverloads constructor(
     private val spikeWidth = 4f
     private val spikeInterval = 10  // large spike every 10 units
     private val pixelsPerUnit = 15f  // 20 pixels per unit
-
     private val largeSpikeTextColor = Color.parseColor("#494C4D")
     private val largeSpikeColor = Color.parseColor("#828485")
     private val smallSpikeColor = Color.parseColor("#525556")

@@ -7,9 +7,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.media3.ui.PlayerView
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 import co.com.mypt.R
@@ -28,7 +30,7 @@ class TrainerListAdapter(
     var latitude: Double?,
     var longitude: Double?,
     var studio_id: String,
-    var clickListener:(Boolean,String, String)->Unit
+    var clickListener:(Boolean,Boolean, String, String)->Unit
 ) : RecyclerView.Adapter<TrainerListAdapter.ViewHolder>() {
     lateinit var sharedPreferences:SharedPreferences
     private var trainerListModels: List<TrainersModel>
@@ -47,6 +49,8 @@ class TrainerListAdapter(
 //        val availableSlots : TextView = item.findViewById(R.id.availableSlots)
         val trainerImage : ImageView = item.findViewById(R.id.trainerImage)
         val relative : RelativeLayout = item.findViewById(R.id.relative)
+        val playerView : PlayerView = item.findViewById(R.id.playerView)
+        val btnSoundToggle : ImageButton = item.findViewById(R.id.btnSoundToggle)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -128,24 +132,70 @@ class TrainerListAdapter(
         holder.totalRatings.text = trainersModel.noOfRating+" ratings"
         holder.distance.text = trainersModel.distance
         holder.place.text = trainersModel.location
-        if(trainersModel.slot == "no"){
+
+        if(trainersModel.isPackage == true){
+            holder.bookSlot.text ="Book Slot"
+            if(trainersModel.slot == "no"){
 //            holder.hurryUp.text = "No slots available"
-            holder.bookSlot.setOnClickListener {}
-            holder.bookSlot.background
+                holder.bookSlot.setOnClickListener {}
+                holder.bookSlot.background
 //            holder.availableSlots.visibility = View.GONE
-            holder.bookSlot.setBackgroundColor(context.resources.getColor(R.color.buttongreycolor,null))
-            holder.bookSlot.setTextColor(context.resources.getColor(R.color.white,null))
-        }
-        else {
+                holder.bookSlot.setBackgroundColor(context.resources.getColor(R.color.buttongreycolor,null))
+                holder.bookSlot.setTextColor(context.resources.getColor(R.color.white,null))
+            }
+            else {
 //            holder.availableSlots.text = "Only ${trainersModel.slot} slots available"
-            holder.bookSlot.setOnClickListener {
-                val pos = it.tag as Int
-                var trainersModel=trainerListModels[pos]
+                holder.bookSlot.setOnClickListener {
+                    val pos = it.tag as Int
+                    var trainersModel=trainerListModels[pos]
 
 //                if (trainersModel.is_group==false){
                     val query=if (typeWorkout =="home") "type=home&trainer_id=${trainersModel.id}"  else "type=gym&trainer_id=${trainersModel.id}&studio_id=${trainersModel.studio_id}"
 
-                    clickListener(/*trainersModel.is_group*/true?:false,query,trainersModel.id)
+                    clickListener(trainersModel.isPackage?:false,trainersModel.is_group?:false,query,trainersModel.id)
+//                    return@setOnClickListener
+//                }
+                    /*if (sharedPreferences.getString("typeWorkout","").equals("home")){
+                        var intent = Intent(context, AddressListForTrainerActivity::class.java)
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        intent.putExtra("trainer_id",trainersModel.id)
+                        intent.putExtra("studio_id",studio_id)
+                        intent.putExtra("type",typeWorkout)
+                        intent.putExtra("long",longitude)
+                        Log.e("longitiude",""+longitude)
+                        intent.putExtra("lat",latitude)
+                        Log.e("lati",""+latitude)
+                        context.startActivity(intent)
+                    }else{
+                        var intent = Intent(context, BookSlot::class.java)
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        intent.putExtra("trainer_id",trainersModel.id)
+                        intent.putExtra("studio_id",studio_id)
+                        intent.putExtra("type",typeWorkout)
+                        intent.putExtra("long",longitude)
+                        Log.e("longitiude",""+longitude)
+                        intent.putExtra("lat",latitude)
+                        Log.e("lati",""+latitude)
+                        context.startActivity(intent)
+
+                    }*/
+
+                }
+                holder.bookSlot.setBackgroundColor(context.resources.getColor(R.color.headingcolor,null))
+//            holder.hurryUp.text = context.resources.getString(R.string.hurry_up)
+//            holder.availableSlots.visibility = View.VISIBLE
+                holder.bookSlot.setTextColor(context.resources.getColor(R.color.buttontextcolor,null))
+            }
+        }
+        else{
+            holder.bookSlot.text ="Select this trainer"
+            holder.bookSlot.setOnClickListener {
+                val pos = it.tag as Int
+                var trainersModel=trainerListModels[pos]
+
+                val query=if (typeWorkout =="home") "type=home&trainer_id=${trainersModel.id}"  else "type=gym&trainer_id=${trainersModel.id}&studio_id=${trainersModel.studio_id}"
+
+                clickListener(trainersModel.isPackage?:false,trainersModel.is_group?:false,query,trainersModel.id)
 //                    return@setOnClickListener
 //                }
                 /*if (sharedPreferences.getString("typeWorkout","").equals("home")){
@@ -178,9 +228,64 @@ class TrainerListAdapter(
 //            holder.hurryUp.text = context.resources.getString(R.string.hurry_up)
 //            holder.availableSlots.visibility = View.VISIBLE
             holder.bookSlot.setTextColor(context.resources.getColor(R.color.buttontextcolor,null))
-        }
-        Glide.with(context).load(trainersModel.profile).fitCenter().into(holder.trainerImage)
 
+        }
+        /*if(trainersModel.slot == "no"){
+//            holder.hurryUp.text = "No slots available"
+            holder.bookSlot.setOnClickListener {}
+            holder.bookSlot.background
+//            holder.availableSlots.visibility = View.GONE
+            holder.bookSlot.setBackgroundColor(context.resources.getColor(R.color.buttongreycolor,null))
+            holder.bookSlot.setTextColor(context.resources.getColor(R.color.white,null))
+        }
+        else {
+//            holder.availableSlots.text = "Only ${trainersModel.slot} slots available"
+            holder.bookSlot.setOnClickListener {
+                val pos = it.tag as Int
+                var trainersModel=trainerListModels[pos]
+
+//                if (trainersModel.is_group==false){
+                    val query=if (typeWorkout =="home") "type=home&trainer_id=${trainersModel.id}"  else "type=gym&trainer_id=${trainersModel.id}&studio_id=${trainersModel.studio_id}"
+
+                    clickListener(trainersModel.isPackage?:false,trainersModel.is_group?:false,query,trainersModel.id)
+//                    return@setOnClickListener
+//                }
+                *//*if (sharedPreferences.getString("typeWorkout","").equals("home")){
+                    var intent = Intent(context, AddressListForTrainerActivity::class.java)
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    intent.putExtra("trainer_id",trainersModel.id)
+                    intent.putExtra("studio_id",studio_id)
+                    intent.putExtra("type",typeWorkout)
+                    intent.putExtra("long",longitude)
+                    Log.e("longitiude",""+longitude)
+                    intent.putExtra("lat",latitude)
+                    Log.e("lati",""+latitude)
+                    context.startActivity(intent)
+                }else{
+                    var intent = Intent(context, BookSlot::class.java)
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    intent.putExtra("trainer_id",trainersModel.id)
+                    intent.putExtra("studio_id",studio_id)
+                    intent.putExtra("type",typeWorkout)
+                    intent.putExtra("long",longitude)
+                    Log.e("longitiude",""+longitude)
+                    intent.putExtra("lat",latitude)
+                    Log.e("lati",""+latitude)
+                    context.startActivity(intent)
+
+                }*//*
+
+            }
+            holder.bookSlot.setBackgroundColor(context.resources.getColor(R.color.headingcolor,null))
+//            holder.hurryUp.text = context.resources.getString(R.string.hurry_up)
+//            holder.availableSlots.visibility = View.VISIBLE
+            holder.bookSlot.setTextColor(context.resources.getColor(R.color.buttontextcolor,null))
+        }*/
+        Glide.with(context).load(trainersModel.profile).fitCenter().into(holder.trainerImage)
+        holder.playerView.visibility = View.GONE
+        holder.btnSoundToggle.visibility = View.GONE
+        holder.trainerImage.visibility = View.VISIBLE
+        holder.playerView.player = null
     }
 
     fun filterList(filteredList: MutableList<TrainersModel>) {

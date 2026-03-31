@@ -40,13 +40,21 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.preference.PreferenceManager
 import co.com.mypt.Api.ApiURL
 import co.com.mypt.Api.Constants
+import co.com.mypt.Api.Constants.HAS_GYM
+import co.com.mypt.Api.Constants.IS_GYM_MEMBERSHIP_FLOW
 import co.com.mypt.Api.GetMethod
 import co.com.mypt.Api.ResponseData
+import co.com.mypt.ComingSoonViewMode
+import co.com.mypt.GymWorkout.withTrainer.GymListActivity
+import co.com.mypt.Profile.NewUserProfileActivity
 import co.com.mypt.ProgressDialog
 import co.com.mypt.R
 import co.com.mypt.activities.ChooseLocationActivity
+import co.com.mypt.activities.ComingSoonActivity
 import co.com.mypt.activities.HomeGymTrainerActivity
 import co.com.mypt.activities.MainActivity
+import co.com.mypt.adapter.HomeTrainerListExerciseAdapter
+import co.com.mypt.adapter.HomeTrainerTagAdapter
 import co.com.mypt.adapter.StoryAdapter
 import co.com.mypt.adapter.TrainerGridViewAdapter
 import co.com.mypt.adapter.TrainerListAdapter
@@ -55,12 +63,14 @@ import co.com.mypt.fragments.viewModels.GuestUserViewModel
 import co.com.mypt.model.NearByGymModel
 import co.com.mypt.model.ShopCategoryModel
 import co.com.mypt.model.ShopProductsModel
+import co.com.mypt.model.TrainerListModelX
 import co.com.mypt.model.TrainersModel
 import co.com.mypt.model.TransformationModel
 import co.com.mypt.model.UpcomingClassModel
 import co.com.mypt.onBoarding.PhoneNumberScreenActivity
 import co.com.mypt.retrofitApi.UiState
 import co.com.mypt.retrofitApi.UserViewModelFactory
+import co.com.mypt.utils.HorizontalSpaceItemDecoration
 import com.android.volley.VolleyError
 import com.bumptech.glide.Glide
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -83,9 +93,9 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
     ViewTreeObserver.OnScrollChangedListener {
     var upcomingClassArraylist = ArrayList<UpcomingClassModel>()
     var nearByGymArraylist = ArrayList<NearByGymModel>()
-    lateinit var red_circle: ImageView
     lateinit var imUpcomingBlur: ImageView
-    lateinit var improfile: ImageView
+    lateinit var bookAssesment: ImageView
+    lateinit var tvProfile: TextView
     lateinit var tvlocation: TextView
     lateinit var allNearByGym: TextView
 
@@ -108,6 +118,7 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
     lateinit var sharedPreferences: SharedPreferences
     lateinit var edit: SharedPreferences.Editor
     lateinit var bindingView: FragmentGuestUserHomeNewBinding
+    private var progressDialog: Dialog? = null
 
     companion object {
         private const val KEY_LAT = "lat"
@@ -136,7 +147,8 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireActivity())
         edit = sharedPreferences.edit()
         tvlocation = bindingView.location
-        improfile = bindingView.improfile
+        tvProfile = bindingView.tvProfile
+        bookAssesment = bindingView.bookAssesment
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
         geocoder = Geocoder(requireActivity(), Locale.getDefault())
@@ -161,12 +173,62 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                 ).toString() != ""
             ) {
                 val intent = Intent(context, HomeGymTrainerActivity::class.java)
+                intent.putExtra(HomeGymTrainerActivity.KEY_PT_TYPE, HomeGymTrainerActivity.KEY_HOME)
                 startActivity(intent)
             } else {
                 val intent = Intent(context, PhoneNumberScreenActivity::class.java)
                 startActivity(intent)
             }
 
+        }
+        bindingView.gymPt.setOnClickListener {
+            if (sharedPreferences.getString(
+                    Constants.token,
+                    "-1"
+                ) != "-1" || sharedPreferences.getString(
+                    Constants.token, ""
+                ).toString() != ""
+            ) {
+                val intent = Intent(context, HomeGymTrainerActivity::class.java)
+                intent.putExtra(HomeGymTrainerActivity.KEY_PT_TYPE, HomeGymTrainerActivity.KEY_WORK)
+                startActivity(intent)
+            } else {
+                val intent = Intent(context, PhoneNumberScreenActivity::class.java)
+                startActivity(intent)
+            }
+        }
+
+        bindingView.memberShip.setOnClickListener {
+            val intent=Intent(context, GymListActivity::class.java)
+            intent.putExtra("longitude",longitude)
+            intent.putExtra("latitude",latitude)
+            intent.putExtra(IS_GYM_MEMBERSHIP_FLOW,true)
+            startActivity(intent)
+        }
+        bookAssesment.setOnClickListener {
+            openBookAssessment()
+        }
+        bindingView.bookDemoView.setOnClickListener {
+            openBookAssessment()
+        }
+        bindingView.choosePlanView.setOnClickListener {
+            if (sharedPreferences.getString(
+                    Constants.token,
+                    "-1"
+                ) != "-1" || sharedPreferences.getString(
+                    Constants.token, ""
+                ).toString() != ""
+            ) {
+                val intent = Intent(context, HomeGymTrainerActivity::class.java)
+                startActivity(intent)
+            } else {
+                val intent = Intent(context, PhoneNumberScreenActivity::class.java)
+                startActivity(intent)
+            }
+        }
+        bindingView.profileView.setOnClickListener {
+            val intent = Intent(requireContext(), NewUserProfileActivity::class.java)
+            startActivity(intent)
         }
         return bindingView.root
     }
@@ -200,12 +262,12 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
     private lateinit var viewModel: GuestUserViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                context?.sendBroadcast(Intent("finish"))
-                (context as MainActivity).finish()
-            }
-        })
+//        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
+//            override fun handleOnBackPressed() {
+//                context?.sendBroadcast(Intent("finish"))
+//                (context as MainActivity).finish()
+//            }
+//        })
         arguments?.let {
             lat = it.getString(KEY_LAT, "") ?: "" // Provide a default value
             long = it.getString(KEY_LNG, "") ?: "" // Provide a default value
@@ -214,7 +276,21 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
 
     }
 
+    private fun openBookAssessment(){
+        val intent = Intent(context, ComingSoonActivity::class.java)
+        intent.putExtra(ComingSoonActivity.KEY_VIEW_MODE, ComingSoonViewMode.FREE_ASSESSMENT)
+        startActivity(intent)
+    }
+
     private fun collectUsers() {
+
+        viewModel.exerciseList.observe(viewLifecycleOwner){ list ->
+                bindingView.exerciseRecyclerView.adapter = HomeTrainerTagAdapter(requireContext(),
+                    list?.filterNotNull() ?: emptyList()
+                ){ tag ->
+                    getTrainerList(tagId = tag.id)
+                }
+        }
 
         viewLifecycleOwner.lifecycleScope.launch {
 
@@ -227,17 +303,19 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                     when (state) {
 
                         is UiState.Loading -> {
-                            //binding.progressBar.visibility = View.VISIBLE
+
                         }
 
                         is UiState.Success -> {
-                            println("DDLDLDLDLDL")
-                            // binding.progressBar.visibility = View.GONE
-                            if (state.data?.isNullOrEmpty() == true) {
 
+                            if (state.data?.isNullOrEmpty() == true) {
+                                bindingView.llNodataPt.visibility = View.VISIBLE
+                                bindingView.storiesListRecyclerView.visibility = View.GONE
                             } else {
+                                bindingView.llNodataPt.visibility = View.GONE
+                                bindingView.storiesListRecyclerView.visibility = View.VISIBLE
                                 bindingView.storiesListRecyclerView.adapter =
-                                    StoryAdapter(requireContext(), state.data, longitude, latitude)
+                                    StoryAdapter(requireContext(), state.data, latitude, longitude)
                             }
 //                            binding.recyclerView.adapter = UserAdapter(state.data)
                         }
@@ -270,13 +348,14 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                     when (state) {
 
                         is UiState.Loading -> {
-                            //binding.progressBar.visibility = View.VISIBLE
+                            showProgress()
                         }
 
                         is UiState.Success -> {
-                            // binding.progressBar.visibility = View.GONE
-                            if (state.data?.isNullOrEmpty() == true) {
-
+                          hideProgress()
+                            if (state.data.isNullOrEmpty()) {
+                                bindingView.llNodataTrainers.visibility = View.VISIBLE
+                                bindingView.nearByGymRecyclerView.visibility = View.GONE
                             } else {
                                 val dataList = state.data?.map {
                                     val trainerModel=TrainersModel()
@@ -303,11 +382,17 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                                     longitude, ""
                                 ) { isGrp, type, id -> }
                                 bindingView.nearByGymRecyclerView.adapter = trainerListAdapter
+                                bindingView.nearByGymRecyclerView.addItemDecoration(
+                                    HorizontalSpaceItemDecoration(5)
+                                )
+                                bindingView.llNodataTrainers.visibility = View.GONE
+                                bindingView.nearByGymRecyclerView.visibility = View.VISIBLE
                             }
 
                         }
 
                         is UiState.Error -> {
+                            hideProgress()
                         }
                     }
                 }
@@ -344,14 +429,14 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                              val offer_banner=state.data?.firstOrNull { it?.key =="offer_banner" }
 
                                 if (home_background !=null)
-                                Glide.with(bindingView.backgroundImg).load(home_background?.image).fitCenter().into(bindingView.backgroundImg)
+                                Glide.with(requireContext()).load(home_background?.image).fitCenter().into(bindingView.backgroundImg)
                                 if (offer_banner !=null)
-                                    Glide.with(bindingView.homeBanner).load(offer_banner?.image).fitCenter().into(bindingView.homeBanner)
+                                    Glide.with(requireContext()).load(offer_banner?.image).fitCenter().into(bindingView.homeBanner)
                                // else bindingView.homeBanner.visibility=View.GONE
 
-                                Glide.with(bindingView.homePt).load(buy_home_pt?.image).fitCenter().into(bindingView.homePt)
-                                Glide.with(bindingView.memberShip).load(buy_gym_membership?.image).fitCenter().into(bindingView.memberShip)
-                                Glide.with(bindingView.GymPt).load(buy_gym_pt?.image).fitCenter().into(bindingView.GymPt)
+                                Glide.with(requireContext()).load(buy_home_pt?.image).fitCenter().into(bindingView.homePt)
+                                Glide.with(requireContext()).load(buy_gym_membership?.image).fitCenter().into(bindingView.memberShip)
+                                Glide.with(requireContext()).load(buy_gym_pt?.image).fitCenter().into(bindingView.gymPt)
                             }
                         }
 
@@ -430,7 +515,7 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
         })
     }
 
-    private fun getTrainerList() {
+    private fun getTrainerList(tagId: Int?=null) {
 
         var api = ""
         val param: MutableMap<String, String> = HashMap()
@@ -439,10 +524,11 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
 
 //        param["gender"] = "" + genderId
 //        param["language"] = "" + languageId
-        param["lat"] = "" + "25.276987"//latitude
-        param["long"] = "" + "55.296249"//longitude
+        param["lat"] = "" + latitude
+        param["long"] = "" + longitude
 //        param["time_slot"] = "" + timeSlotId
-//        param["tag_id"] = "" + tag_id
+        if (tagId != null)
+            param["tag_id"] = "" + tagId
 //        param["nationality"] = "" + nationId
         Log.e("trainerListParam", param.toString())
 
@@ -637,9 +723,10 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
             ).toString() != ""
         ) {
 //            userName.text = "$msg ${sharedPreferences.getString(Constants.name,"")}!"
-            Glide.with(requireActivity()!!)
-                .load(sharedPreferences.getString(Constants.profile_image, "")).fitCenter()
-                .error(R.drawable.guest_user).into(improfile)
+            val nameInitial = sharedPreferences.getString(Constants.name,"")?.firstOrNull()
+            nameInitial?.let {
+                tvProfile.text = it.toString()
+            }
             getchecktype()
         } else {
 //            userName.text = msg
@@ -812,14 +899,6 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
 
                         }
 
-
-                        if (!jsonObj.optJSONObject("data").optBoolean("userHaveRequest")) {
-                            red_circle.visibility = View.GONE
-                        } else {
-                            red_circle.visibility = View.VISIBLE
-
-                        }
-
                     } else {
 
                     }
@@ -837,6 +916,20 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
 
         })
 
+    }
+
+    private fun showProgress() {
+        if (progressDialog == null) {
+            progressDialog = ProgressDialog.progressDialog(requireContext(), "")
+        }
+
+        if (!(requireActivity().isFinishing) && progressDialog?.isShowing == false) {
+            progressDialog?.show()
+        }
+    }
+
+    private fun hideProgress() {
+        progressDialog?.dismiss()
     }
 
 }

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:fitsSystemWindows="true"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent"
+    android:background="@color/buttontextcolor"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.fragment.app.FragmentContainerView
@@ -65,8 +65,8 @@
             android:elevation="0dp"
             app:menu="@menu/bottom_menu"
             app:labelVisibilityMode="labeled"
-            app:itemIconTint="@color/white"
-            app:itemTextColor="@color/red"/>
+            app:itemIconTint="@color/nav_icon_color"
+            app:itemTextColor="@color/nav_item_color"/>
 
     <!--</RelativeLayout>-->
 

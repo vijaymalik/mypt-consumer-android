@@ -37,12 +37,11 @@ class ViewCouponsOfferActivity : AppCompatActivity() {
             couponsModelList.add(activityModel)
         }*/
         var couponAdapter= CouponAdapter(this,couponsModelList){it,name->
-            val intent = Intent("selectedReviewCoupon")
+
+            val resultIntent = Intent()
             intent.putExtra("couponId", it)
             intent.putExtra("couponName", name)
-            LocalBroadcastManager
-                .getInstance(this)
-                .sendBroadcast(intent)
+            setResult(RESULT_OK, resultIntent)
             finish()
         }
         recyclerCoupon.adapter=couponAdapter

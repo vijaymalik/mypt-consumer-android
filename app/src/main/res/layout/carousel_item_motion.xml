@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="240dp"
 
-     android:layout_height="310dp">
+    android:layout_height="310dp">
 
     <ImageView
         android:id="@+id/topBackground"
@@ -22,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/funnel_sans_medium"
-            android:text="Most Popular"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="20sp" />
 
@@ -32,7 +33,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/funnel_sans_regular"
             android:paddingTop="2dp"
-            android:text="100 sessions"
+            android:text=""
             android:textColor="@color/grey_button"
             android:textSize="14sp" />
 
@@ -40,9 +41,9 @@
             android:id="@+id/packagePrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/funnel_sans_medium"
+            android:fontFamily="@font/clash_display_medium"
             android:paddingTop="10dp"
-            android:text="AED 6,500"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="24sp" />
 
@@ -56,22 +57,25 @@
                 android:id="@+id/perSession"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/funnel_sans_medium"
-                android:text="AED 70/session"
-                android:textColor="@color/location_txt"
+                android:fontFamily="@font/funnel_sans_regular"
+                android:text=""
+                android:textColor="@color/session"
                 android:textSize="12sp" />
 
-            <View
-                android:layout_width="2dp"
-                android:layout_height="2dp"
-                android:background="@drawable/dot" />
+            <ImageView
+                android:layout_width="5dp"
+                android:layout_height="5dp"
+                android:layout_marginHorizontal="6dp"
+                android:src="@drawable/diamond_white"
+                app:tint="@color/light_lavender" />
 
             <TextView
+                android:id="@+id/tvValidity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/funnel_sans_medium"
-                android:text="Most Popular"
-                android:textColor="@color/location_txt"
+                android:fontFamily="@font/funnel_sans_regular"
+                android:text=""
+                android:textColor="@color/session"
                 android:textSize="12sp" />
         </LinearLayout>
 
@@ -83,31 +87,80 @@
             android:background="@drawable/category_border_bg"
             android:fontFamily="@font/funnel_sans_semibold"
             android:lineHeight="16sp"
-            android:padding="4dp"
+            android:paddingVertical="4dp"
+            android:paddingHorizontal="8dp"
             android:scaleType="centerCrop"
-            android:text="SAVE AED 300"
+            android:text=""
             android:textColor="#D1ECCC"
             android:textSize="12sp" />
-
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical"
+           >
+
+            <!-- LEFT SIDE -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="-1dp"
+                    android:background="@drawable/divider_line_gradient_white_left"/>
+
+                <ImageView
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:background="@drawable/diamond_white"/>
+            </LinearLayout>
+
+            <!-- TEXT -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:fontFamily="@font/funnel_sans_semibold"
                 android:lineHeight="16sp"
-                android:padding="4dp"
                 android:scaleType="centerCrop"
                 android:text="PERKS"
-                android:textColor="@color/grey_button"
+                android:layout_marginHorizontal="10dp"
+                android:textColor="@color/text_color_neutral_200"
                 android:textSize="12sp" />
-        </RelativeLayout>
+            <!-- RIGHT SIDE -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:src="@drawable/diamond_white"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="-1dp"
+                    android:background="@drawable/divider_line_gradient_white_right"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
         <LinearLayout
             android:id="@+id/perksText"
             android:orientation="vertical"
+            android:layout_marginTop="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 

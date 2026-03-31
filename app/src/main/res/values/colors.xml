@@ -92,5 +92,10 @@
     <color name="session">#CBD8E0</color>
     <color name="location_txt">#BFFAFAFA</color>
     <color name="light_yellow">#9CB201</color>
+    <color name="light_gold">#FFF2C0</color>
+    <color name="gold_700">#B26B00</color>
+    <color name="light_lavender">#DFD0EF</color>
+
+
 
 </resources>

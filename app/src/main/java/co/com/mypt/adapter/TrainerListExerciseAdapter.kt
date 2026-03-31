@@ -16,7 +16,8 @@ import java.util.ArrayList
 
 class TrainerListExerciseAdapter(
     val activity: Context,
-    val exerciseList: ArrayList<ExerciseModel>
+    val exerciseList: ArrayList<ExerciseModel>,
+    private val onTagClick: ((String, String) -> Unit)? = null
 ) : RecyclerView.Adapter<TrainerListExerciseAdapter.ViewHolder>() {
     var selectedIndex = 0
     class ViewHolder(item:View) : RecyclerView.ViewHolder(item) {
@@ -44,20 +45,23 @@ class TrainerListExerciseAdapter(
             holder.ll.background = null
             holder.exercise.setTextColor(activity.resources.getColor(R.color.headingcolor))
         }
-        Glide.with(activity!!).load(exerciseModel.icon).fitCenter().error(R.drawable.dumbbell).placeholder(R.drawable.dumbbell).into(holder.exerciseIcon)
+        if (!exerciseModel.icon.isNullOrEmpty() && exerciseModel.icon!="null") {
+            Glide.with(activity).load(exerciseModel.icon).fitCenter().error(R.drawable.dumbbell)
+                .placeholder(R.drawable.dumbbell).into(holder.exerciseIcon)
+        }else {
+            holder.exerciseIcon.setImageResource(R.drawable.dumbbell)
+        }
         holder.exercise.setText(exerciseModel.name)
         holder.ll.setOnClickListener {
             val pos = it.tag as Int
             selectedIndex = pos
-            var exerciseModel=exerciseList.get(pos)
-            var intent= Intent("tag")
-            if (exerciseModel.name.equals("All Workouts")){
-                intent.putExtra("filter","0")
-            }else{
-                intent.putExtra("filter","1")
+            val exerciseModel=exerciseList.get(pos)
+            val filter = if (exerciseModel.name == "All Workouts") {
+                "0"
+            } else {
+                "1"
             }
-            intent.putExtra("tag_id",exerciseModel.id)
-            activity.sendBroadcast(intent)
+            onTagClick?.invoke(exerciseModel.id, filter)
             notifyDataSetChanged()
         }
     }

@@ -1,24 +1,34 @@
 package co.com.mypt.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class GetStoriesList(
     val data: Data?,
     val msg: String?,
     val status: Boolean?
-) {
+) : Parcelable {
+
+    @Parcelize
     data class Data(
         val data: List<StoryList?>?,
         val pagination: Pagination?
-    ) {
+    ) : Parcelable {
+
+        @Parcelize
         data class StoryList(
             val category_description: String?,
-            val category_icon: Any?,
+            val category_icon: String?,
             val category_id: Int?,
-            val category_image: Any?,
+            val category_image: String?,
             val category_name: String?,
             val category_order: Int?,
             val stories: List<Story?>?,
             val stories_count: Int?
-        ) {
+        ) : Parcelable {
+
+            @Parcelize
             data class Story(
                 val caption: String?,
                 val cta_text: String?,
@@ -30,9 +40,10 @@ data class GetStoriesList(
                 val thumb_path: String?,
                 val title: String?,
                 val type: String?
-            )
+            ) : Parcelable
         }
 
+        @Parcelize
         data class Pagination(
             val current_page: Int?,
             val from: Int?,
@@ -41,6 +52,6 @@ data class GetStoriesList(
             val per_page: Int?,
             val to: Int?,
             val total: Int?
-        )
+        ) : Parcelable
     }
 }

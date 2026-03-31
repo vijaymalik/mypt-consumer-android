@@ -10,7 +10,7 @@
         android:layout_height="80dp"
         android:layout_below="@+id/card"
         android:layout_marginTop="-30dp"
-        android:background="@drawable/grey_rectangle">
+        android:background="@drawable/dark_grey_rectangle_background">
 
         <View
             android:id="@+id/aliner"
@@ -44,7 +44,7 @@
             android:textColor="#B3B3B3"
             android:textSize="14sp" />
         <LinearLayout
-            android:id="@+id/ddd"
+            android:id="@+id/llCheckIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/aliner"
@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
 
-                android:fontFamily="@font/manrope_semi_bold"
+                android:fontFamily="@font/funnel_sans_semibold"
                 android:text="Check-in"
                 android:textAllCaps="true"
                 android:textColor="@color/headingcolor"
@@ -90,7 +90,7 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/trainer_bg_home" />
+                android:background="@drawable/selection_card" />
 
             <ImageView
                 android:id="@+id/im"
@@ -155,7 +155,7 @@
                         android:fontFamily="@font/funnel_sans_regular"
                         android:paddingStart="8dp"
                         android:text="10:00am - 11:00am"
-                        android:textColor="#FAFAFABF"
+                        android:textColor="@color/location_txt"
                         android:textSize="12sp" />
 
                     <ImageView
@@ -177,7 +177,7 @@
                         android:paddingStart="8dp"
                         android:maxLines="2"
                         android:text="Near Dubai Mall"
-                        android:textColor="#FAFAFABF"
+                        android:textColor="@color/location_txt"
                         android:textSize="12sp" />
                 </RelativeLayout>
 

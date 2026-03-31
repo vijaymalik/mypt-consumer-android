@@ -334,7 +334,9 @@ class MyTrainerActivity : AppCompatActivity() {
                             exerciseModel.icon = jsonObject1.optString("icon")
                             exerciseList.add(exerciseModel)
                         }
-                        exerciseRecyclerView.adapter = TrainerListExerciseAdapter(applicationContext,exerciseList)
+                        exerciseRecyclerView.adapter = TrainerListExerciseAdapter(applicationContext,exerciseList){ tagId, filter->
+                            getTrainerList(tagId,filter)
+                        }
 
                     }
 
@@ -492,28 +494,8 @@ class MyTrainerActivity : AppCompatActivity() {
             showGPSDisabledAlertToUser()
             return
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            registerReceiver(TrainerList, IntentFilter("tag"), RECEIVER_EXPORTED)
-        } else {
-            @Suppress("UnspecifiedRegisterReceiverFlag")
-            registerReceiver(TrainerList, IntentFilter("tag"))
-        }
         getTrainerList(tag_id,filter)
 
-
-
-    }
-
-    var TrainerList: BroadcastReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            try {
-                filter= intent.getStringExtra("filter")!!
-                tag_id= intent.getStringExtra("tag_id")!!
-                getTrainerList(tag_id,filter)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
     }
 
     private fun getTrainerList(tag_id: String?, filter: String?) {

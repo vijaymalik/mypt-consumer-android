@@ -32,7 +32,6 @@ import co.com.mypt.Api.PostMethod
 import co.com.mypt.Api.ResponseData
 import co.com.mypt.ProgressDialog
 import co.com.mypt.R
-import co.com.mypt.activities.CreatePackagectivity
 import co.com.mypt.adapter.JoinAdapter
 import co.com.mypt.model.JoinModel
 import com.android.volley.VolleyError

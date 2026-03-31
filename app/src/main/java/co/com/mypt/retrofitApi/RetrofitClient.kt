@@ -1,6 +1,6 @@
 package co.com.mypt.retrofitApi
 
-import androidx.preference.PreferenceManager
+import co.com.mypt.Api.ApiURL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
 
-    private const val BASE_URL = "https://mobileappuat.mypt-me.com/api/"
+    private const val BASE_URL = ApiURL.Baseurl
 
     private val logger = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY

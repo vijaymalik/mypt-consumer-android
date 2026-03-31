@@ -1,35 +1,54 @@
 package co.com.mypt.fragments
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.View
 import androidx.fragment.app.Fragment
 import co.com.mypt.R
 
 class HomePlaceholderFragment : Fragment(R.layout.fragment_placeholder) {
 
+    private var currentChildTag: String? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val isActiveUser = arguments?.getBoolean("isActiveUser") ?: false
-        val name = arguments?.getString("name") ?: ""
-        val lat = arguments?.getString("lat") ?: ""
-        val long = arguments?.getString("long") ?: ""
-        val chooseAddress = arguments?.getString("chooseAddress") ?: ""
 
+        // Optional: load default state if arguments exist
+        val isActiveUser = arguments?.getBoolean("isActiveUser")
 
-        Handler(Looper.getMainLooper()).postDelayed({
-            val frag = if (!isActiveUser) {
-                ActiveUserHomeFragmentNew.newInstance( lat, long,chooseAddress)
-            } else {
-                GuestUserHomeFragmentNew.newInstance(lat, long, chooseAddress)
-            }
+        if (isActiveUser != null) {
+            updateHome(
+                isActiveUser,
+                arguments?.getString("name") ?: "",
+                arguments?.getString("lat") ?: "",
+                arguments?.getString("long") ?: "",
+                arguments?.getString("chooseAddress") ?: ""
+            )
+        }
+    }
 
-            childFragmentManager.beginTransaction()
-                .replace(R.id.home_container, frag)
-                .commitNowAllowingStateLoss()
+    fun updateHome(
+        isActiveUser: Boolean,
+        name: String,
+        lat: String,
+        long: String,
+        chooseAddress: String
+    ) {
 
-        }, 200)
+        val newTag = if (isActiveUser) "ACTIVE" else "GUEST"
 
+        // 🚀 Prevent reloading same fragment again
+        if (currentChildTag == newTag) return
+
+        currentChildTag = newTag
+
+        val fragment = if (isActiveUser) {
+            ActiveUserHomeFragmentNew.newInstance(lat, long, chooseAddress)
+        } else {
+            GuestUserHomeFragmentNew.newInstance(lat, long, chooseAddress)
+        }
+
+        childFragmentManager.beginTransaction()
+            .replace(R.id.home_container, fragment, newTag)
+            .commit()
     }
 }

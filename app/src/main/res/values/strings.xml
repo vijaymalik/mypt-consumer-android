@@ -737,4 +737,9 @@
     <string name="primary_trainer_msg">Secondary trainers follow the same plan to maintain progress</string>
     <string name="upgrade_plan_txt">Upgrade plan</string>
     <string name="confirm_pay">CONFIRM &amp; PAY</string>
+    <string name="payment_success">You\'re all set!</string>
+    <string name="payment_failed">Payment failed</string>
+    <string name="payment_not_charged">We couldn’t complete your payment, but dont worry, nothing has been charged</string>
+    <string name="your_training_plan_is_active">Your training plan is active.</string>
+    <string name="your_membership_plan_is_active">Your membership plan is active.</string>
 </resources>

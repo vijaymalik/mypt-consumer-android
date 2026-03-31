@@ -14,4 +14,5 @@ class RenewalUpgradeModel {
     lateinit var remSession: String
     lateinit var type: String
     lateinit var id: String
+    lateinit var end_date: String
 }

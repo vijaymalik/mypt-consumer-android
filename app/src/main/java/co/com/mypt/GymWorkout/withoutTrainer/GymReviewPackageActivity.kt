@@ -23,7 +23,6 @@ import co.com.mypt.GymWorkout.withTrainer.GymListActivity
 import co.com.mypt.ProgressDialog
 import co.com.mypt.R
 import co.com.mypt.activities.BookingConfirmActivity
-import co.com.mypt.activities.CreatePackagectivity
 import co.com.mypt.activities.DuringSeesionActivity
 import co.com.mypt.activities.MembersListForPackage
 import co.com.mypt.activities.PaymentSelectionActivity

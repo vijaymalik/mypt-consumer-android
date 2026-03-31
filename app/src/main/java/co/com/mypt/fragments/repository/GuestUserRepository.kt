@@ -8,6 +8,9 @@ class GuestUserRepository {
     suspend fun getTrainerList(token: String,params: Map<String, String>) =
         RetrofitClient.api.getTrainerList(token,params)
 
+    suspend fun getTrainerTags(token: String,params: Map<String, String>) =
+        RetrofitClient.api.getTrainerList(token,params)
+
     suspend fun getContent(token: String) =
         RetrofitClient.api.getContent(token)
 

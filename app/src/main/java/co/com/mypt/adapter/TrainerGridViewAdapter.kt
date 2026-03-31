@@ -92,7 +92,7 @@ class TrainerGridViewAdapter(
             intent.putExtra("lat", latitude)
             Log.e("lati", "" + latitude)
             Log.e("studio_id", "" + studio_id)
-            context.startActivity(intent)
+           // context.startActivity(intent)
         }
         holder.userName.text = trainersModel.name
 

@@ -33,6 +33,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.preference.PreferenceManager
+import co.com.mypt.Api.Constants.HAS_GYM
 import co.com.mypt.Api.Constants.ISFROMGYMWORKOUT
 import co.com.mypt.GymWorkout.withTrainer.GymListActivity
 import co.com.mypt.R
@@ -151,6 +152,7 @@ class ChangeLocationActivity : AppCompatActivity() , OnMapReadyCallback {
                 val intent=Intent(this, GymListActivity::class.java)
                 intent.putExtra("longitude",longitude)
                 intent.putExtra("latitude",latitude)
+                intent.putExtra(HAS_GYM,this.intent?.getBooleanExtra(HAS_GYM,false))
                 startActivity(intent)
             }else{
                 finish()

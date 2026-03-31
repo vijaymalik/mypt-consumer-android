@@ -17,6 +17,26 @@
             android:layout_height="380dp"
             android:scaleType="centerCrop" />
 
+        <androidx.media3.ui.PlayerView
+            android:id="@+id/playerView"
+            android:layout_width="match_parent"
+            android:layout_height="380dp"
+            app:use_controller="false"
+            android:visibility="gone" />
+
+        <ImageButton
+            android:id="@+id/btnSoundToggle"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end|bottom"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="80dp"
+            android:visibility="gone"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_volume_off"
+            android:contentDescription="Toggle sound"/>
+
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

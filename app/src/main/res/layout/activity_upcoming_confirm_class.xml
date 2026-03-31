@@ -23,7 +23,7 @@
 
             <LinearLayout
                 android:id="@+id/detailLL"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_below="@+id/headerMain"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -269,7 +269,7 @@
                     android:src="@drawable/successicon"/>
                 <LinearLayout
                     android:id="@+id/header"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">

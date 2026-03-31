@@ -134,14 +134,13 @@ class SelectTime : AppCompatActivity() {
 
 
         tvPackage.setOnClickListener {
-            val intent = Intent(this, CreatePackagectivity::class.java)
+            val intent = Intent(this, BestPlanTotalSessionWrapperActivity::class.java)
             // val intent = Intent(this, DuringSeesionActivity::class.java)
             //intent.putExtra("type",getIntent().getStringExtra("type"))
             intent.putExtra("slot_id",slot_id)
             intent.putExtra("address_id",getIntent().getStringExtra("address_id"))
             intent.putExtra("trainer_id",getIntent().getStringExtra("trainer_id"))
             intent.putExtra("studio_id",getIntent().getStringExtra("studio_id"))
-            intent.putExtra("month",currentMonth)
             intent.putExtra("month",currentMonth)
 
             startActivity(intent)

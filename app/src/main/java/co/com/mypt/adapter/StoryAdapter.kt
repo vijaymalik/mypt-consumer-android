@@ -9,8 +9,9 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import co.com.mypt.Api.Constants.KEY_STORIES_DATA
 import co.com.mypt.R
-import co.com.mypt.UpComingClasses.ClassDescriptionActivity
+import co.com.mypt.activities.StoryActivity
 import co.com.mypt.model.GetStoriesList.Data.StoryList
 import com.bumptech.glide.Glide
 
@@ -52,7 +53,11 @@ class StoryAdapter(
             intent.putExtra("latitude",latitude)
             intent.putExtra("longitude",longitude)
             context?.startActivity(intent)*/
+            upcomingModel?.let {
+                val intent= Intent(context, StoryActivity::class.java)
+                intent.putExtra(KEY_STORIES_DATA, it)
+                context?.startActivity(intent)
+            }
         }
     }
-
 }

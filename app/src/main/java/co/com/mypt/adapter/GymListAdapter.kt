@@ -10,11 +10,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
+import co.com.mypt.Api.Constants
+import co.com.mypt.Api.Constants.HAS_GYM
 import co.com.mypt.GymWorkout.withoutTrainer.GymValidityActivity
 import co.com.mypt.R
+import co.com.mypt.activities.BestPlanGymMembershipActivity
+import co.com.mypt.activities.BestPlanTotalSessionWrapperActivity
+import co.com.mypt.activities.CreatePackagectivity
 import co.com.mypt.activities.GymDetailActivity
 import co.com.mypt.activities.TrainersListActivity
 import co.com.mypt.model.ExerciseModel
@@ -28,7 +32,9 @@ class GymListAdapter(
     var type: String?,
     var gym: String?,
     var latitude: Double?,
-    var longitude: Double?
+    var longitude: Double?,
+    val isGymPlanAlreadyExist: Boolean,
+    val isGymMembershipFlow: Boolean = false
 
 ) : RecyclerView.Adapter<GymListAdapter.GymlistHolder>() {
     lateinit var sharedPreferences: SharedPreferences
@@ -72,49 +78,18 @@ class GymListAdapter(
         holder.tvDetail.tag = position
         holder.tvConfirmGym.tag = position
         sharedPreferences=PreferenceManager.getDefaultSharedPreferences(context)
-
-        if (sharedPreferences.getString("typewithout","").equals("withoutTrainer") || sharedPreferences.getString("typewithout","").equals("withTrainer")){
+        if(isGymMembershipFlow){
             if (trainersModel.canMembership.equals("true")){
                 holder.tvConfirmGym.setOnClickListener {
-                    if (sharedPreferences.getString("token", "").equals("")){
-                        val intent= Intent(context, PhoneNumberScreenActivity::class.java)
-                        context?.startActivity(intent)
-                    }else{
-                        val pos = it.tag as Int
-                        var trainersModel=trainerList.get(pos)
-                        Log.e("typeWorkout",""+sharedPreferences.getString("typeWorkout",""))
-                        if ((type.equals("withoutTrainer")) || (type.equals("withTrainer"))){
-                            if (type.equals("withoutTrainer")){
-                                val intent = Intent(context, GymValidityActivity::class.java)
-                                intent.putExtra("studio_id",trainersModel.id)
-                                intent.putExtra("type","withoutTrainer")
-                                context.startActivity(intent)
-                            }else{
-                                val intent = Intent(context, TrainersListActivity::class.java)
-                                intent.putExtra("longitude",longitude)
-                                intent.putExtra("latitude",latitude)
-                                intent.putExtra("type","withTrainer")
-                                intent.putExtra("studio_id",trainersModel.id)
-                                context.startActivity(intent)
-                            }
-                        }else{
-                            val intent = Intent(context, TrainersListActivity::class.java)
-                            intent.putExtra("longitude",longitude)
-                            intent.putExtra("latitude",latitude)
-                            if (sharedPreferences.getString("typeWorkout","").equals("work")){
-                                intent.putExtra("studio_id",trainersModel.id)
-                            }
-                            context.startActivity(intent)
-                        }
-
-                    }
-
-
-
+                    val intent = Intent(context, BestPlanGymMembershipActivity::class.java)
+                    intent.putExtra("studio_id",trainersModel.id)
+                    intent.putExtra("type", "gym")
+                    intent.putExtra("long", longitude)
+                    intent.putExtra("lat", latitude)
+                    context.startActivity(intent)
                 }
                 holder.bookSlot.setTextColor(context.resources.getColor(R.color.buttontextcolor,null))
                 holder.bookSlot.setBackgroundColor(context.resources.getColor(R.color.headingcolor,null))
-
             }
             else {
                 holder.bookSlot.setBackgroundColor(
@@ -127,59 +102,151 @@ class GymListAdapter(
                 holder.tvConfirmGym.setOnClickListener {
                 }
             }
-        }
-        else if (sharedPreferences.getString("typeWorkout","").equals("home") || sharedPreferences.getString("typeWorkout","").equals("work")){
-            if (trainersModel.canBook.equals("true")){
-                holder.tvConfirmGym.setOnClickListener {
-                    if (sharedPreferences.getString("token", "").equals("")){
-                        val intent= Intent(context, PhoneNumberScreenActivity::class.java)
-                        context?.startActivity(intent)
-                    }else{
-                        val pos = it.tag as Int
-                        var trainersModel=trainerList.get(pos)
-                        Log.e("typeWorkout",""+sharedPreferences.getString("typeWorkout",""))
-                        if ((type.equals("withoutTrainer")) || (type.equals("withTrainer"))){
-                            if (type.equals("withoutTrainer")){
-                                val intent = Intent(context, GymValidityActivity::class.java)
-                                intent.putExtra("studio_id",trainersModel.id)
-                                intent.putExtra("type","withoutTrainer")
-                                context.startActivity(intent)
-                            }else{
+        }else {
+
+            if (sharedPreferences.getString("typewithout", "")
+                    .equals("withoutTrainer") || sharedPreferences.getString("typewithout", "")
+                    .equals("withTrainer")
+            ) {
+                if (trainersModel.canMembership.equals("true")) {
+                    holder.tvConfirmGym.setOnClickListener {
+                        if (sharedPreferences.getString("token", "").equals("")) {
+                            val intent = Intent(context, PhoneNumberScreenActivity::class.java)
+                            context?.startActivity(intent)
+                        } else {
+                            val pos = it.tag as Int
+                            var trainersModel = trainerList.get(pos)
+                            Log.e(
+                                "typeWorkout",
+                                "" + sharedPreferences.getString("typeWorkout", "")
+                            )
+                            if ((type.equals("withoutTrainer")) || (type.equals("withTrainer"))) {
+                                if (type.equals("withoutTrainer")) {
+                                    val intent = Intent(context, GymValidityActivity::class.java)
+                                    intent.putExtra("studio_id", trainersModel.id)
+                                    intent.putExtra("type", "withoutTrainer")
+                                    context.startActivity(intent)
+                                } else {
+                                    val intent = Intent(context, TrainersListActivity::class.java)
+                                    intent.putExtra("longitude", longitude)
+                                    intent.putExtra("latitude", latitude)
+                                    intent.putExtra("type", "withTrainer")
+                                    intent.putExtra("studio_id", trainersModel.id)
+                                    context.startActivity(intent)
+                                }
+                            } else {
                                 val intent = Intent(context, TrainersListActivity::class.java)
-                                intent.putExtra("longitude",longitude)
-                                intent.putExtra("latitude",latitude)
-                                intent.putExtra("type","withTrainer")
-                                intent.putExtra("studio_id",trainersModel.id)
+                                intent.putExtra("longitude", longitude)
+                                intent.putExtra("latitude", latitude)
+                                if (sharedPreferences.getString("typeWorkout", "").equals("work")) {
+                                    intent.putExtra("studio_id", trainersModel.id)
+                                }
                                 context.startActivity(intent)
                             }
-                        }else{
-                            val intent = Intent(context, TrainersListActivity::class.java)
-                            intent.putExtra("longitude",longitude)
-                            intent.putExtra("latitude",latitude)
-                            if (sharedPreferences.getString("typeWorkout","").equals("work")){
-                                intent.putExtra("studio_id",trainersModel.id)
+
+                        }
+
+
+                    }
+                    holder.bookSlot.setTextColor(
+                        context.resources.getColor(
+                            R.color.buttontextcolor,
+                            null
+                        )
+                    )
+                    holder.bookSlot.setBackgroundColor(
+                        context.resources.getColor(
+                            R.color.headingcolor,
+                            null
+                        )
+                    )
+
+                } else {
+                    holder.bookSlot.setBackgroundColor(
+                        context.resources.getColor(
+                            R.color.buttongreycolor,
+                            null
+                        )
+                    )
+                    holder.bookSlot.setTextColor(context.resources.getColor(R.color.white))
+                    holder.tvConfirmGym.setOnClickListener {
+                    }
+                }
+            } else if (sharedPreferences.getString("typeWorkout", "")
+                    .equals("home") || sharedPreferences.getString("typeWorkout", "").equals("work")
+            ) {
+                if (trainersModel.canBook.equals("true")) {
+                    holder.tvConfirmGym.setOnClickListener {
+                        if (sharedPreferences.getString("token", "").equals("")) {
+                            val intent = Intent(context, PhoneNumberScreenActivity::class.java)
+                            context?.startActivity(intent)
+                        } else {
+                            val pos = it.tag as Int
+                            var trainersModel = trainerList.get(pos)
+                            Log.e(
+                                "typeWorkout",
+                                "" + sharedPreferences.getString("typeWorkout", "")
+                            )
+                            if ((type.equals("withoutTrainer")) || (type.equals("withTrainer"))) {
+                                if (type.equals("withoutTrainer")) {
+                                    val intent = Intent(context, GymValidityActivity::class.java)
+                                    intent.putExtra("studio_id", trainersModel.id)
+                                    intent.putExtra("type", "withoutTrainer")
+                                    context.startActivity(intent)
+                                } else {
+                                    val intent = Intent(context, TrainersListActivity::class.java)
+                                    intent.putExtra("longitude", longitude)
+                                    intent.putExtra("latitude", latitude)
+                                    intent.putExtra("type", "withTrainer")
+                                    intent.putExtra("studio_id", trainersModel.id)
+                                    context.startActivity(intent)
+                                }
+                            } else {
+                                val type = sharedPreferences.getString("typeWorkout", "")
+                                val hasPlan = when (type) {
+                                    "work" -> isGymPlanAlreadyExist
+                                    else -> false
+                                }
+
+                                val targetActivity = if (hasPlan) {
+                                    TrainersListActivity::class.java
+                                } else {
+                                    CreatePackagectivity::class.java
+                                }
+                                val intent = Intent(context, targetActivity)
+                                intent.putExtra("longitude", longitude)
+                                intent.putExtra("latitude", latitude)
+                                if (sharedPreferences.getString("typeWorkout", "").equals("work")) {
+                                    intent.putExtra("studio_id", trainersModel.id)
+                                }
+                                context.startActivity(intent)
                             }
-                            context.startActivity(intent)
                         }
 
                     }
-
-
-
-                }
-                holder.bookSlot.setTextColor(context.resources.getColor(R.color.buttontextcolor,null))
-                holder.bookSlot.setBackgroundColor(context.resources.getColor(R.color.headingcolor,null))
-
-            }
-            else {
-                holder.bookSlot.setBackgroundColor(
-                    context.resources.getColor(
-                        R.color.buttongreycolor,
-                        null
+                    holder.bookSlot.setTextColor(
+                        context.resources.getColor(
+                            R.color.buttontextcolor,
+                            null
+                        )
                     )
-                )
-                holder.bookSlot.setTextColor(context.resources.getColor(R.color.white))
-                holder.tvConfirmGym.setOnClickListener {
+                    holder.bookSlot.setBackgroundColor(
+                        context.resources.getColor(
+                            R.color.headingcolor,
+                            null
+                        )
+                    )
+
+                } else {
+                    holder.bookSlot.setBackgroundColor(
+                        context.resources.getColor(
+                            R.color.buttongreycolor,
+                            null
+                        )
+                    )
+                    holder.bookSlot.setTextColor(context.resources.getColor(R.color.white))
+                    holder.tvConfirmGym.setOnClickListener {
+                    }
                 }
             }
         }
@@ -198,6 +265,8 @@ class GymListAdapter(
                 intent.putExtra("lat",latitude)
                 intent.putExtra("long",longitude)
                 intent.putExtra("studio_id",trainersModel.id)
+                intent.putExtra(HAS_GYM,isGymPlanAlreadyExist)
+                intent.putExtra(Constants.IS_GYM_MEMBERSHIP_FLOW,isGymMembershipFlow)
                 context.startActivity(intent)
             }
 

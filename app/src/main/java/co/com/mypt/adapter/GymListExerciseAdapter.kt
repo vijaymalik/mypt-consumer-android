@@ -10,7 +10,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import co.com.mypt.R
-import co.com.mypt.adapter.TrainerListExerciseAdapter.ViewHolder
 import co.com.mypt.model.ExerciseModel
 import com.bumptech.glide.Glide
 import java.util.ArrayList

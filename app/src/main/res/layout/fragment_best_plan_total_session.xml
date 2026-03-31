@@ -6,6 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".fragments.CreatePackageScreen.TotalSessionFragment">
 
+    <RelativeLayout
+        android:id="@+id/topLay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="20dp"
+            android:src="@drawable/ic_back_arrow_new" />
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/p_Bar"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="50"
+            android:progressTint="@color/progress_clr_1"
+            android:visibility="visible"
+            app:indicatorColor="@color/progress_color"
+            app:trackColor="@color/progress_color_bg"
+            app:trackCornerRadius="10dp" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/topLay"
+        android:layout_above="@+id/tvcontinueViewParent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,7 +51,6 @@
             android:id="@+id/linear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:layout_marginTop="46dp"
             android:orientation="vertical">
 
@@ -580,6 +615,7 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+    </ScrollView>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -601,4 +637,185 @@
             android:textColor="@color/gold"
             android:textSize="16sp" />
     </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/tvcontinueViewParent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bottomView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/blue_border_container"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/topView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:paddingBottom="16dp"
+                android:paddingTop="6dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/tvcontinueView">
+
+                <TextView
+                    android:id="@+id/yourPlan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/clash_display_regular"
+                    android:text="Your Selected Plan"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/light_blue_text"
+                    android:textSize="12sp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/upArrow"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/up_arrow"
+                    android:padding="5dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/planLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/yourPlan">
+
+                    <TextView
+                        android:id="@+id/packagePrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/clash_display_medium"
+                        android:text="AED 800"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:layout_width="4dp"
+                        android:layout_height="4dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/d_ot" />
+
+                    <TextView
+                        android:id="@+id/sessionCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/clash_display_regular"
+                        android:text="10 Sessions"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:id="@+id/downArrow"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/down_arrow"
+                        android:padding="5dp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/validDay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/clash_display_semibold"
+                    android:text="Valid for 120 days"
+                    android:textColor="@color/grey_text"
+                    android:textSize="14sp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@+id/devider"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/planLayout" />
+
+                <ImageView
+                    android:id="@+id/devider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="16dp"
+                    android:background="@drawable/devider"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@+id/freeMsg"
+                    app:layout_constraintTop_toBottomOf="@+id/validDay" />
+
+                <TextView
+                    android:id="@+id/freeMsg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="16dp"
+                    android:fontFamily="@font/clash_display_regular"
+                    android:text="You save AED 500 — that's 6 free sessions ✨"
+                    android:textColor="@color/neon_color"
+                    android:textSize="14sp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/devider" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/freeMsgCustom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="16dp"
+                android:layout_marginHorizontal="20dp"
+                android:fontFamily="@font/clash_display_regular"
+                android:text="Validity and savings increase with more sessions"
+                android:textColor="@color/grey_text"
+                android:textSize="14sp"
+                android:lineHeight="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/tvcontinueView" />
+
+            <LinearLayout
+                android:id="@+id/tvcontinueView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginVertical="20dp"
+                android:background="@drawable/rounded_cornor"
+                android:gravity="center"
+                android:paddingVertical="15dp"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <TextView
+                    android:id="@+id/tvcontinue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/funnel_sans_medium"
+                    android:text="@string/next"
+                    android:textAllCaps="true"
+                    android:textColor="@color/subheadingcolor"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/forwardArrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="10dp"
+                    android:src="@drawable/ic_arrow_right"
+                    app:tint="@color/white" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </RelativeLayout>

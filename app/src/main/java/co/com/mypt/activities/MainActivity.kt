@@ -28,6 +28,7 @@ import co.com.mypt.Api.ResponseData
 import co.com.mypt.ProgressDialog
 import co.com.mypt.R
 import co.com.mypt.databinding.ActivityMainBinding
+import co.com.mypt.fragments.HomePlaceholderFragment
 import co.com.mypt.onBoarding.PhoneNumberScreenActivity
 import com.android.volley.VolleyError
 import org.json.JSONObject
@@ -92,7 +93,8 @@ class MainActivity : AppCompatActivity() {
                 if (currentId != R.id.homeFragment) {
                     // Navigate to home tab
 //                    binding.bottomNavigation.show(R.id.homeFragment)
-                    handleTabSelection(R.id.homeFragment) // optional if you want to trigger logic manually
+                    //handleTabSelection(R.id.homeFragment) // optional if you want to trigger logic manually
+                    binding.bottomNav.selectedItemId = R.id.home
                 } else {
                     // Already on home, double back to exit
                     if (doubleBackToExitPressedOnce) {
@@ -135,6 +137,10 @@ class MainActivity : AppCompatActivity() {
                 getData(true,false)*/
             }
         })
+
+        if (savedInstanceState == null) {
+            getData(false, true)
+        }
     }
 
     private fun setUpBottomNavigation() {
@@ -174,11 +180,11 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.plans->{
-                    handleTabSelection(ID_BOOKING)
+                    handleTabSelection(ID_CALENDAR)
                     true
                 }
                 R.id.bookings->{
-                    handleTabSelection(ID_CALENDAR)
+                    handleTabSelection(ID_BOOKING)
                     true
                 }
                 R.id.menu->{
@@ -190,6 +196,7 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+        binding.bottomNav.itemIconTintList = null
 
 
 //        getData(false,true)
@@ -222,6 +229,10 @@ class MainActivity : AppCompatActivity() {
                 navController.navigate(id)
             }, 200)
         }
+    }
+
+    fun selectBottomItem(itemId:Int){
+        binding.bottomNav.selectedItemId = itemId
     }
 
     private fun initNavHost() {
@@ -266,7 +277,19 @@ class MainActivity : AppCompatActivity() {
                             putString("long", long)
                             putString("chooseAddress", chooseAddress)
                         }
-                        navController.navigate(R.id.homeFragment, bundle)
+
+                        val navHostFragment =
+                            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+
+                        val currentFragment =
+                            navHostFragment.childFragmentManager.fragments
+                                .firstOrNull { it is HomePlaceholderFragment }
+
+                        if (currentFragment is HomePlaceholderFragment) {
+                            currentFragment.updateHome(isActiveUser, name, lat, long, chooseAddress)
+                        } else {
+                            navController.navigate(R.id.homeFragment, bundle)
+                        }
                     }
                     Handler(Looper.getMainLooper()).postDelayed({
                         progressDialog?.dismiss()

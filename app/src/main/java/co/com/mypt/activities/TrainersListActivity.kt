@@ -36,6 +36,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
+import androidx.media3.common.MediaItem
+import androidx.media3.common.Player
+import androidx.media3.exoplayer.ExoPlayer
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -74,6 +78,7 @@ import com.google.android.material.textview.MaterialTextView
 import com.google.gson.Gson
 import org.json.JSONObject
 import java.util.Locale
+import kotlin.let
 
 
 class TrainersListActivity : AppCompatActivity() {
@@ -81,6 +86,7 @@ class TrainersListActivity : AppCompatActivity() {
     var languageId = ""
     var timeSlotId = ""
     var genderId = ""
+    var address_id = ""
     private var pendingDialogType: String? = null
     lateinit var tvTimeslot: TextView
     lateinit var linearTime: LinearLayout
@@ -147,12 +153,15 @@ class TrainersListActivity : AppCompatActivity() {
     private var selectedType = ""
 
     var filterBottomSheetDialog: BottomSheetDialog? = null
+    private var exoPlayer: ExoPlayer? = null
+    private var currentPlayingPosition = RecyclerView.NO_POSITION
+    private var isMuted = true
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trainers_list)
-
+        setupPlayer()
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         geocoder = Geocoder(this, Locale.getDefault())
@@ -160,8 +169,8 @@ class TrainersListActivity : AppCompatActivity() {
         if (checkLocationPermission() && isclick == 0) {
 //            getCurrentLocation()
         }
-        latitude =intent?.getDoubleExtra("longitude",0.0)
-        longitude =intent?.getDoubleExtra("latitude",0.0)
+        longitude =intent?.getDoubleExtra("longitude",0.0)
+        latitude =intent?.getDoubleExtra("latitude",0.0)
         getTagData(latitude, longitude)
         getTrainerList(tag_id, filter)
 
@@ -184,6 +193,9 @@ class TrainersListActivity : AppCompatActivity() {
             studio_id = "" + intent.getStringExtra("studio_id")
         } catch (e: Exception) {
             e.printStackTrace()
+        }
+        if(intent.getStringExtra("address_id")!=null) {
+            address_id = intent.getStringExtra("address_id")?:""
         }
 //        var filterAdapter= FilterListAdapter(this@TrainersListActivity, filternames)
 //        filterRecyclerView.adapter=filterAdapter
@@ -208,7 +220,7 @@ class TrainersListActivity : AppCompatActivity() {
             latitude,
             longitude,
             studio_id
-        ) { bool, string, string1 -> }
+        ) { isPackage,bool, string, string1 -> }
         trainerRecyclerView.adapter = trainerListAdapter
 
         linearList.setOnClickListener {
@@ -221,6 +233,8 @@ class TrainersListActivity : AppCompatActivity() {
                 trainerRecyclerView.removeItemDecorationAt(0)
             }
             trainerRecyclerView.addItemDecoration(AdaptiveSpacingItemDecoration(0, false))
+            exoPlayer?.pause()
+            currentPlayingPosition = RecyclerView.NO_POSITION
             trainerListAdapter = TrainerListAdapter(
                 this,
                 trainerList,
@@ -229,8 +243,11 @@ class TrainersListActivity : AppCompatActivity() {
                 latitude,
                 longitude,
                 studio_id
-            ) { bool, string, string1 -> }
+            ) { isPackage,bool, string, string1 -> }
             trainerRecyclerView.adapter = trainerListAdapter
+            trainerRecyclerView.post {
+                autoPlayVisibleVideo()
+            }
         }
         gridList.setOnClickListener {
             typeLayout = "grid"
@@ -242,6 +259,8 @@ class TrainersListActivity : AppCompatActivity() {
             trainerRecyclerView.addItemDecoration(AdaptiveSpacingItemDecoration(30, true))
             linearList.setImageResource(R.drawable.linear_list)
             gridList.setImageResource(R.drawable.selected_grid_layout)
+            exoPlayer?.pause()
+            currentPlayingPosition = RecyclerView.NO_POSITION
             trainerListAdapter = TrainerListAdapter(
                 this,
                 trainerList,
@@ -250,9 +269,23 @@ class TrainersListActivity : AppCompatActivity() {
                 latitude,
                 longitude,
                 studio_id
-            ) { bool, string, string1 -> }
+            ) { isPackage,bool, string, string1 -> }
             trainerRecyclerView.adapter = trainerListAdapter
         }
+
+        trainerRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(rv: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(rv, newState)
+//                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+//                    autoPlayVisibleVideo()
+//                }
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                    autoPlayVisibleVideo()
+            }
+        })
 
         /*searchTrainer.setOnClickListener {
             searchTrainer.visibility = View.GONE
@@ -282,7 +315,7 @@ class TrainersListActivity : AppCompatActivity() {
                         latitude,
                         longitude,
                         studio_id
-                    ) { bool, string, string1 -> }
+                    ) { isPackage,bool, string, string1 -> }
                     trainerRecyclerView.adapter = trainerListAdapter
                     trainerRecyclerView.visibility = View.VISIBLE
                     tvNodata.visibility = View.GONE
@@ -310,7 +343,7 @@ class TrainersListActivity : AppCompatActivity() {
                             latitude,
                             longitude,
                             studio_id
-                        ) { bool, string, string1 -> }
+                        ) { isPackage,bool, string, string1 -> }
                         trainerRecyclerView.adapter = trainerListAdapter
                         trainerRecyclerView.visibility = View.VISIBLE
                         tvNodata.visibility = View.GONE
@@ -327,6 +360,110 @@ class TrainersListActivity : AppCompatActivity() {
                 }
             }
             false
+        }
+    }
+
+    private fun setupPlayer() {
+        exoPlayer = ExoPlayer.Builder(this).build()
+
+        exoPlayer?.addListener(object : Player.Listener {
+            override fun onPlaybackStateChanged(state: Int) {
+                if (state == Player.STATE_ENDED) {
+                    val holder = trainerRecyclerView
+                        .findViewHolderForAdapterPosition(currentPlayingPosition)
+                            as? TrainerListAdapter.ViewHolder
+
+                    holder?.let {
+                        it.playerView.visibility = View.GONE
+                        it.trainerImage.visibility = View.VISIBLE
+                        it.btnSoundToggle.visibility = View.GONE
+                    }
+                }
+            }
+        })
+    }
+
+    private fun autoPlayVisibleVideo() {
+        // Guard: if player is not initialized, exit early
+        if (exoPlayer == null) return
+
+        val layoutManager = trainerRecyclerView.layoutManager
+
+        if (layoutManager is GridLayoutManager) {
+            exoPlayer?.pause()
+            currentPlayingPosition = RecyclerView.NO_POSITION
+            return
+        }
+        if (layoutManager !is LinearLayoutManager) return
+
+        // Reset all holders
+        for (i in 0 until trainerRecyclerView.childCount) {
+            val child = trainerRecyclerView.getChildAt(i)
+            val holder = trainerRecyclerView.getChildViewHolder(child) as? TrainerListAdapter.ViewHolder
+            holder?.playerView?.player = null
+            holder?.playerView?.visibility = View.GONE
+            holder?.btnSoundToggle?.visibility = View.GONE
+            holder?.trainerImage?.visibility = View.VISIBLE
+        }
+
+        // Find the one fully visible item
+        val first = layoutManager.findFirstCompletelyVisibleItemPosition()
+        val last = layoutManager.findLastCompletelyVisibleItemPosition()
+
+        if (first == last && first != RecyclerView.NO_POSITION) {
+            val holder = trainerRecyclerView.findViewHolderForAdapterPosition(first) as? TrainerListAdapter.ViewHolder
+            holder?.let {
+                val trainer = trainerListAdapter?.trainerList[first]
+                val videoUrl = trainer?.trainWithMe
+
+                if (!videoUrl.isNullOrEmpty()) {
+                    currentPlayingPosition = first
+                    val mediaItem = MediaItem.fromUri(videoUrl.toUri())
+                    exoPlayer?.setMediaItem(mediaItem)
+                    exoPlayer?.prepare()
+                    exoPlayer?.play()
+
+                    it.trainerImage.visibility = View.GONE
+                    it.playerView.visibility = View.VISIBLE
+                    it.btnSoundToggle.visibility = View.VISIBLE
+                    it.playerView.player = exoPlayer
+                    setupSoundToggle(it)
+
+                    exoPlayer?.addListener(object : Player.Listener {
+                        override fun onPlaybackStateChanged(playbackState: Int) {
+                            if (playbackState == Player.STATE_ENDED) {
+                                it.playerView.visibility = View.GONE
+                                it.trainerImage.visibility = View.VISIBLE
+                                it.btnSoundToggle.visibility = View.GONE
+                            }
+                        }
+                    })
+                } else {
+                    it.playerView.player = null
+                    it.playerView.visibility = View.GONE
+                    it.trainerImage.visibility = View.VISIBLE
+                    it.btnSoundToggle.visibility = View.GONE
+                }
+            }
+        } else {
+            exoPlayer?.pause()
+            currentPlayingPosition = RecyclerView.NO_POSITION
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        exoPlayer?.release()
+        exoPlayer = null
+    }
+
+    private fun setupSoundToggle(holder: TrainerListAdapter.ViewHolder) {
+        holder.btnSoundToggle.setOnClickListener {
+            isMuted = !isMuted
+            exoPlayer?.volume = if (isMuted) 0f else 1f
+            holder.btnSoundToggle.setImageResource(
+                if (isMuted) R.drawable.ic_volume_off else R.drawable.ic_volume_on
+            )
         }
     }
 
@@ -395,7 +532,9 @@ class TrainersListActivity : AppCompatActivity() {
                             exerciseList.add(exerciseModel)
                         }
                         exerciseRecyclerView.adapter =
-                            TrainerListExerciseAdapter(applicationContext, exerciseList)
+                            TrainerListExerciseAdapter(applicationContext, exerciseList){ tagId, filter->
+                                getTrainerList(tagId,filter)
+                            }
 
                     }
 
@@ -551,6 +690,10 @@ class TrainersListActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         isResumed1 = true
+        if (exoPlayer == null) {
+            setupPlayer()
+        }
+        autoPlayVisibleVideo()
 
         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
             && !locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
@@ -558,25 +701,8 @@ class TrainersListActivity : AppCompatActivity() {
             showGPSDisabledAlertToUser()
             return
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            registerReceiver(TrainerList, IntentFilter("tag"), RECEIVER_EXPORTED)
-        } else {
-            @Suppress("UnspecifiedRegisterReceiverFlag")
-            registerReceiver(TrainerList, IntentFilter("tag"))
-        }
     }
 
-    var TrainerList: BroadcastReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            try {
-                filter = intent.getStringExtra("filter")!!
-                tag_id = intent.getStringExtra("tag_id")!!
-                getTrainerList(tag_id, filter)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-    }
 
     private fun getTrainerList(tag_id: String?, filter: String?) {
         val progressDialog: Dialog = ProgressDialog.progressDialog(this@TrainersListActivity, "")
@@ -599,14 +725,14 @@ class TrainersListActivity : AppCompatActivity() {
         }
         param["gender"] = "" + genderId
         param["language"] = "" + languageId
-        param["lat"] = "" + "25.276987"//latitude
-        param["long"] = "" + "55.296249"//longitude
+        param["lat"] = "" + latitude
+        param["long"] = "" + longitude
         param["time_slot"] = "" + timeSlotId
         param["tag_id"] = "" + tag_id
         param["nationality"] = "" + nationId
         Log.e("trainerListParam", param.toString())
 
-        PostMethod(api, param, applicationContext).startPostMethod(object : ResponseData {
+        PostMethod(api, param, this@TrainersListActivity).startPostMethod(object : ResponseData {
             override fun response(data: String?) {
                 progressDialog.dismiss()
                 trainerList.clear()
@@ -630,6 +756,8 @@ class TrainersListActivity : AppCompatActivity() {
                                 trainerModel.activity = jsonObject1.optJSONArray("tags")
                                 trainerModel.is_group = jsonObject1.optBoolean("is_group")
                                 trainerModel.studio_id = jsonObject1.optString("studio_id")
+                                trainerModel.isPackage = jsonObject1.optBoolean("is_package")
+                                trainerModel.trainWithMe = jsonObject1.optString("train_with_me")
                                 trainerList.add(trainerModel)
                             }
                             trainerListAdapter = TrainerListAdapter(
@@ -640,14 +768,25 @@ class TrainersListActivity : AppCompatActivity() {
                                 latitude,
                                 longitude,
                                 studio_id
-                            ) { isGrp, type, id ->
-                                if (isGrp) {
-                                    getPrimaryTrainer(type, id)
-                                } else {
-                                    getPrimaryTrainerRedirect(id)
+                            ) { isPackage,isGrp, type, id ->
+                                if(isPackage){
+                                    // book slot
+                                    var intent = Intent(this@TrainersListActivity, BookSlot::class.java)
+                                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                                    intent.putExtra("trainer_id",id)
+                                    intent.putExtra("studio_id",studio_id)
+                                    intent.putExtra("type",sharedPreferences.getString("typeWorkout", ""))
+                                    intent.putExtra("long",longitude)
+                                    intent.putExtra("lat",latitude)
+                                    intent.putExtra("address_id",address_id)
+                                    startActivity(intent)
+                                }else{
+                                    if (isGrp) {
+                                        getPrimaryTrainer(type, id)
+                                    } else {
+                                        getPrimaryTrainerRedirect(id)
+                                    }
                                 }
-
-
                             }
                             trainerRecyclerView.adapter = trainerListAdapter
                             trainerRecyclerView.visibility = View.VISIBLE
@@ -676,20 +815,20 @@ class TrainersListActivity : AppCompatActivity() {
 
     fun getPrimaryTrainerRedirect(id: String) {
         if (sharedPreferences.getString("typeWorkout", "").equals("home")) {
-            val intent = Intent(this, CreatePackagectivity::class.java)
+            val intent = Intent(this, BestPlanTotalSessionWrapperActivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             intent.putExtra("trainer_id", id)
-            intent.putExtra("address_id", intent.getStringExtra("address_id"))
+            intent.putExtra("address_id", address_id)
             intent.putExtra("studio_id", studio_id)
             intent.putExtra("type", sharedPreferences.getString("typeWorkout", ""))
             intent.putExtra("long", longitude)
             intent.putExtra("lat", latitude)
             startActivity(intent)
         } else {
-            val intent = Intent(this, CreatePackagectivity::class.java)
+            val intent = Intent(this, BestPlanTotalSessionWrapperActivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             intent.putExtra("trainer_id", id)
-            intent.putExtra("address_id", intent.getStringExtra("address_id"))
+            intent.putExtra("address_id", address_id)
             intent.putExtra("studio_id", studio_id)
             intent.putExtra("type", sharedPreferences.getString("typeWorkout", ""))
             intent.putExtra("long", longitude)
@@ -744,6 +883,7 @@ class TrainersListActivity : AppCompatActivity() {
         intent.putExtra("studio_id",studio_id)
         intent.putExtra("long",longitude)
         intent.putExtra("lat",latitude)
+        intent.putExtra("address_id",address_id)
         intent.putExtra("trainerId",trainerId)
         startActivity(intent)
     }

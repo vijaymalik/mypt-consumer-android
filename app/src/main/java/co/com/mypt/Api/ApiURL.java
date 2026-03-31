@@ -1,8 +1,8 @@
 package co.com.mypt.Api;
 
 public class ApiURL {
-    //public static String Baseurl= "https://mobileapp.mypt-me.com/api/"; //Live URL
-    public static String Baseurl= "https://mobileappuat.mypt-me.com/api/"; //Test URL
+    public static final String Baseurl= "https://mobileapp.mypt-me.com/api/"; //Live URL
+   // public static String Baseurl= "https://mobileappuat.mypt-me.com/api/"; //Test URL
     public static String login = Baseurl+"login"; //param: country_code,phone,type
     public static String submitOTP = Baseurl+"submit-otp"; //param: country_code,phone,type,otp
     public static String resendOTP = Baseurl+"resendotp"; //param: country_code,phone
@@ -105,5 +105,9 @@ public class ApiURL {
     public static String getBestPlan = Baseurl+"best-plans?";
     public static String getBuddyMember = Baseurl+"member-buddy-get";
     public static String reviewPackageCheckout = Baseurl+"review-package-checkout";
+    public static String paymentSession = Baseurl+"payment/session";
+    public static String verifyPayment = Baseurl+"payment/verify-status";
+    public static String getSubscriptionSlots = Baseurl+"get-subscription-slots?date=";
+    public static String getGroupDetail = Baseurl+"get-group-detail?group_id=";
 }
 

@@ -36,6 +36,25 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".activities.StoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.TrainingTeamWrapperActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.BestPlanTotalSessionWrapperActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.BestPlanGymMembershipActivity"
+            android:exported="false" />
+        <activity android:name=".activities.ReviewGymMembershipActivity"
+            android:exported="false"/>
+        <activity android:name=".activities.GymMembershipPaymentStatusActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".activities.ComingSoonActivity"
+            android:exported="false" />
+        <activity
             android:name=".ActiveChallenge.ChallengeDetailActivity"
             android:exported="false" />
         <activity
@@ -171,6 +190,12 @@
             android:exported="false" />
         <activity
             android:name=".Webview.CCavenueWebViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Webview.CreatePackageCCavenueWebViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.CreatePackagePaymentStatusActivity"
             android:exported="false" />
         <activity
             android:name=".activities.PaymentSelectionActivity"
@@ -454,16 +479,16 @@
 
         <activity
             android:name=".onBoarding.PersonalizedActivity2"
-            android:windowSoftInputMode="stateHidden|adjustResize"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".onBoarding.NameActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".onBoarding.OtpActivity"
-            android:theme="@style/Theme.MyPT"
-            android:exported="false" /> <!-- testing screen -->
+            android:exported="false"
+            android:theme="@style/Theme.MyPT" /> <!-- testing screen -->
         <activity
             android:name=".activities.CreatePackagectivity"
             android:exported="true"
@@ -525,7 +550,7 @@
         <activity android:name=".PlanRenewal.Renew.RenewHomeGymReviewActivity" />
         <activity android:name=".PlanRenewal.PlanRenewalCCAvenueWebPage" />
         <activity android:name=".Notification.NotificationBookingConfirmActivity" />
-        <activity android:name="co.com.mypt.activities.TrainerGroupActivity" />
+        <activity android:name=".activities.TrainerGroupActivity" />
 
         <receiver
             android:name=".broadcastReceiverforMessage.MySMSBroadcastReceiver"
@@ -545,7 +570,9 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-        <service android:name="co.com.FCM.MyFirebaseMessagingService"
+
+        <service
+            android:name="co.com.FCM.MyFirebaseMessagingService"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

@@ -22,6 +22,7 @@ class TrainersModel {
     lateinit var studio_id: String
     lateinit var tags: List<Tag?>
      var is_group: Boolean?=null
-
+     var isPackage: Boolean?=null
+     var trainWithMe: String?=null
 
 }

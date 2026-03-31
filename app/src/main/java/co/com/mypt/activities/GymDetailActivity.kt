@@ -36,6 +36,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
 import androidx.viewpager.widget.ViewPager
 import co.com.mypt.Api.ApiURL
+import co.com.mypt.Api.Constants.HAS_GYM
+import co.com.mypt.Api.Constants.HAS_HOME
 import co.com.mypt.Api.GetMethod
 import co.com.mypt.Api.ResponseData
 import co.com.mypt.GymWorkout.withoutTrainer.GymValidityActivity
@@ -167,6 +169,8 @@ class GymDetailActivity : AppCompatActivity() , ViewTreeObserver.OnScrollChanged
         tv = findViewById(R.id.tv)
         studio_id=""+intent.getStringExtra("studio_id")
         flowType=""+intent.getStringExtra("type")
+
+        bookSlot.text = "SELECT THIS GYM"
         Log.e("flowType",flowType)
         //checkAndRequestPermissions()
         back.setOnClickListener {
@@ -369,7 +373,20 @@ class GymDetailActivity : AppCompatActivity() , ViewTreeObserver.OnScrollChanged
                                             startActivity(intent)
                                         }
                                     }else{
-                                        val intent1 = Intent(this@GymDetailActivity, TrainersListActivity::class.java)
+                                        val type = sharedPreferences.getString("typeWorkout", "")
+                                        val hasPlan = when (type) {
+                                            "work" -> intent.getBooleanExtra(HAS_GYM, false)
+                                            else -> false
+                                        }
+
+                                        val targetActivity = if (hasPlan) {
+                                            TrainersListActivity::class.java
+                                        } else {
+                                            CreatePackagectivity::class.java
+                                        }
+                                        val intent1 = Intent(this@GymDetailActivity, targetActivity)
+                                        intent1.putExtra("longitude",intent.getDoubleExtra("long",0.0))
+                                        intent1.putExtra("latitude",intent.getDoubleExtra("lat",0.0))
                                         if (sharedPreferences.getString("typeWorkout","").equals("work")){
                                             intent1.putExtra("studio_id", studio_id)
                                         }

@@ -12,36 +12,30 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.location.Address
 import android.location.Geocoder
 import android.location.LocationManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.provider.Settings
 import android.util.Log
 import android.view.View
-import android.view.Window
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 import co.com.mypt.Api.ApiURL
+import co.com.mypt.Api.Constants
+import co.com.mypt.Api.Constants.HAS_GYM
 import co.com.mypt.Api.GetMethod
 import co.com.mypt.Api.ResponseData
-import co.com.mypt.GymWorkout.withoutTrainer.GymValidityActivity
 import co.com.mypt.ProgressDialog
 import co.com.mypt.R
 import co.com.mypt.activities.SearchGymActivity2
-import co.com.mypt.activities.TrainersListActivity
 import co.com.mypt.adapter.GymListAdapter
 import co.com.mypt.adapter.GymListExerciseAdapter
 import co.com.mypt.model.ExerciseModel
@@ -50,17 +44,11 @@ import com.android.volley.VolleyError
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.location.Priority
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.Places
-import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.Autocomplete
-import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import org.json.JSONObject
 import java.util.Locale
-import kotlin.text.equals
 
 class GymListActivity : AppCompatActivity() {
     lateinit var exerciseRecyclerView : RecyclerView
@@ -435,7 +423,18 @@ class GymListActivity : AppCompatActivity() {
                                 trainerList.add(trainerModel)
                             }
 
-                            trainerRecyclerView.adapter = GymListAdapter(this@GymListActivity,trainerList,intent.getStringExtra("type"),"gym",latitude,longitude)
+                            trainerRecyclerView.adapter = GymListAdapter(
+                                this@GymListActivity,
+                                trainerList,
+                                intent.getStringExtra("type"),
+                                "gym",
+                                latitude,
+                                longitude,
+                                intent.getBooleanExtra(HAS_GYM, false),
+                                isGymMembershipFlow = intent.getBooleanExtra(
+                                    Constants.IS_GYM_MEMBERSHIP_FLOW, false
+                                )
+                            )
 
                             trainerRecyclerView.visibility= View.VISIBLE
                             tvNodata.visibility= View.GONE
