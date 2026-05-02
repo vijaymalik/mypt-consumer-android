@@ -657,18 +657,15 @@
         android:visibility="gone"
         android:background="@drawable/view_detail_rectangle"
         android:layout_height="wrap_content">
-        <ImageView
-            android:layout_width="24dp"
-            android:src="@drawable/qr_image"
-            android:layout_height="24dp"/>
         <TextView
+            android:id="@+id/tvSessionOtp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:fontFamily="@font/manrope_medium"
             android:textFontWeight="700"
             android:textAllCaps="true"
-            android:text="@string/booking_qr_code"
+            android:text="Session OTP -"
             android:textStyle="bold"
             android:textColor="@color/headingcolor"
             android:textSize="16dp" />

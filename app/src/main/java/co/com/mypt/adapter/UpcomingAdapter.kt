@@ -50,7 +50,7 @@ class UpcomingAdapter(var activity: FragmentActivity?, var upComingBookkingModel
          /*    j= j + ","+ upcomingbokingModel.workout_focus!!.get(i)*/
             j += if (i == 0) upcomingbokingModel.workout_focus!!.get(i) else ", " + upcomingbokingModel.workout_focus!!.get(i)
         }
-        holder.tvWorkoutFocus.text = j
+        holder.tvWorkoutFocus.text = upcomingbokingModel.booking_type
         holder.linear.tag = position
         if (upcomingbokingModel.is_reschedule == "false"){
             holder.linear.setBackgroundResource(R.drawable.booking_rounded_green)

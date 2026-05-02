@@ -17,4 +17,5 @@ class CancelbokingModel {
     lateinit var timing: String
     lateinit var id: String
     lateinit var name: String
+    lateinit var booking_type: String
 }

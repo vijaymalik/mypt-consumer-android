@@ -53,6 +53,7 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/couponsView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
@@ -207,8 +208,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
+                android:background="@drawable/grey_rectangle_12"
                 android:orientation="vertical">
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -370,6 +371,30 @@
                         android:textColor="@color/white"
                         android:textSize="30sp" />
 
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="6dp">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="12dp"
+                        android:rotation="180"
+                        app:tint="@color/white"
+                        android:src="@drawable/info_circle_grey" />
+
+                    <TextView
+                        android:id="@+id/paymentMsg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/funnel_sans_regular"
+                        android:lineHeight="24sp"
+                        android:text="This package is non-refundable. Know More"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -570,9 +595,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="90dp"
-                        android:layout_marginHorizontal="20dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="20dp"
+                        android:layout_margin="16dp"
                         android:background="@drawable/payment_continer"
                         android:orientation="horizontal">
 
@@ -598,35 +621,52 @@
                                     android:layout_gravity="center"
                                     android:src="@drawable/master_card" />
 
-                                <TextView
-                                    android:id="@+id/ccvenueTxt"
+                                <LinearLayout
+                                    android:id="@+id/llCardTitle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="22dp"
-                                    android:layout_marginEnd="5dp"
-                                    android:layout_toStartOf="@+id/ccvenueRadio"
                                     android:layout_toEndOf="@+id/ccvenueIc"
-                                    android:fontFamily="@font/clash_display_regular"
-                                    android:lineHeight="24sp"
-                                    android:text="Save AED 35 with ‘GYM20’"
-                                    android:textColor="@color/lightgreycolor"
-                                    android:textSize="16sp" />
+                                    android:layout_toStartOf="@+id/ccvenueRadio"
+                                    android:layout_marginEnd="5dp"
+                                    android:layout_marginStart="10dp"
+                                    android:orientation="horizontal">
+                                    <TextView
+                                        android:id="@+id/ccvenueTxt"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:fontFamily="@font/funnel_sans_regular"
+                                        android:text="Card/Tamara"
+                                        android:textColor="@color/white"
+                                        android:textSize="16sp" />
+                                    <TextView
+                                        android:id="@+id/tvPaymentInfo"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="EASY INSTALMENTS"
+                                        android:textSize="12sp"
+                                        android:paddingHorizontal="8dp"
+                                        android:paddingVertical="4dp"
+                                        android:textColor="@color/text_color_neutral_200"
+                                        android:layout_marginStart="5dp"
+                                        android:fontFamily="@font/funnel_sans_semibold"
+                                        android:background="@drawable/black_white_20_gradient_with_border"/>
+
+                                </LinearLayout>
 
                                 <TextView
                                     android:id="@+id/ccvenueTxtSub"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_below="@+id/ccvenueTxt"
-                                    android:layout_alignStart="@+id/ccvenueTxt"
+                                    android:layout_below="@+id/llCardTitle"
+                                    android:layout_alignStart="@+id/llCardTitle"
                                     android:layout_marginTop="6dp"
                                     android:layout_marginEnd="5dp"
                                     android:layout_toStartOf="@+id/ccvenueRadio"
-                                    android:drawableTint="@color/bg_color_primary_white_55"
                                     android:fontFamily="@font/clash_display_regular"
                                     android:lineHeight="16sp"
                                     android:maxLines="1"
-                                    android:text="Dubai - Al Thanyah First- Barsha Heights, Dubai internet City"
+                                    android:text="Pay full amount or split your payment"
                                     android:textColor="@color/bg_color_primary_white_55"
                                     android:textSize="12sp" />
 
@@ -635,7 +675,6 @@
                                     android:layout_width="20dp"
                                     android:layout_height="20dp"
                                     android:layout_alignParentEnd="true"
-                                    android:layout_marginEnd="20dp"
                                     android:adjustViewBounds="true"
                                     android:src="@drawable/radio_unselect" />
 
@@ -765,6 +804,33 @@
 
 
             </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edittext_border_background">
+
+                <ImageView
+                    android:id="@+id/checkTermsConditions"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/radio_unselect" />
+
+                <TextView
+                    android:id="@+id/tvTermsConditions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/funnel_sans_semibold"
+                    android:textSize="12sp"
+                    android:layout_marginStart="12dp"
+                    android:layout_toEndOf="@+id/checkTermsConditions"
+                    android:text="I have read and agree to the MyPT Personal Training Terms  Conditions"/>
+
+            </RelativeLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
@@ -780,19 +846,11 @@
         android:paddingHorizontal="20dp">
 
 
-        <TextView
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/tvPayment"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_gravity="center_vertical"
-            android:background="@drawable/white_rectangle"
-            android:fontFamily="@font/funnel_sans_bold"
-            android:gravity="center"
-            android:paddingHorizontal="25dp"
-            android:paddingVertical="18dp"
-            android:text="@string/confirm_pay"
-            android:textAllCaps="true"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:layout_height="wrap_content"
+            style="@style/PrimaryButton"
+            android:text="@string/confirm_pay" />
     </LinearLayout>
 </RelativeLayout>

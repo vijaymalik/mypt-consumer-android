@@ -75,7 +75,7 @@ class ChangeLocationActivity : AppCompatActivity() , OnMapReadyCallback {
     lateinit var stateCountry: TextView
     lateinit var currentLoc: ImageView
     lateinit var tvContinue: TextView
-    lateinit var linearheader: LinearLayout
+    lateinit var back: ImageView
     lateinit var sharedPreferences: SharedPreferences
     var address = ""
     var isFromGymWorkoutL: Boolean?=false
@@ -88,7 +88,7 @@ class ChangeLocationActivity : AppCompatActivity() , OnMapReadyCallback {
         stateCountry=findViewById(R.id.stateCountry)
         currentLoc=findViewById(R.id.currentLoc)
         tvContinue=findViewById(R.id.tvContinue)
-        linearheader=findViewById(R.id.linearheader)
+        back=findViewById(R.id.back)
         isFromGymWorkoutL=intent?.getBooleanExtra(ISFROMGYMWORKOUT,false)
         sharedPreferences= PreferenceManager.getDefaultSharedPreferences(applicationContext)
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map1) as? SupportMapFragment
@@ -107,7 +107,7 @@ class ChangeLocationActivity : AppCompatActivity() , OnMapReadyCallback {
 
         }
 
-        linearheader.setOnClickListener{
+        back.setOnClickListener{
             finish()
         }
 

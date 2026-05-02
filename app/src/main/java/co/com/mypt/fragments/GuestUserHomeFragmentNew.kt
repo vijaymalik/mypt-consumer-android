@@ -9,6 +9,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.graphics.drawable.Drawable
 import android.location.Address
 import android.location.Geocoder
 import android.location.LocationManager
@@ -26,10 +27,11 @@ import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.ScrollView
 import android.widget.TextView
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.StringDef
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -38,34 +40,35 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.preference.PreferenceManager
+import androidx.viewpager.widget.ViewPager
 import co.com.mypt.Api.ApiURL
 import co.com.mypt.Api.Constants
-import co.com.mypt.Api.Constants.HAS_GYM
+import co.com.mypt.Api.Constants.ISFROMGYMWORKOUT
 import co.com.mypt.Api.Constants.IS_GYM_MEMBERSHIP_FLOW
+import co.com.mypt.Api.Constants.delayMillis
 import co.com.mypt.Api.GetMethod
 import co.com.mypt.Api.ResponseData
 import co.com.mypt.ComingSoonViewMode
 import co.com.mypt.GymWorkout.withTrainer.GymListActivity
+import co.com.mypt.Profile.ChangeLocationActivity
 import co.com.mypt.Profile.NewUserProfileActivity
 import co.com.mypt.ProgressDialog
 import co.com.mypt.R
 import co.com.mypt.activities.ChooseLocationActivity
 import co.com.mypt.activities.ComingSoonActivity
 import co.com.mypt.activities.HomeGymTrainerActivity
-import co.com.mypt.activities.MainActivity
-import co.com.mypt.adapter.HomeTrainerListExerciseAdapter
+import co.com.mypt.activities.SelectCurrentLocationActivity
+import co.com.mypt.activities.TrainerDetails
+import co.com.mypt.adapter.HomeCertificateBannerAdapter
 import co.com.mypt.adapter.HomeTrainerTagAdapter
 import co.com.mypt.adapter.StoryAdapter
 import co.com.mypt.adapter.TrainerGridViewAdapter
-import co.com.mypt.adapter.TrainerListAdapter
+import co.com.mypt.curvedBottomNavigation.dpToPx
 import co.com.mypt.databinding.FragmentGuestUserHomeNewBinding
 import co.com.mypt.fragments.viewModels.GuestUserViewModel
 import co.com.mypt.model.NearByGymModel
-import co.com.mypt.model.ShopCategoryModel
-import co.com.mypt.model.ShopProductsModel
-import co.com.mypt.model.TrainerListModelX
+import co.com.mypt.model.TrainerStudiosResponse
 import co.com.mypt.model.TrainersModel
-import co.com.mypt.model.TransformationModel
 import co.com.mypt.model.UpcomingClassModel
 import co.com.mypt.onBoarding.PhoneNumberScreenActivity
 import co.com.mypt.retrofitApi.UiState
@@ -73,6 +76,7 @@ import co.com.mypt.retrofitApi.UserViewModelFactory
 import co.com.mypt.utils.HorizontalSpaceItemDecoration
 import com.android.volley.VolleyError
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -81,20 +85,21 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.Places
-import com.google.gson.Gson
-import com.google.gson.JsonArray
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.json.JSONArray
 import org.json.JSONObject
 import java.util.Calendar
 import java.util.Locale
 
 class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
     ViewTreeObserver.OnScrollChangedListener {
+    private var homeTrainersList: List<TrainersModel> = emptyList()
+    private var gymTrainersList: List<TrainersModel> = emptyList()
     var upcomingClassArraylist = ArrayList<UpcomingClassModel>()
     var nearByGymArraylist = ArrayList<NearByGymModel>()
     lateinit var imUpcomingBlur: ImageView
-    lateinit var bookAssesment: ImageView
+    lateinit var bookAssesment: RelativeLayout
     lateinit var tvProfile: TextView
     lateinit var tvlocation: TextView
     lateinit var allNearByGym: TextView
@@ -119,6 +124,13 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
     lateinit var edit: SharedPreferences.Editor
     lateinit var bindingView: FragmentGuestUserHomeNewBinding
     private var progressDialog: Dialog? = null
+    private lateinit var trainerGridAdapter: TrainerGridViewAdapter
+    private lateinit var homeCertificateBannerAdapter: HomeCertificateBannerAdapter
+
+    private var autoScrollJob: Job? = null
+    private var selectedTab = TrainerTab.HOME
+    private  var addressId: String= ""
+
 
     companion object {
         private const val KEY_LAT = "lat"
@@ -155,7 +167,6 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
         locationManager =
             requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
-
         tvlocation.setOnClickListener {
             var intent = Intent(activity, ChooseLocationActivity::class.java)
             startActivity(intent)
@@ -172,8 +183,9 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                     Constants.token, ""
                 ).toString() != ""
             ) {
-                val intent = Intent(context, HomeGymTrainerActivity::class.java)
-                intent.putExtra(HomeGymTrainerActivity.KEY_PT_TYPE, HomeGymTrainerActivity.KEY_HOME)
+                edit.putString("typeWorkout","home").apply()
+                val intent= Intent(context, SelectCurrentLocationActivity::class.java)
+                intent.putExtra(ISFROMGYMWORKOUT,true)
                 startActivity(intent)
             } else {
                 val intent = Intent(context, PhoneNumberScreenActivity::class.java)
@@ -189,8 +201,9 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                     Constants.token, ""
                 ).toString() != ""
             ) {
-                val intent = Intent(context, HomeGymTrainerActivity::class.java)
-                intent.putExtra(HomeGymTrainerActivity.KEY_PT_TYPE, HomeGymTrainerActivity.KEY_WORK)
+                edit.putString("typeWorkout","work").apply()
+                val intent= Intent(context,ChangeLocationActivity::class.java)
+                intent.putExtra(ISFROMGYMWORKOUT,true)
                 startActivity(intent)
             } else {
                 val intent = Intent(context, PhoneNumberScreenActivity::class.java)
@@ -230,6 +243,32 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
             val intent = Intent(requireContext(), NewUserProfileActivity::class.java)
             startActivity(intent)
         }
+
+        bindingView.homeTrainerTab.setOnClickListener {
+            selectTab(bindingView.homeTrainerTab, bindingView.gymTrainerTab)
+            selectedTab = TrainerTab.HOME
+            updateUI(homeTrainersList)
+         }
+
+        bindingView.gymTrainerTab.setOnClickListener {
+            selectTab(bindingView.gymTrainerTab, bindingView.homeTrainerTab)
+            selectedTab = TrainerTab.GYM
+            updateUI(gymTrainersList)
+        }
+
+        childFragmentManager.setFragmentResultListener(
+            HomeTrainerBottomSheet.REQUEST_KEY,
+            viewLifecycleOwner
+        ) { _, bundle ->
+
+            val studioId = bundle.getInt(HomeTrainerBottomSheet.KEY_SELECTED_STUDIO_ID, 0)
+            val trainerId = bundle.getInt(HomeTrainerBottomSheet.KEY_SELECTED_TRAINER_ID, 0)
+
+            openTrainerDetailScreen(trainerId.toString(),studioId.toString())
+        }
+
+        getAddressData()
+
         return bindingView.root
     }
 
@@ -241,6 +280,48 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
         collectUsers()
         viewModel.getStories("Bearer " + sharedPreferences.getString("token", ""))
         viewModel.getContent("Bearer " + sharedPreferences.getString("token", ""))
+
+        trainerGridAdapter = TrainerGridViewAdapter(
+            requireContext(),
+            "grid",
+            sharedPreferences.getString("typeWorkout", ""),
+            latitude,
+            longitude, "",
+            onProfileClick = { trainersModel ->
+                if(selectedTab== TrainerTab.GYM) {
+                    edit.putString("typeWorkout","work").apply()
+                    fetchTrainerStudios(trainersModel.id)
+                }else{
+                    edit.putString("typeWorkout","home").apply()
+                    openTrainerDetailScreen(trainersModel.id)
+                }
+            }
+        )
+        bindingView.nearByGymRecyclerView.adapter = trainerGridAdapter
+        bindingView.nearByGymRecyclerView.addItemDecoration(
+            HorizontalSpaceItemDecoration(20.dpToPx(requireContext()))
+        )
+        homeCertificateBannerAdapter = HomeCertificateBannerAdapter( requireContext())
+        bindingView.viewPagerBanner.adapter = homeCertificateBannerAdapter
+        bindingView.viewPagerBanner.pageMargin = 10.dpToPx(requireContext())
+        bindingView.dotsIndicator.attachTo(bindingView.viewPagerBanner)
+        startAutoScroll()
+
+        // Reset timer when user swipes manually
+        bindingView.viewPagerBanner.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrolled(position: Int, offset: Float, offsetPixels: Int) {}
+            override fun onPageSelected(position: Int) {
+            }
+            override fun onPageScrollStateChanged(state: Int) {
+                if (state == ViewPager.SCROLL_STATE_DRAGGING) {
+                    autoScrollJob?.cancel()
+                } else if (state == ViewPager.SCROLL_STATE_IDLE) {
+                    startAutoScroll()
+                }
+            }
+        })
+        viewModel.getBanners("Bearer " + sharedPreferences.getString("token", ""))
+
     }
 
     override fun onTouch(v: View?, event: MotionEvent?): Boolean {
@@ -282,14 +363,62 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
         startActivity(intent)
     }
 
+    private fun startAutoScroll() {
+        // Cancel any existing job to prevent multiple coroutines running simultaneously
+        autoScrollJob?.cancel()
+        autoScrollJob = viewLifecycleOwner.lifecycleScope.launch {
+            // repeatOnLifecycle handles the cleanup when the fragment goes to background
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                while (true) {
+                    delay(delayMillis)
+                    val count = homeCertificateBannerAdapter.count
+                    if (count > 0) {
+                        val nextItem = (bindingView.viewPagerBanner.currentItem + 1) % count
+                        bindingView.viewPagerBanner.setCurrentItem(nextItem, true)
+                    }
+                }
+            }
+        }
+    }
+
     private fun collectUsers() {
 
         viewModel.exerciseList.observe(viewLifecycleOwner){ list ->
                 bindingView.exerciseRecyclerView.adapter = HomeTrainerTagAdapter(requireContext(),
                     list?.filterNotNull() ?: emptyList()
                 ){ tag ->
-                    getTrainerList(tagId = tag.id)
+                    fetchHomeGymTrainers(tagId = tag.id)
                 }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.bannerState.collect { state ->
+
+                    when (state) {
+
+                        is UiState.Loading -> {
+                            showProgress()
+                        }
+
+                        is UiState.Success -> {
+                            hideProgress()
+                            if(state.data.isNullOrEmpty()){
+                                bindingView.viewPagerBanner.visibility = View.GONE
+                                bindingView.dotsIndicator.visibility = View.GONE
+                            }else{
+                                homeCertificateBannerAdapter.updateData(state.data.filterNotNull())
+                                bindingView.viewPagerBanner.visibility = View.VISIBLE
+                                bindingView.dotsIndicator.visibility = View.VISIBLE
+                            }
+                        }
+
+                        is UiState.Error -> {
+                            hideProgress()
+                        }
+                    }
+                }
+            }
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -303,7 +432,7 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                     when (state) {
 
                         is UiState.Loading -> {
-
+                            showProgress()
                         }
 
                         is UiState.Success -> {
@@ -348,16 +477,12 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                     when (state) {
 
                         is UiState.Loading -> {
-                            showProgress()
+                             showProgress()
                         }
 
                         is UiState.Success -> {
                           hideProgress()
-                            if (state.data.isNullOrEmpty()) {
-                                bindingView.llNodataTrainers.visibility = View.VISIBLE
-                                bindingView.nearByGymRecyclerView.visibility = View.GONE
-                            } else {
-                                val dataList = state.data?.map {
+                                 homeTrainersList = state.data?.map {
                                     val trainerModel=TrainersModel()
                                     trainerModel.name = it?.name?:""
                                     trainerModel.id = it?.id?:""
@@ -372,27 +497,96 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                                     trainerModel.is_group =it?.is_group
                                     trainerModel.name=it?.name?:""
                                     trainerModel
+                                }?:emptyList()
+                                if (selectedTab == TrainerTab.HOME) {
+                                    updateUI(homeTrainersList)
                                 }
-                                val trainerListAdapter = TrainerGridViewAdapter(
-                                    requireContext(),
-                                    dataList ?: emptyList(),
-                                    "grid",
-                                    sharedPreferences.getString("typeWorkout", ""),
-                                    latitude,
-                                    longitude, ""
-                                ) { isGrp, type, id -> }
-                                bindingView.nearByGymRecyclerView.adapter = trainerListAdapter
-                                bindingView.nearByGymRecyclerView.addItemDecoration(
-                                    HorizontalSpaceItemDecoration(5)
-                                )
-                                bindingView.llNodataTrainers.visibility = View.GONE
-                                bindingView.nearByGymRecyclerView.visibility = View.VISIBLE
-                            }
 
                         }
 
                         is UiState.Error -> {
+                             hideProgress()
+                        }
+                    }
+                }
+
+
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+
+            viewLifecycleOwner.repeatOnLifecycle(
+                Lifecycle.State.STARTED
+            ) {
+
+                viewModel.allGymTrainerListState.collect { state ->
+
+                    when (state) {
+
+                        is UiState.Loading -> {
+                            showProgress()
+                        }
+
+                        is UiState.Success -> {
                             hideProgress()
+                                gymTrainersList = state.data?.map {
+                                    val trainerModel=TrainersModel()
+                                    trainerModel.name = it?.name?:""
+                                    trainerModel.id = it?.id?:""
+                                    trainerModel.distance =it?.distance?:""
+                                    trainerModel.slot = it?.slot?:""
+                                    trainerModel.noOfRating = it?.noOfRating?:""
+                                    trainerModel.averageRating =it?.averageRating.toString()
+                                    trainerModel.location = it?.location?:""
+                                    trainerModel.profile =  it?.profile?:""
+                                    trainerModel.is_verified =it?.is_verified.toString()
+                                    trainerModel.tags =it?.tags?:emptyList()
+                                    trainerModel.is_group =it?.is_group
+                                    trainerModel.name=it?.name?:""
+                                    trainerModel
+                                }?:emptyList()
+                                if (selectedTab == TrainerTab.GYM) {
+                                    updateUI(gymTrainersList)
+                                }
+                        }
+
+                        is UiState.Error -> {
+                            hideProgress()
+                        }
+                    }
+                }
+
+
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+
+            viewLifecycleOwner.repeatOnLifecycle(
+                Lifecycle.State.STARTED
+            ) {
+
+                viewModel.trainerStudiosState.collect { state ->
+
+                    when (state) {
+
+                        is UiState.Loading -> {
+                            showProgress()
+                        }
+
+                        is UiState.Success -> {
+                            hideProgress()
+                            val response = state.data?.data
+                            openTrainerStudioBottomSheet(response)
+                            viewModel.resetTrainerStudioState()
+                        }
+
+                        is UiState.Error -> {
+                            hideProgress()
+                        }
+                        else ->{
+
                         }
                     }
                 }
@@ -427,6 +621,8 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                              val buy_home_pt=state.data?.firstOrNull { it?.key =="buy_home_pt" }
                              val buy_gym_membership=state.data?.firstOrNull { it?.key =="buy_gym_membership" }
                              val offer_banner=state.data?.firstOrNull { it?.key =="offer_banner" }
+                             val bgBookAssesment=state.data?.firstOrNull { it?.id ==ActiveUserHomeFragmentNew.BOOK_FREE_ASSESSMENT }
+                             val bgAddress=state.data?.firstOrNull { it?.id == ActiveUserHomeFragmentNew.BACKGROUND_ADDRESS_ID }
 
                                 if (home_background !=null)
                                 Glide.with(requireContext()).load(home_background?.image).fitCenter().into(bindingView.backgroundImg)
@@ -434,6 +630,23 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                                     Glide.with(requireContext()).load(offer_banner?.image).fitCenter().into(bindingView.homeBanner)
                                // else bindingView.homeBanner.visibility=View.GONE
 
+                                bgBookAssesment?.let {
+                                    Glide.with(requireContext()).load(it.image).fitCenter().into(bindingView.ivBookAssessment)
+                                }
+
+                                Glide.with(requireContext()).load(bgAddress?.image)
+                                    .into(object : CustomTarget<Drawable>() {
+                                        override fun onResourceReady(
+                                            resource: Drawable,
+                                            transition: com.bumptech.glide.request.transition.Transition<in Drawable>?
+                                        ) {
+                                            bindingView.headerLayout.background = resource
+                                        }
+
+                                        override fun onLoadCleared(placeholder: Drawable?) {
+                                            bindingView.headerLayout.background = placeholder
+                                        }
+                                    })
                                 Glide.with(requireContext()).load(buy_home_pt?.image).fitCenter().into(bindingView.homePt)
                                 Glide.with(requireContext()).load(buy_gym_membership?.image).fitCenter().into(bindingView.memberShip)
                                 Glide.with(requireContext()).load(buy_gym_pt?.image).fitCenter().into(bindingView.gymPt)
@@ -451,89 +664,12 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
         }
     }
 
-    private fun getgymList(latitude: Double, longitude: Double) {
-        val progressDialog: Dialog = ProgressDialog.progressDialog(requireActivity(), "")
-        progressDialog.show()
-        Log.e(
-            "gymListApi",
-            "" + ApiURL.getTrainer + "0" + "&tag_id=" + "0" + "&type=" + "gym" + "&long=" + longitude + "&lat=" + latitude
-        )
-        GetMethod(
-            ApiURL.getTrainer + "0" + "&tag_id=" + "0" + "&type=" + "gym" + "&long=" + longitude + "&lat=" + latitude,
-            activity
-        ).startMethod(object :
-            ResponseData {
-            override fun response(data: String?) {
-                progressDialog.dismiss()
-                nearByGymArraylist.clear()
-                Log.e("getGymListResponse", data.toString())
-                try {
-                    val jsonObj = JSONObject(data!!)
-                    if (jsonObj.optBoolean("status")) {
-                        var jsonArrayList = jsonObj.optJSONObject("data").optJSONArray("studios")
-                        if (jsonArrayList.length() > 0) {
-                            for (i in 0 until jsonArrayList.length()) {
-                                var jsonObject1 = jsonArrayList.optJSONObject(i)
-                                val nearByGymModel = NearByGymModel()
-                                nearByGymModel.name = jsonObject1.optString("name")
-                                nearByGymModel.id = jsonObject1.optString("id")
-                                nearByGymModel.distance = jsonObject1.optString("distance")
-                                nearByGymModel.slot = jsonObject1.optString("slot")
-                                nearByGymModel.noOfRating = jsonObject1.optString("noOfRating")
-                                nearByGymModel.averageRating =
-                                    jsonObject1.optString("averageRating")
-                                nearByGymModel.profile = jsonObject1.optString("profile")
-                                nearByGymModel.location = jsonObject1.optString("location")
-                                nearByGymModel.timing = jsonObject1.optString("timing")
-                                nearByGymModel.activity = jsonObject1.optJSONArray("activity")
-                                nearByGymModel.tag = jsonObject1.optString("tag")
-                                nearByGymModel.description = jsonObject1.optString("description")
-                                nearByGymArraylist.add(nearByGymModel)
-                            }
-
-                            /*trainerRecyclerView.adapter = GymListAdapter(this@GymListActivity,trainerList,intent.getStringExtra("type"),"gym",
-                                this@InactivePlanHomeFragment.latitude,
-                                this@InactivePlanHomeFragment.longitude
-                            )*/
-//                            nearByGymRecyclerView.adapter = NearByGymAdapter(context,nearByGymArraylist,latitude,longitude,"gym")
-//                            nearByGymRecyclerView.visibility= View.VISIBLE
-
-                        } else {
-//                            nearByGymRecyclerView.visibility= View.GONE
-
-                        }
-                    }
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-            }
-
-            override fun error(error: VolleyError?) {
-                progressDialog.dismiss()
-                error!!.printStackTrace()
-            }
-        })
+    private fun fetchHomeGymTrainers(tagId: Int?=null){
+        viewModel.fetchHomeAndGymTrainers("Bearer " + sharedPreferences.getString("token", ""), latitude,longitude,tagId)
     }
 
-    private fun getTrainerList(tagId: Int?=null) {
-
-        var api = ""
-        val param: MutableMap<String, String> = HashMap()
-
-        param["type"] = "home"
-
-//        param["gender"] = "" + genderId
-//        param["language"] = "" + languageId
-        param["lat"] = "" + latitude
-        param["long"] = "" + longitude
-//        param["time_slot"] = "" + timeSlotId
-        if (tagId != null)
-            param["tag_id"] = "" + tagId
-//        param["nationality"] = "" + nationId
-        Log.e("trainerListParam", param.toString())
-
-        viewModel.getTrainerList("Bearer " + sharedPreferences.getString("token", ""), param)
-
+    private fun fetchTrainerStudios(trainerId: String){
+        viewModel.getTrainerStudios("Bearer " + sharedPreferences.getString("token", ""), latitude,longitude,trainerId)
     }
 
     private fun checkLocationPermission(): Boolean {
@@ -675,7 +811,7 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                                 })
 
                             }, 2000)
-                            getTrainerList()
+                           fetchHomeGymTrainers()
                             // getgymList(latitude!!, longitude!!)
 //                            getClasses(latitude!!, longitude!!)
                             mFusedLocationClient.removeLocationUpdates(locationCallback)
@@ -756,7 +892,7 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                     tvlocation.text = sharedPreferences.getString(Constants.address, "")
                     latitude = sharedPreferences.getString(Constants.lat, "")!!.toDouble()
                     longitude = sharedPreferences.getString(Constants.long, "")!!.toDouble()
-                    getTrainerList()
+                    fetchHomeGymTrainers()
 //                    getgymList(latitude!!, longitude!!)
 //                    getClasses(latitude!!, longitude!!)
                 }
@@ -765,7 +901,7 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                 tvlocation.text = chooseAddress
                 latitude = lat.toDouble()
                 longitude = long.toDouble()
-                getTrainerList()
+               fetchHomeGymTrainers()
 //                getgymList(latitude!!, longitude!!)
 //                getClasses(latitude!!, longitude!!)
             }
@@ -783,7 +919,7 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                 longitude = long.toDouble()
                 tvlocation.visibility = View.VISIBLE
                 tvlocation.text = chooseAddress
-                getTrainerList()
+               fetchHomeGymTrainers()
 //                getgymList(latitude!!, longitude!!)
 //                getClasses(latitude!!, longitude!!)
             }
@@ -795,78 +931,6 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
             showGPSDisabledAlertToUser()
             return
         }
-    }
-
-    private fun getClasses(latitude: Double, longitude: Double) {
-        val progressDialog: Dialog = ProgressDialog.progressDialog(requireActivity(), "")
-        progressDialog.show()
-
-        var api = ""
-        api = ApiURL.upcoming_classes + latitude + "&long=" + longitude
-
-        Log.e("UpcomingclassnearUrl", api)
-        GetMethod(
-            api, activity
-        ).startMethod(object :
-            ResponseData {
-            override fun response(data: String?) {
-                progressDialog.dismiss()
-                upcomingClassArraylist.clear()
-                Log.e("UpcomingNearResponse", data.toString())
-                try {
-                    val jsonObj = JSONObject(data!!)
-                    if (jsonObj.optBoolean("status")) {
-
-                        var jsonArrayAllClassess =
-                            jsonObj.optJSONObject("data").optJSONArray("allClasses")
-
-                        if (jsonArrayAllClassess.length() > 0) {
-
-                            for (i in 0 until jsonArrayAllClassess.length()) {
-                                var json = jsonArrayAllClassess.optJSONObject(i)
-                                var nearUpcomingCLassModel = UpcomingClassModel()
-                                nearUpcomingCLassModel.cla_ss = json.optString("class")
-                                nearUpcomingCLassModel.id = json.optString("id")
-                                nearUpcomingCLassModel.image = json.optString("image")
-                                nearUpcomingCLassModel.status = json.optString("status")
-                                nearUpcomingCLassModel.location = json.optString("location")
-                                nearUpcomingCLassModel.type = json.optString("type")
-                                nearUpcomingCLassModel.time = json.optString("time")
-                                nearUpcomingCLassModel.start_end = json.optString("start_end")
-                                nearUpcomingCLassModel.price = json.optString("price")
-                                nearUpcomingCLassModel.trained_by = json.optString("trained_by")
-                                nearUpcomingCLassModel.trainer_image =
-                                    json.optString("trainer_image")
-                                nearUpcomingCLassModel.studio_name = json.optString("studio_name")
-                                nearUpcomingCLassModel.schedule_id = json.optString("schedule_id")
-                                upcomingClassArraylist.add(nearUpcomingCLassModel)
-                            }
-
-//                            upcomingClassRecyclerView.adapter = UpcomingClassAdapter(context,upcomingClassArraylist,latitude,longitude)
-
-                            imUpcomingBlur.visibility = View.GONE
-                        } else {
-                            imUpcomingBlur.visibility = View.VISIBLE
-                        }
-
-
-                    } else {
-
-                    }
-
-
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-            }
-
-            override fun error(error: VolleyError?) {
-                progressDialog.dismiss()
-                error!!.printStackTrace()
-            }
-
-        })
-
     }
 
     private fun getchecktype() {
@@ -918,6 +982,37 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
 
     }
 
+    private fun getAddressData() {
+
+        val progressDialog: Dialog = ProgressDialog.progressDialog(requireContext(),"")
+        progressDialog.show()
+
+        GetMethod(ApiURL.getaddress,requireContext()).startMethod(object :
+            ResponseData {
+
+            override fun response(data: String?) {
+                progressDialog.dismiss()
+                Log.e("getAddressResponse",data.toString())
+                try {
+                    val jsonObj = JSONObject(data!!)
+                    if (jsonObj.optBoolean("status")){
+                        val jsonArray=jsonObj.optJSONArray("data")
+                        if (jsonArray != null && jsonArray.length()>0){
+                            addressId= jsonArray.optJSONObject(0).optString("id")
+                        }
+                    }
+                }catch (e:Exception){
+                    e.printStackTrace()
+                }
+            }
+
+            override fun error(error: VolleyError?) {
+                progressDialog.dismiss()
+                error!!.printStackTrace()
+            }
+        })
+    }
+
     private fun showProgress() {
         if (progressDialog == null) {
             progressDialog = ProgressDialog.progressDialog(requireContext(), "")
@@ -932,4 +1027,57 @@ class GuestUserHomeFragmentNew : Fragment(), View.OnTouchListener,
         progressDialog?.dismiss()
     }
 
+    private fun selectTab(
+        selectedTab: TextView,
+        unselectedTab: TextView
+    ) {
+        // Tab UI
+        selectedTab.setTextColor(ContextCompat.getColor(requireContext(),R.color.black))
+        selectedTab.background = ContextCompat.getDrawable(requireContext(),R.drawable.feet_button)
+
+        unselectedTab.setTextColor(ContextCompat.getColor(requireContext(),R.color.lightgreycolor))
+        unselectedTab.background = null
+    }
+
+    fun updateUI(list: List<TrainersModel>) {
+        bindingView.nearByGymRecyclerView.scrollToPosition(0)
+        if (list.isEmpty()) {
+            bindingView.nearByGymRecyclerView.visibility = View.GONE
+            bindingView.llNodataTrainers.visibility = View.VISIBLE
+        } else {
+            bindingView.nearByGymRecyclerView.visibility = View.VISIBLE
+            bindingView.llNodataTrainers.visibility = View.GONE
+            trainerGridAdapter.updateTrainerList(list)
+        }
+    }
+
+    private fun openTrainerStudioBottomSheet(response: TrainerStudiosResponse.Data?) {
+        response?.let {
+            HomeTrainerBottomSheet.newInstance(it)
+                .show(childFragmentManager, "HomeTrainerBottomSheet")
+        }
+    }
+
+    private fun openTrainerDetailScreen(trainersId: String,studioId:String?=null){
+        val intent = Intent(context, TrainerDetails::class.java)
+        intent.putExtra("trainer_id", trainersId)
+        intent.putExtra("studio_id",studioId )
+        intent.putExtra("type", if(selectedTab== TrainerTab.HOME)"home" else "work")
+        intent.putExtra("long", longitude)
+        intent.putExtra("lat", latitude)
+        intent.putExtra("isGuestHome", true)
+        requireContext().startActivity(intent)
+    }
+
+}
+
+@Retention(AnnotationRetention.SOURCE)
+@StringDef(
+    TrainerTab.HOME, TrainerTab.GYM
+)
+annotation class TrainerTab {
+    companion object {
+        const val HOME = "home"
+        const val GYM = "gym"
+    }
 }

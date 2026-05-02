@@ -18,6 +18,12 @@ class TrainingTeamWrapperActivity : AppCompatActivity() {
             if(intent.hasExtra("studio_id")) {
                 bundle.putString("studio_id", intent.getStringExtra("studio_id"))
             }
+            if(intent.hasExtra("trainer_id")) {
+                bundle.putString("trainer_id", intent.getStringExtra("trainer_id"))
+            }
+            if(intent.hasExtra("isGuestHome")){
+                bundle.putBoolean("isGuestHome", intent.getBooleanExtra("isGuestHome",false))
+            }
             fragment.arguments = bundle
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer, fragment)

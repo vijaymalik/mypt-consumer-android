@@ -14,5 +14,13 @@ class GuestUserRepository {
     suspend fun getContent(token: String) =
         RetrofitClient.api.getContent(token)
 
+    suspend fun getBanners(token: String) =
+        RetrofitClient.api.getBanners(token)
+
+    suspend fun getAllGymTrainerList(token: String,params: Map<String, String>) =
+        RetrofitClient.api.getAllGymTrainerList(token,params)
+
+    suspend fun getTrainersStudios(token: String,params: Map<String, String>) =
+        RetrofitClient.api.getTrainersStudios(token,params)
 
 }

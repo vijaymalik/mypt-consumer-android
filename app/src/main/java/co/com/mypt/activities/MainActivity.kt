@@ -17,6 +17,9 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -27,6 +30,7 @@ import co.com.mypt.Api.GetMethod
 import co.com.mypt.Api.ResponseData
 import co.com.mypt.ProgressDialog
 import co.com.mypt.R
+import co.com.mypt.curvedBottomNavigation.dpToPx
 import co.com.mypt.databinding.ActivityMainBinding
 import co.com.mypt.fragments.HomePlaceholderFragment
 import co.com.mypt.onBoarding.PhoneNumberScreenActivity
@@ -54,6 +58,7 @@ class MainActivity : AppCompatActivity() {
         private val ID_Library= R.id.libraryFragment
         private val ID_CALENDAR = R.id.calendarFragment
         private val ID_CART = R.id.moreFragment
+         val KEY_TAB = "key_tab"
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -140,6 +145,14 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             getData(false, true)
+        }
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        val itemId = intent.getIntExtra(KEY_TAB,-1)
+        if (itemId != -1) {
+            selectBottomItem(itemId)
         }
     }
 
@@ -267,7 +280,6 @@ class MainActivity : AppCompatActivity() {
                     //val isActiveUser = jsonObj.optBoolean("status") && (jsonObj.optJSONArray("data")?.length() ?: 0) > 0
                     if(jsonObj.optBoolean("status"))
                         isActiveUser = jsonObj.optJSONObject("data").optBoolean("isActive")
-
                     // Navigate to placeholder HomeFragment
                     Handler(Looper.getMainLooper()).post {
                         val bundle = Bundle().apply {
@@ -306,5 +318,4 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
-
 }

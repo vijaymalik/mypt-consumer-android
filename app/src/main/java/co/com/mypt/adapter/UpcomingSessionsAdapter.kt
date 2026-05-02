@@ -32,7 +32,7 @@ class UpcomingSessionsAdapter(
         val sessionWith : TextView = itemView.findViewById(R.id.sessionWith)
         val sessionNumber : TextView = itemView.findViewById(R.id.sessionNumber)
         val time : TextView = itemView.findViewById(R.id.time)
-        val place : TextView = itemView.findViewById(R.id.place)
+        val tvDate : TextView = itemView.findViewById(R.id.tvDate)
         val im : ImageView = itemView.findViewById(R.id.im)
         val imTrack : ImageView = itemView.findViewById(R.id.imTrack)
         val relative : RelativeLayout = itemView.findViewById(R.id.relative)
@@ -54,17 +54,21 @@ class UpcomingSessionsAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var upcomingSessionsModel=upcomingSessionsArraylist.get(position)
 
-        holder.card.setTag(position)
-        holder.sessionWith.setText("Session with "+upcomingSessionsModel.trainer)
-        holder.sessionNumber.setText(""+(position+1)+" th Session")
-        holder.place.setText(upcomingSessionsModel.location)
+        holder.card.tag = position
+        holder.sessionWith.text = "Session with "+upcomingSessionsModel.trainer
+        holder.sessionNumber.text = ""+(position+1)+" th Session"
+        val date  = upcomingSessionsModel.timing.substringBeforeLast(",")
+        holder.tvDate.text = date
 //        holder.distance.setText(upcomingSessionsModel.distance)
-        holder.time.setText(upcomingSessionsModel.selected_slot)
-        holder.relative.setTag(position)
-        holder.imTrack.setTag(position)
+        holder.time.text = upcomingSessionsModel.selected_slot
+        holder.relative.tag = position
+        holder.imTrack.tag = position
         Glide.with(context!!).load(upcomingSessionsModel.trainer_image).fitCenter().error(R.drawable.dummy_trainer).into(holder.im)
 
         holder.llCheckIn.setOnClickListener {
+            onCheckInClick(upcomingSessionsModel)
+        }
+        holder.card.setOnClickListener {
             onCheckInClick(upcomingSessionsModel)
         }
 

@@ -3,496 +3,169 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/buttontextcolor"
+    android:fitsSystemWindows="true"
     tools:context=".fragments.MoreFragment">
 
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:orientation="vertical"
-       android:layout_height="wrap_content">
-       <TextView
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:textColor="@color/subheadingcolor"
-           android:textSize="16sp"
-           android:layout_marginVertical="15dp"
-           android:layout_marginHorizontal="15dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-           android:textStyle="bold"
-           android:fontFamily="@font/manrope_medium"
-           android:text="@string/explore"
-           />
-       <TextView
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:textColor="@color/subheadingcolor"
-           android:textSize="25sp"
-           android:layout_marginVertical="10dp"
-           android:layout_marginHorizontal="15dp"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="15dp"
+            android:fontFamily="@font/manrope_medium"
+            android:text="@string/explore"
 
-           android:textStyle="bold"
-           android:fontFamily="@font/manrope_medium"
-           android:text="@string/mypt"
-           />
-       <TextView
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:textColor="@color/smallTextcolor"
-           android:textSize="14sp"
-           android:layout_marginTop="30dp"
-           android:layout_marginHorizontal="15dp"
+            android:textColor="@color/subheadingcolor"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-           android:textStyle="bold"
-           android:fontFamily="@font/manrope_medium"
-           android:text="@string/fitness_amp_progress"
-           />
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:orientation="vertical"
-           android:layout_marginHorizontal="15dp"
-           android:layout_marginTop="20dp"
-           android:layout_height="wrap_content">
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:orientation="horizontal"
-               android:layout_height="wrap_content">
-               <LinearLayout
-                   android:layout_width="0dp"
-                   android:layout_weight="1"
-                   android:orientation="vertical"
-                   android:id="@+id/linearGoals"
-                   android:layout_height="wrap_content">
-                   <ImageView
-                       android:layout_width="90dp"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="10dp"
+            android:fontFamily="@font/manrope_medium"
+            android:text="@string/mypt"
 
-                       android:src="@drawable/my_goals"
-                       android:scaleType="centerCrop"
-                       android:layout_height="100dp"/>
+            android:textColor="@color/subheadingcolor"
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
-               </LinearLayout>
-               <LinearLayout
-                   android:layout_width="0dp"
-                   android:layout_weight="1"
-                   android:orientation="vertical"
-                   android:id="@+id/linearBookings"
-                   android:layout_height="wrap_content">
-                   <ImageView
-                       android:layout_width="90dp"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/manrope_medium"
+            android:text="Quick Actions"
 
-                       android:src="@drawable/mybookings"
-                       android:scaleType="centerCrop"
-                       android:layout_height="90dp"/>
+            android:textColor="@color/smallTextcolor"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
-               </LinearLayout>
-                  <LinearLayout
-                   android:layout_width="0dp"
-                   android:layout_weight="1"
-                   android:orientation="vertical"
-                      android:id="@+id/linearHealth"
-                   android:layout_height="wrap_content">
-                   <ImageView
-                       android:layout_width="90dp"
-                       android:scaleType="centerCrop"
-                       android:src="@drawable/my_healthstatus"
-                       android:layout_height="110dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
 
-               </LinearLayout>
-                  <LinearLayout
-                   android:layout_width="0dp"
-                   android:layout_weight="1"
-                      android:id="@+id/linearMilestone"
-                   android:orientation="vertical"
-                   android:layout_height="wrap_content">
-                   <ImageView
-                       android:layout_width="90dp"
-                       android:src="@drawable/my_milestone"
-                       android:scaleType="centerCrop"
-                       android:layout_height="100dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-               </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linearBookings"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
+                    <ImageView
+                        android:layout_width="90dp"
 
-           </LinearLayout>
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:orientation="horizontal"
-               android:layout_marginTop="10dp"
-               android:layout_height="wrap_content">
-               <LinearLayout
-                   android:layout_width="0dp"
-                   android:layout_weight="1"
-                   android:id="@+id/linearMeal"
-                   android:orientation="vertical"
-                   android:layout_height="wrap_content">
-                   <ImageView
-                       android:layout_width="90dp"
-                       android:src="@drawable/my_meals"
-                       android:scaleType="centerCrop"
-                       android:layout_height="97dp"/>
+                        android:layout_height="90dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/mybookings" />
 
-               </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearTrainer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="90dp"
+
+                        android:layout_height="95dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/my_trainers" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearFindGym"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/finda_gym" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearFindTrainer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/findatrainer" />
+
+                </LinearLayout>
+
+            </LinearLayout>
 
 
+            <TextView
+                android:id="@+id/tvDeleteAccount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/manrope_medium"
+                android:textColor="#ADADAD"
+                android:textSize="14sp"
+                 />
 
-               <LinearLayout
-                   android:layout_width="0dp"
-                   android:layout_weight="1"
-                   android:id="@+id/linearWorkoutLibrary"
-                   android:orientation="vertical"
-                   android:layout_height="wrap_content">
-                   <ImageView
-                       android:layout_width="90dp"
-                       android:layout_height="105dp"
-                       android:scaleType="centerCrop"
-                       android:src="@drawable/workout_library" />
-               </LinearLayout>
-               <LinearLayout
-                   android:layout_width="0dp"
-                   android:layout_weight="1"
-                   android:id="@+id/linearFavouriteWorkout"
-                   android:orientation="vertical"
-                   android:layout_height="wrap_content">
-                   <ImageView
-                       android:layout_width="90dp"
-                       android:src="@drawable/my_favourite_workout"
-                       android:scaleType="centerCrop"
-                       android:layout_height="105dp"/>
+            <LinearLayout
+                android:id="@+id/linearLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="60dp"
+                android:background="@drawable/logout_drawable"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingVertical="15sp">
 
-               </LinearLayout>
-               <LinearLayout
-                   android:layout_width="0dp"
-                   android:layout_weight="1"
-                   android:orientation="vertical"
-                   android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/logout" />
 
-
-               </LinearLayout>
-
-           </LinearLayout>
-           <View
-               android:layout_width="match_parent"
-               android:background="@drawable/horizontal_line"
-               android:layout_marginTop="20dp"
-               android:layout_marginHorizontal="40dp"
-               android:layout_height="1dp"/>
-
-       </LinearLayout>
-       <TextView
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:textColor="@color/smallTextcolor"
-           android:textSize="14sp"
-           android:layout_marginTop="30dp"
-           android:layout_marginHorizontal="15dp"
-
-           android:textStyle="bold"
-           android:fontFamily="@font/manrope_medium"
-           android:text="@string/my_network"
-           />
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:orientation="vertical"
-           android:layout_marginHorizontal="15dp"
-           android:layout_marginTop="20dp"
-           android:layout_height="wrap_content">
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:orientation="horizontal"
-               android:layout_height="wrap_content">
-               <LinearLayout
-                   android:layout_width="0dp"
-                   android:layout_weight="1"
-                   android:orientation="vertical"
-                   android:id="@+id/linearTrainer"
-                   android:layout_height="wrap_content">
-                   <ImageView
-                       android:layout_width="90dp"
-
-                       android:src="@drawable/my_trainers"
-                       android:scaleType="centerCrop"
-                       android:layout_height="95dp"/>
-
-               </LinearLayout>
-               <LinearLayout
-                   android:layout_width="0dp"
-                   android:layout_weight="1"
-                   android:orientation="vertical"
-                   android:id="@+id/linearChat"
-                   android:layout_height="wrap_content">
-                   <ImageView
-                       android:layout_width="90dp"
-
-                       android:src="@drawable/mychats"
-                       android:scaleType="centerCrop"
-                       android:layout_height="100dp"/>
-
-               </LinearLayout>
-               <LinearLayout
-                   android:layout_width="0dp"
-                   android:layout_weight="1"
-                   android:orientation="vertical"
-                   android:id="@+id/linearFindGym"
-                   android:layout_height="wrap_content">
-                   <ImageView
-                       android:layout_width="90dp"
-                       android:scaleType="centerCrop"
-                       android:src="@drawable/finda_gym"
-                       android:layout_height="90dp"/>
-
-               </LinearLayout>
-               <LinearLayout
-                   android:layout_width="0dp"
-                   android:layout_weight="1"
-                   android:orientation="vertical"
-                   android:id="@+id/linearFindTrainer"
-                   android:layout_height="wrap_content">
-                   <ImageView
-                       android:layout_width="90dp"
-                       android:src="@drawable/findatrainer"
-                       android:scaleType="centerCrop"
-                       android:layout_height="90dp"/>
-
-               </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:fontFamily="@font/manrope_bold"
+                    android:text="@string/logout"
+                    android:textAllCaps="true"
+                    android:textColor="@color/headingcolor"
+                    android:textSize="16sp" />
+            </LinearLayout>
 
 
-           </LinearLayout>
-
-           <View
-               android:layout_width="match_parent"
-               android:background="@drawable/horizontal_line"
-               android:layout_marginTop="20dp"
-               android:layout_marginHorizontal="40dp"
-               android:layout_height="1dp"/>
-
-       </LinearLayout>
-       <TextView
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:textColor="@color/smallTextcolor"
-           android:textSize="14sp"
-           android:layout_marginTop="30dp"
-           android:layout_marginHorizontal="15dp"
-
-           android:textStyle="bold"
-           android:fontFamily="@font/manrope_medium"
-           android:text="@string/account_management"
-           />
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:orientation="vertical"
-           android:layout_marginHorizontal="15dp"
-           android:layout_marginTop="20dp"
-           android:layout_height="wrap_content">
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:orientation="horizontal"
-               android:layout_height="wrap_content">
-               <LinearLayout
-                   android:layout_width="0dp"
-                   android:id="@+id/linearProfile"
-                   android:layout_weight="1"
-                   android:orientation="vertical"
-
-                   android:layout_height="wrap_content">
-                   <ImageView
-                       android:layout_width="90dp"
-
-                       android:src="@drawable/profile"
-                       android:scaleType="centerCrop"
-                       android:layout_height="95dp"/>
-
-               </LinearLayout>
-               <LinearLayout
-                   android:layout_width="0dp"
-                   android:layout_weight="1"
-                   android:orientation="vertical"
-                   android:id="@+id/linearSetting"
-                   android:layout_height="wrap_content">
-                   <ImageView
-                       android:layout_width="90dp"
-
-                       android:src="@drawable/settings"
-                       android:scaleType="centerCrop"
-                       android:layout_height="93dp"/>
-
-               </LinearLayout>
-               <LinearLayout
-                   android:layout_width="0dp"
-                   android:layout_weight="1"
-                   android:orientation="vertical"
-                   android:id="@+id/linearPayment"
-                   android:layout_height="wrap_content">
-                   <ImageView
-                       android:layout_width="90dp"
-                       android:scaleType="centerCrop"
-                       android:src="@drawable/payment_history"
-                       android:layout_height="107dp"/>
-
-               </LinearLayout>
-               <LinearLayout
-                   android:layout_width="0dp"
-                   android:layout_weight="1"
-                   android:orientation="vertical"
-
-                   android:layout_height="wrap_content">
-
-               </LinearLayout>
-
-
-           </LinearLayout>
-
-           <View
-               android:layout_width="match_parent"
-               android:background="@drawable/horizontal_line"
-               android:layout_marginTop="20dp"
-               android:layout_marginHorizontal="40dp"
-               android:layout_height="1dp"/>
-
-       </LinearLayout>
-       <TextView
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:textColor="@color/smallTextcolor"
-           android:textSize="14sp"
-           android:layout_marginTop="30dp"
-           android:layout_marginHorizontal="15dp"
-
-           android:textStyle="bold"
-           android:fontFamily="@font/manrope_medium"
-           android:text="@string/support"
-           />
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_marginHorizontal="15dp"
-           android:orientation="vertical"
-           android:layout_marginTop="20dp"
-           android:id="@+id/linearHelp"
-           android:layout_height="wrap_content">
-           <ImageView
-               android:layout_width="90dp"
-               android:src="@drawable/helpsupport"
-               android:scaleType="centerCrop"
-               android:layout_height="105dp"/>
-           <View
-               android:layout_width="match_parent"
-               android:background="@drawable/horizontal_line"
-               android:layout_marginTop="20dp"
-               android:layout_marginHorizontal="40dp"
-               android:layout_height="1dp"/>
-       </LinearLayout>
-       <TextView
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:textColor="@color/smallTextcolor"
-           android:textSize="14sp"
-           android:layout_marginTop="30dp"
-           android:layout_marginHorizontal="15dp"
-           android:textStyle="bold"
-           android:fontFamily="@font/manrope_medium"
-           android:text="@string/e_commerce"
-           />
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:orientation="horizontal"
-           android:layout_marginTop="30dp"
-           android:layout_marginHorizontal="15dp"
-           android:layout_height="wrap_content">
-           <LinearLayout
-               android:layout_width="0dp"
-               android:layout_weight="1"
-               android:orientation="vertical"
-               android:id="@+id/linearShop"
-               android:layout_height="wrap_content">
-               <ImageView
-                   android:layout_width="90dp"
-
-                   android:src="@drawable/shop"
-                   android:scaleType="centerCrop"
-                   android:layout_height="95dp"/>
-
-           </LinearLayout>
-           <LinearLayout
-               android:layout_width="0dp"
-               android:layout_weight="1"
-               android:orientation="vertical"
-               android:id="@+id/linearOrder"
-               android:layout_height="wrap_content">
-               <ImageView
-                   android:layout_width="90dp"
-                   android:src="@drawable/myorders"
-                   android:scaleType="centerCrop"
-                   android:layout_height="93dp"/>
-
-           </LinearLayout>
-           <LinearLayout
-               android:layout_width="0dp"
-               android:layout_weight="1"
-               android:orientation="vertical"
-               android:id="@+id/linearCart"
-               android:layout_height="wrap_content">
-               <ImageView
-                   android:layout_width="90dp"
-                   android:scaleType="centerCrop"
-                   android:src="@drawable/mycart"
-                   android:layout_height="93dp"/>
-
-
-
-           </LinearLayout>
-           <LinearLayout
-               android:layout_width="0dp"
-               android:layout_weight="1"
-               android:orientation="vertical"
-
-               android:layout_height="wrap_content">
-
-           </LinearLayout>
-
-
-       </LinearLayout>
-       <TextView
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:textColor="#ADADAD"
-           android:textSize="14sp"
-           android:id="@+id/tvDeleteAccount"
-           android:layout_marginTop="30dp"
-           android:layout_marginHorizontal="15dp"
-           android:textStyle="bold"
-           android:fontFamily="@font/manrope_medium"
-           android:text="@string/to_delete_your_data_permanently_close_your_account"
-           />
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:orientation="horizontal"
-           android:gravity="center"
-           android:id="@+id/linearLogout"
-           android:layout_marginTop="60dp"
-           android:layout_marginBottom="60dp"
-           android:paddingVertical="15sp"
-           android:background="@drawable/logout_drawable"
-           android:layout_marginHorizontal="15dp"
-           android:layout_height="wrap_content">
-           <ImageView
-               android:layout_width="24dp"
-               android:src="@drawable/logout"
-               android:layout_height="24dp"/>
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:textColor="@color/headingcolor"
-               android:textSize="16sp"
-               android:layout_marginHorizontal="15dp"
-               android:textAllCaps="true"
-               android:fontFamily="@font/manrope_bold"
-               android:text="@string/logout"
-               />
-       </LinearLayout>
-
-
-   </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

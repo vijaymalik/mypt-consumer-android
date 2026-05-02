@@ -1,0 +1,29 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Background rounded shape -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="8dp"/>
+
+            <gradient
+                android:angle="0"
+                android:startColor="#33FFFFFF"
+                android:endColor="#00FFFFFF"/>
+        </shape>
+    </item>
+
+    <!-- Top highlight (to mimic shine effect) -->
+
+
+    <!-- Border -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="8dp"/>
+            <stroke
+                android:width="1dp"
+                android:color="#33FAFAFA"/>
+            <solid android:color="@android:color/transparent"/>
+        </shape>
+    </item>
+
+</layer-list>

@@ -1,178 +1,209 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:background="@color/buttontextcolor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/buttontextcolor"
     android:fitsSystemWindows="true"
     tools:context=".activities.SelectCurrentLocationActivity">
-    <RelativeLayout
+
+    <LinearLayout
+        android:id="@+id/linear"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/linear"
-            android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp"
-                android:gravity="center"
-                android:id="@+id/linearheader"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="20dp"
-                    android:src="@drawable/arrow_left"
-                    android:layout_marginLeft="15dp"
-                    android:layout_height="20dp"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/headingcolor"
-                    android:textSize="28dp"
-                    android:gravity="center"
-                    android:layout_marginHorizontal="10dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-                    android:fontFamily="@font/clash_display_medium"
-                    android:text="@string/what_s_your_location" />
-            </LinearLayout>
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/edittext_background">
-
-                <AutoCompleteTextView
-                    android:layout_marginEnd="10dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_toStartOf="@+id/currentLoc"
-                    android:id="@+id/edaddress"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:cursorVisible="false"
-                    android:hint="@string/search_for_area_street_name"
-                    android:inputType="text"
-                    android:textColorHint="@color/smallTextcolor"
-                    android:paddingHorizontal="10dp"
-                    android:paddingVertical="15dp"
-
-                    android:layout_centerInParent="true"
-                    android:fontFamily="@font/manrope_medium"
-                    android:drawableTint="@color/white"
-                    android:drawablePadding="10dp"
-                    android:drawableStart="@drawable/baseline_search_24"
-                    android:textColor="@color/white"
-                    android:textSize="16dp" />
-
-                <ImageView
-                    android:id="@+id/currentLoc"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_alignParentEnd="true"
-                    android:padding="12dp"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/baseline_my_location_24"
-                    app:tint="@color/white" />
-            </RelativeLayout>
-
-        </LinearLayout>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_above="@id/linear1"
-            android:layout_below="@id/linear"
-            android:layout_height="wrap_content">
-            <fragment
-                android:id="@+id/map1"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
 
-                android:name="com.google.android.gms.maps.SupportMapFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                />
             <ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:id="@+id/back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="4dp"
+                android:src="@drawable/ic_back_arrow_new" />
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/p_Bar"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:src="@drawable/marker"/>
+                android:indeterminate="false"
+                android:max="100"
+                android:progress="30"
+                android:progressTint="@color/progress_clr_1"
+                android:visibility="visible"
+                app:indicatorColor="@color/progress_color"
+                app:trackColor="@color/progress_color_bg"
+                app:trackCornerRadius="10dp" />
+
         </RelativeLayout>
-        <LinearLayout
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="46dp"
+            android:layout_gravity="center"
+            android:textSize="32sp"
+            android:fontFamily="@font/clash_display_medium"
+            android:text="What’s your location?"
+            android:textColor="@color/white"/>
+
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:id="@+id/linear1"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/search_editview">
 
-            android:layout_alignParentBottom="true"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_width="match_parent"
+            <AutoCompleteTextView
+                android:id="@+id/edaddress"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="10dp"
-                android:layout_marginHorizontal="15dp"
-                android:paddingVertical="15dp"
-
-                >
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginTop="5dp"
-                    android:src="@drawable/locimage"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:textSize="18sp"
-                        android:maxLines="1"
-                        android:ellipsize="end"
-                        android:layout_marginStart="10dp"
-                        android:id="@+id/tvlocation"
-                        android:fontFamily="@font/manrope_medium"
-                        android:text="" />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/smallTextcolor"
-                        android:textSize="12dp"
-                        android:layout_marginHorizontal="10dp"
-                        android:textFontWeight="600"
-                        android:maxLines="1"
-                        android:id="@+id/stateCountry"
-                        android:fontFamily="@font/manrope_medium"
-                        android:text="" />
-
-                </LinearLayout>
-            </LinearLayout>
-            <TextView
-                android:layout_width="match_parent"
-                android:gravity="center"
-                android:layout_alignParentBottom="true"
-                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="10dp"
+                android:paddingStart="16dp"
+                android:layout_toStartOf="@+id/currentLoc"
+                android:background="@android:color/transparent"
+                android:cursorVisible="false"
+                android:drawableStart="@drawable/search_address"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/white"
+                android:ellipsize="end"
                 android:fontFamily="@font/manrope_medium"
-                android:layout_marginVertical="15dp"
-                android:layout_marginHorizontal="15dp"
-                android:text="@string/cont_inue"
-                android:id="@+id/tvContinue"
-                android:textStyle="bold"
-                android:textAllCaps="true"
-                android:paddingVertical="15dp"
-                android:paddingHorizontal="15dp"
-                android:background="@drawable/white_rectangle"
-                android:textColor="@color/buttontextcolor"
-                android:textSize="16sp" />
-        </LinearLayout>
+                android:hint="@string/search_for_area_street_name"
 
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="15dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/smallTextcolor"
+                android:textSize="16dp" />
+
+            <ImageView
+                android:id="@+id/currentLoc"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
+                android:padding="12dp"
+                android:src="@drawable/baseline_my_location_24"
+                app:tint="@color/white" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/linear1"
+        app:layout_constraintTop_toBottomOf="@id/linear">
+
+        <fragment
+            android:id="@+id/map1"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:clickable="false"
+            android:focusable="false"
+            android:background="@drawable/black_transparent_gradient_top_bottom"/>
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/marker" />
 
     </RelativeLayout>
 
-</RelativeLayout>
+    <LinearLayout
+        android:id="@+id/linear1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="-5dp"
+        android:paddingBottom="5dp"
+        android:background="@drawable/bg_selection_card_gradient"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="15dp"
+
+            >
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/location" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvlocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/funnel_sans_medium"
+                    android:maxLines="1"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/stateCountry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:fontFamily="@font/funnel_sans_semibold"
+                    android:maxLines="1"
+                    android:text=""
+                    android:textColor="@color/smallTextcolor"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvContinue"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="15dp"
+            android:background="@drawable/primary_btn_gradient"
+            android:fontFamily="@font/funnel_sans_medium"
+            android:gravity="center"
+            android:paddingHorizontal="15dp"
+            android:text="@string/cont_inue"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

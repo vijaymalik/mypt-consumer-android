@@ -4,14 +4,13 @@
     android:id="@+id/relative"
     android:layout_width="200dp"
     android:layout_height="330dp"
-    android:layout_marginEnd="20dp"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"
-        app:cardBackgroundColor="#262626"
+        app:cardBackgroundColor="#101113"
         app:cardCornerRadius="16dp">
 
         <RelativeLayout
@@ -21,13 +20,56 @@
             <ImageView
                 android:id="@+id/trainerImage"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="230dp"
+                android:src="@drawable/train_group_img"
+                android:layout_below="@+id/topRatingLay"
                 android:scaleType="centerCrop" />
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/black_white_gradient" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="16dp"
+                android:id="@+id/topRatingLay"
+                android:layout_marginHorizontal="12dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/star" />
+
+                <TextView
+                    android:id="@+id/avgRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/manrope_medium"
+                    android:text="4"
+                    android:layout_marginStart="4dp"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/location" />
+
+                <TextView
+                    android:id="@+id/distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:fontFamily="@font/funnel_sans_semibold"
+                    android:text="2.5km"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -45,7 +87,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/clash_display_medium"
+                        android:ellipsize="end"
                         android:text="MyPT Studio Dubai"
+                        android:lines="1"
                         android:textColor="@color/white"
                         android:textSize="16sp" />
 
@@ -63,12 +107,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:nestedScrollingEnabled="false"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <TextView
@@ -78,54 +125,21 @@
                         android:ellipsize="end"
                         android:fontFamily="@font/manrope_semi_bold"
                         android:maxLines="1"
-                        android:paddingTop="7dp"
-                        android:drawableRight="@drawable/ic_arrow_right"
                         android:text="Book this trainer"
-                        android:drawablePadding="5dp"
                         android:textAllCaps="true"
                         android:drawableTint="@color/white"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
 
+                    <ImageView
+                        android:layout_width="7dp"
+                        android:layout_height="wrap_content"
+                        app:tint="@color/white"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginStart="5dp"
+                        android:src="@drawable/ic_arrow_right"/>
+
                 </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_margin="16dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:src="@drawable/star" />
-
-                <TextView
-                    android:id="@+id/avgRating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/manrope_medium"
-                    android:text="4"
-                    android:textColor="@color/white"
-                    android:textSize="12sp" />
-                <ImageView
-                    android:layout_width="16dp"
-                    android:layout_marginStart="4dp"
-                    android:layout_height="16dp"
-                    android:src="@drawable/location" />
-
-                <TextView
-                    android:id="@+id/distance"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="5dp"
-                    android:fontFamily="@font/funnel_sans_semibold"
-                    android:text="2.5km"
-                    android:textColor="@color/white"
-                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout

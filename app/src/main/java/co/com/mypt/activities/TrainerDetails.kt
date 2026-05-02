@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator
 import android.app.Dialog
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.LinearGradient
 import android.graphics.Paint
@@ -25,6 +26,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
@@ -38,11 +40,14 @@ import co.com.mypt.R
 import co.com.mypt.adapter.CertificateAdapter
 import co.com.mypt.adapter.GalleryAdapter
 import co.com.mypt.adapter.SpecialitiesAdapter
+import co.com.mypt.curvedBottomNavigation.dpToPx
 import co.com.mypt.model.CertificateModel
 import co.com.mypt.model.GalleryModel
 import co.com.mypt.model.SpecialitiesModel
+import co.com.mypt.utils.HorizontalSpaceItemDecoration
 import com.android.volley.VolleyError
 import com.bumptech.glide.Glide
+import com.google.android.material.button.MaterialButton
 import org.json.JSONObject
 
 
@@ -83,6 +88,8 @@ class TrainerDetails : AppCompatActivity(), ViewTreeObserver.OnScrollChangedList
     lateinit var aboutTrainerText : TextView
 
     lateinit var videoView: VideoView
+    lateinit var ivVideoThumbnail: ImageView
+    lateinit var btnSelect: MaterialButton
 
     lateinit var specialitiesRecyclerView : RecyclerView
     lateinit var galleryRecyclerView : RecyclerView
@@ -96,6 +103,8 @@ class TrainerDetails : AppCompatActivity(), ViewTreeObserver.OnScrollChangedList
     var text = ""
     lateinit var sharedPreferences:SharedPreferences
 
+    private var addressId = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trainer_details)
@@ -108,6 +117,7 @@ class TrainerDetails : AppCompatActivity(), ViewTreeObserver.OnScrollChangedList
         place = findViewById(R.id.place)
         back = findViewById(R.id.back)
         back_1 = findViewById(R.id.back_1)
+        btnSelect = findViewById(R.id.btnSelect)
         whyTrain = findViewById(R.id.whyTrain)
         mediaGallery = findViewById(R.id.mediaGallery)
         linearCertificate = findViewById(R.id.linearCertificate)
@@ -128,6 +138,7 @@ class TrainerDetails : AppCompatActivity(), ViewTreeObserver.OnScrollChangedList
 //        bookSlot = findViewById(R.id.bookSlot)
         play = findViewById(R.id.play)
         videoView = findViewById(R.id.videoView)
+        ivVideoThumbnail = findViewById(R.id.ivVideoThumbnail)
 
         clientsCoached = findViewById(R.id.clientsCoached)
         avgRating1 = findViewById(R.id.avgRating1)
@@ -179,6 +190,7 @@ class TrainerDetails : AppCompatActivity(), ViewTreeObserver.OnScrollChangedList
                 start()
             }
         }
+        addressId = intent.getStringExtra("address_id").orEmpty()
         getTrainerDetail(intent.getStringExtra("trainer_id"),intent.getStringExtra("studio_id"),intent.getStringExtra("type"),
             intent.getDoubleExtra("long",0.0).toString(),
             intent.getDoubleExtra("lat",0.0).toString()
@@ -199,6 +211,7 @@ class TrainerDetails : AppCompatActivity(), ViewTreeObserver.OnScrollChangedList
         }
         play.setOnClickListener {
             play.visibility = View.GONE
+            ivVideoThumbnail.visibility = View.GONE
             videoView.start()
         }
         videoView.setOnPreparedListener {
@@ -206,6 +219,7 @@ class TrainerDetails : AppCompatActivity(), ViewTreeObserver.OnScrollChangedList
         }
         videoView.setOnCompletionListener {
             play.visibility = View.VISIBLE
+            ivVideoThumbnail.visibility = View.VISIBLE
         }
         videoView.setOnClickListener {
             if(videoView.isPlaying) {
@@ -214,14 +228,17 @@ class TrainerDetails : AppCompatActivity(), ViewTreeObserver.OnScrollChangedList
             }
             else{
                 play.visibility = View.GONE
-                videoView.resume()
+                videoView.start()
             }
+        }
+        btnSelect.setOnClickListener {
+
         }
 
 
-        textShader(clientsCoached)
-        textShader(avgRating1)
-        textShader(totalExp)
+       // textShader(clientsCoached)
+       // textShader(avgRating1)
+       // textShader(totalExp)
     }
 
     private fun sendFolowData(trainer_id: String?) {
@@ -336,8 +353,20 @@ class TrainerDetails : AppCompatActivity(), ViewTreeObserver.OnScrollChangedList
                         }
                         else{
                             LinearWhyTrainWithMe.visibility=View.VISIBLE
-                            val uri = Uri.parse(jsonData.optString("train_with_me"))
+                            val thumb = jsonData.optString("train_with_me_thumbnail")
+                            val finalUrl = if (thumb.startsWith("http")) {
+                                thumb
+                            } else {
+                                "https://mobileapp.mypt-me.com/storage/$thumb"
+                            }
+                            Glide.with(this@TrainerDetails).load(finalUrl).into(ivVideoThumbnail)
+                            // val uri = Uri.parse(jsonData.optString("train_with_me"))
+                            val rawUrl = jsonData.optString("train_with_me")
+                            val encodedUrl = rawUrl.replace(" ", "%20")
+
+                            val uri = Uri.parse(encodedUrl)
                             videoView.setVideoURI(uri)
+                           // videoView.setVideoURI(uri)
                         }
 
                         if (jsonData.optString("averageRating").equals("")){
@@ -375,9 +404,17 @@ class TrainerDetails : AppCompatActivity(), ViewTreeObserver.OnScrollChangedList
                                 var certificateModel=CertificateModel()
                                 certificateModel.name=json.optString("name")
                                 certificateModel.level=json.optString("level")
+                                certificateModel.certificatePath=json.optString("certificate_path")
                                 certificateArrayList.add(certificateModel)
                             }
                             certificateRecycler.adapter = CertificateAdapter(applicationContext,certificateArrayList)
+                            certificateRecycler.addItemDecoration(
+                                HorizontalSpaceItemDecoration(
+                                    20.dpToPx(
+                                        this@TrainerDetails
+                                    ), middleSpace = 15.dpToPx(this@TrainerDetails)
+                                )
+                            )
                         }
                         else{
                             linearCertificate.visibility=View.GONE
@@ -408,6 +445,10 @@ class TrainerDetails : AppCompatActivity(), ViewTreeObserver.OnScrollChangedList
                                 setupCollapsedText()
                             }
                         }
+                        val isPackage = jsonData.optBoolean("is_package")?:false
+                        val isSlotAvailable = jsonData.optString("slot") != "no"
+
+                        setSelectButtonUI(isPackage,isSlotAvailable,trainer_id,studio_id,type,longitude,latitude)
 
                         /*if (intent.getStringExtra("haveSlot")=="no"){
                             bookSlot.background = resources.getDrawable(R.drawable.grey_rectangle_rounded,null)
@@ -512,5 +553,72 @@ class TrainerDetails : AppCompatActivity(), ViewTreeObserver.OnScrollChangedList
         aboutTrainerText.movementMethod = LinkMovementMethod.getInstance()
         aboutTrainerText.isClickable = true
         isExpanded = true
+    }
+
+    private fun setSelectButtonUI(
+        isPackage: Boolean, isSlotAvailable: Boolean,
+        trainer_id: String?,
+        studio_id: String?,
+        type: String?,
+        longitude: String?,
+        latitude: String?
+    ) {
+        if(isPackage){
+           btnSelect.text ="Book Slot"
+            if (!isSlotAvailable) {
+                btnSelect.setOnClickListener {}
+                btnSelect.background =
+                    ContextCompat.getDrawable(this, R.drawable.bg_shape_btn_disabled)
+                btnSelect.setTextColor(ContextCompat.getColor(this, R.color.white))
+                btnSelect.iconTint= ColorStateList.valueOf(ContextCompat.getColor(
+                    this,
+                    R.color.white
+                ))
+            }
+            else {
+                btnSelect.setOnClickListener {
+                    val intent = Intent(this@TrainerDetails, BookSlot::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    intent.putExtra("trainer_id",trainer_id)
+                    intent.putExtra("studio_id",studio_id)
+                    intent.putExtra("type",type)
+                    intent.putExtra("long",longitude)
+                    intent.putExtra("lat",latitude)
+                    intent.putExtra("address_id",addressId)
+                    startActivity(intent)
+                }
+                btnSelect.background= ContextCompat.getDrawable(this,R.drawable.primary_btn_gradient)
+                btnSelect.setTextColor(ContextCompat.getColor(this,R.color.black))
+                btnSelect.iconTint= null
+            }
+        }
+        else{
+            btnSelect.text ="Select this trainer"
+            btnSelect.setOnClickListener {
+                if(intent.getBooleanExtra("isGuestHome",false)){
+                    val intent = Intent(this, CreatePackagectivity::class.java)
+                    intent.putExtra("trainer_id", trainer_id)
+                    intent.putExtra("address_id", addressId)
+                    intent.putExtra("studio_id", studio_id)
+                    intent.putExtra("type", type)
+                    intent.putExtra("longitude", longitude)
+                    intent.putExtra("latitude", latitude)
+                    intent.putExtra("isGuestHome", true)
+                    startActivity(intent)
+                }else {
+                    val intent = Intent(this, BestPlanTotalSessionWrapperActivity::class.java)
+                    intent.putExtra("trainer_id", trainer_id)
+                    intent.putExtra("address_id", addressId)
+                    intent.putExtra("studio_id", studio_id)
+                    intent.putExtra("type", type)
+                    intent.putExtra("long", longitude)
+                    intent.putExtra("lat", latitude)
+                    startActivity(intent)
+                }
+            }
+            btnSelect.background = ContextCompat.getDrawable(this,R.drawable.primary_btn_gradient)
+            btnSelect.setTextColor(ContextCompat.getColor(this,R.color.black))
+            btnSelect.iconTint= null
+        }
     }
 }

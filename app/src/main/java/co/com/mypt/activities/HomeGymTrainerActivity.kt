@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
 import co.com.mypt.Api.Constants.HAS_GYM
 import co.com.mypt.Api.Constants.HAS_HOME
@@ -22,6 +23,7 @@ class HomeGymTrainerActivity :AppCompatActivity() {
     lateinit var back : ImageView
     lateinit var radioStateHome : ImageView
     lateinit var radioStateGym : ImageView
+    lateinit var icRightArrow : ImageView
     lateinit var tvcontinue : TextView
     lateinit var tvcontinueView : LinearLayout
 //    lateinit var im:ImageView
@@ -41,6 +43,7 @@ class HomeGymTrainerActivity :AppCompatActivity() {
         back = findViewById(R.id.back)
         radioStateHome = findViewById(R.id.radioStateHome)
         radioStateGym = findViewById(R.id.radioStateGym)
+        icRightArrow = findViewById(R.id.icRightArrow)
 //        im = findViewById(R.id.im)
         back.setOnClickListener{
             finish()
@@ -64,8 +67,10 @@ class HomeGymTrainerActivity :AppCompatActivity() {
             gymWorkout.setImageResource(R.drawable.image_gym_gender_male_selected)
             homeWorkout.setImageResource(R.drawable.home_workout)
 
-            tvcontinueView.background = resources.getDrawable(R.drawable.white_rectangle)
-            tvcontinue.setTextColor(resources.getColor(R.color.buttontextcolor))
+            tvcontinueView.background = resources.getDrawable(R.drawable.primary_btn_gradient,null)
+            tvcontinue.setTextColor(resources.getColor(R.color.buttontextcolor,null))
+            tvcontinue.setTextColor(resources.getColor(R.color.buttontextcolor,null))
+            icRightArrow.imageTintList = null
             radioStateHome.setImageDrawable(getDrawable(R.drawable.radio_unselect))
             radioStateGym.setImageDrawable(getDrawable(R.drawable.radio_select))
         }
@@ -74,8 +79,9 @@ class HomeGymTrainerActivity :AppCompatActivity() {
             gymWorkout.setImageResource(R.drawable.image_gym_gender_male_unselected)
             homeWorkout.setImageResource(R.drawable.selected_home_workout)
 
-            tvcontinueView.background = resources.getDrawable(R.drawable.white_rectangle)
-            tvcontinue.setTextColor(resources.getColor(R.color.buttontextcolor))
+            tvcontinueView.background = resources.getDrawable(R.drawable.primary_btn_gradient,null)
+            tvcontinue.setTextColor(resources.getColor(R.color.buttontextcolor,null))
+            icRightArrow.imageTintList = null
             radioStateHome.setImageDrawable(getDrawable(R.drawable.radio_select))
             radioStateGym.setImageDrawable(getDrawable(R.drawable.radio_unselect))
 

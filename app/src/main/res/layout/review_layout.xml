@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="300dp"
-        android:background="@drawable/review_gradient"
+        android:background="@drawable/bg_card_gradient_black_without_border"
         android:orientation="vertical"
         android:layout_marginEnd="10dp"
         android:layout_marginVertical="10dp"

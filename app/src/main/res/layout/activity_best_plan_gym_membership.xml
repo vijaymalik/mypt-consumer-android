@@ -212,6 +212,20 @@
                                 android:textSize="24sp"
                                 android:visibility="visible" />
                         </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/saveTxt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="14dp"
+                            android:background="@drawable/category_border_bg"
+                            android:fontFamily="@font/funnel_sans_semibold"
+                            android:paddingVertical="4dp"
+                            android:paddingHorizontal="8dp"
+                            android:scaleType="centerCrop"
+                            android:text=""
+                            android:textColor="#D1ECCC"
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <RelativeLayout

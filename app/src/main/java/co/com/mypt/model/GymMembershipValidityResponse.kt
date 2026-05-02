@@ -25,5 +25,6 @@ data class PackageDetail(
     val price: Int,
     val validity: String,
     val image: String,
-    val special_msg: String?
+    val special_msg: String?,
+    val save_price: String?
 )

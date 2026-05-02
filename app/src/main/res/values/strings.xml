@@ -37,7 +37,7 @@
     <string name="EnableGPS">Enable GPS</string>
     <string name="LocationPermission">Location Permission</string>
     <string name="grantlocationpermission">Go to Settings and Grant the location permission</string>
-    <string name="search_for_area_street_name">Search for area, street name...</string>
+    <string name="search_for_area_street_name">Search for your building, street name...</string>
     <string name="gear_up_for_a_whole_new_fitness_journey">Gear up for a whole new fitness journey</string>
     <string name="you_are_all_set">You are all set!</string>
     <string name="almost_done">Almost Done</string>
@@ -144,7 +144,7 @@
     <string name="gym_timings">Gym Timings</string>
     <string name="location_of_the_gym">Location of the gym</string>
     <string name="booking_listings">Booking Listings</string>
-    <string name="workout_focus">Workout Focus</string>
+    <string name="workout_focus">Type</string>
     <string name="session_type">Session Type</string>
     <string name="calories_burned">Calories Burned</string>
     <string name="training_location">Training Location</string>
@@ -742,4 +742,12 @@
     <string name="payment_not_charged">We couldn’t complete your payment, but dont worry, nothing has been charged</string>
     <string name="your_training_plan_is_active">Your training plan is active.</string>
     <string name="your_membership_plan_is_active">Your membership plan is active.</string>
+    <string name="terms_conditions_full_text">I have read and agree to the MyPT Personal Training Terms &amp; Conditions</string>
+    <string name="terms_conditions_highlight_text">e MyPT Personal Training Terms &amp; Conditions</string>
+    <string name="refund_subtitle">Once you buy, your trainer is paid and your sessions are reserved just for you. That\'s a true commitment from them.</string>
+    <string name="refund_medical_talk_us">Medical condition or relocating out of our area? Talk to us — we\'ll find a way to help.</string>
+    <string name="non_refundable_know_more">This package is non-refundable. Know More</string>
+    <string name="know_more">Know More</string>
+    <string name="top_trainers_curated_for_you">Top trainers curated for you</string>
+    <string name="search_results">Search results</string>
 </resources>

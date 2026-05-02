@@ -5,8 +5,8 @@ import android.app.Dialog
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.content.SharedPreferences
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -19,21 +19,26 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 import co.com.mypt.Api.ApiURL
 import co.com.mypt.Api.Constants.BEST_PLAN_ID
 import co.com.mypt.Api.Constants.REVIEW_ADDRESS_ID
+import co.com.mypt.Api.Constants.TERMS_BUNDLE_KEY
+import co.com.mypt.Api.Constants.TERMS_REQUEST_KEY
 import co.com.mypt.Api.GetMethod
 import co.com.mypt.Api.PostMethod
 import co.com.mypt.Api.ResponseData
 import co.com.mypt.ProgressDialog
 import co.com.mypt.R
-import co.com.mypt.Webview.CCavenueWebViewActivity
 import co.com.mypt.Webview.CreatePackageCCavenueWebViewActivity
 import co.com.mypt.adapter.AddressListAdapter
+import co.com.mypt.curvedBottomNavigation.setColoredTextRes
+import co.com.mypt.curvedBottomNavigation.setUnderlineClickableText
 import co.com.mypt.databinding.ActivityReviewPackageBinding
+import co.com.mypt.fragments.RefundBottomSheet
+import co.com.mypt.fragments.TermsConditionsBottomSheet
 import co.com.mypt.model.ActivityModel
 import co.com.mypt.model.AddressModel
 import co.com.mypt.model.AvailablePromo
@@ -41,6 +46,7 @@ import co.com.mypt.model.JoinModel
 import co.com.mypt.model.PackageDetails
 import co.com.mypt.model.ReviewPackageCheckout
 import co.com.mypt.model.ReviewPackageCheckout.Data.UpgradePlan
+import co.com.mypt.model.TermsConditionsResponse
 import com.android.volley.VolleyError
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.gson.Gson
@@ -101,6 +107,11 @@ class ReviewPackageActivity : AppCompatActivity() {
     private var progressDialog: Dialog? = null
 
     private var packageDetails: PackageDetails?=null
+    var isTermsConditionsChecked = false
+
+    private var termsConditionsResponse: TermsConditionsResponse? = null
+
+    private var isPaymentChecked = false
     lateinit var binding: ActivityReviewPackageBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -108,7 +119,7 @@ class ReviewPackageActivity : AppCompatActivity() {
         setContentView(binding.root)
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         edit = sharedPreferences.edit()
-        binding.addressUpdate.setOnClickListener {
+        binding.addressContainer.setOnClickListener {
             showAddresListDialog()
 //            startActivity(Intent(this, AddressListForPackage::class.java))
         }
@@ -122,10 +133,60 @@ class ReviewPackageActivity : AppCompatActivity() {
         }
         binding.appliedCoupon.visibility = View.GONE
         binding.upgradePlan.setOnClickListener {
-            upgradeDialog()
+            isupgreadClick = true
+            getData()
         }
         binding.back1.setOnClickListener {
             finish()
+        }
+
+        binding.applyCoupon.setOnClickListener {
+            available_promos?.firstOrNull()?.let { applyCoupon(it) }
+        }
+
+        setTermsConditionsHighlightText()
+
+        supportFragmentManager.setFragmentResultListener(
+            TERMS_REQUEST_KEY,
+            this
+        ) { _, bundle ->
+
+            val isAccepted = bundle.getBoolean(TERMS_BUNDLE_KEY, false)
+
+            if (isAccepted) {
+                isTermsConditionsChecked = true
+
+                binding.checkTermsConditions.setImageResource(
+                    R.drawable.radio_select_light_green
+                )
+                updateContinueButton()
+            }
+        }
+
+        binding.checkTermsConditions.setOnClickListener {
+            isTermsConditionsChecked = !isTermsConditionsChecked
+            binding.checkTermsConditions.setImageResource(if(isTermsConditionsChecked)R.drawable.radio_select_light_green else R.drawable.radio_unselect)
+            updateContinueButton()
+        }
+        binding.tvTermsConditions.setOnClickListener {
+            if (termsConditionsResponse != null) {
+                openTermsConditionBottomSheet(termsConditionsResponse)
+            } else {
+                fetchTermsConditions()
+            }
+        }
+
+        binding.paymentMsg.setUnderlineClickableText(
+            fullText = getString(R.string.non_refundable_know_more),
+            targetText = getString(R.string.know_more)
+        ) {
+            openRefundBottomSheet()
+        }
+
+        binding.rlCCAvenue.setOnClickListener {
+            isPaymentChecked = !isPaymentChecked
+            binding.ccvenueRadio.setImageResource(if (isPaymentChecked) R.drawable.radio_select_light_green else R.drawable.radio_unselect)
+            updateContinueButton()
         }
         if (sharedPreferences.getString("typeWorkout", "").equals("home")) {
             binding.tranningAddress.visibility = View.VISIBLE
@@ -137,7 +198,7 @@ class ReviewPackageActivity : AppCompatActivity() {
             binding.selectedGymView.visibility = View.VISIBLE
         }
 
-        binding.tvPayment.setOnClickListener {
+        binding.btnPayment.setOnClickListener {
             val intent = Intent(this, CreatePackageCCavenueWebViewActivity::class.java)
 
             intent.putExtra("package_data",packageDetails)
@@ -330,6 +391,45 @@ class ReviewPackageActivity : AppCompatActivity() {
             .getInstance(this)
             .registerReceiver(updatedAddressId, selectAddressFilter)*/
         getData()
+        continueButtonClick(false)
+    }
+
+    private fun setTermsConditionsHighlightText() {
+        binding.tvTermsConditions.setColoredTextRes(
+            getString(R.string.terms_conditions_full_text),
+            getString(R.string.terms_conditions_highlight_text),
+            R.color.white,
+            R.color.neon_color
+        )
+    }
+
+    private fun applyCoupon(coupon: AvailablePromo) {
+        selectedCouponId = coupon.id?.toString()
+        binding.offerTitle.text = coupon.name.orEmpty()
+        binding.appliedCoupon.visibility = View.VISIBLE
+        binding.applyCoupon.visibility = View.GONE
+        getData()
+    }
+
+    private fun updateContinueButton(){
+        val isEnable = isTermsConditionsChecked && isPaymentChecked
+        continueButtonClick(isEnable)
+    }
+
+    private fun continueButtonClick(isEnable: Boolean) {
+        binding.btnPayment.isEnabled = isEnable
+        if (isEnable) {
+            binding.btnPayment.setTextColor(resources.getColor(R.color.buttontextcolor, null))
+            binding.btnPayment.background =
+                ContextCompat.getDrawable(this, R.drawable.primary_btn_gradient)
+            binding.btnPayment.iconTint = null
+        } else {
+            val color = ContextCompat.getColor(this,R.color.white)
+            binding.btnPayment.setTextColor(color)
+            binding.btnPayment.background =
+                ContextCompat.getDrawable(this, R.drawable.rectangle_btn)
+            binding.btnPayment.iconTint = ColorStateList.valueOf(color)
+        }
     }
 
     override fun onResume() {
@@ -366,6 +466,10 @@ class ReviewPackageActivity : AppCompatActivity() {
             dialog.dismiss()
             updatedAddress = it
             getData()
+        }
+        val closeBtn = dialog.findViewById<ImageView>(R.id.btnClose)
+        closeBtn?.setOnClickListener {
+            dialog.dismiss()
         }
         dialog.show()
     }
@@ -477,14 +581,15 @@ class ReviewPackageActivity : AppCompatActivity() {
         if (isupgreadClick) {
             isupgreadClick = false
             param["best_plan_id"] = upgradIdText?.id ?: ""
+            param["sessions"] = ""+upgradIdText?.sessions
         } else {
             val bestPlanId=intent.getStringExtra(BEST_PLAN_ID)
             if (bestPlanId !=null)
             param["best_plan_id"] = bestPlanId
+            param["sessions"] = intent.getStringExtra("session_value").toString()
         }
 
         param["package_type"] = sharedPreferences.getInt("selectedPackageType", 0).toString()
-        param["sessions"] = intent.getStringExtra("session_value").toString()
         param["trainer_id"] = intent.getStringExtra("trainer_id").toString()
 //        param["skip_offer"] = "true"
         if (!selectedCouponId.isNullOrEmpty())
@@ -506,11 +611,12 @@ class ReviewPackageActivity : AppCompatActivity() {
                     if (data.status == true) {
                         packageDetails = data.data?.package_details
                         available_promos = data.data?.available_promos
-                        available_promos?.let {
-                            if(it.isNotEmpty()){
-                                binding.offerTitle.text = it.firstOrNull()?.name?:"Select Coupon"
-                            }
+                        if(available_promos.isNullOrEmpty()){
+                            binding.couponsView.visibility = View.GONE
+                        }else{
+                            binding.offerTitle.text = available_promos?.firstOrNull()?.name?:"Select Coupon"
                         }
+
                         upgradIdText = data.data?.upgrade_plan
                         if (data.data?.upgrade_plan != null) {
                             binding.title.text = data.data.upgrade_plan.title
@@ -541,8 +647,11 @@ class ReviewPackageActivity : AppCompatActivity() {
                         binding.paymentTimeMsg.text = "${data.data?.payment_msg}"
                     }else{
                         Toast.makeText(this@ReviewPackageActivity,"Package not available.", Toast.LENGTH_LONG).show()
-                        binding.tvPayment.isClickable=false
-                        binding.tvPayment.background = resources.getDrawable(R.drawable.grey_rectangle, null)
+                        binding.btnPayment.isClickable=false
+                        binding.btnPayment.background = resources.getDrawable(R.drawable.grey_rectangle, null)
+                        val color = ContextCompat.getColor(this@ReviewPackageActivity, R.color.white)
+                        binding.btnPayment.setTextColor(color)
+                        binding.btnPayment.iconTint = ColorStateList.valueOf(color)
                     }
 
                     /*if(resp.optBoolean("status")){
@@ -635,6 +744,46 @@ class ReviewPackageActivity : AppCompatActivity() {
         if (!isFinishing && !isDestroyed) {
             progressDialog?.dismiss()
         }
+    }
+
+    private fun fetchTermsConditions(){
+        showProgress()
+
+        val url = ApiURL.getClientPtTermsConditions+"pt"
+
+        GetMethod(url, this@ReviewPackageActivity).startMethod(object :
+            ResponseData {
+            override fun response(data: String?) {
+                hideProgress()
+                data?.let {
+                    try {
+                         termsConditionsResponse =
+                            Gson().fromJson(it, TermsConditionsResponse::class.java)
+                        openTermsConditionBottomSheet(termsConditionsResponse)
+
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+            }
+
+            override fun error(error: VolleyError?) {
+                hideProgress()
+            }
+        })
+    }
+
+    private fun openTermsConditionBottomSheet(termsConditionsResponse: TermsConditionsResponse?){
+        termsConditionsResponse?.let {
+            TermsConditionsBottomSheet.newInstance(it).show(
+                supportFragmentManager,
+                "TermsConditionsBottomSheet"
+            )
+        }
+    }
+
+    private fun openRefundBottomSheet() {
+        RefundBottomSheet().show(supportFragmentManager, "RefundBottomSheet")
     }
 
 }

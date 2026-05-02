@@ -89,10 +89,26 @@ class BookingConfirmActivity : AppCompatActivity() {
         val scaleDown = AnimatorSet()
         scaleDown.play(scaleDownX).with(scaleDownY)
         scaleDown.start()
-        headerMain.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.slide_from_bottom))
+        headerMain.startAnimation(AnimationUtils.loadAnimation(this@BookingConfirmActivity, R.anim.slide_from_bottom))
 
         // load the animation
-        animUpDown = AnimationUtils.loadAnimation(applicationContext, R.anim.slide_from_bottom)
+        animUpDown = AnimationUtils.loadAnimation(this@BookingConfirmActivity, R.anim.slide_from_bottom)
+        animUpDown?.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationEnd(animation: Animation?) {
+
+                header.visibility = View.VISIBLE
+
+                detailLL.visibility = View.VISIBLE
+                detailLL.startAnimation(
+                    AnimationUtils.loadAnimation(this@BookingConfirmActivity, R.anim.slide_from_top)
+                )
+
+                mediaPlayer?.start()
+            }
+
+            override fun onAnimationStart(animation: Animation?) {}
+            override fun onAnimationRepeat(animation: Animation?) {}
+        })
         sendBookingData()
     }
     private fun sendBookingData() {
@@ -141,30 +157,6 @@ class BookingConfirmActivity : AppCompatActivity() {
                     Log.e("BookingConfirmResp",data.toString())
                     val resp = JSONObject(data!!)
                     if(resp.optBoolean("status")){
-                        animUpDown?.setAnimationListener(object : Animation.AnimationListener {
-                            override fun onAnimationStart(p0: Animation?) {
-                                lifecycleScope.launch {
-                                    delay(500)
-                                    header.visibility= View.VISIBLE
-
-
-                                    delay(1370L)
-                                    detailLL.visibility= View.VISIBLE
-                                    detailLL.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.slide_from_top))
-
-                                    mediaPlayer?.start()
-                                }
-                            }
-
-                            override fun onAnimationRepeat(p0: Animation?) {
-                            }
-
-                            override fun onAnimationEnd(p0: Animation?) {
-
-                            }
-                        })
-                        header.startAnimation(animUpDown)
-
                         sharedPreferences.edit().remove("typeWorkout").apply()
                         tvPackage.text = resp.optJSONObject("data")!!.optString("package")
                         tvTime.text = resp.optJSONObject("data")!!.optString("timing")
@@ -189,6 +181,7 @@ class BookingConfirmActivity : AppCompatActivity() {
                         qrWebView.getSettings().builtInZoomControls = true
                         qrWebView.getSettings().displayZoomControls = false
                         qrWebView.loadUrl(resp.optJSONObject("data")!!.optString("qr"))
+                        header.startAnimation(animUpDown)
                     }
                     // Toast.makeText(this@PhoneNumberScreenActivity,resp.optString("msg"), Toast.LENGTH_SHORT).show()
                 }catch (e:Exception){

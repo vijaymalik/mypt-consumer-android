@@ -25,30 +25,12 @@ class TrainerHomeTagAdapter(
     }
 
     override fun getItemCount(): Int {
-        return if(type == "Linear"){
-            if (exerciseArraylist.size>5)
-                5
-            else
-                exerciseArraylist.size
-        }else{
-            if (exerciseArraylist.size>2)
-                2
-            else
-                exerciseArraylist.size
-        }
-
-
+        return exerciseArraylist.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val exerciseModel=exerciseArraylist[position]
-        if(position ==2 && type == "grid") {
-            holder.exercise.text = "+"+((exerciseArraylist.size) - (position+1))
-        }else if(position ==4 && type == "Linear") {
-            holder.exercise.text = "+"+((exerciseArraylist.size) - (position+1))
-        }else{
-            holder.exercise.text=exerciseModel.name
-        }
+        val exerciseModel = exerciseArraylist[position]
+        holder.exercise.text = exerciseModel.name
     }
 
 }

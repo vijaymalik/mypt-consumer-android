@@ -12,6 +12,7 @@ import androidx.activity.addCallback
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import co.com.mypt.R
+import co.com.mypt.activities.BestPlanTotalSessionWrapperActivity
 import co.com.mypt.activities.TrainersListActivity
 import co.com.mypt.utils.FullScreenVideoView
 
@@ -58,6 +59,18 @@ class TrainingTeamFragment : Fragment(R.layout.fragment_training_team) {
 
         llBtnSelectTrainerView.setOnClickListener {
             arguments?.let { args ->
+                if(args.getBoolean("isGuestHome",false)){
+                    val intent = Intent(requireContext(), BestPlanTotalSessionWrapperActivity::class.java)
+                    intent.putExtra("trainer_id", args.getString("trainer_id"))
+                    intent.putExtra("address_id", args.getString("address_id"))
+                    if (args.getString("studio_id").isNullOrEmpty().not()) {
+                        intent.putExtra("studio_id", args.getString("studio_id"))
+                    }
+                    intent.putExtra("type", "")
+                    intent.putExtra("long", args.getDouble("longitude"))
+                    intent.putExtra("lat", args.getDouble("latitude"))
+                    requireContext().startActivity(intent)
+                }else {
                 val intent = Intent(requireContext(), TrainersListActivity::class.java)
                 intent.putExtra("address_id", args.getString("address_id"))
                 intent.putExtra("longitude", args.getDouble("longitude"))
@@ -66,6 +79,7 @@ class TrainingTeamFragment : Fragment(R.layout.fragment_training_team) {
                     intent.putExtra("studio_id", args.getString("studio_id"))
                 }
                 requireContext().startActivity(intent)
+                }
             }
         }
 

@@ -14,8 +14,10 @@
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentTop="true"
+        android:paddingBottom="10dp"
+        android:layout_above="@+id/bottomBtnLay"
         android:scrollbars="none">
 
         <LinearLayout
@@ -117,7 +119,8 @@
                         android:id="@+id/avgRating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/manrope_semi_bold"
+                        android:layout_marginStart="2dp"
+                        android:fontFamily="@font/funnel_sans_semibold"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
 
@@ -132,8 +135,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="5dp"
-                        android:fontFamily="@font/manrope_semi_bold"
-                        android:textColor="@color/subheadingcolor"
+                        android:fontFamily="@font/funnel_sans_semibold"
+                        android:textColor="@color/smallTextcolor"
                         android:textSize="12sp" />
 
 
@@ -221,7 +224,7 @@
                     android:lineHeight="18sp"
                     android:maxLines="1"
                     android:minLines="1"
-                    android:textColor="@color/white"
+                    android:textColor="@color/location_txt"
                     android:textSize="14sp" />
 
 
@@ -383,7 +386,7 @@
                 android:fontFamily="@font/funnel_sans_regular"
                 android:lineHeight="24sp"
                 android:text="@string/details"
-                android:textColor="@color/smallTextcolor"
+                android:textColor="@color/white"
                 android:textSize="16sp" />
 
             <LinearLayout
@@ -408,7 +411,7 @@
                         android:layout_marginHorizontal="10dp"
                         android:fontFamily="@font/clash_display_medium"
                         android:text="5+"
-                        android:textColor="@color/subheadingcolor"
+                        android:textColor="@color/text_color_neutral_200"
                         android:textSize="32sp" />
 
                     <TextView
@@ -439,8 +442,8 @@
                         android:layout_marginTop="15dp"
                         android:fontFamily="@font/clash_display_medium"
                         android:text="4.2"
-                        android:textColor="@color/subheadingcolor"
-                        android:textSize="30sp" />
+                        android:textColor="@color/text_color_neutral_200"
+                        android:textSize="32sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -471,7 +474,7 @@
                         android:fontFamily="@font/clash_display_medium"
                         android:gravity="center_vertical"
                         android:text="234"
-                        android:textColor="@color/subheadingcolor"
+                        android:textColor="@color/text_color_neutral_200"
                         android:textSize="32sp" />
 
                     <TextView
@@ -508,18 +511,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="15dp"
                     android:layout_marginTop="30dp"
-                    android:fontFamily="@font/manrope_medium"
+                    android:fontFamily="@font/funnel_sans_regular"
                     android:text="@string/certifications"
-                    android:textColor="@color/smallTextcolor"
+                    android:textColor="@color/white"
                     android:textSize="16sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/certificateRecycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginRight="5dp"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
             </LinearLayout>
@@ -536,9 +537,9 @@
                     android:layout_marginHorizontal="15dp"
                     android:layout_marginTop="30dp"
 
-                    android:fontFamily="@font/manrope_medium"
+                    android:fontFamily="@font/funnel_sans_regular"
                     android:text="@string/why_train_with_me"
-                    android:textColor="@color/smallTextcolor"
+                    android:textColor="@color/white"
                     android:textSize="16sp" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -561,16 +562,23 @@
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
 
                             <VideoView
                                 android:id="@+id/videoView"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_alignParentStart="true"
-                                android:layout_alignParentTop="true"
-                                android:layout_alignParentEnd="true"
-                                android:layout_alignParentBottom="true"
                                 android:focusable="false" />
+
+                                <ImageView
+                                    android:id="@+id/ivVideoThumbnail"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:scaleType="centerCrop"/>
+
+                            </FrameLayout>
 
                             <ImageView
                                 android:id="@+id/play"
@@ -588,9 +596,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="30dp"
-                android:fontFamily="@font/manrope_medium"
+                android:fontFamily="@font/funnel_sans_regular"
                 android:text="@string/personal_motivation_quote"
-                android:textColor="@color/smallTextcolor"
+                android:textColor="@color/white"
                 android:textSize="16sp" />
 
             <LinearLayout
@@ -639,9 +647,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="15dp"
                     android:layout_marginTop="30dp"
-                    android:fontFamily="@font/manrope_medium"
+                    android:fontFamily="@font/funnel_sans_regular"
                     android:text="@string/media_gallery"
-                    android:textColor="@color/smallTextcolor"
+                    android:textColor="@color/white"
                     android:textSize="16sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -653,10 +661,32 @@
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
             </LinearLayout>
-
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
+    <RelativeLayout
+        android:id="@+id/bottomBtnLay"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:background="@drawable/blue_border_container"
+        android:layout_alignParentBottom="true">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSelect"
+        android:layout_marginHorizontal="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        style="@style/PrimaryButton"
+        android:layout_centerInParent="true"
+        app:iconGravity="textEnd"
+        android:visibility="visible"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        app:icon="@drawable/ic_arrow_right"
+        android:text="Select this Trainer"
+        />
+    </RelativeLayout>
     <LinearLayout
         android:id="@+id/headerLayout"
         android:layout_width="match_parent"

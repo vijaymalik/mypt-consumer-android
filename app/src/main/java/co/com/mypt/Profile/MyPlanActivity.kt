@@ -35,6 +35,7 @@ class MyPlanActivity : AppCompatActivity() {
     lateinit var linearUpdatePlan:LinearLayout
     lateinit var sessionProgress:ProgressBar
     lateinit var DaysprogressBar:ProgressBar
+    lateinit var back: ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -55,6 +56,8 @@ class MyPlanActivity : AppCompatActivity() {
         tvTopUp=findViewById(R.id.tvTopUp)
         linearUpgrade=findViewById(R.id.linearUpgrade)
         linearUpdatePlan=findViewById(R.id.linearUpdatePlan)
+        back=findViewById(R.id.back_1)
+        back.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
         linearUpgrade.setOnClickListener {
             val intent1=Intent(this,ChooseSessionActivity::class.java)
             intent1.putExtra("id",intent.getStringExtra("plan_id"))

@@ -8,7 +8,8 @@
     <RelativeLayout
         android:id="@+id/topLay"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
 
         <ImageView
             android:id="@+id/back"
@@ -16,7 +17,7 @@
             android:layout_height="40dp"
             android:layout_alignParentStart="true"
             android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="20dp"
+            android:layout_marginVertical="4dp"
             android:src="@drawable/ic_back_arrow_new" />
 
         <com.google.android.material.progressindicator.LinearProgressIndicator
@@ -195,14 +196,13 @@
     <LinearLayout
         android:id="@+id/llBtnSelectTrainerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_alignParentBottom="true"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/white_rectangle"
-        android:gravity="center"
-        android:paddingVertical="15dp">
+        android:background="@drawable/white_rectangle_8dp"
+        android:gravity="center">
 
         <TextView
             android:id="@+id/tvcontinue"
@@ -211,13 +211,13 @@
             android:fontFamily="@font/funnel_sans_medium"
             android:text="select primary trainer"
             android:textAllCaps="true"
-            android:textColor="@color/buttontextcolor"
-            android:textSize="16sp" />
+            android:textColor="@color/text_color_primary_black"
+            android:textSize="14sp" />
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="7dp"
             android:layout_height="wrap_content"
-            android:paddingStart="10dp"
+            android:layout_marginStart="10dp"
             android:src="@drawable/ic_arrow_right" />
     </LinearLayout>
 

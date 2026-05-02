@@ -22,6 +22,8 @@ import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -33,6 +35,7 @@ import co.com.mypt.Api.ResponseData
 import co.com.mypt.ProgressDialog
 import co.com.mypt.R
 import co.com.mypt.adapter.GymMembershipCarouselAdapter
+import co.com.mypt.fragments.adapter.CarouselAdapter
 import co.com.mypt.fragments.adapter.CenterRaiseTransformer
 import co.com.mypt.model.BestPlanList
 import co.com.mypt.model.GymMembershipValidityResponse
@@ -42,6 +45,9 @@ import com.android.volley.VolleyError
 import com.google.gson.Gson
 import com.yarolegovich.discretescrollview.DiscreteScrollView
 import com.yarolegovich.discretescrollview.transform.ScaleTransformer
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class BestPlanGymMembershipActivity : AppCompatActivity() {
     var checkedType = "Per_session"
@@ -58,6 +64,7 @@ class BestPlanGymMembershipActivity : AppCompatActivity() {
 
     private val debounceHandler = Handler(Looper.getMainLooper())
     private var debounceRunnable: Runnable? = null
+    private var debounceJob: Job? = null
     lateinit var bestPlan: TextView
     lateinit var customization: TextView
     lateinit var bestPlanParentView: LinearLayout
@@ -80,6 +87,7 @@ class BestPlanGymMembershipActivity : AppCompatActivity() {
     lateinit var forwardArrow: ImageView
     lateinit var freeMsg: TextView
     lateinit var devider: ImageView
+    lateinit var saveTxt: TextView
     var bestPlanDaysCount = 0
     var customDaysCount = 0
     var bestPlanId = ""
@@ -114,6 +122,7 @@ class BestPlanGymMembershipActivity : AppCompatActivity() {
         freeMsg = findViewById(R.id.freeMsg)
         devider = findViewById(R.id.devider)
         tvCustomPlanTitle = findViewById(R.id.tvCustomPlanTitle)
+        saveTxt = findViewById(R.id.saveTxt)
         pBar.setProgress(90, true)
         upArrow.setOnClickListener {
             upArrowClick(true)
@@ -150,7 +159,6 @@ class BestPlanGymMembershipActivity : AppCompatActivity() {
 
         rulerWeight.setUpdateListenerWeight(object : onViewUpdateListenerWeight {
             override fun onViewUpdate(value: Float) {
-                val valueL = if (value > .1) value.minus(.1).toFloat() else value
                 println("===== $value")
                 val updatedValue = value.toInt()
                 if (updatedValue == 0) {
@@ -165,52 +173,59 @@ class BestPlanGymMembershipActivity : AppCompatActivity() {
                 // Update the last progress value
                 lastProgress = updatedValue
 
-                debounceRunnable?.let { debounceHandler.removeCallbacks(it) }
-
-                debounceRunnable = Runnable {
-                    getGymMembershipValidityData(updatedValue)
+                debounceJob?.cancel()
+                debounceJob = lifecycleScope.launch {
+                    delay(500)
+                    if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
+                        getGymMembershipValidityData(updatedValue)
+                    }
                 }
-                debounceHandler.postDelayed(debounceRunnable!!, 300)
             }
         })
         rulerWeight.setMaxValue(365f)
         rulerWeight.setDefaultValue(10f)
+        getBestPlanApi()
         getGymMembershipValidityData(10)
     }
 
     private val snapHelper = PagerSnapHelper()
 
     fun initializeCarousel(data: List<BestPlanList.BestPlanData?>) {
-        carouselRecycler?.adapter = GymMembershipCarouselAdapter(data)
 
-        carouselRecycler?.setItemTransformer(
-            ScaleTransformer.Builder()
-                .setMinScale(0.85f)
-                .build()
-        )
-
-        carouselRecycler?.setItemTransformer(CenterRaiseTransformer())
-        carouselRecycler?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(rv: RecyclerView, newState: Int) {
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    val snapView = snapHelper.findSnapView(rv.layoutManager)
-                    val position = rv.layoutManager?.getPosition(snapView!!) ?: -1
-                    if (position != -1) {
-                        updateBestPlanSession(data[position])
-                    }
-
-                }
-            }
-        })
         if (isBestPlanSelected) {
-            if (!data.isNullOrEmpty()) {
-                isBestPlanAvailable = true
-                selectedPlan(Plans.IS_BEST_AVAILABLE)
-                updateBestPlanSession(data[0])
-            } else {
+            if (data.isEmpty()) {
                 isBestPlanAvailable = false
                 selectedPlan(Plans.IS_BEST_NOT_AVAILABLE)
+                return
             }
+        }
+
+        carouselRecycler?.apply {
+            adapter = GymMembershipCarouselAdapter(data)
+
+            setItemTransformer(CenterRaiseTransformer())
+
+            clearOnScrollListeners()
+
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(rv: RecyclerView, newState: Int) {
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+
+                        val snapView = snapHelper.findSnapView(layoutManager)
+                        val position = snapView?.let { layoutManager?.getPosition(it) } ?: -1
+
+                        if (position != -1 && position < data.size) {
+                            updateBestPlanSession(data[position])
+                        }
+                    }
+                }
+            })
+        }
+
+        if (isBestPlanSelected) {
+            isBestPlanAvailable = true
+            selectedPlan(Plans.IS_BEST_AVAILABLE)
+            updateBestPlanSession(data[0])
         }
     }
 
@@ -267,7 +282,13 @@ class BestPlanGymMembershipActivity : AppCompatActivity() {
                     tvCustomPlanTitle.text = response.data.packageDetail.name
                     tvRealPrice.text = "${response.data.packageDetail.price}"
                     customPlanDays(response.data.packageDetail.validity.toInt())
-
+                    if(response.data.packageDetail.save_price!=null){
+                    saveTxt.text = response.data.packageDetail.save_price
+                    saveTxt.visibility = View.VISIBLE
+                    }
+                    else{
+                        saveTxt.visibility = View.GONE
+                    }
                 } catch (e: Exception) {
                 }
             }
@@ -345,10 +366,6 @@ class BestPlanGymMembershipActivity : AppCompatActivity() {
         return Color.rgb(r, g, b)
     }
 
-    override fun onResume() {
-        super.onResume()
-        getBestPlanApi()
-    }
 
     fun selectedPlan(isBestPlanSelected: Plans) {
         when (isBestPlanSelected) {

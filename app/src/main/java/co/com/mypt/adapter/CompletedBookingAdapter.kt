@@ -47,7 +47,7 @@ class CompletedBookingAdapter(var activity: FragmentActivity?, var completedBook
         for (i in 0 until upcomingbokingModel.workout_focus!!.length()){
             j= j + ","+ upcomingbokingModel.workout_focus!!.get(i)
         }
-        holder.tvWorkoutFocus.setText(j)
+        holder.tvWorkoutFocus.text=upcomingbokingModel.booking_type
         holder.linear.setBackgroundResource(R.drawable.completed_booking_rouded_rectangle_)
         holder.linear.setTag(position)
         holder.linear.setOnClickListener{

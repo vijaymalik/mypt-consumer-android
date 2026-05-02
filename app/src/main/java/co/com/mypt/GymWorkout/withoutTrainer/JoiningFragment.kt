@@ -24,6 +24,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity.RECEIVER_EXPORTED
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 import co.com.mypt.Api.ApiURL
@@ -33,11 +37,13 @@ import co.com.mypt.Api.ResponseData
 import co.com.mypt.ProgressDialog
 import co.com.mypt.R
 import co.com.mypt.adapter.JoinAdapter
+import co.com.mypt.fragments.viewModels.CreatePackageSharedViewModel
 import co.com.mypt.model.JoinModel
 import com.android.volley.VolleyError
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.coroutines.launch
 import org.json.JSONObject
 
 
@@ -64,6 +70,7 @@ class JoiningFragment(
     var maxvalue=0
    lateinit var context1:Context
     lateinit var bottomSheet:View
+    private val sharedViewModel: CreatePackageSharedViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -85,6 +92,21 @@ class JoiningFragment(
 
         }
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+
+                sharedViewModel.addMinMembers.collect { value ->
+                   if(value){
+                       linearAddMember.performClick()
+                   }
+                }
+
+            }
+        }
     }
 
 
@@ -382,6 +404,7 @@ class JoiningFragment(
                                 addmembeBottomsheet(context1)
                         }
                         }
+                        sharedViewModel.isMinMembersAdded= joinList.size>=minvalue
                     }
 
 
@@ -459,6 +482,7 @@ class JoiningFragment(
                                 addmembeBottomsheet(context1)
                             }
                         }
+                        sharedViewModel.isMinBuddyAdded= joinList.size>=minvalue
                     }
 
 

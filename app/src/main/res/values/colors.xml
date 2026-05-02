@@ -95,7 +95,10 @@
     <color name="light_gold">#FFF2C0</color>
     <color name="gold_700">#B26B00</color>
     <color name="light_lavender">#DFD0EF</color>
-
+    <color name="pastel_purple">#D1BADD</color>
+    <color name="text_color_neutral_800">#D1BADD</color>
+    <color name="secondary_gold_50">#FFF8DA</color>
+    <color name="light_gray_delete">#ADADAD</color>
 
 
 </resources>

@@ -2,7 +2,7 @@ package co.com.mypt.Api;
 
 public class ApiURL {
     public static final String Baseurl= "https://mobileapp.mypt-me.com/api/"; //Live URL
-   // public static String Baseurl= "https://mobileappuat.mypt-me.com/api/"; //Test URL
+    //public static final String Baseurl= "https://mobileappuat.mypt-me.com/api/"; //Test URL
     public static String login = Baseurl+"login"; //param: country_code,phone,type
     public static String submitOTP = Baseurl+"submit-otp"; //param: country_code,phone,type,otp
     public static String resendOTP = Baseurl+"resendotp"; //param: country_code,phone
@@ -109,5 +109,10 @@ public class ApiURL {
     public static String verifyPayment = Baseurl+"payment/verify-status";
     public static String getSubscriptionSlots = Baseurl+"get-subscription-slots?date=";
     public static String getGroupDetail = Baseurl+"get-group-detail?group_id=";
+    public static String getClientPtTermsConditions = Baseurl+"get-legal-document/client_pt_terms?type=";
+    public static final String getTrainersStudios = Baseurl+"get-trainer-studios";
+    public static final String getAllGymTrainers = Baseurl+"get-gym-trainers";
+    public static final String reviewAssessment = Baseurl+"review-assessment?";
+    public static final String bookAssessment = Baseurl+"book-assessment";
 }
 

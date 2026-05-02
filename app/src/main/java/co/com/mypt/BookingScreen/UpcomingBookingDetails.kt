@@ -116,6 +116,7 @@ class UpcomingBookingDetails : AppCompatActivity() {
     lateinit  var linearSelectSLot : LinearLayout
     lateinit  var linearSelectDate : LinearLayout
     lateinit  var linearQRCode : LinearLayout
+    lateinit  var tvSessionOtp : TextView
 
     lateinit var cancellationMsgCard:CardView
     lateinit var geocoder: Geocoder
@@ -152,6 +153,7 @@ class UpcomingBookingDetails : AppCompatActivity() {
         cancellationPolicyLayout = findViewById(R.id.cancellationPolicyLayout)
         tvLearn = findViewById(R.id.tvLearn)
         linearQRCode = findViewById(R.id.linearQRCode)
+        tvSessionOtp = findViewById(R.id.tvSessionOtp)
         nested = findViewById(R.id.nested)
         headerLayout = findViewById(R.id.headerLayout)
         cancelRequest = findViewById(R.id.cancelRequest)
@@ -196,9 +198,7 @@ class UpcomingBookingDetails : AppCompatActivity() {
         rescheduleBooking.setOnClickListener {
             reschedulingSheetDialog.show()
         }
-        linearQRCode.setOnClickListener {
-            qrBottomSheetDialog.show()
-        }
+
         headerLayout.setOnClickListener {
             finish()
         }
@@ -294,6 +294,7 @@ class UpcomingBookingDetails : AppCompatActivity() {
                             tvTrack.visibility=View.VISIBLE
 
                         }
+                        tvSessionOtp.text = "Session Otp - "+jsonObjectData.optJSONObject("bookingDetail").optString("otp")
                         tvContact.text = jsonObjectData.optJSONObject("bookingDetail").optString("contact")
                         tvamountPaid.text = jsonObjectData.optJSONObject("bookingDetail").optString("price")
                         tvTrainingLocation.text = jsonObjectData.optJSONObject("bookingDetail").optString("location")

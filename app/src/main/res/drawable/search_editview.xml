@@ -1,0 +1,14 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Border -->
+    <stroke
+        android:width="1dp"
+        android:color="#1AFFFFFF" />
+
+    <!-- Background (transparent) -->
+    <solid android:color="@color/name_text_field" />
+
+    <!-- Rounded corners (optional) -->
+    <corners android:radius="8dp" />
+</shape>

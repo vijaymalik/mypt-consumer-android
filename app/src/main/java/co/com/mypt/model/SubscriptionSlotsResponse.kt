@@ -1,12 +1,15 @@
 package co.com.mypt.model
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class SubscriptionSlotsResponse(
     val status: Boolean,
     val data: Data,
     val msg: String
-)
-
+): Parcelable
+@Parcelize
 data class Data(
     @SerializedName("is_group")
     val isGroup: Boolean,
@@ -29,16 +32,16 @@ data class Data(
     val trainers: List<Trainer>?,
 
     val message: String?
-)
-
+): Parcelable
+@Parcelize
 data class Group(
     val id: Int,
     val name: String,
     val type: String,
     val image: String,
     val msg: String
-)
-
+): Parcelable
+@Parcelize
 data class Trainer(
     val id: Int,
     val name: String,
@@ -48,8 +51,8 @@ data class Trainer(
 
     @SerializedName("slots_count")
     val slotsCount: Int
-)
-
+): Parcelable
+@Parcelize
 data class Slot(
     val id: Int,
     val time: String,
@@ -59,4 +62,4 @@ data class Slot(
 
     @SerializedName("end_time")
     val endTime: String
-)
+): Parcelable

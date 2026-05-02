@@ -8,6 +8,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Rect
 import android.graphics.drawable.BitmapDrawable
@@ -29,6 +30,8 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.widget.NestedScrollView
 import androidx.preference.PreferenceManager
@@ -49,6 +52,7 @@ import co.com.mypt.adapter.GymEquipmentAdapter
 import co.com.mypt.adapter.GymOfferAdapter
 import co.com.mypt.adapter.ReviewAdapter
 import co.com.mypt.adapter.ViewPagerImageAdapter
+import co.com.mypt.curvedBottomNavigation.dpToPx
 import co.com.mypt.model.GalleryModel
 import co.com.mypt.model.GymEquipmentModel
 import co.com.mypt.model.GymOfferModel
@@ -61,7 +65,10 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.UiSettings
+import com.google.android.gms.maps.model.BitmapDescriptor
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 import org.json.JSONObject
@@ -73,11 +80,12 @@ class GymDetailActivity : AppCompatActivity() , ViewTreeObserver.OnScrollChanged
     lateinit var gymOfferRecyclerView:RecyclerView
     lateinit var equipmentRecyclerView:RecyclerView
     lateinit var reviewRecycle:RecyclerView
+    lateinit var tvReviewLabel: TextView
     lateinit var bookSlot:TextView
     lateinit var back: ImageView
     private lateinit var uiSettings: UiSettings
     lateinit var back_1: ImageView
-    lateinit var relative:RelativeLayout
+    lateinit var relative: ConstraintLayout
     var gymOfferModelList : ArrayList<GymOfferModel> = ArrayList()
     var gymEquipmentModelList : ArrayList<GymEquipmentModel> = ArrayList()
     lateinit var galleryRecyclerView : RecyclerView
@@ -145,6 +153,7 @@ class GymDetailActivity : AppCompatActivity() , ViewTreeObserver.OnScrollChanged
         equipmentRecyclerView=findViewById(R.id.equipmentRecyclerView)
         galleryRecyclerView = findViewById(R.id.galleryRecyclerView)
         reviewRecycle = findViewById(R.id.reviewRecycle)
+        tvReviewLabel = findViewById(R.id.tvReviewLabel)
         scrollView = findViewById(R.id.scrollView)
         bookSlot = findViewById(R.id.bookSlot)
         headerLayout = findViewById(R.id.headerLayout)
@@ -335,8 +344,8 @@ class GymDetailActivity : AppCompatActivity() , ViewTreeObserver.OnScrollChanged
 
 
                                 }
-                                bookSlot.setTextColor(resources.getColor(R.color.buttontextcolor,null))
-                                bookSlot.background = resources.getDrawable(R.drawable.white_rectangle,null)
+                                bookSlot.setTextColor(resources.getColor(R.color.text_color_primary_black,null))
+                                bookSlot.background = resources.getDrawable(R.drawable.primary_btn_gradient,null)
 
                             }
                             else {
@@ -395,8 +404,8 @@ class GymDetailActivity : AppCompatActivity() , ViewTreeObserver.OnScrollChanged
 
 
                                 }
-                                bookSlot.setTextColor(resources.getColor(R.color.buttontextcolor,null))
-                                bookSlot.background = resources.getDrawable(R.drawable.white_rectangle,null)
+                                bookSlot.setTextColor(resources.getColor(R.color.text_color_primary_black,null))
+                                bookSlot.background = resources.getDrawable(R.drawable.primary_btn_gradient,null)
 
                             }
                             else {
@@ -486,6 +495,7 @@ class GymDetailActivity : AppCompatActivity() , ViewTreeObserver.OnScrollChanged
                         }
                         if (jsonData.optJSONArray("reviews").length()>0){
                             reviewRecycle.visibility=View.VISIBLE
+                            tvReviewLabel.visibility=View.VISIBLE
                             for(i in 0 until jsonData.optJSONArray("reviews").length()){
                                 var json=jsonData.optJSONArray("reviews").optJSONObject(i)
                                 var reviewModel=ReviewModel()
@@ -500,6 +510,7 @@ class GymDetailActivity : AppCompatActivity() , ViewTreeObserver.OnScrollChanged
                             reviewRecycle.adapter = ReviewAdapter(applicationContext,reviewArrayList)
                         }else{
                             reviewRecycle.visibility=View.GONE
+                            tvReviewLabel.visibility=View.GONE
                         }
 
                         aboutTrainerText.text = jsonData.optString("description")
@@ -516,7 +527,16 @@ class GymDetailActivity : AppCompatActivity() , ViewTreeObserver.OnScrollChanged
                         val location = LatLng(jsonData.optDouble("latitude",0.0), jsonData.optDouble("longitude",0.0)) // Example: New Delhi
 
                         // Add Marker
-                        mMap.addMarker(MarkerOptions().position(location))
+                        mMap.addMarker(
+                            MarkerOptions().position(location).icon(
+                                resizedMarker(
+                                    this@GymDetailActivity,
+                                    R.drawable.marker,
+                                    60.dpToPx(this@GymDetailActivity),
+                                    60.dpToPx(this@GymDetailActivity)
+                                )
+                            ).anchor(0.5f, 0.8f)
+                        )
 
                         // Move Camera to the Marker
                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 12f))
@@ -625,7 +645,7 @@ class GymDetailActivity : AppCompatActivity() , ViewTreeObserver.OnScrollChanged
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-
+        mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.map))
         getGymDetailData()
     }
 
@@ -676,6 +696,18 @@ class GymDetailActivity : AppCompatActivity() , ViewTreeObserver.OnScrollChanged
             context.startActivity(Intent.createChooser(shareIntent, "Share via"))
         }
 
+    }
+
+    fun resizedMarker(context: Context, drawableId: Int, width: Int, height: Int): BitmapDescriptor {
+        val drawable = ContextCompat.getDrawable(context, drawableId)!!
+
+        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+
+        drawable.setBounds(0, 0, width, height)
+        drawable.draw(canvas)
+
+        return BitmapDescriptorFactory.fromBitmap(bitmap)
     }
 
 

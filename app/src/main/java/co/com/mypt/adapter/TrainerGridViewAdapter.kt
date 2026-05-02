@@ -13,23 +13,21 @@ import android.widget.TextView
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 import co.com.mypt.R
-import co.com.mypt.activities.TrainerDetails
 import co.com.mypt.model.ExerciseModel
 import co.com.mypt.model.TrainersModel
 import com.bumptech.glide.Glide
 
 class TrainerGridViewAdapter(
     val context: Context,
-    val trainerList: List<TrainersModel>,
     val type: String,
     var typeWorkout: String?,
     var latitude: Double?,
     var longitude: Double?,
     var studio_id: String,
-    var clickListener: (Boolean, String, String) -> Unit
+    var onProfileClick: (TrainersModel) -> Unit
 ) : RecyclerView.Adapter<TrainerGridViewAdapter.ViewHolder>() {
     lateinit var sharedPreferences: SharedPreferences
-    private var trainerListModels: List<TrainersModel>
+    private val trainerListModels = mutableListOf<TrainersModel>()
 
     class ViewHolder(item: View) : RecyclerView.ViewHolder(item) {
         val exerciseRecyclerView: RecyclerView = item.findViewById(R.id.exerciseRecyclerView)
@@ -41,22 +39,13 @@ class TrainerGridViewAdapter(
         val userName: TextView = item.findViewById(R.id.userName)
         val distance: TextView = item.findViewById(R.id.distance)
         val bookThisTrainer: TextView = item.findViewById(R.id.bookThisTrainer)
-
-        //        val viewProfile : TextView = item.findViewById(R.id.viewProfile)
-        //val hurryUp : TextView = item.findViewById(R.id.hurryUp)
-//        val availableSlots : TextView = item.findViewById(R.id.availableSlots)
         val trainerImage: ImageView = item.findViewById(R.id.trainerImage)
         val relative: RelativeLayout = item.findViewById(R.id.relative)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = if (type == "Linear")
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.trainer_list_linear_adapter_layout, parent, false)
-        else
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.trainer_list_home_grid_adapter_layout, parent, false)
-
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.trainer_list_home_grid_adapter_layout, parent, false)
         return ViewHolder(view)
     }
 
@@ -74,26 +63,19 @@ class TrainerGridViewAdapter(
             exerciseModel.name = it?.name.toString()
             exerciseModel
         }
+        holder.exerciseRecyclerView.setHasFixedSize(true)
+        holder.exerciseRecyclerView.isNestedScrollingEnabled = false
         holder.exerciseRecyclerView.adapter = TrainerHomeTagAdapter(context, listTag, type)
-
+        holder.exerciseRecyclerView.setOnTouchListener { v, event ->
+            v.parent.requestDisallowInterceptTouchEvent(true)
+            false
+        }
         holder.bookSlot.tag = position
         holder.relative.tag = position
         holder.relative.setOnClickListener {
-            val pos = it.tag as Int
-            var trainersModel = trainerListModels[pos]
-            val intent = Intent(context, TrainerDetails::class.java)
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            intent.putExtra("trainer_id", trainersModel.id)
-            intent.putExtra("studio_id", studio_id)
-            intent.putExtra("haveSlot", trainersModel.slot)
-            intent.putExtra("type", typeWorkout)
-            intent.putExtra("long", longitude)
-            Log.e("longitiude", "" + longitude)
-            intent.putExtra("lat", latitude)
-            Log.e("lati", "" + latitude)
-            Log.e("studio_id", "" + studio_id)
-           // context.startActivity(intent)
+            onProfileClick(trainersModel)
         }
+
         holder.userName.text = trainersModel.name
 
         if (trainersModel.averageRating == "null")
@@ -125,7 +107,7 @@ class TrainerGridViewAdapter(
                 val query =
                     if (typeWorkout == "home") "type=home&trainer_id=${trainersModel.id}" else "type=gym&trainer_id=${trainersModel.id}&studio_id=${trainersModel.studio_id}"
 
-                clickListener(/*trainersModel.is_group*/true ?: false, query, trainersModel.id)
+               // clickListener(/*trainersModel.is_group*/true ?: false, query, trainersModel.id)
 //                    return@setOnClickListener
 //                }
                 /*if (sharedPreferences.getString("typeWorkout","").equals("home")){
@@ -169,13 +151,12 @@ class TrainerGridViewAdapter(
     }
 
     fun filterList(filteredList: MutableList<TrainersModel>) {
-        trainerListModels = filteredList
-        // below line is to notify our adapter
-        // as change in recycler view data.
-        notifyDataSetChanged()
+        updateTrainerList(filteredList)
     }
 
-    init {
-        this.trainerListModels = trainerList
+    fun updateTrainerList(trainerList: List<TrainersModel>){
+        trainerListModels.clear()
+        trainerListModels.addAll(trainerList)
+        notifyDataSetChanged()
     }
 }

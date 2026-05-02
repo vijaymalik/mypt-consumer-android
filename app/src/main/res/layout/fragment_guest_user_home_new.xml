@@ -6,10 +6,90 @@
     android:background="@drawable/onboarding_backgrd_2"
     android:fitsSystemWindows="true">
 
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingVertical="20dp"
+        android:paddingStart="20dp">
+
+        <RelativeLayout
+            android:id="@+id/parentLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/locId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/ic_location" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/funnel_sans_semibold"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:text="Home"
+                    android:textSize="14sp"
+                    android:textColor="@color/location_txt"
+                    app:drawableEndCompat="@drawable/down_arrow" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/locId"
+                android:layout_marginEnd="20dp"
+                android:layout_alignParentStart="true"
+                android:layout_toLeftOf="@+id/profileView"
+                android:ellipsize="end"
+                android:fontFamily="@font/funnel_sans_regular"
+                android:maxLines="1"
+                android:text="@string/choose_location"
+                android:textColor="@color/headingcolor"
+                android:textSize="12sp"
+                android:visibility="visible" />
+
+            <RelativeLayout
+                android:id="@+id/profileView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/user_profile_bg"
+                >
+                <TextView
+                    android:id="@+id/tvProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/funnel_sans_medium"
+                    android:textSize="18sp"
+                    android:textAllCaps="true"
+                    android:textColor="@color/gold_700"
+                    android:layout_gravity="center" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/headerLayout"
         android:scrollbars="none">
 
         <LinearLayout
@@ -17,8 +97,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <RelativeLayout
-
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -26,104 +105,27 @@
                 <ImageView
                     android:id="@+id/backgroundImg"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/headerLayout"
-                    android:layout_alignBottom="@+id/botomview"
-                    android:scaleType="fitXY" />
-
-                <LinearLayout
-                    android:id="@+id/headerLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingVertical="20dp"
-                    android:paddingStart="20dp">
-
-                    <RelativeLayout
-                        android:id="@+id/parentLocation"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:id="@+id/locId"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical">
-
-                            <ImageView
-                                android:layout_width="14dp"
-                                android:layout_height="14dp"
-                                android:src="@drawable/ic_location" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="5dp"
-                                android:ellipsize="end"
-                                android:fontFamily="@font/clash_display_medium"
-                                android:gravity="center_vertical"
-                                android:maxLines="1"
-                                android:text="Home"
-                                android:textColor="@color/white"
-                                app:drawableEndCompat="@drawable/down_arrow" />
-                        </LinearLayout>
-
-                        <TextView
-                            android:id="@+id/location"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/locId"
-                            android:layout_alignStart="@+id/locId"
-                            android:layout_marginHorizontal="20dp"
-                            android:layout_toLeftOf="@+id/profileView"
-                            android:ellipsize="end"
-                            android:fontFamily="@font/clash_display_medium"
-                            android:maxLines="1"
-                            android:text="@string/choose_location"
-                            android:textColor="@color/headingcolor"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            android:visibility="visible" />
-
-                        <RelativeLayout
-                            android:id="@+id/profileView"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerInParent="true"
-                            android:layout_marginEnd="20dp"
-                            android:background="@drawable/user_profile_bg"
-                            >
-                            <TextView
-                                android:id="@+id/tvProfile"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:fontFamily="@font/funnel_sans_medium"
-                                android:textSize="18sp"
-                                android:textAllCaps="true"
-                                android:textColor="@color/gold_700"
-                                android:layout_gravity="center" />
-                        </RelativeLayout>
-                    </RelativeLayout>
-                </LinearLayout>
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/botomview"
+                    android:scaleType="fitXY"
+                    />
 
                 <ImageView
                     android:id="@+id/homeBanner"
                     android:layout_width="match_parent"
-                    android:layout_height="240dp"
-                    android:layout_below="@+id/headerLayout"
-                    android:scaleType="fitCenter" />
+                    android:layout_height="350dp"
+                    android:paddingTop="30dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:scaleType="centerCrop" />
 
                 <LinearLayout
                     android:id="@+id/ptGym"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/homeBanner"
+                    app:layout_constraintTop_toBottomOf="@+id/homeBanner"
                     android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="-40dp">
+                    android:layout_marginTop="-140dp">
 
                     <RelativeLayout
                         android:layout_width="0dp"
@@ -146,8 +148,7 @@
                             android:fontFamily="@font/clash_display_medium"
                             android:text="Buy \nHome PT"
                             android:textColor="@color/white"
-                            android:textSize="14sp" />
-
+                            android:textSize="16sp" />
 
                     </RelativeLayout>
 
@@ -174,7 +175,7 @@
                             android:fontFamily="@font/clash_display_medium"
                             android:text="Buy\nGym PT"
                             android:textColor="@color/white"
-                            android:textSize="14sp" />
+                            android:textSize="16sp" />
 
 
                     </RelativeLayout>
@@ -203,7 +204,7 @@
                             android:fontFamily="@font/clash_display_medium"
                             android:text="Buy Gym \nMembership"
                             android:textColor="@color/white"
-                            android:textSize="14sp" />
+                            android:textSize="16sp" />
 
                     </RelativeLayout>
                 </LinearLayout>
@@ -213,7 +214,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="18dp"
-                    android:layout_below="@+id/ptGym">
+                    app:layout_constraintTop_toBottomOf="@+id/ptGym">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -243,21 +244,53 @@
 
                 </RelativeLayout>
 
-                <ImageView
+                <RelativeLayout
                     android:id="@+id/bookAssesment"
-                    android:layout_width="300dp"
-                    android:layout_height="42dp"
-                    android:layout_below="@+id/notSureView"
-                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/notSureView"
                     android:layout_marginTop="12dp"
-                    android:paddingBottom="20dp"
-                    android:background="@drawable/book_assesment" />
+                    android:layout_marginBottom="20dp">
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/ivBookAssessment"
+                        android:layout_width="300dp"
+                        android:scaleType="fitXY"
+                        android:layout_height="42dp"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/clash_display_medium"
+                        android:textSize="14sp"
+                        android:text="Book Free Assessment"
+                        />
+
+                    <ImageView
+                        android:layout_width="8dp"
+                        android:layout_height="16dp"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/ic_arrow_right"
+                        app:tint="@color/white"/>
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+
                 <View
                     android:id="@+id/botomview"
-                    android:layout_below="@+id/bookAssesment"
+                    app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/bookAssesment"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"/>
-            </RelativeLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -365,7 +398,8 @@
                     android:fontFamily="@font/clash_display_medium"
                     android:paddingHorizontal="20dp"
                     android:text="See MyPT in action"
-                    android:textColor="@color/white" />
+                    android:textSize="14sp"
+                    android:textColor="@color/location_txt" />
 
                 <View
                     android:layout_width="0dp"
@@ -449,19 +483,33 @@
                     android:visibility="visible" />
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/purchaseGymPass"
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPagerBanner"
                 android:layout_width="match_parent"
+                android:layout_height="128dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginHorizontal="20dp" />
+
+            <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+                android:id="@+id/dotsIndicator"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:adjustViewBounds="true"
-                android:src="@drawable/certified_banner" />
+                app:dotsColor="@color/progress_track_color_1"
+                app:dotsCornerRadius="8dp"
+                android:layout_marginTop="12dp"
+                android:layout_gravity="center"
+                app:dotsSize="5dp"
+                app:dotsSpacing="4dp"
+                app:dotsWidthFactor="5"
+                app:selectedDotColor="@color/white"
+                app:progressMode="true"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="20dp"
                 android:gravity="center_vertical"
                 android:paddingHorizontal="20dp">
 
@@ -477,13 +525,54 @@
                     android:fontFamily="@font/clash_display_medium"
                     android:paddingHorizontal="20dp"
                     android:text="Meet your match"
-                    android:textColor="@color/white" />
+                    android:textSize="14sp"
+                    android:textColor="@color/location_txt" />
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_weight="1"
                     android:background="@color/separator_list" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="20dp"
+                android:background="@drawable/tab_linear_background"
+                android:orientation="horizontal"
+                android:paddingHorizontal="4dp"
+                android:paddingVertical="4dp">
+
+                <!-- Kilogram Option -->
+                <TextView
+                    android:id="@+id/homeTrainerTab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="46dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/feet_button"
+                    android:fontFamily="@font/funnel_sans_semibold"
+                    android:gravity="center"
+                    android:paddingHorizontal="24dp"
+                    android:text="Home Trainers"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <!-- Pound Option -->
+                <TextView
+                    android:id="@+id/gymTrainerTab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="46dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/funnel_sans_semibold"
+                    android:gravity="center"
+                    android:paddingHorizontal="24dp"
+                    android:text="Gym Trainers"
+                    android:textAllCaps="false"
+                    android:textColor="@color/lightgreycolor"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -500,7 +589,6 @@
                 android:id="@+id/nearByGymRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="15dp"
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
@@ -530,64 +618,23 @@
                     android:visibility="visible" />
             </LinearLayout>
 
-            <!--<TextView
-                android:id="@+id/allTransformationStories"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="30dp"
-                android:fontFamily="@font/manrope_medium"
-                android:gravity="center_vertical"
-                android:text="@string/transformation_stories"
-                android:textColor="@color/smallTextcolor"
-                android:textSize="16sp"
-                android:textStyle="bold"
-
-                />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/transformationRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
--->
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:adjustViewBounds="true"
-                android:src="@drawable/buy_session_image"
-                android:visibility="gone" />
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/upcomingClassRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:orientation="horizontal"
-                android:visibility="gone"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="700dp">
+                android:layout_height="700dp"
+                android:layout_marginTop="38dp">
 
             <ImageView
                 android:id="@+id/imUpcomingBlur"
                 android:layout_width="match_parent"
-                android:layout_height="700dp"
-                android:layout_marginTop="20dp"
+                android:layout_height="match_parent"
                 android:scaleType="fitXY"
                 android:src="@drawable/journey_to_fit" />
 
                 <View
                     android:id="@+id/choosePlanView"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:layout_marginBottom="107dp"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="130dp"
                     android:layout_gravity="bottom"
                     android:background="@android:color/transparent"
                     android:layout_marginHorizontal="12dp" />
@@ -596,8 +643,8 @@
                 <View
                     android:id="@+id/bookDemoView"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:layout_marginBottom="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="80dp"
                     android:background="@android:color/transparent"
                     android:layout_gravity="bottom"
                     android:layout_marginHorizontal="12dp" />

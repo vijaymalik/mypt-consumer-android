@@ -64,7 +64,11 @@ class GetPlanDetailAdapter(
         }
         holder.progressBar.progress = progressPercent
 
-        holder.itemView.layoutParams.width = getItemWidth()
+        if (itemCount == 1) {
+            holder.itemView.layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
+        } else {
+            holder.itemView.layoutParams.width = getItemWidth()
+        }
 
         holder.btnUseSession.setOnClickListener {
             onUseSessionClick(planModel)
@@ -92,6 +96,6 @@ class GetPlanDetailAdapter(
     private fun getItemWidth(): Int{
         val displayMetrics = Resources.getSystem().displayMetrics
         val screenWidth = displayMetrics.widthPixels
-        return (screenWidth * 0.85).toInt()
+        return (screenWidth * 0.90).toInt()
     }
 }

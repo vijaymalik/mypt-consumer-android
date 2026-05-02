@@ -15,12 +15,12 @@
             android:src="@drawable/gym"/>
         <TextView
             android:layout_width="wrap_content"
-            android:textSize="12dp"
+            android:textSize="12sp"
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
             android:id="@+id/tv"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/manrope_medium"
+            android:fontFamily="@font/funnel_sans_regular"
             android:textColor="@color/subheadingcolor"
             android:text="@string/cafe"
             />

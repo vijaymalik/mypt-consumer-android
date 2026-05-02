@@ -188,6 +188,7 @@ class BookingFragment : Fragment() {
                                     upcomingbokingModel.msg=jsonObject.optString("msg")
                                     upcomingbokingModel.is_Trainer=jsonObject.optString("isTrainer")
                                     upcomingbokingModel.workout_focus=jsonObject.optJSONArray("workout_focus")
+                                    upcomingbokingModel.booking_type=jsonObject.optString("booking_type")
                                     upComingBookkingModelList.add(upcomingbokingModel)
                                 }
                                 var activityAdapter = UpcomingAdapter(activity, upComingBookkingModelList)
@@ -206,6 +207,7 @@ class BookingFragment : Fragment() {
                                     cancelbokingModel.is_reschedule=jsonObject.optString("is_reschedule")
                                     cancelbokingModel.msg=jsonObject.optString("msg")
                                     cancelbokingModel.is_Trainer=jsonObject.optString("isTrainer")
+                                    cancelbokingModel.booking_type=jsonObject.optString("booking_type")
                                     cancelbokingModel.workout_focus=jsonObject.optJSONArray("workout_focus")
                                     cancelBookkingModelList.add(cancelbokingModel)
                                 }
@@ -225,6 +227,7 @@ class BookingFragment : Fragment() {
                                     completedbokingModel.is_reschedule=jsonObject.optString("is_reschedule")
                                     completedbokingModel.msg=jsonObject.optString("msg")
                                     completedbokingModel.is_Trainer=jsonObject.optString("isTrainer")
+                                    completedbokingModel.booking_type=jsonObject.optString("booking_type")
                                     completedbokingModel.workout_focus=jsonObject.optJSONArray("workout_focus")
                                     completedBookkingModelList.add(completedbokingModel)
                                 }

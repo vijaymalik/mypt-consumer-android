@@ -21,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
+import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
@@ -30,6 +31,7 @@ import co.com.mypt.GymWorkout.withoutTrainer.JoiningFragment
 import co.com.mypt.R
 import co.com.mypt.adapter.ViewPagerAdapter1
 import co.com.mypt.fragments.CreatePackageScreen.CreatePackageFragment
+import co.com.mypt.fragments.viewModels.CreatePackageSharedViewModel
 import co.com.mypt.model.BestPlanList
 import co.com.mypt.utils.SharedDuringSessionViewModel
 import co.com.mypt.utils.SharedSessionvalueViewModel
@@ -80,6 +82,8 @@ class CreatePackagectivity : AppCompatActivity() {
     var bestPlanSessionCountTxt = ""
     var customSessionCountTxt = ""
     var bestPlanId=""
+    private val sharedViewModel: CreatePackageSharedViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_packagectivity)
@@ -191,7 +195,23 @@ class CreatePackagectivity : AppCompatActivity() {
                     openTrainingTeamScreen()
                     return@setOnClickListener
                 } else if (selectedPage == 1 && (selectedOption == 1 || selectedOption == 2)) {
-                    openTrainingTeamScreen()
+                    if(selectedOption==1){
+                        if(sharedViewModel.isMinBuddyAdded){
+                            openTrainingTeamScreen()
+                        }else{
+                            lifecycleScope.launch {
+                                sharedViewModel.addMinMembers.emit(true)
+                            }
+                        }
+                    }else{
+                        if(sharedViewModel.isMinMembersAdded){
+                            openTrainingTeamScreen()
+                        } else{
+                            lifecycleScope.launch {
+                                sharedViewModel.addMinMembers.emit(true)
+                            }
+                        }
+                    }
                     return@setOnClickListener
                 }
 
@@ -348,6 +368,12 @@ class CreatePackagectivity : AppCompatActivity() {
         intent.putExtra("latitude", getIntent().getDoubleExtra("latitude",0.0))
         if(getIntent().hasExtra("studio_id")) {
             intent.putExtra("studio_id", getIntent().getStringExtra("studio_id"))
+        }
+        if(getIntent().hasExtra("trainer_id")) {
+            intent.putExtra("trainer_id", getIntent().getStringExtra("trainer_id"))
+        }
+        if(getIntent().hasExtra("isGuestHome")){
+            intent.putExtra("isGuestHome", getIntent().getBooleanExtra("isGuestHome",false))
         }
         startActivity(intent)
     }

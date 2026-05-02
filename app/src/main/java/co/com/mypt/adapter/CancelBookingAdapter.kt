@@ -48,7 +48,7 @@ class CancelBookingAdapter(var activity: FragmentActivity?, var cancelBookkingMo
         for (i in 0 until upcomingbokingModel.workout_focus!!.length()){
             j= j + ","+ upcomingbokingModel.workout_focus!!.get(i)
         }
-        holder.tvWorkoutFocus.setText(j)
+        holder.tvWorkoutFocus.text = upcomingbokingModel.booking_type
         holder.linear.setTag(position)
         holder.linear.setOnClickListener{
             val pos = it.tag as Int

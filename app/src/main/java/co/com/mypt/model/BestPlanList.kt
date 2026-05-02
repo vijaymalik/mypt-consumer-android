@@ -18,6 +18,7 @@ data class BestPlanList(
         val title: String?,
         val validity_days: String?,
         val validity_months: String?,
-        val validity_text: String?
+        val validity_text: String?,
+        val special_msg: String?
     )
 }

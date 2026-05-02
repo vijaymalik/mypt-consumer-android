@@ -2,9 +2,12 @@ package co.com.mypt.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.RecyclerView
 import co.com.mypt.R
@@ -17,11 +20,17 @@ class ViewCouponsOfferActivity : AppCompatActivity() {
 //    var couponsModelList :ArrayList<CouponsModel> = ArrayList()
     lateinit var tvPayment : TextView
     lateinit var headerLayout : LinearLayout
+    lateinit var etSearchCoupon : EditText
+    lateinit var tvCouponError : TextView
+    lateinit var tvApplyCoupon : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_coupons_offer)
         tvPayment=findViewById(R.id.tvPayment)
+        etSearchCoupon=findViewById(R.id.etSearchCoupon)
+        tvCouponError=findViewById(R.id.tvCouponError)
+        tvApplyCoupon=findViewById(R.id.tvApplyCoupon)
         recyclerCoupon=findViewById(R.id.recyclerCoupon)
         headerLayout=findViewById(R.id.headerLayout)
         headerLayout.setOnClickListener {
@@ -49,6 +58,38 @@ class ViewCouponsOfferActivity : AppCompatActivity() {
         tvPayment.setOnClickListener {
 
             finish()
+        }
+
+        etSearchCoupon.addTextChangedListener {
+            tvCouponError.visibility = View.GONE
+        }
+
+        tvApplyCoupon.setOnClickListener {
+
+            val enteredCode = etSearchCoupon.text.toString().trim()
+
+            if (enteredCode.isEmpty()) {
+                tvCouponError.text = "Please enter coupon code"
+                tvCouponError.visibility = View.VISIBLE
+                return@setOnClickListener
+            }
+
+            val matchedCoupon = couponsModelList?.find {
+                it?.name.equals(enteredCode, ignoreCase = true)
+            }
+
+            if (matchedCoupon != null) {
+                tvCouponError.visibility = View.GONE
+                val resultIntent = Intent()
+                resultIntent.putExtra("couponId", matchedCoupon.id)
+                resultIntent.putExtra("couponName", matchedCoupon.name)
+                setResult(RESULT_OK, resultIntent)
+                finish()
+
+            } else {
+                tvCouponError.text = "Invalid coupon code"
+                tvCouponError.visibility = View.VISIBLE
+            }
         }
     }
 }

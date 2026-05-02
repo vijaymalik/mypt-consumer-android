@@ -36,6 +36,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".activities.BookAssessmentSuccessActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.SearchTrainerActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.StoryActivity"
             android:exported="false" />
         <activity
@@ -47,10 +53,12 @@
         <activity
             android:name=".activities.BestPlanGymMembershipActivity"
             android:exported="false" />
-        <activity android:name=".activities.ReviewGymMembershipActivity"
-            android:exported="false"/>
-        <activity android:name=".activities.GymMembershipPaymentStatusActivity"
-            android:exported="false"/>
+        <activity
+            android:name=".activities.ReviewGymMembershipActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.GymMembershipPaymentStatusActivity"
+            android:exported="false" />
         <activity
             android:name=".activities.ComingSoonActivity"
             android:exported="false" />

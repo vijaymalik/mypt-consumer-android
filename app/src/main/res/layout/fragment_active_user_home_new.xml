@@ -6,10 +6,90 @@
     android:background="@drawable/onboarding_backgrd_2"
     android:fitsSystemWindows="true">
 
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingVertical="20dp"
+        android:paddingStart="20dp">
+
+        <RelativeLayout
+            android:id="@+id/parentLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/locId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/ic_location" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/funnel_sans_semibold"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:text="Home"
+                    android:textSize="14sp"
+                    android:textColor="@color/location_txt"
+                    app:drawableEndCompat="@drawable/down_arrow" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/locId"
+                android:layout_marginEnd="20dp"
+                android:layout_alignParentStart="true"
+                android:layout_toLeftOf="@+id/profileView"
+                android:ellipsize="end"
+                android:fontFamily="@font/funnel_sans_regular"
+                android:maxLines="1"
+                android:text="@string/choose_location"
+                android:textColor="@color/headingcolor"
+                android:textSize="12sp"
+                android:visibility="visible" />
+
+            <RelativeLayout
+                android:id="@+id/profileView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/user_profile_bg">
+
+                <TextView
+                    android:id="@+id/tvProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/funnel_sans_medium"
+                    android:textSize="18sp"
+                    android:textAllCaps="true"
+                    android:textColor="@color/gold_700"
+                    android:layout_gravity="center" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/headerLayout"
         android:scrollbars="none">
 
         <LinearLayout
@@ -17,8 +97,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <RelativeLayout
-
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -26,109 +105,33 @@
                 <ImageView
                     android:id="@+id/backgroundImg"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/headerLayout"
-                    android:layout_alignBottom="@+id/botomview"
-                    android:scaleType="fitXY" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/bottomView"
+                    android:scaleType="fitXY"
+                    />
 
-                <LinearLayout
-                    android:id="@+id/headerLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingVertical="20dp"
-                    android:paddingStart="20dp">
-
-                    <RelativeLayout
-                        android:id="@+id/parentLocation"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:id="@+id/locId"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical">
-
-                            <ImageView
-                                android:layout_width="14dp"
-                                android:layout_height="14dp"
-                                android:src="@drawable/ic_location" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="5dp"
-                                android:ellipsize="end"
-                                android:fontFamily="@font/clash_display_medium"
-                                android:gravity="center_vertical"
-                                android:maxLines="1"
-                                android:text="Home"
-                                android:textColor="@color/white"
-                                app:drawableEndCompat="@drawable/down_arrow" />
-                        </LinearLayout>
-
-                        <TextView
-                            android:id="@+id/location"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/locId"
-                            android:layout_alignStart="@+id/locId"
-                            android:layout_marginHorizontal="20dp"
-                            android:layout_toLeftOf="@+id/profileView"
-                            android:ellipsize="end"
-                            android:fontFamily="@font/clash_display_medium"
-                            android:maxLines="1"
-                            android:text="@string/choose_location"
-                            android:textColor="@color/headingcolor"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            android:visibility="visible" />
-
-                        <RelativeLayout
-                            android:id="@+id/profileView"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerInParent="true"
-                            android:layout_marginEnd="20dp"
-                            android:background="@drawable/user_profile_bg">
-
-                            <TextView
-                                android:id="@+id/tvProfile"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:fontFamily="@font/funnel_sans_medium"
-                                android:textSize="18sp"
-                                android:textAllCaps="true"
-                                android:textColor="@color/gold_700"
-                                android:layout_gravity="center" />
-                        </RelativeLayout>
-                    </RelativeLayout>
-                </LinearLayout>
 
                 <ImageView
                     android:id="@+id/homeBanner"
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
-                    android:layout_below="@+id/headerLayout"
-                    android:scaleType="fitCenter" />
+                    android:layout_height="350dp"
+                    android:paddingTop="30dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:scaleType="centerCrop" />
 
                 <HorizontalScrollView
                     android:id="@+id/ptGym"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/homeBanner"
+                    app:layout_constraintTop_toBottomOf="@+id/homeBanner"
                     android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="-40dp"
+                    android:layout_marginTop="-140dp"
                     android:scrollbars="none">
 
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
                         <RelativeLayout
@@ -242,11 +245,12 @@
                 </HorizontalScrollView>
 
                 <View
-                    android:id="@+id/botomview"
+                    android:id="@+id/bottomView"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
-                    android:layout_below="@+id/ptGym" />
-            </RelativeLayout>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ptGym" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -348,8 +352,9 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/clash_display_medium"
                     android:paddingEnd="20dp"
-                    android:text="My Bookings"
-                    android:textColor="@color/white" />
+                    android:textSize="14sp"
+                    android:text="Upcoming Bookings"
+                    android:textColor="@color/location_txt" />
 
                 <View
                     android:layout_width="0dp"
@@ -362,10 +367,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/ic_arrow_right"
-                    android:drawablePadding="5dp"
+                    android:drawablePadding="8dp"
                     android:drawableTint="@color/white"
-                    android:fontFamily="@font/clash_display_medium"
+                    android:fontFamily="@font/funnel_sans_medium"
                     android:paddingStart="20dp"
+                    android:textSize="12sp"
+                    android:textAllCaps="true"
                     android:text="View all"
                     android:textColor="@color/white" />
 
@@ -374,7 +381,6 @@
                 android:id="@+id/upcomingSessionsRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="10dp"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
@@ -425,6 +431,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/clash_display_medium"
                     android:paddingHorizontal="20dp"
+                    android:textSize="14sp"
                     android:text="Smart Suggestions for You"
                     android:textColor="@color/location_txt" />
 
@@ -448,7 +455,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingHorizontal="5dp"
                 android:layout_marginTop="20dp"
                 android:clipToPadding="false"
                 android:overScrollMode="never"
@@ -481,6 +487,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/llTrainingTeamHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
@@ -499,8 +506,9 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/clash_display_medium"
                     android:paddingHorizontal="20dp"
+                    android:textSize="16sp"
                     android:text="Your Training Team"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/text_color_neutral_200" />
 
                 <View
                     android:layout_width="0dp"
@@ -592,34 +600,15 @@
                     android:layout_marginTop="5dp"
                     android:textColor="@color/location_txt"/>
 
-                <LinearLayout
-                    android:id="@+id/btnViewTeam"
-                    android:layout_width="wrap_content"
-                    android:layout_height="56dp"
-                    android:layout_below="@+id/tvGroupSubTitle"
-                    android:background="@drawable/white_rectangle"
-                    android:gravity="center"
-                    android:layout_centerHorizontal="true"
-                    android:paddingHorizontal="12dp"
-                    android:layout_marginTop="16dp"
-                    android:orientation="horizontal">
-
-                    <TextView
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnViewTeam"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/funnel_sans_medium"
-                        android:text="View your team"
-                        android:textAllCaps="true"
-                        android:textColor="#000000"
-                        android:textSize="14sp" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:src="@drawable/ic_arrow_right"
-                        android:tint="@color/black" />
-                </LinearLayout>
+                        style="@style/PrimaryButton"
+                        android:layout_marginTop="16dp"
+                        app:icon="@drawable/ic_arrow_right"
+                        app:iconGravity="textEnd"
+                        android:text="View your team" />
                 </LinearLayout>
 
             </RelativeLayout>
@@ -631,8 +620,6 @@
                 android:orientation="horizontal"
                 android:clipToPadding="false"
                 android:layout_marginTop="20dp"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp"
                 android:overScrollMode="never"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
@@ -686,14 +673,28 @@
                     android:textStyle="bold"
                     android:visibility="visible" />
 
-            <ImageView
-                android:id="@+id/purchaseGymPass"
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPagerBanner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:adjustViewBounds="true"
-                android:src="@drawable/certified_banner" />
+                android:layout_height="128dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginHorizontal="20dp" />
 
+            <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+                android:id="@+id/dotsIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:dotsColor="@color/progress_track_color_1"
+                app:dotsCornerRadius="8dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center"
+                app:dotsSize="5dp"
+                app:dotsSpacing="4dp"
+                app:dotsWidthFactor="5"
+                app:selectedDotColor="@color/white"
+                app:progressMode="true"
+                />
 
 
 

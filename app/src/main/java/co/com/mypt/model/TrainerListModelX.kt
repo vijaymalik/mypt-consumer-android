@@ -21,7 +21,7 @@ data class TrainerListModelX(
         data class Trainer(
             val averageRating: Any?,
             val distance: String?,
-            val distance_sort: Double?,
+            val distance_sort: Any?,
             val encrypted_id: String?,
             val id: String?,
             val is_full: Boolean?,

@@ -22,6 +22,7 @@
         android:textSize="12sp"
         android:fontFamily="@font/funnel_sans_semibold"
         android:gravity="center"
+        android:textColor="@color/name_text_field"
         android:background="@drawable/partener_gym" />
     <RelativeLayout
         android:layout_width="match_parent"

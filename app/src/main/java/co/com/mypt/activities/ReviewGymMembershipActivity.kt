@@ -18,18 +18,26 @@ import co.com.mypt.Api.ApiURL
 import co.com.mypt.Api.Constants
 import co.com.mypt.Api.Constants.BEST_PLAN_ID
 import co.com.mypt.Api.Constants.REVIEW_ADDRESS_ID
+import co.com.mypt.Api.Constants.TERMS_BUNDLE_KEY
+import co.com.mypt.Api.Constants.TERMS_REQUEST_KEY
+import co.com.mypt.Api.GetMethod
 import co.com.mypt.Api.PostMethod
 import co.com.mypt.Api.ResponseData
 import co.com.mypt.ProgressDialog
 import co.com.mypt.R
 import co.com.mypt.Webview.CreatePackageCCavenueWebViewActivity
+import co.com.mypt.curvedBottomNavigation.setColoredTextRes
+import co.com.mypt.curvedBottomNavigation.setUnderlineClickableText
 import co.com.mypt.databinding.ActivityReviewGymMembershipBinding
+import co.com.mypt.fragments.RefundBottomSheet
+import co.com.mypt.fragments.TermsConditionsBottomSheet
 import co.com.mypt.model.ActivityModel
 import co.com.mypt.model.AvailablePromo
 import co.com.mypt.model.JoinModel
 import co.com.mypt.model.PackageDetails
 import co.com.mypt.model.ReviewPackageCheckout
 import co.com.mypt.model.ReviewPackageCheckout.Data.UpgradePlan
+import co.com.mypt.model.TermsConditionsResponse
 import com.android.volley.VolleyError
 import com.google.gson.Gson
 import java.text.SimpleDateFormat
@@ -55,6 +63,9 @@ class ReviewGymMembershipActivity : AppCompatActivity() {
     private var progressDialog: Dialog? = null
 
     private var packageDetails: PackageDetails? = null
+
+    private var isTermsConditionsChecked = false
+    private var termsConditionsResponse: TermsConditionsResponse? = null
     private var isPaymentChecked = false
     lateinit var binding: ActivityReviewGymMembershipBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,6 +83,42 @@ class ReviewGymMembershipActivity : AppCompatActivity() {
             )
             resultLauncher.launch(intent)
         }
+        setTermsConditionsHighlightText()
+        supportFragmentManager.setFragmentResultListener(
+            TERMS_REQUEST_KEY,
+            this
+        ) { _, bundle ->
+
+            val isAccepted = bundle.getBoolean(TERMS_BUNDLE_KEY, false)
+
+            if (isAccepted) {
+                isTermsConditionsChecked = true
+
+                binding.checkTermsConditions.setImageResource(
+                    R.drawable.radio_select_light_green
+                )
+                updateContinueButton()
+            }
+        }
+
+        binding.checkTermsConditions.setOnClickListener {
+            isTermsConditionsChecked = !isTermsConditionsChecked
+            binding.checkTermsConditions.setImageResource(if(isTermsConditionsChecked)R.drawable.radio_select_light_green else R.drawable.radio_unselect)
+            updateContinueButton()
+        }
+        binding.tvTermsConditions.setOnClickListener {
+            if (termsConditionsResponse != null) {
+                openTermsConditionBottomSheet(termsConditionsResponse)
+            } else {
+                fetchTermsConditions()
+            }
+        }
+        binding.paymentMsg.setUnderlineClickableText(
+            fullText = getString(R.string.non_refundable_know_more),
+            targetText = getString(R.string.know_more)
+        ) {
+            openRefundBottomSheet()
+        }
         binding.appliedCoupon.visibility = View.GONE
         binding.back1.setOnClickListener {
             finish()
@@ -79,8 +126,8 @@ class ReviewGymMembershipActivity : AppCompatActivity() {
 
         binding.rlCCAvenue.setOnClickListener {
             isPaymentChecked = !isPaymentChecked
-            continueButtonClick(isPaymentChecked)
             binding.ccvenueRadio.setImageResource(if (isPaymentChecked) R.drawable.radio_select_light_green else R.drawable.radio_unselect)
+            updateContinueButton()
         }
 
         binding.tvPayment.setOnClickListener {
@@ -124,12 +171,26 @@ class ReviewGymMembershipActivity : AppCompatActivity() {
         getData()
     }
 
+    private fun setTermsConditionsHighlightText() {
+        binding.tvTermsConditions.setColoredTextRes(
+            getString(R.string.terms_conditions_full_text),
+            getString(R.string.terms_conditions_highlight_text),
+            R.color.white,
+            R.color.neon_color
+        )
+    }
+
+    private fun updateContinueButton(){
+        val isEnable = isTermsConditionsChecked && isPaymentChecked
+        continueButtonClick(isEnable)
+    }
+
     fun continueButtonClick(isEnable: Boolean) {
         binding.tvPayment.isEnabled = isEnable
         if (isEnable) {
             binding.tvPayment.setTextColor(resources.getColor(R.color.buttontextcolor, null))
             binding.tvPayment.background =
-                ContextCompat.getDrawable(this, R.drawable.white_rectangle)
+                ContextCompat.getDrawable(this, R.drawable.primary_btn_gradient)
         } else {
             binding.tvPayment.setTextColor(resources.getColor(R.color.white, null))
             binding.tvPayment.background =
@@ -180,10 +241,11 @@ class ReviewGymMembershipActivity : AppCompatActivity() {
                     if (data.status == true) {
                         packageDetails = data.data?.package_details
                         available_promos = data.data?.available_promos
-                        available_promos?.let {
-                            if (it.isNotEmpty()) {
-                                binding.offerTitle.text = it.firstOrNull()?.name ?: "Select Coupon"
-                            }
+
+                        if(available_promos.isNullOrEmpty()){
+                            binding.couponsView.visibility = View.GONE
+                        }else{
+                            binding.offerTitle.text = available_promos?.firstOrNull()?.name ?: "Select Coupon"
                         }
                         binding.tvSelectedGym.text = data.data?.studio?.name?:""
                         binding.tvSelectedPlan.text = packageDetails?.package_name?:""
@@ -265,5 +327,45 @@ class ReviewGymMembershipActivity : AppCompatActivity() {
         val outputFormat = SimpleDateFormat("dd/MM/yy", Locale.getDefault())
         val date = inputFormat.parse(input)
         return outputFormat.format(date!!)
+    }
+
+    private fun fetchTermsConditions(){
+        showProgress()
+
+        val url = ApiURL.getClientPtTermsConditions+"membership"
+
+        GetMethod(url, this@ReviewGymMembershipActivity).startMethod(object :
+            ResponseData {
+            override fun response(data: String?) {
+                hideProgress()
+                data?.let {
+                    try {
+                        termsConditionsResponse =
+                            Gson().fromJson(it, TermsConditionsResponse::class.java)
+                        openTermsConditionBottomSheet(termsConditionsResponse)
+
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+            }
+
+            override fun error(error: VolleyError?) {
+                hideProgress()
+            }
+        })
+    }
+
+    private fun openTermsConditionBottomSheet(termsConditionsResponse: TermsConditionsResponse?){
+        termsConditionsResponse?.let {
+            TermsConditionsBottomSheet.newInstance(it).show(
+                supportFragmentManager,
+                "TermsConditionsBottomSheet"
+            )
+        }
+    }
+
+    private fun openRefundBottomSheet() {
+        RefundBottomSheet().show(supportFragmentManager, "RefundBottomSheet")
     }
 }

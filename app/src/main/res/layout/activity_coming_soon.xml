@@ -43,10 +43,10 @@
 
             <LinearLayout
                 android:id="@+id/llComingSoon"
-                android:layout_width="120dp"
-                android:layout_height="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/chip"
+                android:background="@drawable/black_white_20_gradient_with_border"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:paddingHorizontal="12dp"
@@ -59,9 +59,10 @@
                     android:id="@+id/tvComingSoon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
                     android:fontFamily="@font/funnel_sans_medium"
                     android:text="COMING SOON"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginVertical="7dp"
                     android:textColor="@color/lightgreycolor"
                     android:textSize="12sp" />
             </LinearLayout>

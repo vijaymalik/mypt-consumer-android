@@ -2,6 +2,7 @@ package co.com.mypt.More
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.activity.enableEdgeToEdge
@@ -22,6 +23,7 @@ class SettingsActivity : AppCompatActivity() {
     lateinit var linearLinked:LinearLayout
     lateinit var linearUnits:LinearLayout
     lateinit var relative: RelativeLayout
+    lateinit var back: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +34,7 @@ class SettingsActivity : AppCompatActivity() {
         linearLinked=findViewById(R.id.linearLinked)
         linearUnits=findViewById(R.id.linearUnits)
         relative=findViewById(R.id.relative)
+        back=findViewById(R.id.back_1)
         linearNotification.setOnClickListener{
             var intent= Intent(applicationContext,NotificationActivity::class.java)
             startActivity(intent)
@@ -54,6 +57,10 @@ class SettingsActivity : AppCompatActivity() {
         linearUnits.setOnClickListener{
             var intent= Intent(applicationContext,UnitOfMeasureActivity::class.java)
             startActivity(intent)
+        }
+
+        back.setOnClickListener {
+            finish()
         }
 
     }

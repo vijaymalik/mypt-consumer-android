@@ -23,7 +23,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
 
             <ImageView
                 android:id="@+id/back"
@@ -31,7 +32,7 @@
                 android:layout_height="40dp"
                 android:layout_alignParentStart="true"
                 android:layout_marginHorizontal="20dp"
-                android:layout_marginVertical="20dp"
+                android:layout_marginVertical="4dp"
                 android:src="@drawable/ic_back_arrow_new" />
 
             <com.google.android.material.progressindicator.LinearProgressIndicator
@@ -178,13 +179,12 @@
     <LinearLayout
         android:id="@+id/tvcontinueView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_alignParentBottom="true"
         android:layout_marginHorizontal="15dp"
         android:layout_marginVertical="20dp"
         android:background="@drawable/rounded_cornor"
-        android:gravity="center"
-        android:paddingVertical="15dp">
+        android:gravity="center">
 
         <TextView
             android:id="@+id/tvcontinue"
@@ -194,9 +194,10 @@
             android:text="@string/next"
             android:textAllCaps="true"
             android:textColor="@color/subheadingcolor"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <ImageView
+            android:id="@+id/icRightArrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="10dp"

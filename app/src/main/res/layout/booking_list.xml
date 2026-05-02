@@ -75,7 +75,7 @@
                     android:textSize="12sp"
                     android:textStyle="bold"
                     android:fontFamily="@font/manrope_medium"
-                    android:text="@string/workout_focus"
+                    android:text="@string/type"
                     />
                 <TextView
                     android:layout_marginRight="10dp"

@@ -40,7 +40,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/clash_display_medium"
                     android:text="@string/add_new_address_"
-                    android:textColor="@color/headingcolor"
+                    android:textColor="@color/text_color_neutral_200"
                     android:textSize="20sp" />
 
                 <ImageView

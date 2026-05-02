@@ -302,6 +302,7 @@
                 android:textColor="@color/smallTextcolor"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:visibility="gone"
                 android:layout_marginVertical="20dp"
                 android:fontFamily="@font/manrope_medium"
                 android:text="@string/workout_summary"
@@ -309,6 +310,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:background="@drawable/session_rectangle"
                 android:orientation="vertical">
                 <LinearLayout
@@ -325,7 +327,7 @@
                         android:textSize="14sp"
                         android:textStyle="bold"
                         android:fontFamily="@font/manrope_medium"
-                        android:text="@string/workout_focus"
+                        android:text="@string/type"
                         />
                     <TextView
                         android:layout_width="wrap_content"
@@ -401,16 +403,19 @@
                 android:textColor="@color/smallTextcolor"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:visibility="gone"
                 android:layout_marginVertical="20dp"
                 android:fontFamily="@font/manrope_medium"
                 android:text="@string/exercise_log"
                 />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:background="@drawable/session_rectangle"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:orientation="vertical"

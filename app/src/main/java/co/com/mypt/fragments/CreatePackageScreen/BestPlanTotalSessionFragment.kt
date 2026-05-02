@@ -6,14 +6,12 @@ import android.content.SharedPreferences
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.LinearGradient
-import android.graphics.Paint
 import android.graphics.Shader
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.text.TextPaint
 import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,9 +25,9 @@ import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.PagerSnapHelper
@@ -53,6 +51,7 @@ import com.android.volley.VolleyError
 import com.google.gson.Gson
 import com.yarolegovich.discretescrollview.DiscreteScrollView
 import com.yarolegovich.discretescrollview.transform.ScaleTransformer
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.json.JSONObject
@@ -66,20 +65,22 @@ class BestPlanTotalSessionFragment(
     var studio_id: String?,
     var month: Int?
 ) : Fragment() {
-    var checkedType="Per_session"
+    var checkedType = "Per_session"
     private val viewModel: SharedSessionvalueViewModel by activityViewModels()
 
-//    lateinit var switchCompat: SwitchCompat
+    //    lateinit var switchCompat: SwitchCompat
 //    lateinit var tvTotalcost: TextView
 //    lateinit var tvPerSession: TextView
 //    lateinit var tvTrainer_name: TextView
 //    lateinit var recycler:RecyclerView
-    lateinit var tvRealPrice:TextView
-    lateinit var validFor:TextView
-    lateinit var totalSession:TextView
-    lateinit var sessionSelected:TextView
-    lateinit var tvAEDSession:TextView
-//    lateinit var sessionValue : TextView
+    lateinit var tvRealPrice: TextView
+    lateinit var validFor: TextView
+    lateinit var saveTxt: TextView
+    lateinit var totalSession: TextView
+    lateinit var sessionSelected: TextView
+    lateinit var tvAEDSession: TextView
+
+    //    lateinit var sessionValue : TextView
 //    lateinit var imTrainer : ImageView
 //    lateinit var greenLine : ImageView
 //    lateinit var seekBar : SeekBar
@@ -87,11 +88,11 @@ class BestPlanTotalSessionFragment(
 //    lateinit var view2 : View
 //    lateinit var sessionValueCard : LinearLayout
 //    lateinit var relaticeSave : RelativeLayout
-    lateinit var endLayout : LinearLayout
+    lateinit var endLayout: LinearLayout
 //    lateinit var cardEdit : CardView
 //    var activitiesModelList :ArrayList<ActivityModel> = ArrayList()
 
-    private lateinit var textSwitcher: TextSwitcher
+    //private lateinit var textSwitcher: TextSwitcher
     private var lastProgress = 0
     private var lastDragTime = System.currentTimeMillis()
     lateinit var sharedPreferences: SharedPreferences
@@ -100,13 +101,15 @@ class BestPlanTotalSessionFragment(
 
     private val debounceHandler = Handler(Looper.getMainLooper())
     private var debounceRunnable: Runnable? = null
+
+    private var debounceJob: Job? = null
     lateinit var bestPlan: TextView
     lateinit var customization: TextView
     lateinit var bestPlanParentView: LinearLayout
     lateinit var customPlanParentView: LinearLayout
-    private var carouselRecycler: DiscreteScrollView?=null
-    private var isBestPlanAvailable=false
-    private var isBestPlanSelected=true
+    private var carouselRecycler: DiscreteScrollView? = null
+    private var isBestPlanAvailable = false
+    private var isBestPlanSelected = true
     private lateinit var back: ImageView
     private lateinit var pBar: ProgressBar
     private lateinit var tvcontinue: TextView
@@ -123,23 +126,24 @@ class BestPlanTotalSessionFragment(
     lateinit var forwardArrow: ImageView
     lateinit var freeMsg: TextView
     lateinit var devider: ImageView
+    lateinit var rulerWeight: SessionRulerViewHorizontal
     var bestPlanSessionCountTxt = ""
     var customSessionCountTxt = ""
-    var bestPlanId=""
+    var bestPlanId = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view=inflater.inflate(R.layout.fragment_best_plan_total_session, container, false)
+        val view = inflater.inflate(R.layout.fragment_best_plan_total_session, container, false)
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireActivity())
 
 //        greenLine=view.findViewById(R.id.greenLine)
 //        relaticeSave=view.findViewById(R.id.relaticeSave)
 //        recycler=view.findViewById(R.id.recycler)
 //        tvTrainer_name=view.findViewById(R.id.tvTrainer_name)
-        tvRealPrice=view.findViewById(R.id.tvRealPrice)
-        tvAEDSession=view.findViewById(R.id.tvAEDSession)
+        tvRealPrice = view.findViewById(R.id.tvRealPrice)
+        tvAEDSession = view.findViewById(R.id.tvAEDSession)
 //        switchCompat=view.findViewById(R.id.switchCompat)
 //        tvTotalcost=view.findViewById(R.id.tvTotalcost)
 //        tvPerSession=view.findViewById(R.id.tvPerSession)
@@ -149,10 +153,9 @@ class BestPlanTotalSessionFragment(
 //        seekBar=view.findViewById(R.id.seekBar)
 //        sessionValue=view.findViewById(R.id.sessionValue)
 //        sessionValueCard=view.findViewById(R.id.sessionValueCard)
-        customization=view.findViewById(R.id.customization)
-        bestPlan=view.findViewById(R.id.bestPlan)
+        customization = view.findViewById(R.id.customization)
+        bestPlan = view.findViewById(R.id.bestPlan)
 //        cardEdit=view.findViewById(R.id.cardEdit)
-        textSwitcher = view.findViewById(R.id.textSwitcher)
         customPlanParentView = view.findViewById(R.id.customPlanParentView)
         bestPlanParentView = view.findViewById(R.id.bestPlanParentView)
         carouselRecycler = view.findViewById(R.id.carouselView)
@@ -175,7 +178,8 @@ class BestPlanTotalSessionFragment(
         forwardArrow = view.findViewById(R.id.forwardArrow)
         freeMsg = view.findViewById(R.id.freeMsg)
         devider = view.findViewById(R.id.devider)
-        pBar.setProgress(90,true)
+        saveTxt = view.findViewById(R.id.saveTxt)
+        pBar.setProgress(90, true)
         upArrow.setOnClickListener {
             upArrowClick(true)
         }
@@ -193,7 +197,7 @@ class BestPlanTotalSessionFragment(
             requireActivity().finish()
         }
 
-        tvcontinue.setOnClickListener {
+        tvcontinueView.setOnClickListener {
             reviewPackage()
         }
         /*seekBar.post {
@@ -212,86 +216,21 @@ class BestPlanTotalSessionFragment(
             intent.putExtra("studio_id",studio_id)
             startActivity(intent)
         }*/
-        textSwitcher.setFactory {
-            val textView = TextView(context)
-            textView.textSize = 40f
-            textView.setTextColor(resources.getColor(R.color.headingcolor))
-            textView.setTypeface(ResourcesCompat.getFont(requireActivity(), R.font.clash_display_medium))
-            textView.gravity = Gravity.CENTER
-            textView
-        }
+
         bestPlan.setOnClickListener {
-            isBestPlanSelected=true
-            selectTab(bestPlan, customization,bestPlanParentView,customPlanParentView)
-               selectedPlan(if (isBestPlanAvailable) Plans.IS_BEST_AVAILABLE else Plans.IS_BEST_NOT_AVAILABLE)
+            isBestPlanSelected = true
+            selectTab(bestPlan, customization, bestPlanParentView, customPlanParentView)
+            selectedPlan(if (isBestPlanAvailable) Plans.IS_BEST_AVAILABLE else Plans.IS_BEST_NOT_AVAILABLE)
         }
 
         customization.setOnClickListener {
-            isBestPlanSelected=false
-            selectTab(customization, bestPlan,customPlanParentView,bestPlanParentView)
-                selectedPlan(Plans.CUSTOMIZE)
+            isBestPlanSelected = false
+            selectTab(customization, bestPlan, customPlanParentView, bestPlanParentView)
+            selectedPlan(Plans.CUSTOMIZE)
         }
 
-        val rulerWeight = view.findViewById<SessionRulerViewHorizontal>(R.id.ruler_session)
-
-        rulerWeight.setUpdateListenerWeight(object : onViewUpdateListenerWeight {
-            override fun onViewUpdate(value: Float) {
-                val valueL = if (value>.1)value.minus(.1).toFloat() else value
-                println("===== $value")
-                val updatedValue=value.toInt()
-                if(updatedValue == 0){
-                    //seekBar!!.progress = 1
-                    return
-                }
-                if(updatedValue > 1)
-                    sessionSelected.text = "$updatedValue Sessions"
-                else
-                    sessionSelected.text = "$updatedValue Session"
-
-                viewModel.data.value =updatedValue.toString()
-
-                textShader(textSwitcher.currentView as TextView)
-
-
-
-                // Determine the direction of the progress change (increase or decrease)
-                var inAnimation: Animation? = null
-                var outAnimation: Animation? = null
-
-                if (updatedValue > lastProgress) {
-                    // Slide from top to bottom (increasing)
-                    inAnimation = createSlideInAnimation(1.0f, 0.0f) // from up to down
-                    outAnimation = createSlideOutAnimation(0.0f, -1.0f) // slide out upward
-                } else if (updatedValue < lastProgress) {
-                    // Slide from bottom to top (decreasing)
-                    inAnimation = createSlideInAnimation(-1.0f, 0.0f) // from down to up
-                    outAnimation = createSlideOutAnimation(0.0f, 1.0f) // slide out downward
-                }
-
-                // Apply the animations to TextSwitcher
-                textSwitcher.inAnimation = inAnimation
-                textSwitcher.outAnimation = outAnimation
-
-                // Update text in TextSwitcher
-                // textSwitcher.setText(String.valueOf(progress))
-
-                // Update the last progress value
-                lastProgress = updatedValue
-                val layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-                )
-                textSwitcher.setLayoutParams(layoutParams)
-
-                debounceRunnable?.let { debounceHandler.removeCallbacks(it) }
-
-                debounceRunnable = Runnable {
-                    getSessionData(checkedType)
-                }
-                debounceHandler.postDelayed(debounceRunnable!!, 300)
-            }
-        })
-        rulerWeight.setDefaultValue(21F)
+         rulerWeight = view.findViewById<SessionRulerViewHorizontal>(R.id.ruler_session)
+        getBestPlanApi()
         getSessionData(checkedType)
         //textSwitcher.setText("100")
 
@@ -405,16 +344,85 @@ class BestPlanTotalSessionFragment(
             getSessionData(checkedType)
         }*/
 
-        textShader(tvAEDSession)
-        tvRealPrice.paintFlags = tvRealPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-      //  getSessionData()
+        //textShader(tvAEDSession)
+        //  tvRealPrice.paintFlags = tvRealPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+        //  getSessionData()
 
         return view
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        rulerWeight.setDefaultValue(20F)
+        rulerWeight.setUpdateListenerWeight(object : onViewUpdateListenerWeight {
+            override fun onViewUpdate(value: Float) {
+                println("===== $value")
+                val updatedValue = value.toInt()
+                if (updatedValue == 0) {
+                    //seekBar!!.progress = 1
+                    return
+                }
+                if (updatedValue > 1)
+                    sessionSelected.text = "$updatedValue Sessions"
+                else
+                    sessionSelected.text = "$updatedValue Session"
+
+                viewModel.data.value = updatedValue.toString()
+
+                // Update the last progress value
+                lastProgress = updatedValue
+
+                debounceJob?.cancel()
+                debounceJob = viewLifecycleOwner.lifecycleScope.launch {
+                    delay(500)
+                    if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
+                        getSessionData(checkedType)
+                    }
+                }
+            }
+        })
+    }
+
     private val snapHelper = PagerSnapHelper()
 
-    fun initializeCarousel( data: List<BestPlanData?>) {
-        carouselRecycler?.adapter = CarouselAdapter(data)
+    fun initializeCarousel(data: List<BestPlanData?>) {
+        if (isBestPlanSelected) {
+            if (data.isEmpty()) {
+                isBestPlanAvailable = false
+                selectedPlan(Plans.IS_BEST_NOT_AVAILABLE)
+                return
+            }
+        }
+
+        carouselRecycler?.apply {
+            adapter = CarouselAdapter(data)
+
+            setItemTransformer(CenterRaiseTransformer())
+
+            clearOnScrollListeners()
+
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(rv: RecyclerView, newState: Int) {
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+
+                        val snapView = snapHelper.findSnapView(layoutManager)
+                        val position = snapView?.let { layoutManager?.getPosition(it) } ?: -1
+
+                        if (position != -1 && position < data.size) {
+                            updateBestPlanSession(data[position])
+                        }
+                    }
+                }
+            })
+        }
+
+        if (isBestPlanSelected) {
+            isBestPlanAvailable = true
+            selectedPlan(Plans.IS_BEST_AVAILABLE)
+            updateBestPlanSession(data[0])
+        }
+
+        /*carouselRecycler?.adapter = CarouselAdapter(data)
 
         carouselRecycler?.setItemTransformer(
             ScaleTransformer.Builder()
@@ -427,9 +435,9 @@ class BestPlanTotalSessionFragment(
             override fun onScrollStateChanged(rv: RecyclerView, newState: Int) {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     val snapView = snapHelper.findSnapView(rv.layoutManager)
-                    val position = rv.layoutManager?.getPosition(snapView!!)?:-1
-                    if (position !=-1){
-                            updateBestPlanSession(data[position])
+                    val position = rv.layoutManager?.getPosition(snapView!!) ?: -1
+                    if (position != -1) {
+                        updateBestPlanSession(data[position])
                     }
 
                 }
@@ -438,13 +446,13 @@ class BestPlanTotalSessionFragment(
         if (isBestPlanSelected) {
             if (!data.isNullOrEmpty()) {
                 isBestPlanAvailable = true
-                   selectedPlan(Plans.IS_BEST_AVAILABLE)
-                    updateBestPlanSession(data[0])
+                selectedPlan(Plans.IS_BEST_AVAILABLE)
+                updateBestPlanSession(data[0])
             } else {
                 isBestPlanAvailable = false
-                   selectedPlan(Plans.IS_BEST_NOT_AVAILABLE)
+                selectedPlan(Plans.IS_BEST_NOT_AVAILABLE)
             }
-        }
+        }*/
 
 
 //        carouselRecycler?.layoutManager =
@@ -493,18 +501,18 @@ class BestPlanTotalSessionFragment(
         unselectedContent.visibility = View.GONE
     }
 
-    fun getBestPlanApi(){
-        val progressDialog: Dialog = ProgressDialog.progressDialog(requireActivity(),"")
+    fun getBestPlanApi() {
+        val progressDialog: Dialog = ProgressDialog.progressDialog(requireActivity(), "")
         progressDialog.show()
-        var type=sharedPreferences.getString("typeWorkout","")
-        type=if (type == "home") "home" else "gym"
-        val packageType=sharedPreferences.getInt("selectedPackageType",0)
-        val api=ApiURL.getBestPlan+"package_type=$packageType&type=$type"
-        GetMethod(api,activity).startMethod(object : ResponseData{
+        var type = sharedPreferences.getString("typeWorkout", "")
+        type = if (type == "home") "home" else "gym"
+        val packageType = sharedPreferences.getInt("selectedPackageType", 0)
+        val api = ApiURL.getBestPlan + "package_type=$packageType&type=$type"
+        GetMethod(api, activity).startMethod(object : ResponseData {
             override fun response(data: String?) {
                 progressDialog.dismiss()
                 val data: BestPlanList = Gson().fromJson(data, BestPlanList::class.java)
-                initializeCarousel(data?.data?:emptyList())
+                initializeCarousel(data?.data ?: emptyList())
             }
 
             override fun error(error: VolleyError?) {
@@ -517,65 +525,74 @@ class BestPlanTotalSessionFragment(
 
     private fun getSessionData(checkedType: String) {
         count++
-        val progressDialog: Dialog = ProgressDialog.progressDialog(requireActivity(),"")
+        val progressDialog: Dialog = ProgressDialog.progressDialog(requireActivity(), "")
         progressDialog.show()
-        var api=""
-        if (sharedPreferences.getString("typeWorkout","").equals("home")){
-            api= ApiURL.packagecreate+sharedPreferences.getInt("selectedPackageType",0)+"&sessions="+sessionSelected.text.toString().replace("Sessions","").replace(" Session","").trim()+"&type="+"home"+
-                    "&trainer_id="+trainer_id+"&studio_id="+""+"&month="+month+"&address_id="+address_id
-        }else{
-            api= ApiURL.packagecreate+sharedPreferences.getInt("selectedPackageType",0)+"&sessions="+sessionSelected.text.toString().replace("Sessions","").replace("Session","").trim()+"&type="+"gym"+
-                    "&trainer_id="+trainer_id+"&studio_id="+studio_id+"&month="+month+"&address_id="+address_id
+        var api = ""
+        if (sharedPreferences.getString("typeWorkout", "").equals("home")) {
+            api = ApiURL.packagecreate + sharedPreferences.getInt(
+                "selectedPackageType",
+                0
+            ) + "&sessions=" + sessionSelected.text.toString().replace("Sessions", "")
+                .replace(" Session", "").trim() + "&type=" + "home" +
+                    "&trainer_id=" + trainer_id + "&studio_id=" + "" + "&month=" + month + "&address_id=" + address_id
+        } else {
+            api = ApiURL.packagecreate + sharedPreferences.getInt(
+                "selectedPackageType",
+                0
+            ) + "&sessions=" + sessionSelected.text.toString().replace("Sessions", "")
+                .replace("Session", "").trim() + "&type=" + "gym" +
+                    "&trainer_id=" + trainer_id + "&studio_id=" + studio_id + "&month=" + month + "&address_id=" + address_id
         }
-        Log.e("SessionPackageAPi",api)
-        GetMethod(api,activity).startMethod(object :
+        Log.e("SessionPackageAPi", api)
+        GetMethod(api, activity).startMethod(object :
             ResponseData {
             override fun response(data: String?) {
                 progressDialog.dismiss()
 
-                Log.e("SessionPackageResponse",data.toString())
+                Log.e("SessionPackageResponse", data.toString())
                 try {
                     val resp = JSONObject(data!!)
-                    if(resp.optBoolean("status")){
+                    if (resp.optBoolean("status")) {
 //                        sharedPreferences.edit().putString("trainer_image",resp.optJSONObject("data")!!.optJSONObject("trainer").optString("image")).apply()
 //                        sharedPreferences.edit().putString("trainer_name",resp.optJSONObject("data")!!.optJSONObject("trainer").optString("name")).apply()
 
-                            val session=resp.optJSONObject("data").optJSONObject("details").optString("sessions")
-                           customPlanSession(session)
+                        val session = resp.optJSONObject("data").optJSONObject("details")
+                            .optString("sessions")
+                        customPlanSession(session)
 
-                        sharedPreferences.edit().putString("costType",checkedType).apply()
-                        sharedPreferences.edit().putString("validity",resp.optJSONObject("data").optString("validity")).apply()
-                        sharedPreferences.edit().putString("totalDays",resp.optJSONObject("data").optString("totalDays")).apply()
+                        sharedPreferences.edit().putString("costType", checkedType).apply()
+                        sharedPreferences.edit()
+                            .putString("validity", resp.optJSONObject("data").optString("validity"))
+                            .apply()
+                        sharedPreferences.edit().putString(
+                            "totalDays",
+                            resp.optJSONObject("data").optString("totalDays")
+                        ).apply()
 
                         /*sharedPreferences.edit().putString("tagsArray",
                             resp.optJSONObject("data")!!.optJSONObject("trainer").optJSONArray("tags")
                                 .toString()
                         ).apply()*/
 //                        tvTrainer_name.text = resp.optJSONObject("data")!!.optJSONObject("trainer").optString("name")
-                        var price=""
-                        if (checkedType == "Per_session"){
-                            textSwitcher.setText(resp.optJSONObject("data").optString("pricePerSession"))
-                            price=resp.optJSONObject("data").optString("pricePerSession")
-                            val validForTxt=resp.optJSONObject("data").optString("validity")
-                            sharedPreferences.edit().putString("price",price).apply()
-                            tvAEDSession.text = "AED / Session"
-                            validFor.text="Valid for $validForTxt"
+                        var price = ""
+                        if (checkedType == "Per_session") {
+                            price = resp.optJSONObject("data").optString("pricePerSession")
+                            val validForTxt = resp.optJSONObject("data").optString("validity")
+                            sharedPreferences.edit().putString("price", price).apply()
+                            val totalPrice = resp.optJSONObject("data").optString("totalPrice")
+                            tvRealPrice.text = "AED $totalPrice"
+                            tvAEDSession.text = "AED $price/Session"
+                            validFor.text = "Valid for $validForTxt"
+                            saveTxt.text = resp.optJSONObject("data").optString("save_price")
 
-                        }else{
-                            textSwitcher.setText(resp.optJSONObject("data").optString("totalPrice"))
-                            price=resp.optJSONObject("data").optString("totalPrice")
+                        } else {
+                            price = resp.optJSONObject("data").optString("totalPrice")
 
-                            sharedPreferences.edit().putString("price",price).apply()
+                            sharedPreferences.edit().putString("price", price).apply()
                             tvAEDSession.text = "AED"
 
                         }
                         tvAEDSession.visibility = View.VISIBLE
-                        textShader(textSwitcher.currentView as TextView)
-                        val layoutParams = LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.WRAP_CONTENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT
-                        )
-                        textSwitcher.setLayoutParams(layoutParams)
 
 //                        Glide.with(requireActivity()).load(resp.optJSONObject("data")!!.optJSONObject("trainer").optString("image")).fitCenter().into(imTrainer)
                         /*activitiesModelList.clear()
@@ -591,7 +608,7 @@ class BestPlanTotalSessionFragment(
                     }
 
 
-                }catch (e:Exception){
+                } catch (e: Exception) {
                     e.printStackTrace()
                 }
             }
@@ -604,6 +621,7 @@ class BestPlanTotalSessionFragment(
         })
 
     }
+
     private fun createSlideInAnimation(fromY: Float, toY: Float): Animation {
         val slideIn = TranslateAnimation(
             Animation.RELATIVE_TO_SELF, 0.0f,
@@ -654,6 +672,7 @@ class BestPlanTotalSessionFragment(
                 // Interpolate between startColor and middleColor
                 interpolateColor(startColor, middleColor, fraction * 2)
             }
+
             else -> {
                 // Interpolate between middleColor and endColor
                 interpolateColor(middleColor, endColor, (fraction - 0.5f) * 2)
@@ -663,25 +682,13 @@ class BestPlanTotalSessionFragment(
 
     private fun interpolateColor(color1: Int, color2: Int, fraction: Float): Int {
         val r = Color.red(color1) + ((Color.red(color2) - Color.red(color1)) * fraction).toInt()
-        val g = Color.green(color1) + ((Color.green(color2) - Color.green(color1)) * fraction).toInt()
+        val g =
+            Color.green(color1) + ((Color.green(color2) - Color.green(color1)) * fraction).toInt()
         val b = Color.blue(color1) + ((Color.blue(color2) - Color.blue(color1)) * fraction).toInt()
         return Color.rgb(r, g, b)
     }
 
-    override fun onResume() {
-        super.onResume()
-                getBestPlanApi()
-            /*activity?.let {
-                (it as CreatePackagectivity).selectedPlan(if (isBestPlanAvailable) Plans.IS_BEST_AVAILABLE else Plans.IS_BEST_NOT_AVAILABLE)
-            }*/
-            val currentTextView = textSwitcher.currentView as TextView
-            lifecycleScope.launch {
-                delay(100)
-                //seekBar.progress = 1
-                textShader(currentTextView)
-            }
-            //getSessionData(checkedType)
-    }
+
     fun selectedPlan(isBestPlanSelected: Plans) {
         when (isBestPlanSelected) {
             Plans.IS_BEST_AVAILABLE -> {
@@ -690,15 +697,19 @@ class BestPlanTotalSessionFragment(
                 topView.visibility = View.VISIBLE
                 tvcontinueView.visibility = View.VISIBLE
                 freeMsgCustom.visibility = View.GONE
-                bottomView.background = resources.getDrawable(R.drawable.blue_border_container, null)
+                bottomView.background =
+                    resources.getDrawable(R.drawable.blue_border_container, null)
             }
+
             Plans.IS_BEST_NOT_AVAILABLE -> {
                 hideCustomText()
             }
+
             else -> {
                 this.isBestPlanSelected = false
                 topView.visibility = View.GONE
-                bottomView.background = resources.getDrawable(R.drawable.blue_border_container, null)
+                bottomView.background =
+                    resources.getDrawable(R.drawable.blue_border_container, null)
                 freeMsgCustom.visibility = View.VISIBLE
                 tvcontinueView.visibility = View.VISIBLE
                 tvcontinue.text = getString(R.string.continue_summery)
@@ -719,11 +730,14 @@ class BestPlanTotalSessionFragment(
         sessionCount.text = "${bestPlan?.sessions} sessions"
         validDay.text = "Valid for ${bestPlan?.validity_days} days"
         bestPlanSessionCountTxt = bestPlan?.sessions ?: ""
-        bestPlanId = bestPlan?.id?:""
+        bestPlanId = bestPlan?.id ?: ""
+        freeMsg.text = bestPlan?.special_msg ?: ""
     }
-    fun customPlanSession(sessions:String){
+
+    fun customPlanSession(sessions: String) {
         customSessionCountTxt = sessions
     }
+
     private fun upArrowClick(isUpArrow: Boolean) {
         yourPlan.visibility = if (!isUpArrow) View.VISIBLE else View.GONE
         upArrow.visibility = if (!isUpArrow) View.VISIBLE else View.GONE
@@ -742,8 +756,9 @@ class BestPlanTotalSessionFragment(
                         R.color.black
                     )
                 )
-            tvcontinue.setTextColor(resources.getColor(R.color.buttontextcolor,null))
-            tvcontinueView.background = ContextCompat.getDrawable(requireContext(),R.drawable.white_rectangle)
+            tvcontinue.setTextColor(resources.getColor(R.color.text_color_primary_black, null))
+            tvcontinueView.background =
+                ContextCompat.getDrawable(requireContext(), R.drawable.primary_btn_gradient)
         } else {
             forwardArrow.imageTintList =
                 ColorStateList.valueOf(
@@ -752,8 +767,9 @@ class BestPlanTotalSessionFragment(
                         R.color.white
                     )
                 )
-            tvcontinue.setTextColor(resources.getColor(R.color.white,null))
-            tvcontinueView.background = ContextCompat.getDrawable(requireContext(),R.drawable.rectangle_btn)
+            tvcontinue.setTextColor(resources.getColor(R.color.white, null))
+            tvcontinueView.background =
+                ContextCompat.getDrawable(requireContext(), R.drawable.rectangle_btn)
         }
     }
 
@@ -764,10 +780,10 @@ class BestPlanTotalSessionFragment(
         intent.putExtra("trainer_id", trainer_id)
         intent.putExtra("studio_id", studio_id)
         intent.putExtra("package_type", sharedPreferences.getInt("selectedPackageType", 0))
-        if (isBestPlanSelected){
+        if (isBestPlanSelected) {
             intent.putExtra("session_value", bestPlanSessionCountTxt)
             intent.putExtra(BEST_PLAN_ID, bestPlanId)
-        }else{
+        } else {
             intent.putExtra("session_value", customSessionCountTxt)
         }
 

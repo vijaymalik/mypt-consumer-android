@@ -1,24 +1,51 @@
 package co.com.mypt.utils
 
+import android.graphics.Rect
+import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class HorizontalSpaceItemDecoration(private val space: Int) : RecyclerView.ItemDecoration() {
+class HorizontalSpaceItemDecoration(
+    private val space: Int,
+    private val startSpace: Int? = null,
+    private val middleSpace: Int? = null,
+    private val endSpace: Int? = null
+) : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(
-        outRect: android.graphics.Rect,
-        view: android.view.View,
+        outRect: Rect,
+        view: View,
         parent: RecyclerView,
         state: RecyclerView.State
     ) {
         val position = parent.getChildAdapterPosition(view)
+        val itemCount = state.itemCount
 
-        outRect.top = 0
-        outRect.bottom = 0
+        // Defaults (fallbacks)
+        val start = startSpace ?: space
+        val end = endSpace ?: space
+        val middle = middleSpace ?: space
 
-        // Add start margin only for the first item
-        outRect.left = if (position == 0) space else 0
+        when {
+            itemCount == 1 -> {
+                // Single item → full start & end
+                outRect.left = start
+                outRect.right = end
+            }
 
-        // Add end margin for all items
-        outRect.right = space
+            position == 0 -> {
+                outRect.left = start
+                outRect.right = middle / 2
+            }
+
+            position == itemCount - 1 -> {
+                outRect.left = middle / 2
+                outRect.right = end
+            }
+
+            else -> {
+                outRect.left = middle / 2
+                outRect.right = middle / 2
+            }
+        }
     }
 }

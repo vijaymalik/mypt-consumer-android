@@ -64,6 +64,7 @@ import co.com.mypt.model.NationModel
 import co.com.mypt.model.TimeSLotModel
 import co.com.mypt.model.TrainersModel
 import co.com.mypt.utils.AdaptiveSpacingItemDecoration
+import co.com.mypt.utils.TrainerListData
 import com.android.volley.VolleyError
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
@@ -118,6 +119,7 @@ class TrainersListActivity : AppCompatActivity() {
 
     var exerciseList = ArrayList<ExerciseModel>()
     var trainerList = ArrayList<TrainersModel>()
+    private val searchTrainerFullList = mutableListOf<TrainersModel>()
     var genderList = ArrayList<GenderModel>()
     var nationrList = ArrayList<NationModel>()
     var languageList = ArrayList<LanguageModel>()
@@ -146,7 +148,7 @@ class TrainersListActivity : AppCompatActivity() {
     lateinit var sharedPreferences: SharedPreferences
 
     //    lateinit var searchTrainer : ImageView
-    lateinit var searchEditText: EditText
+    lateinit var searchEditText: TextView
     lateinit var filterTextView: MaterialTextView
     var trainerListAdapter: TrainerListAdapter? = null
     val filternames = ArrayList<String>()
@@ -156,6 +158,8 @@ class TrainersListActivity : AppCompatActivity() {
     private var exoPlayer: ExoPlayer? = null
     private var currentPlayingPosition = RecyclerView.NO_POSITION
     private var isMuted = true
+
+    private var existingListener: Player.Listener? = null
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -210,19 +214,7 @@ class TrainersListActivity : AppCompatActivity() {
         back.setOnClickListener {
             finish()
         }
-
-
-        trainerListAdapter = TrainerListAdapter(
-            this,
-            trainerList,
-            "linear",
-            sharedPreferences.getString("typeWorkout", ""),
-            latitude,
-            longitude,
-            studio_id
-        ) { isPackage,bool, string, string1 -> }
-        trainerRecyclerView.adapter = trainerListAdapter
-
+        setTrainerListAdapter()
         linearList.setOnClickListener {
             typeLayout = "Linear"
             linearList.setImageResource(R.drawable.selected_linear_list)
@@ -235,16 +227,7 @@ class TrainersListActivity : AppCompatActivity() {
             trainerRecyclerView.addItemDecoration(AdaptiveSpacingItemDecoration(0, false))
             exoPlayer?.pause()
             currentPlayingPosition = RecyclerView.NO_POSITION
-            trainerListAdapter = TrainerListAdapter(
-                this,
-                trainerList,
-                typeLayout,
-                sharedPreferences.getString("typeWorkout", ""),
-                latitude,
-                longitude,
-                studio_id
-            ) { isPackage,bool, string, string1 -> }
-            trainerRecyclerView.adapter = trainerListAdapter
+            setTrainerListAdapter()
             trainerRecyclerView.post {
                 autoPlayVisibleVideo()
             }
@@ -261,16 +244,7 @@ class TrainersListActivity : AppCompatActivity() {
             gridList.setImageResource(R.drawable.selected_grid_layout)
             exoPlayer?.pause()
             currentPlayingPosition = RecyclerView.NO_POSITION
-            trainerListAdapter = TrainerListAdapter(
-                this,
-                trainerList,
-                typeLayout,
-                sharedPreferences.getString("typeWorkout", ""),
-                latitude,
-                longitude,
-                studio_id
-            ) { isPackage,bool, string, string1 -> }
-            trainerRecyclerView.adapter = trainerListAdapter
+            setTrainerListAdapter()
         }
 
         trainerRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -287,6 +261,17 @@ class TrainersListActivity : AppCompatActivity() {
             }
         })
 
+        searchEditText.setOnClickListener {
+            TrainerListData.clear()
+            TrainerListData.trainerList = searchTrainerFullList
+            val intent = Intent(this, SearchTrainerActivity::class.java)
+            intent.putExtra("studio_id",studio_id)
+            intent.putExtra("long",longitude)
+            intent.putExtra("lat",latitude)
+            intent.putExtra("address_id",address_id)
+            startActivity(intent)
+        }
+
         /*searchTrainer.setOnClickListener {
             searchTrainer.visibility = View.GONE
             searchEditText.visibility = View.VISIBLE
@@ -299,68 +284,50 @@ class TrainersListActivity : AppCompatActivity() {
                 imm.showSoftInput(searchEditText, InputMethodManager.SHOW_IMPLICIT)
             }
         }*/
-        searchEditText.addTextChangedListener(object : TextWatcher {
+//        searchEditText.addTextChangedListener(object : TextWatcher {
+//
+//            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+//
+//            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+//                if (s.toString().isNotEmpty()) {
+//                    _filter(s.toString())
+//                } else {
+//                    setTrainerListAdapter()
+//                    trainerRecyclerView.visibility = View.VISIBLE
+//                    tvNodata.visibility = View.GONE
+//                }
+//            }
+//
+//            override fun afterTextChanged(s: Editable) {}
+//        })
 
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                if (s.toString().isNotEmpty()) {
-                    _filter(s.toString())
-                } else {
-                    trainerListAdapter = TrainerListAdapter(
-                        this@TrainersListActivity,
-                        trainerList,
-                        typeLayout,
-                        sharedPreferences.getString("typeWorkout", ""),
-                        latitude,
-                        longitude,
-                        studio_id
-                    ) { isPackage,bool, string, string1 -> }
-                    trainerRecyclerView.adapter = trainerListAdapter
-                    trainerRecyclerView.visibility = View.VISIBLE
-                    tvNodata.visibility = View.GONE
-                }
-            }
-
-            override fun afterTextChanged(s: Editable) {}
-        })
-
-        searchEditText.setOnTouchListener { v, event ->
-            if (event.action == MotionEvent.ACTION_UP) {
-                val drawableEnd = searchEditText.compoundDrawables[2] // Right drawable
-
-                if (drawableEnd != null) {
-                    val drawableWidth = drawableEnd.bounds.width()
-                    val clickAreaStart =
-                        searchEditText.width - searchEditText.paddingEnd - drawableWidth
-
-                    if (event.x >= clickAreaStart) {
-                        trainerListAdapter = TrainerListAdapter(
-                            this,
-                            trainerList,
-                            typeLayout,
-                            sharedPreferences.getString("typeWorkout", ""),
-                            latitude,
-                            longitude,
-                            studio_id
-                        ) { isPackage,bool, string, string1 -> }
-                        trainerRecyclerView.adapter = trainerListAdapter
-                        trainerRecyclerView.visibility = View.VISIBLE
-                        tvNodata.visibility = View.GONE
-                        val inputMethodManager =
-                            getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-                        inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
-
-
-//                        searchTrainer.visibility = View.VISIBLE
-                        searchEditText.visibility = View.INVISIBLE
-                        searchEditText.text.clear() // Clear text, or do your action
-                        return@setOnTouchListener true
-                    }
-                }
-            }
-            false
-        }
+//        searchEditText.setOnTouchListener { v, event ->
+//            if (event.action == MotionEvent.ACTION_UP) {
+//                val drawableEnd = searchEditText.compoundDrawables[2] // Right drawable
+//
+//                if (drawableEnd != null) {
+//                    val drawableWidth = drawableEnd.bounds.width()
+//                    val clickAreaStart =
+//                        searchEditText.width - searchEditText.paddingEnd - drawableWidth
+//
+//                    if (event.x >= clickAreaStart) {
+//                        setTrainerListAdapter()
+//                        trainerRecyclerView.visibility = View.VISIBLE
+//                        tvNodata.visibility = View.GONE
+//                        val inputMethodManager =
+//                            getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+//                        inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+//
+//
+////                        searchTrainer.visibility = View.VISIBLE
+//                        searchEditText.visibility = View.INVISIBLE
+//                        searchEditText.text.clear() // Clear text, or do your action
+//                        return@setOnTouchListener true
+//                    }
+//                }
+//            }
+//            false
+//        }
     }
 
     private fun setupPlayer() {
@@ -399,11 +366,14 @@ class TrainersListActivity : AppCompatActivity() {
         // Reset all holders
         for (i in 0 until trainerRecyclerView.childCount) {
             val child = trainerRecyclerView.getChildAt(i)
-            val holder = trainerRecyclerView.getChildViewHolder(child) as? TrainerListAdapter.ViewHolder
-            holder?.playerView?.player = null
-            holder?.playerView?.visibility = View.GONE
-            holder?.btnSoundToggle?.visibility = View.GONE
-            holder?.trainerImage?.visibility = View.VISIBLE
+            when (val holder = trainerRecyclerView.getChildViewHolder(child)) {
+                is TrainerListAdapter.ListViewHolder -> {
+                    holder.binding.playerView.player = null
+                    holder.binding.playerView.visibility = View.GONE
+                    holder.binding.btnSoundToggle.visibility = View.GONE
+                    holder.binding.trainerImage.visibility = View.VISIBLE
+                }
+            }
         }
 
         // Find the one fully visible item
@@ -411,38 +381,50 @@ class TrainersListActivity : AppCompatActivity() {
         val last = layoutManager.findLastCompletelyVisibleItemPosition()
 
         if (first == last && first != RecyclerView.NO_POSITION) {
-            val holder = trainerRecyclerView.findViewHolderForAdapterPosition(first) as? TrainerListAdapter.ViewHolder
-            holder?.let {
+            val holder = trainerRecyclerView.findViewHolderForAdapterPosition(first)
+            if (holder is TrainerListAdapter.ListViewHolder) {
                 val trainer = trainerListAdapter?.trainerList[first]
                 val videoUrl = trainer?.trainWithMe
 
                 if (!videoUrl.isNullOrEmpty()) {
+                    exoPlayer?.stop()
+                    exoPlayer?.clearMediaItems()
+                    exoPlayer?.clearVideoSurface()
+
+                    existingListener?.let {
+                        exoPlayer?.removeListener(it)
+                    }
                     currentPlayingPosition = first
                     val mediaItem = MediaItem.fromUri(videoUrl.toUri())
-                    exoPlayer?.setMediaItem(mediaItem)
-                    exoPlayer?.prepare()
-                    exoPlayer?.play()
+                    exoPlayer?.apply {
+                       setMediaItem(mediaItem)
+                       prepare()
+                        play()
+                       volume = if (isMuted) 0f else 1f
+                    }
 
-                    it.trainerImage.visibility = View.GONE
-                    it.playerView.visibility = View.VISIBLE
-                    it.btnSoundToggle.visibility = View.VISIBLE
-                    it.playerView.player = exoPlayer
-                    setupSoundToggle(it)
+                    holder.binding.trainerImage.visibility = View.GONE
+                    holder.binding.playerView.visibility = View.VISIBLE
+                    holder.binding.btnSoundToggle.visibility = View.VISIBLE
+                    holder.binding.playerView.player = exoPlayer
+                    setupSoundToggle(holder)
 
-                    exoPlayer?.addListener(object : Player.Listener {
+                    val listener = object : Player.Listener {
                         override fun onPlaybackStateChanged(playbackState: Int) {
                             if (playbackState == Player.STATE_ENDED) {
-                                it.playerView.visibility = View.GONE
-                                it.trainerImage.visibility = View.VISIBLE
-                                it.btnSoundToggle.visibility = View.GONE
+                                holder.binding.playerView.visibility = View.GONE
+                                holder.binding.trainerImage.visibility = View.VISIBLE
+                                holder.binding.btnSoundToggle.visibility = View.GONE
                             }
                         }
-                    })
+                    }
+                    existingListener = listener
+                    exoPlayer?.addListener(listener)
                 } else {
-                    it.playerView.player = null
-                    it.playerView.visibility = View.GONE
-                    it.trainerImage.visibility = View.VISIBLE
-                    it.btnSoundToggle.visibility = View.GONE
+                    holder.binding.playerView.player = null
+                    holder.binding.playerView.visibility = View.GONE
+                    holder.binding.trainerImage.visibility = View.VISIBLE
+                    holder.binding.btnSoundToggle.visibility = View.GONE
                 }
             }
         } else {
@@ -453,20 +435,22 @@ class TrainersListActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
+        existingListener?.let {
+            exoPlayer?.removeListener(it)
+        }
         exoPlayer?.release()
         exoPlayer = null
     }
 
-    private fun setupSoundToggle(holder: TrainerListAdapter.ViewHolder) {
-        holder.btnSoundToggle.setOnClickListener {
+    private fun setupSoundToggle(holder: TrainerListAdapter.ListViewHolder) {
+        holder.binding.btnSoundToggle.setOnClickListener {
             isMuted = !isMuted
             exoPlayer?.volume = if (isMuted) 0f else 1f
-            holder.btnSoundToggle.setImageResource(
+            holder.binding.btnSoundToggle.setImageResource(
                 if (isMuted) R.drawable.ic_volume_off else R.drawable.ic_volume_on
             )
         }
     }
-
 
     private fun _filter(text: String) {
         val filteredList: MutableList<TrainersModel> = ArrayList()
@@ -760,35 +744,11 @@ class TrainersListActivity : AppCompatActivity() {
                                 trainerModel.trainWithMe = jsonObject1.optString("train_with_me")
                                 trainerList.add(trainerModel)
                             }
-                            trainerListAdapter = TrainerListAdapter(
-                                applicationContext,
-                                trainerList,
-                                typeLayout,
-                                sharedPreferences.getString("typeWorkout", ""),
-                                latitude,
-                                longitude,
-                                studio_id
-                            ) { isPackage,isGrp, type, id ->
-                                if(isPackage){
-                                    // book slot
-                                    var intent = Intent(this@TrainersListActivity, BookSlot::class.java)
-                                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                                    intent.putExtra("trainer_id",id)
-                                    intent.putExtra("studio_id",studio_id)
-                                    intent.putExtra("type",sharedPreferences.getString("typeWorkout", ""))
-                                    intent.putExtra("long",longitude)
-                                    intent.putExtra("lat",latitude)
-                                    intent.putExtra("address_id",address_id)
-                                    startActivity(intent)
-                                }else{
-                                    if (isGrp) {
-                                        getPrimaryTrainer(type, id)
-                                    } else {
-                                        getPrimaryTrainerRedirect(id)
-                                    }
-                                }
+                            if ((tag_id.isNullOrEmpty()) && (filter.isNullOrEmpty() || filter == "0")) {
+                                searchTrainerFullList.clear()
+                                searchTrainerFullList.addAll(trainerList)
                             }
-                            trainerRecyclerView.adapter = trainerListAdapter
+                            trainerListAdapter?.updateData(trainerList)
                             trainerRecyclerView.visibility = View.VISIBLE
                             tvNodata.visibility = View.GONE
                         } else {
@@ -811,6 +771,50 @@ class TrainersListActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    private fun setTrainerListAdapter(){
+        trainerListAdapter = TrainerListAdapter(
+            this@TrainersListActivity,
+            trainerList,
+            typeLayout,
+            sharedPreferences.getString("typeWorkout", ""),
+            latitude,
+            longitude,
+            studio_id,
+            onProfileClick = { trainersModel ->
+                val intent = Intent(this, TrainerDetails::class.java)
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                intent.putExtra("trainer_id",trainersModel.id)
+                intent.putExtra("studio_id",studio_id)
+                intent.putExtra("haveSlot",trainersModel.slot)
+                intent.putExtra("type",sharedPreferences.getString("typeWorkout", ""))
+                intent.putExtra("long",longitude)
+                intent.putExtra("lat",latitude)
+                intent.putExtra("address_id",address_id)
+                startActivity(intent)
+            }
+        ) { isPackage,isGrp, type, id ->
+            if(isPackage){
+                // book slot
+                val intent = Intent(this@TrainersListActivity, BookSlot::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                intent.putExtra("trainer_id",id)
+                intent.putExtra("studio_id",studio_id)
+                intent.putExtra("type",sharedPreferences.getString("typeWorkout", ""))
+                intent.putExtra("long",longitude)
+                intent.putExtra("lat",latitude)
+                intent.putExtra("address_id",address_id)
+                startActivity(intent)
+            }else{
+                if (isGrp) {
+                    getPrimaryTrainer(type, id)
+                } else {
+                    getPrimaryTrainerRedirect(id)
+                }
+            }
+        }
+        trainerRecyclerView.adapter = trainerListAdapter
     }
 
     fun getPrimaryTrainerRedirect(id: String) {

@@ -10,7 +10,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import co.com.mypt.R
+import co.com.mypt.curvedBottomNavigation.dpToPx
 import co.com.mypt.model.Trainer
+import co.com.mypt.utils.HorizontalSpaceItemDecoration
 import com.bumptech.glide.Glide
 
 
@@ -24,10 +26,9 @@ class HomeSmartSuggestionsAdapter(
     inner class HomeSmartSuggestionsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imgTrainer: ImageView = itemView.findViewById(R.id.imgTrainer)
         val tvName: TextView = itemView.findViewById(R.id.tvName)
-        val tvTime1: TextView = itemView.findViewById(R.id.tvTime1)
-        val tvTime2: TextView = itemView.findViewById(R.id.tvTime2)
         val btnQuickBook: LinearLayout = itemView.findViewById(R.id.btnQuickBook)
         val btnFullSchedule: LinearLayout = itemView.findViewById(R.id.btnFullSchedule)
+        val rvSlots: RecyclerView = itemView.findViewById(R.id.rvSlots)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeSmartSuggestionsViewHolder {
@@ -42,11 +43,13 @@ class HomeSmartSuggestionsAdapter(
         // Bind trainer info
         holder.tvName.text = trainer.name
         Glide.with(context).load(trainer.profile).fitCenter().into(holder.imgTrainer)
+        holder.rvSlots.addItemDecoration(HorizontalSpaceItemDecoration(0, middleSpace = 12.dpToPx(context)))
 
-        // Optimized slot handling: show up to 2 slots
-        val slots = trainer.slots
-        holder.tvTime1.text = slots.getOrNull(0)?.time ?: "--"
-        holder.tvTime2.text = slots.getOrNull(1)?.time ?: "--"
+        holder.rvSlots.adapter = HomeSmartSuggestionsSlotsAdapter(context,trainer.slots)
+        holder.rvSlots.setOnTouchListener { v, event ->
+            v.parent.requestDisallowInterceptTouchEvent(true)
+            false
+        }
 
         // Click listeners
         holder.btnQuickBook.setOnClickListener {

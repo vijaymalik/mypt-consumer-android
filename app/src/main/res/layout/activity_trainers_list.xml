@@ -44,7 +44,7 @@
                 android:layout_height="1dp"
                 android:layout_weight="1" />
 
-            <EditText
+            <TextView
                 android:id="@+id/searchEditText"
                 android:layout_width="88dp"
                 android:layout_height="35dp"
@@ -52,14 +52,11 @@
                 android:drawableStart="@drawable/baseline_search_24"
                 android:drawablePadding="6dp"
                 android:drawableTint="@color/white"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
                 android:hint="@string/search"
+                android:gravity="center_vertical"
                 android:paddingHorizontal="5dp"
-                android:paddingVertical="2dp"
-                android:text=""
-                android:textColor="@color/headingcolor"
-                android:textColorHint="@color/bg_color_btn_disabled"
+                android:text="Search"
+                android:textColor="@color/bg_color_btn_disabled"
                 android:textSize="14sp"
                 android:visibility="visible" />
             <!-- <ImageView

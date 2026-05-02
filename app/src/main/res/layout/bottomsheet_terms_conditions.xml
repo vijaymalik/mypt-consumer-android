@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:orientation="vertical"
+    android:paddingBottom="20dp"
+    android:background="@drawable/top_rounded_corners">
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="5dp"
+        android:id="@+id/tophandle"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="70dp"
+        app:cardCornerRadius="3dp"
+        android:layout_height="5dp"
+        app:cardBackgroundColor="@color/rulersmallline"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+        <TextView
+            android:id="@+id/tvHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Terms &amp; Conditions"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:fontFamily="@font/clash_display_medium"
+            android:textColor="@color/text_color_neutral_200"
+            android:textSize="20sp"/>
+
+        <ImageView
+            android:id="@+id/btnClose"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/close_white_24"/>
+
+    </RelativeLayout>
+
+
+
+    <View
+        android:id="@+id/separator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/separator_list"/>
+
+    <LinearLayout
+        android:id="@+id/tabLay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/tab_linear_background"
+        android:orientation="horizontal"
+        android:paddingHorizontal="4dp"
+        android:paddingVertical="4dp">
+
+        <!-- Kilogram Option -->
+        <TextView
+            android:id="@+id/tabEnglish"
+            android:layout_width="wrap_content"
+            android:layout_height="46dp"
+            android:layout_weight="1"
+            android:background="@drawable/feet_button"
+            android:fontFamily="@font/funnel_sans_semibold"
+            android:gravity="center"
+            android:paddingHorizontal="24dp"
+            android:text="English"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <!-- Pound Option -->
+        <TextView
+            android:id="@+id/tabArabic"
+            android:layout_width="wrap_content"
+            android:layout_height="46dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/funnel_sans_semibold"
+            android:gravity="center"
+            android:paddingHorizontal="24dp"
+            android:text="Arabic"
+            android:textAllCaps="false"
+            android:textColor="@color/lightgreycolor"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="14dp"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        android:scrollbars="none">
+
+        <TextView
+            android:id="@+id/tvContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="14sp"/>
+    </androidx.core.widget.NestedScrollView>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAgree"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/PrimaryButton"
+        app:icon="@drawable/ic_arrow_right"
+        app:iconGravity="textEnd"
+        android:text="I agree &amp; Continue"/>
+
+</LinearLayout>

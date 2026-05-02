@@ -27,6 +27,11 @@ object Constants {
     val IS_GYM_MEMBERSHIP_FLOW = "isGYMMembershipFlow"
 
     val KEY_STORIES_DATA = "stories_data"
+
+    val delayMillis = 7000L
+
+     val TERMS_REQUEST_KEY = "terms_result"
+     val TERMS_BUNDLE_KEY = "accepted"
 }
 enum class Plans{
     IS_BEST_AVAILABLE,IS_BEST_NOT_AVAILABLE,CUSTOMIZE

@@ -9,6 +9,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.graphics.drawable.Drawable
 import android.location.Address
 import android.location.Geocoder
 import android.location.LocationManager
@@ -29,7 +30,6 @@ import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -39,11 +39,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.preference.PreferenceManager
+import androidx.viewpager.widget.ViewPager
 import co.com.mypt.Api.ApiURL
 import co.com.mypt.Api.Constants
 import co.com.mypt.Api.Constants.HAS_GYM
 import co.com.mypt.Api.Constants.HAS_HOME
 import co.com.mypt.Api.Constants.PASS_DATA
+import co.com.mypt.Api.Constants.delayMillis
 import co.com.mypt.Api.GetMethod
 import co.com.mypt.Api.ResponseData
 import co.com.mypt.BookingScreen.RescheduledUpComingBookingDetailActivity
@@ -59,18 +61,22 @@ import co.com.mypt.activities.HomeGymTrainerActivity
 import co.com.mypt.activities.MainActivity
 import co.com.mypt.activities.TrainerGroupActivity
 import co.com.mypt.adapter.GetPlanDetailAdapter
+import co.com.mypt.adapter.HomeCertificateBannerAdapter
 import co.com.mypt.adapter.HomeSmartSuggestionsAdapter
 import co.com.mypt.adapter.StoryAdapter
 import co.com.mypt.adapter.SubscriptionDateSlotAdapter
 import co.com.mypt.adapter.UpcomingSessionsAdapter
+import co.com.mypt.curvedBottomNavigation.dpToPx
 import co.com.mypt.databinding.FragmentActiveUserHomeNewBinding
 import co.com.mypt.fragments.viewModels.GuestUserViewModel
 import co.com.mypt.model.GetPlansResponse
 import co.com.mypt.model.Group
 import co.com.mypt.model.NearByGymModel
 import co.com.mypt.model.RenewalUpgradeModel
+import co.com.mypt.model.Slot
 import co.com.mypt.model.SubscriptionSlotsResponse
 import co.com.mypt.model.TrainerGroupDetail
+import co.com.mypt.model.TrainerStudiosResponse
 import co.com.mypt.model.UpcomingClassModel
 import co.com.mypt.model.UpcomingSessionsModel
 import co.com.mypt.onBoarding.PhoneNumberScreenActivity
@@ -79,6 +85,7 @@ import co.com.mypt.retrofitApi.UserViewModelFactory
 import co.com.mypt.utils.HorizontalSpaceItemDecoration
 import com.android.volley.VolleyError
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -88,6 +95,8 @@ import com.google.android.gms.location.Priority
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.Places
 import com.google.gson.Gson
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import java.text.SimpleDateFormat
@@ -126,6 +135,11 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
     var renewalUpgradeArraylist = ArrayList<RenewalUpgradeModel>()
     var plansResponse: GetPlansResponse?=null
     var group: Group?=null
+    private var progressDialog: Dialog? = null
+    private lateinit var homeCertificateBannerAdapter: HomeCertificateBannerAdapter
+    private var autoScrollJob: Job? = null
+
+    private  var addressId: String= ""
 
     companion object {
         private const val KEY_LAT = "lat"
@@ -135,7 +149,9 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
         private const val TOP_UP_PLAN_ID = 10
         private const val RENEW_PLAN_ID = 11
         private const val UPGRADE_PLAN_ID = 12
+        const val BACKGROUND_ADDRESS_ID = 13
         private const val OFFER_BANNER_ID = 14
+         const val BOOK_FREE_ASSESSMENT = 15
         private const val KEY_ADD = "add"
 
         fun newInstance(param1: String, param2: String, param3: String): ActiveUserHomeFragmentNew {
@@ -166,7 +182,6 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
         geocoder = Geocoder(requireActivity(), Locale.getDefault())
         locationManager =
             requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
-
 
         tvlocation.setOnClickListener {
             var intent = Intent(activity, ChooseLocationActivity::class.java)
@@ -204,7 +219,76 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
             val intent = Intent(requireContext(), NewUserProfileActivity::class.java)
             startActivity(intent)
         }
+
+        childFragmentManager.setFragmentResultListener(
+            TrainerSlotsBottomSheet.TRAINER_SLOT_REQUEST_KEY,
+            viewLifecycleOwner
+        ) { _, bundle ->
+
+            viewModel.slotId = bundle.getInt(TrainerSlotsBottomSheet.KEY_SELECTED_SLOT_ID, 0)
+            viewModel.trainerId = bundle.getInt(TrainerSlotsBottomSheet.KEY_TRAINER_ID, 0)
+           viewModel.workType = bundle.getString(TrainerSlotsBottomSheet.KEY_WORK_TYPE,"")
+            if(viewModel.workType.equals("home", ignoreCase = true)){
+                openQuickBookReviewAssessmentBottomSheet(viewModel.trainerId,viewModel.slotId,viewModel.workType)
+            }else{
+                fetchTrainerStudios(viewModel.trainerId.toString())
+            }
+        }
+        childFragmentManager.setFragmentResultListener(
+            HomeTrainerBottomSheet.REQUEST_KEY,
+            viewLifecycleOwner
+        ) { _, bundle ->
+
+            viewModel.studioId = bundle.getInt(HomeTrainerBottomSheet.KEY_SELECTED_STUDIO_ID, 0)
+            val isQuickBookFlow = bundle.getBoolean(HomeTrainerBottomSheet.KEY_IS_QUICK_BOOK_FLOW, false)
+
+            if(isQuickBookFlow) {
+                openQuickBookReviewAssessmentBottomSheet(viewModel.trainerId, viewModel.slotId, viewModel.workType,viewModel.studioId)
+            }
+        }
+
+        getAddressData()
         return bindingView.root
+    }
+
+    private fun openQuickBookReviewAssessmentBottomSheet(
+        trainerId: Int,
+        slotId: Int,
+        workType: String,
+        studioId:Int?=null
+    ) {
+        QuickBookReviewBottomSheet.newInstance(slotId, trainerId, workType,addressId,studioId).show(childFragmentManager,"QuickBookReviewBottomSheet")
+    }
+
+    private fun getAddressData() {
+
+        val progressDialog: Dialog = ProgressDialog.progressDialog(requireContext(),"")
+        progressDialog.show()
+
+        GetMethod(ApiURL.getaddress,requireContext()).startMethod(object :
+            ResponseData {
+
+            override fun response(data: String?) {
+                progressDialog.dismiss()
+                Log.e("getAddressResponse",data.toString())
+                try {
+                    val jsonObj = JSONObject(data!!)
+                    if (jsonObj.optBoolean("status")){
+                        val jsonArray=jsonObj.optJSONArray("data")
+                        if (jsonArray != null && jsonArray.length()>0){
+                            addressId= jsonArray.optJSONObject(0).optString("id")
+                        }
+                    }
+                }catch (e:Exception){
+                    e.printStackTrace()
+                }
+            }
+
+            override fun error(error: VolleyError?) {
+                progressDialog.dismiss()
+                error!!.printStackTrace()
+            }
+        })
     }
 
     private fun openComingSoonScreen(viewMode:Int){
@@ -229,13 +313,39 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
         }
         bindingView.dateSlotRecyclerView.adapter = dateAdapter
         bindingView.homeSuggestionsRecyclerView.addItemDecoration(
-            HorizontalSpaceItemDecoration(30)
+            HorizontalSpaceItemDecoration(20.dpToPx(requireContext()), middleSpace = 15.dpToPx(requireContext()) )
         )
         getSubscriptionSlots(dates.first())
 
         bindingView.btnViewTeam.setOnClickListener {
             group?.id?.let { groupId -> getGroupDetail(groupId) }
         }
+        bindingView.upcomingSessionsRecyclerView.addItemDecoration(
+            HorizontalSpaceItemDecoration(20.dpToPx(requireContext()))
+        )
+        bindingView.homePlansRecyclerView.addItemDecoration(
+            HorizontalSpaceItemDecoration(20.dpToPx(requireContext()),middleSpace = 15.dpToPx(requireContext()))
+        )
+        homeCertificateBannerAdapter = HomeCertificateBannerAdapter( requireContext())
+        bindingView.viewPagerBanner.adapter = homeCertificateBannerAdapter
+        bindingView.viewPagerBanner.pageMargin = 10.dpToPx(requireContext())
+        bindingView.dotsIndicator.attachTo(bindingView.viewPagerBanner)
+        startAutoScroll()
+
+        // Reset timer when user swipes manually
+        bindingView.viewPagerBanner.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrolled(position: Int, offset: Float, offsetPixels: Int) {}
+            override fun onPageSelected(position: Int) {
+            }
+            override fun onPageScrollStateChanged(state: Int) {
+                if (state == ViewPager.SCROLL_STATE_DRAGGING) {
+                    autoScrollJob?.cancel()
+                } else if (state == ViewPager.SCROLL_STATE_IDLE) {
+                    startAutoScroll()
+                }
+            }
+        })
+        viewModel.getBanners("Bearer " + sharedPreferences.getString("token", ""))
     }
 
     override fun onTouch(v: View?, event: MotionEvent?): Boolean {
@@ -271,7 +381,57 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
 
     }
 
+    private fun startAutoScroll() {
+        // Cancel any existing job to prevent multiple coroutines running simultaneously
+        autoScrollJob?.cancel()
+        autoScrollJob = viewLifecycleOwner.lifecycleScope.launch {
+            // repeatOnLifecycle handles the cleanup when the fragment goes to background
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                while (true) {
+                    delay(delayMillis)
+                    val count = homeCertificateBannerAdapter.count
+                    if (count > 0) {
+                        val nextItem = (bindingView.viewPagerBanner.currentItem + 1) % count
+                        bindingView.viewPagerBanner.setCurrentItem(nextItem, true)
+                    }
+                }
+            }
+        }
+    }
+
     private fun collectUsers() {
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.bannerState.collect { state ->
+
+                    when (state) {
+
+                        is UiState.Loading -> {
+                            showProgress()
+                        }
+
+                        is UiState.Success -> {
+                            hideProgress()
+                            if(state.data.isNullOrEmpty()){
+                                bindingView.viewPagerBanner.visibility = View.GONE
+                                bindingView.dotsIndicator.visibility = View.GONE
+                            }else{
+                                homeCertificateBannerAdapter.updateData(state.data.filterNotNull())
+                                bindingView.viewPagerBanner.visibility = View.VISIBLE
+                                bindingView.dotsIndicator.visibility = View.VISIBLE
+                            }
+                        }
+
+                        is UiState.Error -> {
+                            hideProgress()
+                            bindingView.viewPagerBanner.visibility = View.GONE
+                            bindingView.dotsIndicator.visibility = View.GONE
+                        }
+                    }
+                }
+            }
+        }
 
         viewLifecycleOwner.lifecycleScope.launch {
 
@@ -351,6 +511,7 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                                     state.data?.firstOrNull { it?.id == UPGRADE_PLAN_ID }
                                 val offer_banner =
                                     state.data?.firstOrNull { it?.id == OFFER_BANNER_ID }
+                                    val bgAddress = state.data?.firstOrNull { it?.id == BACKGROUND_ADDRESS_ID }
 
                                 if (home_background != null)
                                     Glide.with(requireContext())
@@ -360,6 +521,19 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                                     Glide.with(requireContext()).load(offer_banner?.image)
                                         .fitCenter().into(bindingView.homeBanner)
                                 // else bindingView.homeBanner.visibility=View.GONE
+                                Glide.with(requireContext()).load(bgAddress?.image)
+                                    .into(object : CustomTarget<Drawable>() {
+                                        override fun onResourceReady(
+                                            resource: Drawable,
+                                            transition: com.bumptech.glide.request.transition.Transition<in Drawable>?
+                                        ) {
+                                            bindingView.headerLayout.background = resource
+                                        }
+
+                                        override fun onLoadCleared(placeholder: Drawable?) {
+                                            bindingView.headerLayout.background = placeholder
+                                        }
+                                    })
 
                                 Glide.with(requireContext()).load(book_session?.image).fitCenter()
                                     .into(bindingView.homePt)
@@ -374,6 +548,40 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
 
                         is UiState.Error -> {
                             println("11113333")
+                        }
+                    }
+                }
+
+
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+
+            viewLifecycleOwner.repeatOnLifecycle(
+                Lifecycle.State.STARTED
+            ) {
+
+                viewModel.trainerStudiosState.collect { state ->
+
+                    when (state) {
+
+                        is UiState.Loading -> {
+                            showProgress()
+                        }
+
+                        is UiState.Success -> {
+                            hideProgress()
+                            val response = state.data?.data
+                            openTrainerStudioBottomSheet(response)
+                            viewModel.resetTrainerStudioState()
+                        }
+
+                        is UiState.Error -> {
+                            hideProgress()
+                        }
+                        else ->{
+
                         }
                     }
                 }
@@ -770,9 +978,6 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                                 })
                             bindingView.llNodataMyBooking.visibility = View.GONE
                             bindingView.upcomingSessionsRecyclerView.visibility = View.VISIBLE
-                            bindingView.upcomingSessionsRecyclerView.addItemDecoration(
-                                HorizontalSpaceItemDecoration(30)
-                            )
 
                         } else {
                             bindingView.upcomingSessionsRecyclerView.visibility = View.GONE
@@ -810,9 +1015,6 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                             onBuyMoreClick = {
                                 openComingSoonScreen(ComingSoonViewMode.TOPU_UP)
                             }
-                        )
-                        bindingView.homePlansRecyclerView.addItemDecoration(
-                            HorizontalSpaceItemDecoration(30)
                         )
                     }
                    /* val jsonObj = JSONObject(data!!)
@@ -962,11 +1164,13 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                                     requireContext(),
                                     trainers!!,
                                     listenerQuickBook = { trainer ->
-                                        Toast.makeText(
-                                            requireContext(),
-                                            "QuickBook: ${trainer.name}",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
+                                        TrainerSlotsBottomSheet.newInstance(
+                                            workType = subscriptionSlotsResponse.data.type,
+                                            trainerId = trainer.id,
+                                            slotList = trainer.slots as ArrayList<Slot>,
+                                            subscriptionSlotsResponse.data.dateFormatted
+                                        )
+                                            .show(childFragmentManager, "TrainerSlotsBottomSheet")
                                     },
                                     listenerFullSchedule = { trainer ->
                                         Toast.makeText(
@@ -1001,7 +1205,9 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
                         // Training team visibility
                         rlTrainingTeam.visibility =
                             if (subscriptionSlotsResponse.data.isGroup) View.VISIBLE else View.GONE
-                        llNodataTeam.visibility = if (!subscriptionSlotsResponse.data.isGroup) View.VISIBLE else View.GONE
+                        llTrainingTeamHeader.visibility =
+                            if (subscriptionSlotsResponse.data.isGroup) View.VISIBLE else View.GONE
+                        //llNodataTeam.visibility = if (!subscriptionSlotsResponse.data.isGroup) View.VISIBLE else View.GONE
                     }
 
                 } catch (e: Exception) {
@@ -1076,5 +1282,34 @@ class ActiveUserHomeFragmentNew : Fragment(), View.OnTouchListener,
             )
         }
         startActivity(intent)
+    }
+    private fun showProgress() {
+        if (progressDialog == null) {
+            progressDialog = ProgressDialog.progressDialog(requireContext(), "")
+        }
+
+        if (!(requireActivity().isFinishing) && progressDialog?.isShowing == false) {
+            progressDialog?.show()
+        }
+    }
+
+    private fun hideProgress() {
+        progressDialog?.dismiss()
+    }
+
+    private fun fetchTrainerStudios(trainerId: String){
+        viewModel.getTrainerStudios("Bearer " + sharedPreferences.getString("token", ""), latitude,longitude,trainerId)
+    }
+
+    private fun openTrainerStudioBottomSheet(response: TrainerStudiosResponse.Data?) {
+        response?.let {
+            HomeTrainerBottomSheet.newInstance(it,true)
+                .show(childFragmentManager, "HomeTrainerBottomSheet")
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        hideProgress()
     }
 }
