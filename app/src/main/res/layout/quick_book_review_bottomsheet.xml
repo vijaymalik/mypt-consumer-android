@@ -233,7 +233,6 @@
                         android:layout_gravity="center"
                         android:layout_marginStart="22dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_toStartOf="@+id/amountArrow"
                         android:layout_toEndOf="@+id/ptIcon"
                         android:fontFamily="@font/funnel_sans_regular"
                         android:lineHeight="24sp"

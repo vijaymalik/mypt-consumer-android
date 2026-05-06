@@ -63,7 +63,6 @@ class TrainerGridViewAdapter(
             exerciseModel.name = it?.name.toString()
             exerciseModel
         }
-        holder.exerciseRecyclerView.setHasFixedSize(true)
         holder.exerciseRecyclerView.isNestedScrollingEnabled = false
         holder.exerciseRecyclerView.adapter = TrainerHomeTagAdapter(context, listTag, type)
         holder.exerciseRecyclerView.setOnTouchListener { v, event ->
