@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.google.gms.google.services)
     id("kotlin-parcelize")
+    id("kotlin-kapt")
 }
 
 android {
@@ -99,6 +100,7 @@ dependencies {
     implementation ("androidx.preference:preference-ktx:1.2.1")
     implementation ("com.github.sparrow007:carouselrecyclerview:1.2.6")
     implementation ("com.github.bumptech.glide:glide:5.0.5")
+    kapt("com.github.bumptech.glide:compiler:5.0.5")
     implementation ("androidx.media3:media3-exoplayer:1.8.0")
     implementation ("androidx.media3:media3-ui:1.8.0")
     implementation ("com.google.android.material:material:1.12.0")
