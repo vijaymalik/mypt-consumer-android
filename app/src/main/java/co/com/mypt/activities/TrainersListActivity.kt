@@ -714,6 +714,8 @@ class TrainersListActivity : AppCompatActivity() {
         param["time_slot"] = "" + timeSlotId
         param["tag_id"] = "" + tag_id
         param["nationality"] = "" + nationId
+        param["per_page"] = "" + 100
+        param["page"] = "" + 1
         Log.e("trainerListParam", param.toString())
 
         PostMethod(api, param, this@TrainersListActivity).startPostMethod(object : ResponseData {

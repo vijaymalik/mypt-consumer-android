@@ -731,7 +731,7 @@ class BestPlanTotalSessionFragment(
         validDay.text = "Valid for ${bestPlan?.validity_days} days"
         bestPlanSessionCountTxt = bestPlan?.sessions ?: ""
         bestPlanId = bestPlan?.id ?: ""
-        freeMsg.text = bestPlan?.special_msg ?: ""
+        freeMsg.text = bestPlan?.badge_text ?: ""
     }
 
     fun customPlanSession(sessions: String) {
@@ -783,8 +783,10 @@ class BestPlanTotalSessionFragment(
         if (isBestPlanSelected) {
             intent.putExtra("session_value", bestPlanSessionCountTxt)
             intent.putExtra(BEST_PLAN_ID, bestPlanId)
+            intent.putExtra("save_price", freeMsg.text)
         } else {
             intent.putExtra("session_value", customSessionCountTxt)
+            intent.putExtra("save_price", saveTxt.text)
         }
 
         startActivity(intent)

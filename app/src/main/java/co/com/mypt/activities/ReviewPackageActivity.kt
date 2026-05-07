@@ -113,6 +113,7 @@ class ReviewPackageActivity : AppCompatActivity() {
 
     private var isPaymentChecked = false
     lateinit var binding: ActivityReviewPackageBinding
+    private var badgeAedValue = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityReviewPackageBinding.inflate(layoutInflater)
@@ -392,6 +393,8 @@ class ReviewPackageActivity : AppCompatActivity() {
             .registerReceiver(updatedAddressId, selectAddressFilter)*/
         getData()
         continueButtonClick(false)
+
+        badgeAedValue = intent.getStringExtra("save_price")?:""
     }
 
     private fun setTermsConditionsHighlightText() {
@@ -609,6 +612,7 @@ class ReviewPackageActivity : AppCompatActivity() {
                     val data: ReviewPackageCheckout =
                         Gson().fromJson(data, ReviewPackageCheckout::class.java)
                     if (data.status == true) {
+                        binding.saveTxt.text = badgeAedValue
                         packageDetails = data.data?.package_details
                         available_promos = data.data?.available_promos
                         if(available_promos.isNullOrEmpty()){

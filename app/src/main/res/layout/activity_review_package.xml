@@ -451,7 +451,7 @@
 
                         <TextView
                             android:id="@+id/saveTxt"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="14dp"
                             android:background="@drawable/category_border_bg"
@@ -460,7 +460,7 @@
                             android:lineHeight="16sp"
                             android:padding="7dp"
                             android:scaleType="centerCrop"
-                            android:text="SAVE AED 300 - THAT’S 6 FREE SESSIONS"
+                            android:text=""
                             android:textColor="#D1ECCC"
                             android:textSize="12sp" />
                     </LinearLayout>
